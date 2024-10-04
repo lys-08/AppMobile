@@ -1,4 +1,4 @@
-package com.example.clickme
+package com.progmobile.clickme
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
