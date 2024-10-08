@@ -14,8 +14,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.data.DataSource.levels
 import com.progmobile.clickme.ui.HomePage
+import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.levels.Level_01
+import com.progmobile.clickme.ui.levels.Level_02
+import com.progmobile.clickme.ui.levels.Level_03
+import com.progmobile.clickme.ui.levels.Level_04
+import com.progmobile.clickme.ui.levels.Level_05
 
 /*
  * Enum class containing the pages of the app
@@ -56,6 +62,38 @@ fun ClickMeApp(
             }
             composable(route = Screens.Level_01.name) {
                 Level_01(
+                    navController = navController,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding((dimensionResource(id = R.dimen.padding_medium)))
+                )
+            }
+            composable(route = Screens.Level_02.name) {
+                Level_02(
+                    navController = navController,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding((dimensionResource(id = R.dimen.padding_medium)))
+                )
+            }
+            composable(route = Screens.Level_03.name) {
+                Level_03(
+                    navController = navController,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding((dimensionResource(id = R.dimen.padding_medium)))
+                )
+            }
+            composable(route = Screens.Level_04.name) {
+                Level_04(
+                    navController = navController,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding((dimensionResource(id = R.dimen.padding_medium)))
+                )
+            }
+            composable(route = Screens.Level_05.name) {
+                Level_05(
                     navController = navController,
                     modifier = Modifier
                         .fillMaxSize()

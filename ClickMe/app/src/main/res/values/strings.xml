@@ -7,4 +7,7 @@
     <string name="level_03">Level 3</string>
     <string name="level_04">Level 4</string>
     <string name="level_05">Level 5</string>
+
+    // Buttons
+    <string name="button">Button</string>
 </resources>
