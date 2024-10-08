@@ -60,45 +60,16 @@ fun ClickMeApp(
                         .padding((dimensionResource(id = R.dimen.padding_medium)))
                 )
             }
-            composable(route = Screens.Level_01.name) {
-                Level_01(
-                    navController = navController,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding((dimensionResource(id = R.dimen.padding_medium)))
-                )
-            }
-            composable(route = Screens.Level_02.name) {
-                Level_02(
-                    navController = navController,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding((dimensionResource(id = R.dimen.padding_medium)))
-                )
-            }
-            composable(route = Screens.Level_03.name) {
-                Level_03(
-                    navController = navController,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding((dimensionResource(id = R.dimen.padding_medium)))
-                )
-            }
-            composable(route = Screens.Level_04.name) {
-                Level_04(
-                    navController = navController,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding((dimensionResource(id = R.dimen.padding_medium)))
-                )
-            }
-            composable(route = Screens.Level_05.name) {
-                Level_05(
-                    navController = navController,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding((dimensionResource(id = R.dimen.padding_medium)))
-                )
+            levels.forEach { level ->
+                composable(route = level.second) {
+                    when (level.first) {
+                        R.string.level_01 -> Level_01(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_02 -> Level_02(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_03 -> Level_03(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_04 -> Level_04(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_05 -> Level_05(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                    }
+                }
             }
         }
     }
