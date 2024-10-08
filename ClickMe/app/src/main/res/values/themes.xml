@@ -2,4 +2,7 @@
 <resources>
 
     <style name="Theme.ClickMe" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.SplashScreen" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>
