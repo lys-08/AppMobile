@@ -26,7 +26,6 @@ import com.progmobile.clickme.ui.LevelButton
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import com.progmobile.clickme.ui.HintIconButton
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
@@ -57,28 +56,9 @@ fun Level_01(
             labelResourceId = R.string.button,
             onClick = {navController.navigate(Screens.Level_02.name)},
             modifier = Modifier
+                .fillMaxSize()
                 .wrapContentSize(Alignment.Center)
         )
-
-        /**
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(dimensionResource(R.dimen.padding_medium)),
-            horizontalArrangement = Arrangement.SpaceBetween, // Space the items at opposite ends
-            verticalAlignment = Alignment.CenterVertically // Align items vertically in the center
-        ) {
-            // Left-aligned button: ParameterIconButton
-            ParameterIconButton(
-                onClick = { /* Action for the Parameter icon button */ }
-            )
-
-            // Right-aligned button: HintIconButton
-            HintIconButton(
-                listOfHints = listOf(stringResource(id = R.string.hint_01_01), "", "")
-            )
-        }
-        */
     }
 }
 
