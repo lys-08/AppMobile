@@ -52,7 +52,7 @@ fun ClickMeBottomBar(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp), // Apply padding to both left and right
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             // Left-aligned: ParameterIconButton
             ParameterIconButton(navController)
@@ -98,6 +98,13 @@ fun ParameterIconButton(
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
 
+    // Initialize a var to check if we are on the homepage
+    var isNotHomePage: Boolean = false
+    // Get the current route to determine which icon to show
+    if (navController.currentDestination?.route != Screens.HomePage.name) {
+        isNotHomePage = true
+    }
+
     // IconButton with onClick to show dialog
     IconButton(
         imageResourceId = R.drawable.settings_icon,
@@ -113,9 +120,14 @@ fun ParameterIconButton(
 
     if(showDialog){
         ParameterDialog(
+            isNotHomePage = isNotHomePage,
             onDismissRequest = { showDialog = false },
             onNavigateToHomePage = {
-                navController.navigate(Screens.HomePage.name)
+                navController.navigate(Screens.HomePage.name){
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true // This clears the back stack up to the start destination
+                    }
+                }
                 showDialog = false
             },
             onMusicIconClick = { /* Handle music icon click */ }, // TODO : Add music
@@ -126,6 +138,7 @@ fun ParameterIconButton(
 
 @Composable
 fun ParameterDialog(
+    isNotHomePage: Boolean = true,
     onDismissRequest: () -> Unit,
     onNavigateToHomePage: () -> Unit,
     onMusicIconClick: () -> Unit,
@@ -144,14 +157,16 @@ fun ParameterDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Home button
-            IconButton(
-                onClick = onNavigateToHomePage,
-                imageResourceId = R.drawable.home_icon,
-                contentDescription = "Home",
-                modifier = Modifier
-                    .widthIn(max = 128.dp)
-            )
+            if (isNotHomePage) {
+                // Home button
+                IconButton(
+                    onClick = onNavigateToHomePage,
+                    imageResourceId = R.drawable.home_icon,
+                    contentDescription = "Home",
+                    modifier = Modifier
+                        .widthIn(max = 128.dp)
+                )
+            }
 
             // Music icon
             IconButton(
