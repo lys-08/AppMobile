@@ -1,7 +1,8 @@
 package com.progmobile.clickme.ui.levels
-
+import android.app.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,10 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
 
+import android.app.Dialog
+import android.os.Bundle
+import androidx.fragment.app.DialogFragment
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
@@ -60,7 +65,7 @@ fun Level_01(
 @Preview
 @Composable
 fun StartLevel01Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_01(
             navController = rememberNavController(),
             modifier = Modifier

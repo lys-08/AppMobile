@@ -8,6 +8,9 @@
     <string name="level_04">Level 4</string>
     <string name="level_05">Level 5</string>
 
+    // Levels hints
+    <string name="hint_01_01">Seriously ?</string>
+
     // Buttons
     <string name="button">Button</string>
 </resources>

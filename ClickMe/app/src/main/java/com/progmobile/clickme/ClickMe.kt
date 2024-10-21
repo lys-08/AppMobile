@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.navigation.NavHostController
@@ -15,8 +18,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.data.DataSource.levels
+import com.progmobile.clickme.ui.ClickMeBottomBar
 import com.progmobile.clickme.ui.HomePage
-import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.levels.Level_01
 import com.progmobile.clickme.ui.levels.Level_02
 import com.progmobile.clickme.ui.levels.Level_03
@@ -35,22 +38,38 @@ enum class Screens(@StringRes val title: Int) {
     Level_05(title = R.string.level_05)
 }
 
-
 @Composable
 fun ClickMeApp(
     navController: NavHostController = rememberNavController()
 ) {
+
+    val levelHints = mapOf(
+        // TODO : Transform this to list of strings in string.xml
+        Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
+        Screens.Level_02.name to listOf("Hint for Level 2", "Second hint for Level 2", "Third hint for Level 2"),
+        Screens.Level_03.name to listOf("Hint for Level 3")
+    )
+
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = Screens.valueOf(
         backStackEntry?.destination?.route?: Screens.HomePage.name
     )
-    Scaffold() {
-            innerPadding ->
+    Scaffold(
+        bottomBar = {
+            ClickMeBottomBar(
+                levelHints = levelHints,
+                navController = navController,
+                modifier = Modifier
+            )
+        }
+    ) { innerPadding ->
 
         NavHost(
             navController = navController,
             startDestination = Screens.HomePage.name,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
         ) {
             composable(route = Screens.HomePage.name) {
                 HomePage(
