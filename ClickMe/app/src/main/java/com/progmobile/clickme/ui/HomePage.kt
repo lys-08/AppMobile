@@ -52,19 +52,18 @@ fun HomePage(
         )
 
         // Levels button
-        Column {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.fillMaxWidth().fillMaxHeight()
-            ) {
-                items(levels) { level ->
-                    LevelButton(
-                        labelResourceId = level.first,
-                        onClick = { navController.navigate(level.second) }
-                    )
-                }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            items(levels) { level ->
+                LevelButton(
+                    labelResourceId = level.first,
+                    onClick = { navController.navigate(level.second) }
+                )
             }
         }
+
     }
 }
 
@@ -80,7 +79,8 @@ fun LevelButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.widthIn(min = 250.dp)
+        modifier = modifier.widthIn(min = 150.dp)
+            .widthIn()
     ) {
         Text(stringResource(labelResourceId))
     }
