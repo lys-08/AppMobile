@@ -124,6 +124,28 @@ fun LevelButtonLocked(
     }
 }
 
+@Composable
+fun UnlockLevel(
+    @StringRes labelResourceId: Int,
+    level: Int,
+    modifier: Modifier = Modifier,
+    levelName: String,
+    navController: NavHostController
+) {
+    LevelButton(
+        labelResourceId = labelResourceId,
+        onClick = { navController.navigate(levelName)
+            if (currentLevel < level) {
+                currentLevel++
+            }
+        },
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
+}
+
+
 @Preview
 @Composable
 fun StartHomePagePreview() {
