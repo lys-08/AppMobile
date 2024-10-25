@@ -20,7 +20,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.UnlockLevel
 
 
 /**
@@ -47,12 +49,12 @@ fun Level_02(
         )
 
         // Level button
-        LevelButton(
+        UnlockLevel(
             labelResourceId = R.string.button,
-            onClick = {navController.navigate(Screens.Level_03.name)},
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.Center)
+            level = 2,
+            modifier,
+            levelName = Screens.Level_03.name,
+            navController
         )
     }
 }

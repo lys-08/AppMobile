@@ -22,10 +22,12 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.data.DataSource.currentLevel
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
@@ -52,12 +54,12 @@ fun Level_01(
         )
 
         // Level button
-        LevelButton(
+        UnlockLevel(
             labelResourceId = R.string.button,
-            onClick = {navController.navigate(Screens.Level_02.name)},
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.Center)
+            level = 1,
+            modifier,
+            levelName = Screens.Level_02.name,
+            navController
         )
     }
 }
