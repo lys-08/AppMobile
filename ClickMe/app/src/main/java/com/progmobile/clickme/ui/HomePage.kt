@@ -59,29 +59,28 @@ fun HomePage(
         )
 
         // Levels button
-        Column {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                //Enable buttons from unlocked levels
-                items((0..currentLevel).toList()) { i ->
-                    LevelButton(
-                        labelResourceId = levels[i].first,
-                        onClick = { navController.navigate(levels[i].second) }
-                    )
-                }
-                //Disable buttons from locked levels
-                items((currentLevel + 1..levels.size - 1).toList()) { i ->
-                    LevelButtonLocked(
-                        labelResourceId = levels[i].first,
-                        onClick = { navController.navigate(levels[i].second) }
-                    )
-                }
-            }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+          ) {
+              //Enable buttons from unlocked levels
+              items((0..currentLevel).toList()) { i ->
+                  LevelButton(
+                      labelResourceId = levels[i].first,
+                      onClick = { navController.navigate(levels[i].second) }
+                  )
+              }
+              //Disable buttons from locked levels
+              items((currentLevel + 1..levels.size - 1).toList()) { i ->
+                  LevelButtonLocked(
+                      labelResourceId = levels[i].first,
+                      onClick = { navController.navigate(levels[i].second) }
+                  )
+              }
         }
+
     }
 }
 
@@ -97,7 +96,8 @@ fun LevelButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.widthIn(min = 250.dp)
+        modifier = modifier.widthIn(min = 150.dp)
+            .widthIn()
     ) {
         Text(stringResource(labelResourceId))
     }
