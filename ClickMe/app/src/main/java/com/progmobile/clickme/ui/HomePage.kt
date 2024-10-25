@@ -27,6 +27,12 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.data.DataSource.levels
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 
 
 /**
@@ -108,7 +114,13 @@ fun LevelButtonLocked(
         modifier = modifier.widthIn(min = 250.dp),
         enabled = false
     ) {
-        Text(stringResource(labelResourceId))
+        Image(
+            painter = painterResource(id = R.drawable.lock_icon),
+            contentDescription = "Locked levels",
+            modifier = Modifier
+                .background(Color.Transparent)
+                .wrapContentSize(Alignment.Center)
+        )
     }
 }
 
