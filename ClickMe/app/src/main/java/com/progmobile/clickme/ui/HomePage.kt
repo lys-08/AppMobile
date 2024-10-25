@@ -25,7 +25,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.data.DataSource.levels
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 
 
 /**
@@ -54,14 +61,24 @@ fun HomePage(
         // Levels button
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            items(levels) { level ->
-                LevelButton(
-                    labelResourceId = level.first,
-                    onClick = { navController.navigate(level.second) }
-                )
-            }
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+          ) {
+              //Enable buttons from unlocked levels
+              items((0..currentLevel).toList()) { i ->
+                  LevelButton(
+                      labelResourceId = levels[i].first,
+                      onClick = { navController.navigate(levels[i].second) }
+                  )
+              }
+              //Disable buttons from locked levels
+              items((currentLevel + 1..levels.size - 1).toList()) { i ->
+                  LevelButtonLocked(
+                      labelResourceId = levels[i].first,
+                      onClick = { navController.navigate(levels[i].second) }
+                  )
+              }
         }
 
     }
@@ -85,6 +102,49 @@ fun LevelButton(
         Text(stringResource(labelResourceId))
     }
 }
+
+@Composable
+fun LevelButtonLocked(
+    @StringRes labelResourceId: Int,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier.widthIn(min = 250.dp),
+        enabled = false
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.lock_icon),
+            contentDescription = "Locked levels",
+            modifier = Modifier
+                .background(Color.Transparent)
+                .wrapContentSize(Alignment.Center)
+        )
+    }
+}
+
+@Composable
+fun UnlockLevel(
+    @StringRes labelResourceId: Int,
+    level: Int,
+    modifier: Modifier = Modifier,
+    levelName: String,
+    navController: NavHostController
+) {
+    LevelButton(
+        labelResourceId = labelResourceId,
+        onClick = { navController.navigate(levelName)
+            if (currentLevel < level) {
+                currentLevel++
+            }
+        },
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
+}
+
 
 @Preview
 @Composable
