@@ -1,8 +1,7 @@
 package com.progmobile.clickme.ui.levels
-import android.app.AlertDialog
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,17 +22,13 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
 
-import android.app.Dialog
-import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
  * the navigation to next screen
  */
 @Composable
-fun Level_01(
+fun Level_05(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -43,7 +38,7 @@ fun Level_01(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_01),
+            text = stringResource(id = R.string.level_05),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,7 +49,7 @@ fun Level_01(
         // Level button
         LevelButton(
             labelResourceId = R.string.button,
-            onClick = {navController.navigate(Screens.Level_02.name)},
+            onClick = {navController.navigate(Screens.HomePage.name)},
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)
@@ -64,9 +59,9 @@ fun Level_01(
 
 @Preview
 @Composable
-fun StartLevel01Preview() {
-    ClickMeTheme {
-        Level_01(
+fun StartLevel05Preview() {
+    MaterialTheme {
+        Level_02(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
