@@ -25,6 +25,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.data.DataSource.levels
 
 
@@ -55,12 +56,22 @@ fun HomePage(
         Column {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
-                modifier = Modifier.fillMaxWidth().fillMaxHeight()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
             ) {
-                items(levels) { level ->
+                //Enable buttons from unlocked levels
+                items((0..currentLevel).toList()) { i ->
                     LevelButton(
-                        labelResourceId = level.first,
-                        onClick = { navController.navigate(level.second) }
+                        labelResourceId = levels[i].first,
+                        onClick = { navController.navigate(levels[i].second) }
+                    )
+                }
+                //Disable buttons from locked levels
+                items((currentLevel + 1..levels.size - 1).toList()) { i ->
+                    LevelButtonLocked(
+                        labelResourceId = levels[i].first,
+                        onClick = { navController.navigate(levels[i].second) }
                     )
                 }
             }
@@ -81,6 +92,21 @@ fun LevelButton(
     Button(
         onClick = onClick,
         modifier = modifier.widthIn(min = 250.dp)
+    ) {
+        Text(stringResource(labelResourceId))
+    }
+}
+
+@Composable
+fun LevelButtonLocked(
+    @StringRes labelResourceId: Int,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier.widthIn(min = 250.dp),
+        enabled = false
     ) {
         Text(stringResource(labelResourceId))
     }

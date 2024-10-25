@@ -11,4 +11,5 @@ object DataSource {
         Pair(R.string.level_04, Screens.Level_04.name),
         Pair(R.string.level_05, Screens.Level_05.name)
     )
+    var currentLevel = 0;
 }
