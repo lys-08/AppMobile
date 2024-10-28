@@ -1,5 +1,10 @@
 package com.progmobile.clickme.ui.levels
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +30,12 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+
+
 
 
 /**
@@ -34,6 +47,9 @@ fun Level_04(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+
+    var isImageVisible by remember { mutableStateOf(true) }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
@@ -48,15 +64,33 @@ fun Level_04(
             textAlign = TextAlign.Center
         )
 
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 4,
-            modifier,
-            levelName = Screens.Level_05.name,
-            navController
-        )
+        if (isImageVisible) {
+            Image(
+                painter = painterResource(id = R.drawable.screenshot_frame),
+                contentDescription = "Screenshot frame",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Transparent)
+                    .padding(bottom = 200.dp)
+            )
+        }
+        //ShowButton(modifier = modifier, navController = navController)
     }
+}
+
+
+@Composable
+fun ShowButton(
+    modifier: Modifier,
+    navController: NavHostController) {
+    // Level button
+    UnlockLevel(
+        labelResourceId = R.string.button,
+        level = 4,
+        modifier,
+        levelName = Screens.Level_05.name,
+        navController
+    )
 }
 
 @Preview
