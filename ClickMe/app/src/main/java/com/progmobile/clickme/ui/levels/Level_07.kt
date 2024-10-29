@@ -33,6 +33,7 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.LevelButtonLocked
 
 
 /**

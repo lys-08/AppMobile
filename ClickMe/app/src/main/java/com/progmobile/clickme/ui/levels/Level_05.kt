@@ -22,6 +22,7 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.UnlockLevel
 
 
 /**
@@ -48,12 +49,12 @@ fun Level_05(
         )
 
         // Level button
-        LevelButton(
+        UnlockLevel(
             labelResourceId = R.string.button,
-            onClick = { navController.navigate(Screens.Level_06.name) },
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.Center)
+            level = 5,
+            modifier,
+            levelName = Screens.Level_06.name,
+            navController
         )
     }
 }
