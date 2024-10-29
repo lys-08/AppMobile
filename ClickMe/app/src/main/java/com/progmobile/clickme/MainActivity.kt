@@ -14,7 +14,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 class MainActivity : ComponentActivity() {
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.CAMERA)
+        Manifest.permission.CAMERA,
+        /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
     private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
