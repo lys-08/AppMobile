@@ -86,12 +86,12 @@ fun Level_07(
         // Level button
         if (isCharging.value)
         {
-            UnlockLevel(
+            LevelButton(
                 labelResourceId = R.string.button,
-                level = 7,
-                modifier,
-                levelName = Screens.Level_08.name,
-                navController
+                onClick = { navController.navigate(Screens.HomePage.name) },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center)
             )
         }
     }

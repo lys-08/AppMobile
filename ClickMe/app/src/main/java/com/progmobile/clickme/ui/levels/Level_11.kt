@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.BatteryManager
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -49,25 +50,27 @@ fun Level_11(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isCharging = remember { mutableStateOf(false) }
+    val currentMode = context.resources.configuration.uiMode
+    val isDarkMode = remember { mutableStateOf(currentMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) }
 
-    // Creation of a BroadcastReceiver to check light mode state
-    val lightModeReceiver = remember {
+    // Creation of a BroadcastReceiver to check the light mode state
+    val modeReceiver = remember {
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val status = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
-                isCharging.value = status == BatteryManager.BATTERY_STATUS_CHARGING
+                val newMode = context?.resources?.configuration?.uiMode
+                val isCurrentlyDark = newMode?.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+                isDarkMode.value = isCurrentlyDark
             }
         }
     }
 
     // Register the BroadcastReceiver
     DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED) // Listen to the battery change state
-        context.registerReceiver(lightModeReceiver, filter) // Save the BroadcastReceiver with the context
+        val filter = IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED) // Listen to the configuration change state
+        context.registerReceiver(modeReceiver, filter) // Save the BroadcastReceiver with the new context
         onDispose {
-            context.unregisterReceiver(lightModeReceiver)
-        } // Free the resources
+            context.unregisterReceiver(modeReceiver) // Free the resources
+        }
     }
 
     Column(
@@ -85,14 +88,14 @@ fun Level_11(
         )
 
         // Level button
-        if (isCharging.value)
+        if (isDarkMode.value)
         {
-            UnlockLevel(
+            LevelButton(
                 labelResourceId = R.string.button,
-                level = 7,
-                modifier,
-                levelName = Screens.Level_08.name,
-                navController
+                onClick = { navController.navigate(Screens.HomePage.name) },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center)
             )
         }
     }
