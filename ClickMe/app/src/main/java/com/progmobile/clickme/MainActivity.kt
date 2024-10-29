@@ -25,22 +25,35 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        checkPermissions()
         setContent {
             ClickMeTheme {
-                ClickMeApp()
+                ClickMeApp(permissionsStatus)
             }
         }
-
-        checkPermissions()
     }
 
     private fun checkPermissions() {
+        // Check current permissions
         val permissionsNeeded = permissionsToCheck.filter { permission ->
             ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED
         }
 
+        // Needed permissions
         if (permissionsNeeded.isNotEmpty()) {
             requestPermissionLauncher.launch(permissionsNeeded.toTypedArray())
+        } else {
+            permissionsStatus.value = false
+        }
+
+        // Check if at least one permission have been denied
+        val anyPermissionDeniedPreviously = permissionsToCheck.any { permission ->
+            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
+        }
+
+        // Update the status is a permission have been denied
+        if (anyPermissionDeniedPreviously) {
+            permissionsStatus.value = true
         }
     }
 }

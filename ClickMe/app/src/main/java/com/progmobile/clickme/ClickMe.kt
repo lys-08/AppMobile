@@ -4,9 +4,12 @@ package com.progmobile.clickme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,8 +57,33 @@ enum class Screens(@StringRes val title: Int) {
 
 @Composable
 fun ClickMeApp(
+    permissionsDenied : MutableState<Boolean>,
     navController: NavHostController = rememberNavController()
 ) {
+    // ================= PERMISSION =================
+    var showDialog by remember { mutableStateOf(false) }
+
+    // An Alert message is print if at least one permission have been denied
+    LaunchedEffect(permissionsDenied.value) {
+        if (permissionsDenied.value) {
+            showDialog = true
+        }
+    }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text("Permission denied") },
+            text = { Text("Some permission have been denied. WARNING : you may nit complete some level, please accept the permission.") },
+            confirmButton = {
+                Button(onClick = { showDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+    // =============== END PERMISSION ===============
+
     val levelHints = mapOf(
         // TODO : Transform this to list of strings in string.xml
         Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
