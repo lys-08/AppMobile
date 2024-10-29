@@ -5,7 +5,9 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,7 +56,6 @@ enum class Screens(@StringRes val title: Int) {
 fun ClickMeApp(
     navController: NavHostController = rememberNavController()
 ) {
-
     val levelHints = mapOf(
         // TODO : Transform this to list of strings in string.xml
         Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
