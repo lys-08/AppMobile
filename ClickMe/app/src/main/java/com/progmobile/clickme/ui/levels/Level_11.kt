@@ -79,7 +79,7 @@ fun Level_11(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_07),
+            text = stringResource(id = R.string.level_11),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
