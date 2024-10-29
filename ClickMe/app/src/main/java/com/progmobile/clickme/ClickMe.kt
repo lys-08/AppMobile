@@ -57,7 +57,9 @@ fun ClickMeApp(
         // TODO : Transform this to list of strings in string.xml
         Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
         Screens.Level_02.name to listOf("Hint for Level 2", "Second hint for Level 2", "Third hint for Level 2"),
-        Screens.Level_03.name to listOf("Hint for Level 3")
+        Screens.Level_03.name to listOf("Hint for Level 3"),
+        Screens.Level_06.name to listOf("A simple touch can light your way."),
+        Screens.Level_09.name to listOf("Maybe trying all options is not the greatest idea...", "Try to expand your artistic knowledge.", "Never heard of René Magritte ? What a shame.")
     )
 
     val backStackEntry by navController.currentBackStackEntryAsState()

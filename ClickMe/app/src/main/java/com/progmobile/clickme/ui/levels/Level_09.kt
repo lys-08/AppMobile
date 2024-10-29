@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -56,231 +57,243 @@ fun Level_09(
     var sentence by remember { mutableStateOf("") }
     var currentMenu by remember { mutableStateOf(1) }
 
-    Column(
+    LazyColumn(
         modifier = modifier,
         //verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
-            text = stringResource(id = R.string.level_09),
-            style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
-        )
+        item {
+            Text(
+                text = stringResource(id = R.string.level_09),
+                style = MaterialTheme.typography.displayLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                textAlign = TextAlign.Center
+            )
+        }
 
-        Text(
-            text = "$sentence",
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(100.dp),
-            textAlign = TextAlign.Center
-        )
+        item {
+            Text(
+                text = "$sentence",
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(100.dp),
+                textAlign = TextAlign.Center
+            )
+        }
 
-        Button(
-            onClick = { expanded = !expanded },
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.TopCenter)
+        item {
+            Button(
+                onClick = { expanded = !expanded },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.TopCenter)
             ) {
-            Text(text = "Button")
+                Text(text = "Button")
+            }
         }
 
         // Le menu ne se ferme pas après chaque choix
         if (expanded) {
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }, // Garde cette option si tu veux fermer le menu en cliquant à l'extérieur
-                offset = DpOffset(150.dp, 690.dp)
-            ) {
-                when (currentMenu) {
-                    1 -> {
-                        DropdownMenuItem(
-                            text = { Text("She") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("He") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("This") },
-                            onClick = {
-                                sentence += "This "
-                                currentMenu = 2
-                            },
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("It") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("Button") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                    }
-                    2 -> {
-                        DropdownMenuItem(
-                            text = { Text("will") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("can") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("button") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("is") },
-                            onClick = {
-                                sentence += "is "
-                                currentMenu = 3
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("can't") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                    }
-                    3 -> {
-                        DropdownMenuItem(
-                            text = { Text("not") },
-                            onClick = {
-                                sentence += "not "
-                                currentMenu = 4
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("really") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("a") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("very") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("button") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                    }
-                    4 -> {
-                        DropdownMenuItem(
-                            text = { Text("big") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("it") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("easy") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("button") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("a") },
-                            onClick = {
-                                sentence += "a "
-                                currentMenu = 5
-                            }
-                        )
-                    }
-                    5 -> {
-                        DropdownMenuItem(
-                            text = { Text("button") },
-                            onClick = {
-                                sentence += "button."
-                                expanded = false
-                                currentLevel ++
-                                navController.navigate(Screens.Level_10.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("joke") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("choice") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("pipe") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
-                        HorizontalDivider()
-                        DropdownMenuItem(
-                            text = { Text("answer") },
-                            onClick = {
-                                navController.navigate(Screens.HomePage.name)
-                            }
-                        )
+            item {
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }, // Garde cette option si tu veux fermer le menu en cliquant à l'extérieur
+                    offset = DpOffset(150.dp, 690.dp)
+                ) {
+                    when (currentMenu) {
+                        1 -> {
+                            DropdownMenuItem(
+                                text = { Text("She") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("He") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("This") },
+                                onClick = {
+                                    sentence += "This "
+                                    currentMenu = 2
+                                },
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("It") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("Button") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                        }
+
+                        2 -> {
+                            DropdownMenuItem(
+                                text = { Text("will") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("can") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("button") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("is") },
+                                onClick = {
+                                    sentence += "is "
+                                    currentMenu = 3
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("can't") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                        }
+
+                        3 -> {
+                            DropdownMenuItem(
+                                text = { Text("not") },
+                                onClick = {
+                                    sentence += "not "
+                                    currentMenu = 4
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("really") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("a") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("very") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("button") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                        }
+
+                        4 -> {
+                            DropdownMenuItem(
+                                text = { Text("big") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("it") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("easy") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("button") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("a") },
+                                onClick = {
+                                    sentence += "a "
+                                    currentMenu = 5
+                                }
+                            )
+                        }
+
+                        5 -> {
+                            DropdownMenuItem(
+                                text = { Text("button") },
+                                onClick = {
+                                    sentence += "button."
+                                    expanded = false
+                                    currentLevel++
+                                    navController.navigate(Screens.Level_10.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("joke") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("choice") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("pipe") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                            HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("answer") },
+                                onClick = {
+                                    navController.navigate(Screens.HomePage.name)
+                                }
+                            )
+                        }
                     }
                 }
             }
