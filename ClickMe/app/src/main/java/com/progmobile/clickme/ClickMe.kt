@@ -27,6 +27,10 @@ import com.progmobile.clickme.ui.levels.Level_04
 import com.progmobile.clickme.ui.levels.Level_05
 import com.progmobile.clickme.ui.levels.Level_06
 import com.progmobile.clickme.ui.levels.Level_07
+import com.progmobile.clickme.ui.levels.Level_08
+import com.progmobile.clickme.ui.levels.Level_09
+import com.progmobile.clickme.ui.levels.Level_10
+import com.progmobile.clickme.ui.levels.Level_11
 
 /*
  * Enum class containing the pages of the app
@@ -39,7 +43,11 @@ enum class Screens(@StringRes val title: Int) {
     Level_04(title = R.string.level_04),
     Level_05(title = R.string.level_05),
     Level_06(title = R.string.level_06),
-    Level_07(title = R.string.level_07)
+    Level_07(title = R.string.level_07),
+    Level_08(title = R.string.level_08),
+    Level_09(title = R.string.level_09),
+    Level_10(title = R.string.level_10),
+    Level_11(title = R.string.level_11)
 }
 
 @Composable
@@ -94,6 +102,10 @@ fun ClickMeApp(
                         R.string.level_05 -> Level_05(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
                         R.string.level_06 -> Level_06(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
                         R.string.level_07 -> Level_07(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_08 -> Level_08(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_09 -> Level_09(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_10 -> Level_10(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
+                        R.string.level_11 -> Level_11(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
                     }
                 }
             }

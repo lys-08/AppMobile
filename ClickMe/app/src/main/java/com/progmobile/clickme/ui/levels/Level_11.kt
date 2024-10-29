@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.Configuration
 import android.os.BatteryManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,15 +44,15 @@ import com.progmobile.clickme.ui.UnlockLevel
  */
 @SuppressLint("ServiceCast")
 @Composable
-fun Level_07(
+fun Level_11(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val isCharging = remember { mutableStateOf(false) }
 
-    // Creation of a BroadcastReceiver to check the battery state
-    val batteryReceiver = remember {
+    // Creation of a BroadcastReceiver to check light mode state
+    val lightModeReceiver = remember {
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val status = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
@@ -63,9 +64,9 @@ fun Level_07(
     // Register the BroadcastReceiver
     DisposableEffect(Unit) {
         val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED) // Listen to the battery change state
-        context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
+        context.registerReceiver(lightModeReceiver, filter) // Save the BroadcastReceiver with the context
         onDispose {
-            context.unregisterReceiver(batteryReceiver)
+            context.unregisterReceiver(lightModeReceiver)
         } // Free the resources
     }
 
@@ -99,9 +100,9 @@ fun Level_07(
 
 @Preview
 @Composable
-fun StartLevel07Preview() {
+fun StartLevel11Preview() {
     MaterialTheme {
-        Level_07(
+        Level_11(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
