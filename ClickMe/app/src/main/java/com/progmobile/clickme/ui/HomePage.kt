@@ -96,8 +96,7 @@ fun LevelButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.widthIn(min = 150.dp)
-            .widthIn()
+        modifier = modifier.widthIn(min = 150.dp, max = 150.dp)
     ) {
         Text(stringResource(labelResourceId))
     }

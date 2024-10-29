@@ -9,7 +9,9 @@ object DataSource {
         Pair(R.string.level_02, Screens.Level_02.name),
         Pair(R.string.level_03, Screens.Level_03.name),
         Pair(R.string.level_04, Screens.Level_04.name),
-        Pair(R.string.level_05, Screens.Level_05.name)
+        Pair(R.string.level_05, Screens.Level_05.name),
+        Pair(R.string.level_06, Screens.Level_06.name),
+        Pair(R.string.level_07, Screens.Level_07.name)
     )
     var currentLevel = 0;
 }

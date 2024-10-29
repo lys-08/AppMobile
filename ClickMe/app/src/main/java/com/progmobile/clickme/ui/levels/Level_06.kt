@@ -29,7 +29,7 @@ import com.progmobile.clickme.ui.LevelButton
  * the navigation to next screen
  */
 @Composable
-fun Level_05(
+fun Level_06(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -39,7 +39,7 @@ fun Level_05(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_05),
+            text = stringResource(id = R.string.level_06),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,7 +50,7 @@ fun Level_05(
         // Level button
         LevelButton(
             labelResourceId = R.string.button,
-            onClick = { navController.navigate(Screens.Level_06.name) },
+            onClick = { navController.navigate(Screens.Level_07.name) },
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)
@@ -60,9 +60,9 @@ fun Level_05(
 
 @Preview
 @Composable
-fun StartLevel05Preview() {
+fun StartLevel06Preview() {
     MaterialTheme {
-        Level_05(
+        Level_06(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
