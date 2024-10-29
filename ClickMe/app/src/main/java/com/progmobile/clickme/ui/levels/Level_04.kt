@@ -3,9 +3,11 @@ package com.progmobile.clickme.ui.levels
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,8 +36,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
-
-
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.TextRange
 
 
 /**
@@ -48,50 +51,59 @@ fun Level_04(
     modifier: Modifier = Modifier
 ) {
 
-    var isImageVisible by remember { mutableStateOf(true) }
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // Title
-        Text(
-            text = stringResource(id = R.string.level_04),
-            style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
+        val configuration = LocalConfiguration.current
+        if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            RotatedText(configuration)
+        }
+        else {
+            NormalText()
+        }
+        UnlockLevel(
+            labelResourceId = R.string.button,
+            level = 4,
+            modifier,
+            levelName = Screens.Level_05.name,
+            navController
         )
-
-//        if (isImageVisible) {
-//            Image(
-//                painter = painterResource(id = R.drawable.screenshot_frame),
-//                contentDescription = "Screenshot frame",
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .background(Color.Transparent)
-//                    .padding(bottom = 200.dp)
-//            )
-//        }
-        ShowButton(modifier = modifier, navController = navController)
     }
 }
 
+@Composable
+fun RotatedText(
+    configuration: Configuration
+) {
+    val rotationAngle = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 90f else 0f
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.CenterEnd // Aligne le contenu sur le côté droit
+    ) {
+        Text(
+            text = stringResource(id = R.string.level_04),
+            modifier = Modifier
+                .rotate(rotationAngle),
+            style = MaterialTheme.typography.displayLarge,
+            textAlign = TextAlign.End
+        )
+    }
+}
 
 @Composable
-fun ShowButton(
-    modifier: Modifier,
-    navController: NavHostController) {
-    // Level button
-    UnlockLevel(
-        labelResourceId = R.string.button,
-        level = 4,
-        modifier,
-        levelName = Screens.Level_05.name,
-        navController
+fun NormalText() {
+    Text(
+        text = stringResource(id = R.string.level_04),
+        style = MaterialTheme.typography.displayLarge,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        textAlign = TextAlign.Center
     )
 }
+
 
 @Preview
 @Composable
