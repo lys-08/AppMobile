@@ -30,7 +30,7 @@ import com.progmobile.clickme.ui.UnlockLevel
  * the navigation to next screen
  */
 @Composable
-fun Level_05(
+fun Level_10(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -40,7 +40,7 @@ fun Level_05(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_05),
+            text = stringResource(id = R.string.level_10),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -53,7 +53,7 @@ fun Level_05(
             labelResourceId = R.string.button,
             level = 0,
             modifier,
-            levelName = Screens.Level_06.name,
+            levelName = Screens.HomePage.name,
             navController
         )
     }
@@ -61,9 +61,9 @@ fun Level_05(
 
 @Preview
 @Composable
-fun StartLevel05Preview() {
+fun StartLevel10Preview() {
     MaterialTheme {
-        Level_02(
+        Level_10(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

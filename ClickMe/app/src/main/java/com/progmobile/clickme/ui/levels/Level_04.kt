@@ -64,17 +64,17 @@ fun Level_04(
             textAlign = TextAlign.Center
         )
 
-        if (isImageVisible) {
-            Image(
-                painter = painterResource(id = R.drawable.screenshot_frame),
-                contentDescription = "Screenshot frame",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Transparent)
-                    .padding(bottom = 200.dp)
-            )
-        }
-        //ShowButton(modifier = modifier, navController = navController)
+//        if (isImageVisible) {
+//            Image(
+//                painter = painterResource(id = R.drawable.screenshot_frame),
+//                contentDescription = "Screenshot frame",
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .background(Color.Transparent)
+//                    .padding(bottom = 200.dp)
+//            )
+//        }
+        ShowButton(modifier = modifier, navController = navController)
     }
 }
 
