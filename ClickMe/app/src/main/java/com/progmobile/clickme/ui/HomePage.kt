@@ -29,9 +29,11 @@ import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.data.DataSource.levels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 
 
@@ -129,7 +131,8 @@ fun UnlockLevel(
     level: Int,
     modifier: Modifier = Modifier,
     levelName: String,
-    navController: NavHostController
+    navController: NavHostController,
+    onUnlock: () -> Unit = {}
 ) {
     LevelButton(
         labelResourceId = labelResourceId,
@@ -137,8 +140,9 @@ fun UnlockLevel(
             if (currentLevel < level) {
                 currentLevel++
             }
+            onUnlock()
         },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)
     )

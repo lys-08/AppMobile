@@ -64,7 +64,8 @@ fun ClickMeBottomBar(
                 // Right-aligned: HintIconButton
                 HintIconButton(
                     listOfHints = levelHints[currentRoute]
-                        ?: emptyList() // Pass hints for the current level
+                        ?: emptyList(), // Pass hints for the current level
+                    navController = navController
                 )
             }
         }
@@ -204,6 +205,7 @@ fun ParameterDialog(
 @Composable
 fun HintIconButton(
     listOfHints: List<String>,
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     // Maintain a state to control when the dialog should be shown
@@ -224,15 +226,10 @@ fun HintIconButton(
 
     // Show a dialog when showDialog is true
     if (showDialog) {
-        /**
-        BubbleDialog(
-        onDismissRequest = { showDialog = false }, // Close dialog when dismissed
-        hintText = hintText
-        )
-         */
         SwipableDialog(
             onDismissRequest = { showDialog = false },
-            listOfHints = listOfHints
+            listOfHints = listOfHints,
+            navController = navController
         )
     }
 }
@@ -241,7 +238,13 @@ fun HintIconButton(
 fun SwipableDialog(
     onDismissRequest: () -> Unit,
     listOfHints: List<String>,
+    navController: NavHostController,
 ) {
+    var isLevel10: Boolean = false
+    if (navController.currentDestination?.route != Screens.HomePage.name) {
+        isLevel10 = true
+    }
+
     var mutableListOfHints by remember { mutableStateOf(listOfHints) }
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
@@ -268,10 +271,25 @@ fun SwipableDialog(
                         .weight(1f) // Take remaining space
                 ) { page ->
                     // Dynamically display content based on the current page
-                    PageContent(
-                        text = mutableListOfHints[page],
-                        backgroundColor = Color.Transparent
-                    )
+                    if (isLevel10 && page == mutableListOfHints.lastIndex) {
+                        // Display a button on the last page
+                        UnlockLevel(
+                            onUnlock = {
+                                // Trigger onDismissRequest after unlocking
+                                onDismissRequest()
+                            },
+                            labelResourceId = R.string.button,
+                            level = 1,
+                            modifier = Modifier,
+                            levelName = Screens.Level_01.name,
+                            navController = navController
+                        )
+                    } else {
+                        PageContent(
+                            text = mutableListOfHints[page],
+                            backgroundColor = Color.Transparent
+                        )
+                    }
                 }
 
                 // Add a row of dots to indicate which page is active
@@ -282,15 +300,20 @@ fun SwipableDialog(
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
-                    repeat(numberOfHints) { pageIndex ->
-                        val color = if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                        Box(
-                            modifier = Modifier
-                                .size(12.dp)
-                                .background(color = color, shape = MaterialTheme.shapes.small)
-                                .padding(4.dp)
-                        )
-                    }
+                   if (isLevel10 == false) {
+                       repeat(numberOfHints) { pageIndex ->
+                           val color =
+                               if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                           Box(
+                               modifier = Modifier
+                                   .size(12.dp)
+                                   .background(color = color, shape = MaterialTheme.shapes.small)
+                                   .padding(4.dp)
+                           )
+                       }
+                   } else {
+
+                   }
                 }
             }
         }

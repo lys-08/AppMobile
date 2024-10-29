@@ -1,5 +1,6 @@
 package com.progmobile.clickme.ui.levels
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +10,15 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -23,6 +31,7 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+import kotlinx.coroutines.delay
 
 
 /**
@@ -48,11 +57,22 @@ fun Level_02(
             textAlign = TextAlign.Center
         )
 
+        // TODO : Long push doesn't works
         // Level button
         UnlockLevel(
             labelResourceId = R.string.button,
             level = 2,
-            modifier,
+            modifier
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onLongPress = {
+                            navController.navigate(Screens.Level_03.name)
+                            if (currentLevel < 2) {
+                                currentLevel++
+                            }
+                        }
+                    )
+                },
             levelName = Screens.Level_03.name,
             navController
         )
