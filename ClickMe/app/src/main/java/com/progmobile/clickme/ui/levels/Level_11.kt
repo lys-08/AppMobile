@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.BatteryManager
+import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -50,6 +51,61 @@ fun Level_11(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val currentUiMode = context.resources.configuration.uiMode
+    val initialIsDarkMode = remember { currentUiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES }
+    val isDarkMode = remember { mutableStateOf(initialIsDarkMode) }
+
+    Log.d("ThemeChange", "isDarkMode: ${isDarkMode.value}, initialIsDarkMode: $initialIsDarkMode")
+
+    // Creation of a BroadcastReceiver to check the light mode state
+    val modeReceiver = remember {
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val newMode = context?.resources?.configuration?.uiMode
+                val isCurrentlyDark = newMode?.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+                isDarkMode.value = isCurrentlyDark
+
+                Log.d("ThemeChange", "isDarkMode: ${isDarkMode.value}, initialIsDarkMode: $initialIsDarkMode")
+            }
+        }
+    }
+
+    // Register the BroadcastReceiver
+    DisposableEffect(Unit) {
+        val filter = IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED) // Listen to the configuration change state
+        context.registerReceiver(modeReceiver, filter) // Save the BroadcastReceiver with the new mode
+        onDispose {
+            context.unregisterReceiver(modeReceiver) // Free the ressources
+        }
+    }
+
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        // Titre
+        Text(
+            text = stringResource(id = R.string.level_11),
+            style = MaterialTheme.typography.displayLarge,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            textAlign = TextAlign.Center
+        )
+
+        // Level Button
+        if (isDarkMode.value != initialIsDarkMode) {
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 11,
+                modifier,
+                levelName = Screens.Level_12.name,
+                navController
+            )
+        }
+    }
+}
+/*val context = LocalContext.current
     val currentMode = context.resources.configuration.uiMode
     val isDarkMode = remember { mutableStateOf(currentMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) }
 
@@ -99,7 +155,7 @@ fun Level_11(
             )
         }
     }
-}
+}*/
 
 @Preview
 @Composable

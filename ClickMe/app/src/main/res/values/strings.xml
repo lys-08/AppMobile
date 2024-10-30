@@ -12,8 +12,8 @@
     <string name="level_08">The ascent</string>
     <string name="level_09">Level 9</string>
     <string name="level_10">Level 10</string>
-    <string name="level_11">Ying Yang</string>
-    <string name="level_12">Beyond the Antennae</string>
+    <string name="level_11">Ying Yang</string> <!-- Reverse -->
+    <string name="level_12">Beyond the Antennae</string> <!-- Crash -->
 
     // Levels hints
     <string name="hint_01_01">Seriously ?</string>
