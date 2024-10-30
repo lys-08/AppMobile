@@ -5,7 +5,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.Configuration
 import android.os.BatteryManager
+import android.provider.Settings
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,28 +46,31 @@ import com.progmobile.clickme.ui.UnlockLevel
  */
 @SuppressLint("ServiceCast")
 @Composable
-fun Level_07(
+fun Level_12(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isCharging = remember { mutableStateOf(false) }
+    val isInAirplaneMode = remember { mutableStateOf(false) }
 
     // Creation of a BroadcastReceiver to check the battery state
     val batteryReceiver = remember {
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val status = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
-                isCharging.value = status == BatteryManager.BATTERY_STATUS_CHARGING
+                val isAirplaneModeOn = Settings.Global.getInt(
+                    context?.contentResolver,
+                    Settings.Global.AIRPLANE_MODE_ON, 0
+                ) != 0
+
+                isInAirplaneMode.value = isAirplaneModeOn
             }
         }
     }
 
     // Register the BroadcastReceiver
     DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED) // Listen to the battery change state
+        val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED) // Listen to the battery change state
         context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
-
         onDispose {
             context.unregisterReceiver(batteryReceiver)
         } // Free the resources
@@ -76,7 +82,7 @@ fun Level_07(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_07),
+            text = stringResource(id = R.string.level_12),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -85,14 +91,14 @@ fun Level_07(
         )
 
         // Level button
-        if (isCharging.value)
+        if (isInAirplaneMode.value)
         {
-            UnlockLevel(
+            LevelButton(
                 labelResourceId = R.string.button,
-                level = 7,
-                modifier,
-                levelName = Screens.Level_08.name,
-                navController
+                onClick = { navController.navigate(Screens.HomePage.name) },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center)
             )
         }
     }
@@ -100,9 +106,9 @@ fun Level_07(
 
 @Preview
 @Composable
-fun StartLevel07Preview() {
+fun StartLevel12Preview() {
     MaterialTheme {
-        Level_07(
+        Level_12(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

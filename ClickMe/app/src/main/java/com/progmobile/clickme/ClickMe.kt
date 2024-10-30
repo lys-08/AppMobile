@@ -41,7 +41,8 @@ enum class Screens(@StringRes val title: Int) {
     Level_08(title = R.string.level_08),
     Level_09(title = R.string.level_09),
     Level_10(title = R.string.level_10),
-    Level_11(title = R.string.level_11)
+    Level_11(title = R.string.level_11),
+    Level_12(title = R.string.level_12)
 }
 
 @Composable
@@ -86,7 +87,8 @@ fun ClickMeApp(
         Screens.Level_11.name to listOf(
             "Seek the shadow to find the light, seek the light to find the shadow",
             "Sometimes you have to dive into the depths to see the light"
-            )
+            ),
+        Screens.Level_12.name to listOf( "Head in the clouds")
     )
 
     val backStackEntry by navController.currentBackStackEntryAsState()

@@ -16,6 +16,7 @@ import com.progmobile.clickme.ui.levels.Level_08
 import com.progmobile.clickme.ui.levels.Level_09
 import com.progmobile.clickme.ui.levels.Level_10
 import com.progmobile.clickme.ui.levels.Level_11
+import com.progmobile.clickme.ui.levels.Level_12
 
 object DataSource {
     val levels = listOf(
@@ -30,6 +31,7 @@ object DataSource {
         Pair(R.string.level_09, Screens.Level_09.name),
         Pair(R.string.level_10, Screens.Level_10.name),
         Pair(R.string.level_11, Screens.Level_11.name),
+        Pair(R.string.level_12, Screens.Level_12.name),
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -43,8 +45,9 @@ object DataSource {
         Screens.Level_08.name to { navController, modifier -> { Level_08(navController, modifier) } },
         Screens.Level_09.name to { navController, modifier -> { Level_09(navController, modifier) } },
         Screens.Level_10.name to { navController, modifier -> { Level_10(navController, modifier) } },
-        Screens.Level_11.name to { navController, modifier -> { Level_11(navController, modifier) } }
+        Screens.Level_11.name to { navController, modifier -> { Level_11(navController, modifier) } },
+        Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } }
     )
 
-    var currentLevel = 0;
+    var currentLevel = 11;
 }
