@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +35,7 @@ import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
@@ -58,14 +60,59 @@ fun Level_03(
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 3,
-            modifier,
-            levelName = Screens.Level_04.name,
-            navController
-        )
+
+        var box1Pressed by remember { mutableStateOf(false) }
+        var box2Pressed by remember { mutableStateOf(false) }
+        val scope = rememberCoroutineScope()
+        val onBothClicked = {
+            navController.navigate(Screens.Level_04.name)
+            if (currentLevel < 3) {
+                currentLevel++
+            }
+        }
+
+        // Helper function to check both states and trigger action
+        fun checkBothPressed() {
+            if (box1Pressed && box2Pressed) {
+                onBothClicked()
+                box1Pressed = false
+                box2Pressed = false
+            } else {
+                // If only one button is pressed, start a coroutine to reset the state after a delay
+                scope.launch {
+                    delay(10) // 500 ms timeout for the second button to be pressed
+                    box1Pressed = false
+                    box2Pressed = false
+                }
+            }
+        }
+
+        // Level buttons
+        Row {
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 3,
+                modifier = Modifier.weight(1f),
+                levelName = Screens.Level_03.name,
+                navController = navController,
+                onUnlock = {
+                    box1Pressed = true
+                    checkBothPressed()
+                }
+            )
+
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 3,
+                modifier = Modifier.weight(1f),
+                levelName = Screens.Level_04.name,
+                navController = navController,
+                onUnlock = {
+                    box2Pressed = true
+                    checkBothPressed()
+                }
+            )
+        }
     }
 }
 

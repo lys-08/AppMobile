@@ -1,6 +1,7 @@
 package com.progmobile.clickme.ui
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -24,17 +25,35 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
-import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.data.DataSource.levels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
+import kotlinx.coroutines.delay
 
 
 /**
@@ -94,14 +113,51 @@ fun HomePage(
 fun LevelButton(
     @StringRes labelResourceId: Int,
     onClick: () -> Unit,
+    longClick: Boolean = false,
     modifier: Modifier = Modifier
 ) {
+    val holdDuration = 4000L
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(24.dp)) // Rounded corners
+            // light blue background
+            .background(Color(0xFFADD8E6))
+            /*
+            .clickable(
+                onClick = onClick,
+                onLongClick = onClick,
+            )     // Click action*/
+            .pointerInput(longClick) {
+                detectTapGestures(
+                    onPress = {
+                        if (longClick) {
+                            // For long click: wait for hold duration
+                            val success = tryAwaitRelease().also { delay(holdDuration) }
+                            if (success) onClick()
+                        } else {
+                            // For short click: trigger onClick immediately on press
+                            onClick()
+                        }
+                    }
+                )
+            }
+            .padding(16.dp),                  // Padding for content spacing
+        contentAlignment = Alignment.Center   // Center text in Box
+    ) {
+        Text(
+            text = stringResource(labelResourceId),
+            color = Color.White,
+            //style = MaterialTheme.typography.button // Adjust font style as needed
+        )
+    }
+    /*
     Button(
         onClick = onClick,
         modifier = modifier.widthIn(min = 150.dp, max = 150.dp)
-    ) {
+        ) {
         Text(stringResource(labelResourceId))
     }
+    */
 }
 
 @Composable
@@ -125,6 +181,10 @@ fun LevelButtonLocked(
     }
 }
 
+/**
+ * Composable that allows the user to select the desired action to do and triggers
+ * [onUnlock] lambda when the level is unlocked, replaces the default onClick action of the this composable.
+ */
 @Composable
 fun UnlockLevel(
     @StringRes labelResourceId: Int,
@@ -132,16 +192,22 @@ fun UnlockLevel(
     modifier: Modifier = Modifier,
     levelName: String,
     navController: NavHostController,
-    onUnlock: () -> Unit = {}
+    longClick:Boolean = false,
+    onUnlock: (() -> Unit)? = null
 ) {
     LevelButton(
         labelResourceId = labelResourceId,
-        onClick = { navController.navigate(levelName)
-            if (currentLevel < level) {
-                currentLevel++
+        onClick = {
+            if (onUnlock != null) {
+                onUnlock()
+            } else {
+                navController.navigate(levelName)
+                if (currentLevel < level) {
+                    currentLevel++
+                }
             }
-            onUnlock()
         },
+        longClick = longClick,
         modifier = modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)

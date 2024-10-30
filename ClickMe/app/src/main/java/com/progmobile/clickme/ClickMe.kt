@@ -54,15 +54,6 @@ enum class Screens(@StringRes val title: Int) {
 fun ClickMeApp(
     navController: NavHostController = rememberNavController()
 ) {
-
-    val levelHints = mapOf(
-        // TODO : Transform this to list of strings in string.xml
-        Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
-        Screens.Level_02.name to listOf("Hint for Level 2", "Second hint for Level 2", "Third hint for Level 2"),
-        Screens.Level_03.name to listOf("Hint for Level 3"),
-        Screens.Level_07.name to listOf("I'm kind of tired", "I really lack energy")
-    )
-
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = Screens.valueOf(
         backStackEntry?.destination?.route?: Screens.HomePage.name
@@ -70,7 +61,6 @@ fun ClickMeApp(
     Scaffold(
         bottomBar = {
             ClickMeBottomBar(
-                levelHints = levelHints,
                 navController = navController,
                 modifier = Modifier
             )

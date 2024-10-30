@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -37,11 +39,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource
 
 
 @Composable
 fun ClickMeBottomBar(
-    levelHints: Map<String, List<String>>,
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ) {
@@ -63,8 +65,6 @@ fun ClickMeBottomBar(
             if (currentRoute != Screens.HomePage.name) {
                 // Right-aligned: HintIconButton
                 HintIconButton(
-                    listOfHints = levelHints[currentRoute]
-                        ?: emptyList(), // Pass hints for the current level
                     navController = navController
                 )
             }
@@ -204,7 +204,6 @@ fun ParameterDialog(
 
 @Composable
 fun HintIconButton(
-    listOfHints: List<String>,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -228,7 +227,6 @@ fun HintIconButton(
     if (showDialog) {
         SwipableDialog(
             onDismissRequest = { showDialog = false },
-            listOfHints = listOfHints,
             navController = navController
         )
     }
@@ -237,7 +235,6 @@ fun HintIconButton(
 @Composable
 fun SwipableDialog(
     onDismissRequest: () -> Unit,
-    listOfHints: List<String>,
     navController: NavHostController,
 ) {
     var isLevel10: Boolean = false
@@ -245,15 +242,21 @@ fun SwipableDialog(
         isLevel10 = true
     }
 
-    var mutableListOfHints by remember { mutableStateOf(listOfHints) }
+    val listOfHints = DataSource.levelHints[navController.currentDestination?.route]
+    var mutableListOfHints by remember { mutableStateOf(listOf<String>()) }
+    if (listOfHints == null) {
+        mutableListOfHints = listOf("Sorry, no hint available")
+    } else {
+        mutableListOfHints = listOfHints
+    }
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
-        if (mutableListOfHints.isEmpty()) {
-            mutableListOfHints = listOf("Sorry, no hint available")
-        }
 
         // Create a pager to swipe between 3 elements
-        val numberOfHints = mutableListOfHints.size
+        var numberOfHints = mutableListOfHints.size
+        if (isLevel10) {
+            numberOfHints++
+        }
         val pagerState = rememberPagerState(){ numberOfHints }
         val coroutineScope = rememberCoroutineScope()
 
@@ -271,7 +274,7 @@ fun SwipableDialog(
                         .weight(1f) // Take remaining space
                 ) { page ->
                     // Dynamically display content based on the current page
-                    if (isLevel10 && page == mutableListOfHints.lastIndex) {
+                    if (isLevel10 && page == mutableListOfHints.lastIndex+1) {
                         // Display a button on the last page
                         UnlockLevel(
                             onUnlock = {
@@ -279,9 +282,9 @@ fun SwipableDialog(
                                 onDismissRequest()
                             },
                             labelResourceId = R.string.button,
-                            level = 1,
+                            level = 11,
                             modifier = Modifier,
-                            levelName = Screens.Level_01.name,
+                            levelName = Screens.Level_11.name,
                             navController = navController
                         )
                     } else {
@@ -300,19 +303,20 @@ fun SwipableDialog(
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
-                   if (isLevel10 == false) {
-                       repeat(numberOfHints) { pageIndex ->
-                           val color =
-                               if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                           Box(
-                               modifier = Modifier
-                                   .size(12.dp)
-                                   .background(color = color, shape = MaterialTheme.shapes.small)
-                                   .padding(4.dp)
-                           )
-                       }
-                   } else {
+                   repeat(numberOfHints) { pageIndex ->
+                       val color = if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                       Box(
+                           modifier = Modifier
+                               .size(12.dp)
+                               .background(color = color, shape = MaterialTheme.shapes.small)
+                               .padding(8.dp)
+                               .padding(horizontal = 16.dp)
+                       )
 
+                       // Add Spacer with desired width
+                       if (pageIndex < numberOfHints - 1) {
+                           Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                       }
                    }
                 }
             }

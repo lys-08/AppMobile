@@ -57,24 +57,14 @@ fun Level_02(
             textAlign = TextAlign.Center
         )
 
-        // TODO : Long push doesn't works
         // Level button
         UnlockLevel(
             labelResourceId = R.string.button,
             level = 2,
-            modifier
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onLongPress = {
-                            navController.navigate(Screens.Level_03.name)
-                            if (currentLevel < 2) {
-                                currentLevel++
-                            }
-                        }
-                    )
-                },
+            modifier,
             levelName = Screens.Level_03.name,
-            navController
+            longClick = true,
+            navController = navController
         )
     }
 }
