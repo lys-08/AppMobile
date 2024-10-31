@@ -1,23 +1,37 @@
 package com.progmobile.clickme.ui
 
+import android.media.MediaPlayer
+import android.util.Log
 import androidx.annotation.StringRes
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,32 +41,6 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.data.DataSource.levels
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CornerBasedShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
-import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role
 import kotlinx.coroutines.delay
 
 
@@ -94,7 +82,7 @@ fun HomePage(
                   )
               }
               //Disable buttons from locked levels
-              items((currentLevel + 1..levels.size - 1).toList()) { i ->
+              items((currentLevel + 1..<levels.size).toList()) { i ->
                   LevelButtonLocked(
                       labelResourceId = levels[i].first,
                       onClick = { navController.navigate(levels[i].second) }
@@ -116,6 +104,22 @@ fun LevelButton(
     longClick: Boolean = false,
     modifier: Modifier = Modifier
 ) {
+
+    // Sound section
+    val context = LocalContext.current
+    var mediaPlayer: MediaPlayer? = null
+
+    // Load the sound when the composable enters the composition
+    DisposableEffect(Unit) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
+        if (mediaPlayer == null) {
+            Log.e("SoundButton", "MediaPlayer initialization failed")
+        }
+        onDispose {
+            mediaPlayer?.release() // Release the MediaPlayer when not needed
+        }
+    }
+
     val holdDuration = 4000L
     Box(
         modifier = modifier
@@ -133,9 +137,15 @@ fun LevelButton(
                         if (longClick) {
                             // For long click: wait for hold duration
                             val success = tryAwaitRelease().also { delay(holdDuration) }
-                            if (success) onClick()
+                            if (success) onClick(); mediaPlayer?.start()
                         } else {
                             // For short click: trigger onClick immediately on press
+                            try {
+                                mediaPlayer?.start()
+                            } catch (e: Exception) {
+                                Log.e("SoundButton", "Error playing sound: ${e.message}")
+                            }
+
                             onClick()
                         }
                     }
@@ -162,7 +172,7 @@ fun LevelButton(
 
 @Composable
 fun LevelButtonLocked(
-    @StringRes labelResourceId: Int,
+    @StringRes labelResourceId: Int, // TODO : argument is passed but never used ?
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {

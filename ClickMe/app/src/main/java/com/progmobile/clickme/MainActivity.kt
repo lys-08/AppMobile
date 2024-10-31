@@ -1,19 +1,16 @@
 package com.progmobile.clickme
 
+import com.progmobile.clickme.service.MusicService
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 class MainActivity : ComponentActivity() {
+    private var intent = Intent()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,5 +19,22 @@ class MainActivity : ComponentActivity() {
                 ClickMeApp()
             }
         }
+        intent = Intent(this, MusicService::class.java)
+        startService(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(intent)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopService(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startService(intent)
     }
 }
