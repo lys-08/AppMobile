@@ -16,5 +16,5 @@ object DataSource {
         Pair(R.string.level_09, Screens.Level_09.name),
         Pair(R.string.level_10, Screens.Level_10.name)
     )
-    var currentLevel = 0;
+    var currentLevel = 9;
 }

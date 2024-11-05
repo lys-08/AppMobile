@@ -61,7 +61,7 @@ fun ClickMeApp(
         Screens.Level_04.name to listOf("Something doesn't seem right.",
             "Can you read the title ?",
             "Maybe if you turn your head it'll be easier."),
-        Screens.Level_06.name to listOf("A simple touch can light your way."),
+        Screens.Level_06.name to listOf("It's a little dark, isn't it ?","A simple touch can light your way."),
         Screens.Level_09.name to listOf("Maybe trying all options is not the greatest idea...",
             "Try to expand your artistic knowledge.",
             "Never heard of surrealism ? What a shame.",

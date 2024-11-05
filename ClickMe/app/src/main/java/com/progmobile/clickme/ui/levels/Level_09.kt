@@ -100,7 +100,7 @@ fun Level_09(
                 DropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false }, // Garde cette option si tu veux fermer le menu en cliquant à l'extérieur
-                    offset = DpOffset(150.dp, 690.dp)
+                    //offset = DpOffset(150.dp, 690.dp)
                 ) {
                     when (currentMenu) {
                         1 -> {

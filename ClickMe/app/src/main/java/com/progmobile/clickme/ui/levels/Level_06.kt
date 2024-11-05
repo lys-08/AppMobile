@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
@@ -68,7 +69,6 @@ fun Level_06(
             torchManager.unregisterTorchCallback()
         }
     }
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween,
