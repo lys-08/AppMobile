@@ -24,6 +24,7 @@ class MainActivity : ComponentActivity() {
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         val anyPermissionDenied = permissions.values.any { !it }
         permissionsStatus.value = anyPermissionDenied
+    }
 
     // ========== MEDIA PLAYER ==========
     companion object {
