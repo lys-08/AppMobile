@@ -74,23 +74,6 @@ fun ClickMeApp(
     }
     // =============== END PERMISSION ===============
 
-    val levelHints = mapOf(
-        // TODO : Transform this to list of strings in string.xml
-        Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
-        Screens.Level_02.name to listOf("Hint for Level 2", "Second hint for Level 2", "Third hint for Level 2"),
-        Screens.Level_03.name to listOf("Hint for Level 3"),
-        Screens.Level_07.name to listOf("I'm kind of tired", "I really lack energy"),
-        Screens.Level_08.name to listOf(
-            "I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?",
-            "Listen to the colors of the wind",
-            "Just breathing can move mountains"),
-        Screens.Level_11.name to listOf(
-            "Seek the shadow to find the light, seek the light to find the shadow",
-            "Sometimes you have to dive into the depths to see the light"
-            ),
-        Screens.Level_12.name to listOf( "Head in the clouds")
-    )
-
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = Screens.valueOf(
         backStackEntry?.destination?.route?: Screens.HomePage.name
@@ -98,7 +81,6 @@ fun ClickMeApp(
     Scaffold(
         bottomBar = {
             ClickMeBottomBar(
-                levelHints = levelHints,
                 navController = navController,
                 modifier = Modifier
             )
