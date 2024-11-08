@@ -3,17 +3,20 @@
 
     // Levels title
     <string name="level_01">Plain and simple</string>
-    <string name="level_02">Patience is the mother of all virtues</string>
+    <string name="level_02">Mother of all virtues</string>
     <string name="level_03">Duplication</string>
     <string name="level_04">Roller Coaster</string>
     <string name="level_05">Level 5</string>
     <string name="level_06">On the First Day</string>
-    <string name="level_07">On the verge of death</string> <!-- Hidden connection -->
+    <string name="level_07">Coffee</string> <!-- Hidden connection, On the verge of death -->
     <string name="level_08">The ascent</string>
     <string name="level_09">Not what it seems</string>
-    <string name="level_10">Level 10</string>
-    <string name="level_11">Ying Yang</string> <!-- Reverse -->
-    <string name="level_12">Beyond the Antennae</string> <!-- Crash -->
+    <string name="level_10">Lost</string>
+    <string name="level_11">Out of your comfort zone</string> <!-- Ying Yang, Reverse -->
+    <string name="level_12">Aluminium hat</string> <!-- Beyond the Antennae, Crash -->
+    <string name="level_13">Labyrinth</string>
+    <string name="level_14">Knock it down</string>
+    <string name="level_15">Klikněte na mě (pokud můžete)</string>
 
     // Buttons
     <string name="button">Button</string>

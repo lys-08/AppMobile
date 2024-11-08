@@ -17,6 +17,9 @@ import com.progmobile.clickme.ui.levels.Level_09
 import com.progmobile.clickme.ui.levels.Level_10
 import com.progmobile.clickme.ui.levels.Level_11
 import com.progmobile.clickme.ui.levels.Level_12
+import com.progmobile.clickme.ui.levels.Level_13
+import com.progmobile.clickme.ui.levels.Level_14
+import com.progmobile.clickme.ui.levels.Level_15
 
 object DataSource {
     val levels = listOf(
@@ -32,6 +35,9 @@ object DataSource {
         Pair(R.string.level_10, Screens.Level_10.name),
         Pair(R.string.level_11, Screens.Level_11.name),
         Pair(R.string.level_12, Screens.Level_12.name),
+        Pair(R.string.level_13, Screens.Level_13.name),
+        Pair(R.string.level_14, Screens.Level_14.name),
+        Pair(R.string.level_15, Screens.Level_15.name),
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -46,7 +52,10 @@ object DataSource {
         Screens.Level_09.name to { navController, modifier -> { Level_09(navController, modifier) } },
         Screens.Level_10.name to { navController, modifier -> { Level_10(navController, modifier) } },
         Screens.Level_11.name to { navController, modifier -> { Level_11(navController, modifier) } },
-        Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } }
+        Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } },
+        Screens.Level_13.name to { navController, modifier -> { Level_13(navController, modifier) } },
+        Screens.Level_14.name to { navController, modifier -> { Level_14(navController, modifier) } },
+        Screens.Level_15.name to { navController, modifier -> { Level_15(navController, modifier) } }
     )
 
     val levelHints = mapOf(
@@ -72,7 +81,15 @@ object DataSource {
         Screens.Level_11.name to listOf(
           "Seek the shadow to find the light, seek the light to find the shadow",
           "Sometimes you have to dive into the depths to see the light"),
-        Screens.Level_12.name to listOf( "Head in the clouds")
+        Screens.Level_12.name to listOf( "Head in the clouds"),
+        Screens.Level_13.name to listOf(""),
+        Screens.Level_14.name to listOf(""),
+        Screens.Level_15.name to listOf(
+            "Klikit warnon (ma c'hellit)",
+            "Klike sou mwen (si ou kapab)",
+            "Egin klik nigan (ahal baduzu)",
+            "Klicken Sie auf mich (wenn Sie können)",
+            "Cliciwch fi (os gallwch chi)")
 
     )
     var currentLevel = 0;
