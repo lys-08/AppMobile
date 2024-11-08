@@ -64,6 +64,7 @@ fun Level_07(
     DisposableEffect(Unit) {
         val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED) // Listen to the battery change state
         context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
+
         onDispose {
             context.unregisterReceiver(batteryReceiver)
         } // Free the resources
@@ -86,12 +87,12 @@ fun Level_07(
         // Level button
         if (isCharging.value)
         {
-            LevelButton(
+            UnlockLevel(
                 labelResourceId = R.string.button,
-                onClick = { navController.navigate(Screens.HomePage.name) },
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(Alignment.Center)
+                level = 7,
+                modifier,
+                levelName = Screens.Level_08.name,
+                navController
             )
         }
     }

@@ -7,7 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.BatteryManager
-import android.util.Log
+import android.provider.Settings
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,87 +46,34 @@ import com.progmobile.clickme.ui.UnlockLevel
  */
 @SuppressLint("ServiceCast")
 @Composable
-fun Level_11(
+fun Level_12(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val currentUiMode = context.resources.configuration.uiMode
-    val initialIsDarkMode = remember { currentUiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES }
-    val isDarkMode = remember { mutableStateOf(initialIsDarkMode) }
+    val isInAirplaneMode = remember { mutableStateOf(false) }
 
-    Log.d("ThemeChange", "isDarkMode: ${isDarkMode.value}, initialIsDarkMode: $initialIsDarkMode")
-
-    // Creation of a BroadcastReceiver to check the light mode state
-    val modeReceiver = remember {
+    // Creation of a BroadcastReceiver to check the battery state
+    val batteryReceiver = remember {
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val newMode = context?.resources?.configuration?.uiMode
-                val isCurrentlyDark = newMode?.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-                isDarkMode.value = isCurrentlyDark
+                val isAirplaneModeOn = Settings.Global.getInt(
+                    context?.contentResolver,
+                    Settings.Global.AIRPLANE_MODE_ON, 0
+                ) != 0
 
-                Log.d("ThemeChange", "isDarkMode: ${isDarkMode.value}, initialIsDarkMode: $initialIsDarkMode")
+                isInAirplaneMode.value = isAirplaneModeOn
             }
         }
     }
 
     // Register the BroadcastReceiver
     DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED) // Listen to the configuration change state
-        context.registerReceiver(modeReceiver, filter) // Save the BroadcastReceiver with the new mode
+        val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED) // Listen to the battery change state
+        context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
         onDispose {
-            context.unregisterReceiver(modeReceiver) // Free the ressources
-        }
-    }
-
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        // Titre
-        Text(
-            text = stringResource(id = R.string.level_11),
-            style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
-        )
-
-        // Level Button
-        if (isDarkMode.value != initialIsDarkMode) {
-            UnlockLevel(
-                labelResourceId = R.string.button,
-                level = 11,
-                modifier,
-                levelName = Screens.Level_12.name,
-                navController
-            )
-        }
-    }
-}
-/*val context = LocalContext.current
-    val currentMode = context.resources.configuration.uiMode
-    val isDarkMode = remember { mutableStateOf(currentMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) }
-
-    // Creation of a BroadcastReceiver to check the light mode state
-    val modeReceiver = remember {
-        object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val newMode = context?.resources?.configuration?.uiMode
-                val isCurrentlyDark = newMode?.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-                isDarkMode.value = isCurrentlyDark
-            }
-        }
-    }
-
-    // Register the BroadcastReceiver
-    DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED) // Listen to the configuration change state
-        context.registerReceiver(modeReceiver, filter) // Save the BroadcastReceiver with the new context
-        onDispose {
-            context.unregisterReceiver(modeReceiver) // Free the resources
-        }
+            context.unregisterReceiver(batteryReceiver)
+        } // Free the resources
     }
 
     Column(
@@ -135,7 +82,7 @@ fun Level_11(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_11),
+            text = stringResource(id = R.string.level_12),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,7 +91,7 @@ fun Level_11(
         )
 
         // Level button
-        if (isDarkMode.value)
+        if (isInAirplaneMode.value)
         {
             LevelButton(
                 labelResourceId = R.string.button,
@@ -155,13 +102,13 @@ fun Level_11(
             )
         }
     }
-}*/
+}
 
 @Preview
 @Composable
-fun StartLevel11Preview() {
+fun StartLevel12Preview() {
     MaterialTheme {
-        Level_11(
+        Level_12(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

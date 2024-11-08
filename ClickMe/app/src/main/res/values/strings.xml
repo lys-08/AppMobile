@@ -8,14 +8,12 @@
     <string name="level_04">Level 4</string>
     <string name="level_05">Level 5</string>
     <string name="level_06">Level 6</string>
-    <string name="level_07">On the verge of death</string> // Hidden connection
-    <string name="level_08">Level 8</string>
+    <string name="level_07">On the verge of death</string> <!-- Hidden connection -->
+    <string name="level_08">The ascent</string>
     <string name="level_09">Level 9</string>
     <string name="level_10">Level 10</string>
-    <string name="level_11">Level 11</string>
-
-    <string name="hint_07_01">I\'m kind of tired</string>
-    <string name="hint_07_02">I really lack energy</string>
+    <string name="level_11">Ying Yang</string> <!-- Reverse -->
+    <string name="level_12">Beyond the Antennae</string> <!-- Crash -->
 
     // Buttons
     <string name="button">Button</string>
