@@ -37,6 +37,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
@@ -52,7 +53,7 @@ fun ClickMeBottomBar(
     ) {
         val currentRoute = navController.currentDestination?.route
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp), // Apply padding to both left and right
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -90,7 +91,7 @@ fun IconButton(
         painter = painterResource(id = imageResourceId),
         contentDescription = contentDescription, // Provide content description for accessibility
         colorFilter = ColorFilter.tint(iconTintColor), // Tint the image to black
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = onClick) // Make the image clickable
             .background(Color.Transparent) // Ensure no background color
             .wrapContentSize(Alignment.Center) // Center the image
@@ -106,7 +107,7 @@ fun ParameterIconButton(
     var showDialog by remember { mutableStateOf(false) }
 
     // Initialize a var to check if we are on the homepage
-    var isNotHomePage: Boolean = false
+    var isNotHomePage = false
     // Get the current route to determine which icon to show
     if (navController.currentDestination?.route != Screens.HomePage.name) {
         isNotHomePage = true
@@ -119,7 +120,7 @@ fun ParameterIconButton(
             showDialog = true
         },
         contentDescription = "Settings",
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
@@ -137,7 +138,8 @@ fun ParameterIconButton(
                 }
                 showDialog = false
             },
-            onMusicIconClick = { /* Handle music icon click */ }, // TODO : Add music
+            onMusicIconClick = {
+            },
             onVolumeIconClick = { /* Handle volume icon click */ } // TODO : Add volume
         )
     }
@@ -176,8 +178,14 @@ fun ParameterDialog(
             }
 
             // Music icon
+            if (MainActivity.instance?.isMusicPlaying() == true) {
+                isMusicUp = true
+            } else {
+                isMusicUp = false
+            }
             IconButton(
                 onClick = {
+                    MainActivity.instance?.switchMusicState()
                     isMusicUp = !isMusicUp
                     onMusicIconClick()
                 },
@@ -217,7 +225,7 @@ fun HintIconButton(
             showDialog = true
         },
         contentDescription = "Hint",
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
@@ -237,7 +245,7 @@ fun SwipableDialog(
     onDismissRequest: () -> Unit,
     navController: NavHostController,
 ) {
-    var isLevel10: Boolean = false
+    var isLevel10 = false
     if (navController.currentDestination?.route != Screens.HomePage.name) {
         isLevel10 = true
     }
@@ -258,7 +266,6 @@ fun SwipableDialog(
             numberOfHints++
         }
         val pagerState = rememberPagerState(){ numberOfHints }
-        val coroutineScope = rememberCoroutineScope()
 
         Box(
             modifier = Modifier

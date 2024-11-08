@@ -6,6 +6,10 @@ import android.media.MediaPlayer
 import android.os.IBinder
 import com.progmobile.clickme.R
 
+/**
+ * DEPRECATED : MusicService is no longer used
+ */
+
 class MusicService : Service() {
 
     private lateinit var mediaPlayer: MediaPlayer
