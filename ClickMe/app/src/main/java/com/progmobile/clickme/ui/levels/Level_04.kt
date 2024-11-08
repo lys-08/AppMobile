@@ -39,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.unit.sp
 
 
 /**
@@ -61,14 +62,14 @@ fun Level_04(
         }
         else {
             NormalText()
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 4,
+                modifier = Modifier,
+                levelName = Screens.Level_05.name,
+                navController = navController
+            )
         }
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 4,
-            modifier = Modifier,
-            levelName = Screens.Level_05.name,
-            navController = navController
-        )
     }
 }
 
@@ -76,20 +77,12 @@ fun Level_04(
 fun RotatedText(
     configuration: Configuration
 ) {
-    val rotationAngle = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 90f else 0f
-
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.CenterEnd // Aligne le contenu sur le côté droit
-    ) {
-        Text(
-            text = stringResource(id = R.string.level_04),
-            modifier = Modifier
-                .rotate(rotationAngle),
-            style = MaterialTheme.typography.displayLarge,
-            textAlign = TextAlign.End
-        )
-    }
+    Text(
+        text = stringResource(id = R.string.level_04),
+        style = MaterialTheme.typography.displayLarge,
+        fontSize = 200.sp,
+        modifier = Modifier,
+    )
 }
 
 @Composable
@@ -97,6 +90,7 @@ fun NormalText() {
     Text(
         text = stringResource(id = R.string.level_04),
         style = MaterialTheme.typography.displayLarge,
+        fontSize = 150.sp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
