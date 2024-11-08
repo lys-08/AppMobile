@@ -2,9 +2,9 @@
     <string name="app_name">Click Me</string>
 
     // Levels title
-    <string name="level_01">Plain and simple.</string>
-    <string name="level_02">Patience is the mother of all virtues.</string>
-    <string name="level_03">Duplication.</string>
+    <string name="level_01">Plain and simple</string>
+    <string name="level_02">Patience is the mother of all virtues</string>
+    <string name="level_03">Duplication</string>
     <string name="level_04">Roller Coaster</string>
     <string name="level_05">Level 5</string>
     <string name="level_06">On the First Day</string>
