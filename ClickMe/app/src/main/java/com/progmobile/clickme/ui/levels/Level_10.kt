@@ -1,7 +1,9 @@
 package com.progmobile.clickme.ui.levels
-
+import android.app.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,9 +22,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
+import android.app.Dialog
+import android.os.Bundle
+import androidx.fragment.app.DialogFragment
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -48,14 +55,7 @@ fun Level_10(
             textAlign = TextAlign.Center
         )
 
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 0,
-            modifier,
-            levelName = Screens.HomePage.name,
-            navController
-        )
+        /* Button is in bottom app bar :) */
     }
 }
 

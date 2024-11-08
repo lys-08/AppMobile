@@ -4,8 +4,13 @@ package com.progmobile.clickme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,9 +22,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.progmobile.clickme.data.DataSource.levels
+import com.progmobile.clickme.data.DataSource.levelsMap
 import com.progmobile.clickme.ui.ClickMeBottomBar
 import com.progmobile.clickme.ui.HomePage
+
 import com.progmobile.clickme.ui.levels.Level_01
 import com.progmobile.clickme.ui.levels.Level_02
 import com.progmobile.clickme.ui.levels.Level_03
@@ -45,28 +51,39 @@ enum class Screens(@StringRes val title: Int) {
     Level_07(title = R.string.level_07),
     Level_08(title = R.string.level_08),
     Level_09(title = R.string.level_09),
-    Level_10(title = R.string.level_10)
+    Level_10(title = R.string.level_10),
+    Level_11(title = R.string.level_11),
+    Level_12(title = R.string.level_12)
 }
 
 @Composable
 fun ClickMeApp(
+    permissionsDenied : MutableState<Boolean>,
     navController: NavHostController = rememberNavController()
 ) {
+    // ================= PERMISSION =================
+    var showDialog by remember { mutableStateOf(false) }
 
-    val levelHints = mapOf(
-        // TODO : Transform this to list of strings in string.xml
-        Screens.Level_01.name to listOf("Hint for Level 1", "Second hint for Level 1"),
-        Screens.Level_02.name to listOf("Hint for Level 2", "Second hint for Level 2", "Third hint for Level 2"),
-        Screens.Level_03.name to listOf("Hint for Level 3"),
-        Screens.Level_04.name to listOf("Something doesn't seem right.",
-            "Can you read the title ?",
-            "Maybe if you turn your head it'll be easier."),
-        Screens.Level_06.name to listOf("It's a little dark, isn't it ?","A simple touch can light your way."),
-        Screens.Level_09.name to listOf("Maybe trying all options is not the greatest idea...",
-            "Try to expand your artistic knowledge.",
-            "Never heard of surrealism ? What a shame.",
-            "Really, no idea ? You need to step up your game. Fine, here's the last clue : René Magritte.")
-    )
+    // An Alert message is print if at least one permission have been denied
+    LaunchedEffect(permissionsDenied.value) {
+        if (permissionsDenied.value) {
+            showDialog = true
+        }
+    }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text("Permission denied") },
+            text = { Text("Some permission have been denied. WARNING : you may nit complete some level, please accept the permission.") },
+            confirmButton = {
+                Button(onClick = { showDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+    // =============== END PERMISSION ===============
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = Screens.valueOf(
@@ -75,7 +92,6 @@ fun ClickMeApp(
     Scaffold(
         bottomBar = {
             ClickMeBottomBar(
-                levelHints = levelHints,
                 navController = navController,
                 modifier = Modifier
             )
@@ -97,20 +113,11 @@ fun ClickMeApp(
                         .padding((dimensionResource(id = R.dimen.padding_medium)))
                 )
             }
-            levels.forEach { level ->
-                composable(route = level.second) {
-                    when (level.first) {
-                        R.string.level_01 -> Level_01(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_02 -> Level_02(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_03 -> Level_03(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_04 -> Level_04(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_05 -> Level_05(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_06 -> Level_06(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_07 -> Level_07(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_08 -> Level_08(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_09 -> Level_09(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                        R.string.level_10 -> Level_10(navController = navController, modifier = Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))
-                    }
+
+            // Setup Levels Nav Graph
+            levelsMap.forEach { (levelName, levelComposable) ->
+                composable(route = levelName) {
+                    levelComposable(navController, Modifier.fillMaxSize().padding(dimensionResource(id = R.dimen.padding_medium)))()
                 }
             }
         }

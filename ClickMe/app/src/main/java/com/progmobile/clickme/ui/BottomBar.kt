@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -35,13 +37,14 @@ import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource
 
 
 @Composable
 fun ClickMeBottomBar(
-    levelHints: Map<String, List<String>>,
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ) {
@@ -50,7 +53,7 @@ fun ClickMeBottomBar(
     ) {
         val currentRoute = navController.currentDestination?.route
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp), // Apply padding to both left and right
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -63,8 +66,7 @@ fun ClickMeBottomBar(
             if (currentRoute != Screens.HomePage.name) {
                 // Right-aligned: HintIconButton
                 HintIconButton(
-                    listOfHints = levelHints[currentRoute]
-                        ?: emptyList() // Pass hints for the current level
+                    navController = navController
                 )
             }
         }
@@ -89,7 +91,7 @@ fun IconButton(
         painter = painterResource(id = imageResourceId),
         contentDescription = contentDescription, // Provide content description for accessibility
         colorFilter = ColorFilter.tint(iconTintColor), // Tint the image to black
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = onClick) // Make the image clickable
             .background(Color.Transparent) // Ensure no background color
             .wrapContentSize(Alignment.Center) // Center the image
@@ -105,7 +107,7 @@ fun ParameterIconButton(
     var showDialog by remember { mutableStateOf(false) }
 
     // Initialize a var to check if we are on the homepage
-    var isNotHomePage: Boolean = false
+    var isNotHomePage = false
     // Get the current route to determine which icon to show
     if (navController.currentDestination?.route != Screens.HomePage.name) {
         isNotHomePage = true
@@ -118,7 +120,7 @@ fun ParameterIconButton(
             showDialog = true
         },
         contentDescription = "Settings",
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
@@ -136,7 +138,8 @@ fun ParameterIconButton(
                 }
                 showDialog = false
             },
-            onMusicIconClick = { /* Handle music icon click */ }, // TODO : Add music
+            onMusicIconClick = {
+            },
             onVolumeIconClick = { /* Handle volume icon click */ } // TODO : Add volume
         )
     }
@@ -175,8 +178,14 @@ fun ParameterDialog(
             }
 
             // Music icon
+            if (MainActivity.instance?.isMusicPlaying() == true) {
+                isMusicUp = true
+            } else {
+                isMusicUp = false
+            }
             IconButton(
                 onClick = {
+                    MainActivity.instance?.switchMusicState()
                     isMusicUp = !isMusicUp
                     onMusicIconClick()
                 },
@@ -203,7 +212,7 @@ fun ParameterDialog(
 
 @Composable
 fun HintIconButton(
-    listOfHints: List<String>,
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     // Maintain a state to control when the dialog should be shown
@@ -216,7 +225,7 @@ fun HintIconButton(
             showDialog = true
         },
         contentDescription = "Hint",
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
@@ -224,15 +233,9 @@ fun HintIconButton(
 
     // Show a dialog when showDialog is true
     if (showDialog) {
-        /**
-        BubbleDialog(
-        onDismissRequest = { showDialog = false }, // Close dialog when dismissed
-        hintText = hintText
-        )
-         */
         SwipableDialog(
             onDismissRequest = { showDialog = false },
-            listOfHints = listOfHints
+            navController = navController
         )
     }
 }
@@ -240,19 +243,29 @@ fun HintIconButton(
 @Composable
 fun SwipableDialog(
     onDismissRequest: () -> Unit,
-    listOfHints: List<String>,
+    navController: NavHostController,
 ) {
-    var mutableListOfHints by remember { mutableStateOf(listOfHints) }
+    var isLevel10 = false
+    if (navController.currentDestination?.route != Screens.HomePage.name) {
+        isLevel10 = true
+    }
+
+    val listOfHints = DataSource.levelHints[navController.currentDestination?.route]
+    var mutableListOfHints by remember { mutableStateOf(listOf<String>()) }
+    if (listOfHints == null) {
+        mutableListOfHints = listOf("Sorry, no hint available")
+    } else {
+        mutableListOfHints = listOfHints
+    }
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
-        if (mutableListOfHints.isEmpty()) {
-            mutableListOfHints = listOf("Sorry, no hint available")
-        }
 
         // Create a pager to swipe between 3 elements
-        val numberOfHints = mutableListOfHints.size
+        var numberOfHints = mutableListOfHints.size
+        if (isLevel10) {
+            numberOfHints++
+        }
         val pagerState = rememberPagerState(){ numberOfHints }
-        val coroutineScope = rememberCoroutineScope()
 
         Box(
             modifier = Modifier
@@ -268,10 +281,25 @@ fun SwipableDialog(
                         .weight(1f) // Take remaining space
                 ) { page ->
                     // Dynamically display content based on the current page
-                    PageContent(
-                        text = mutableListOfHints[page],
-                        backgroundColor = Color.Transparent
-                    )
+                    if (isLevel10 && page == mutableListOfHints.lastIndex+1) {
+                        // Display a button on the last page
+                        UnlockLevel(
+                            onUnlock = {
+                                // Trigger onDismissRequest after unlocking
+                                onDismissRequest()
+                            },
+                            labelResourceId = R.string.button,
+                            level = 11,
+                            modifier = Modifier,
+                            levelName = Screens.Level_11.name,
+                            navController = navController
+                        )
+                    } else {
+                        PageContent(
+                            text = mutableListOfHints[page],
+                            backgroundColor = Color.Transparent
+                        )
+                    }
                 }
 
                 // Add a row of dots to indicate which page is active
@@ -282,15 +310,21 @@ fun SwipableDialog(
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
-                    repeat(numberOfHints) { pageIndex ->
-                        val color = if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                        Box(
-                            modifier = Modifier
-                                .size(12.dp)
-                                .background(color = color, shape = MaterialTheme.shapes.small)
-                                .padding(4.dp)
-                        )
-                    }
+                   repeat(numberOfHints) { pageIndex ->
+                       val color = if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                       Box(
+                           modifier = Modifier
+                               .size(12.dp)
+                               .background(color = color, shape = MaterialTheme.shapes.small)
+                               .padding(8.dp)
+                               .padding(horizontal = 16.dp)
+                       )
+
+                       // Add Spacer with desired width
+                       if (pageIndex < numberOfHints - 1) {
+                           Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                       }
+                   }
                 }
             }
         }

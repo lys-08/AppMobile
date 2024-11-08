@@ -65,9 +65,9 @@ fun Level_04(
         UnlockLevel(
             labelResourceId = R.string.button,
             level = 4,
-            modifier,
+            modifier = Modifier,
             levelName = Screens.Level_05.name,
-            navController
+            navController = navController
         )
     }
 }
