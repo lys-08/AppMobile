@@ -1,17 +1,16 @@
-package com.progmobile.clickme.ui
-
+package com.progmobile.clickme.ui.levels
+import android.app.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -21,8 +20,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
+import com.progmobile.clickme.Screens
+import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.data.DataSource.currentLevel
-import com.progmobile.clickme.data.DataSource.levels
+import com.progmobile.clickme.ui.LevelButton
+import android.app.Dialog
+import android.os.Bundle
+import androidx.fragment.app.DialogFragment
+import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -30,7 +36,7 @@ import com.progmobile.clickme.data.DataSource.levels
  * the navigation to next screen
  */
 @Composable
-fun HomePage(
+fun Level_10(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -40,7 +46,7 @@ fun HomePage(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = R.string.level_10),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,38 +54,15 @@ fun HomePage(
             textAlign = TextAlign.Center
         )
 
-        // Levels button
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-          ) {
-              //Enable buttons from unlocked levels
-              items((0..currentLevel).toList()) { i ->
-                  LevelButton(
-                      labelResourceId = levels[i].first,
-                      onClick = { navController.navigate(levels[i].second) }
-                  )
-              }
-              //Disable buttons from locked levels
-              items((currentLevel + 1..<levels.size).toList()) { i ->
-                  LevelButtonLocked(
-                      labelResourceId = levels[i].first,
-                      onClick = { navController.navigate(levels[i].second) }
-                  )
-              }
-        }
-
+        /* Button is in bottom app bar :) */
     }
 }
 
-
 @Preview
 @Composable
-fun StartHomePagePreview() {
+fun StartLevel10Preview() {
     MaterialTheme {
-        HomePage(
+        Level_10(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

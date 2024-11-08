@@ -2,14 +2,20 @@
     <string name="app_name">Click Me</string>
 
     // Levels title
-    <string name="level_01">Level 1</string>
-    <string name="level_02">Level 2</string>
-    <string name="level_03">Level 3</string>
+    <string name="level_01">Plain and simple.</string>
+    <string name="level_02">Patience is the mother of all virtues.</string>
+    <string name="level_03">Duplication.</string>
     <string name="level_04">Level 4</string>
     <string name="level_05">Level 5</string>
+    <string name="level_06">Level 6</string>
+    <string name="level_07">On the verge of death</string> // Hidden connection
+    <string name="level_08">Level 8</string>
+    <string name="level_09">Level 9</string>
+    <string name="level_10">Level 10</string>
+    <string name="level_11">Level 11</string>
 
-    // Levels hints
-    <string name="hint_01_01">Seriously ?</string>
+    <string name="hint_07_01">I\'m kind of tired</string>
+    <string name="hint_07_02">I really lack energy</string>
 
     // Buttons
     <string name="button">Button</string>
