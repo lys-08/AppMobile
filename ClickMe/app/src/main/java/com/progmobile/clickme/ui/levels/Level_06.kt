@@ -115,3 +115,4 @@ fun StartLevel06Preview() {
                 .padding(dimensionResource(R.dimen.padding_medium))
         )
     }
+}
