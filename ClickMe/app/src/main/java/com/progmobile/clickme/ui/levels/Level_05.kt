@@ -1,16 +1,23 @@
 package com.progmobile.clickme.ui.levels
 
+import android.content.ContentResolver
+import android.database.ContentObserver
+import android.database.Cursor
+import android.net.Uri
+import android.os.Handler
+import android.os.Looper
+import android.provider.MediaStore
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -20,9 +27,50 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.data.DataSource.currentLevel
-import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+
+class ScreenshotObserver(private val contentResolver: ContentResolver) {
+    private val handler = Handler(Looper.getMainLooper())
+    private var screenshotTaken = mutableStateOf(false)
+
+    private val observer = object : ContentObserver(handler) {
+        override fun onChange(selfChange: Boolean) {
+            super.onChange(selfChange)
+
+            // Effectuer l'interrogation sur un thread secondaire
+            Thread {
+                val uri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                val cursor: Cursor? = contentResolver.query(uri, null, null, null, null)
+
+                cursor?.use {
+                    if (it.moveToLast()) {
+                        val columnIndex = it.getColumnIndex(MediaStore.Images.Media.DATA)
+                        val filePath = it.getString(columnIndex)
+
+                        if (filePath.contains("/Screenshots/")) { // Vérifiez si c'est dans le dossier Screenshots
+                            screenshotTaken.value = true
+                        }
+                    }
+                }
+            }.start()
+        }
+    }
+
+    fun registerObserver() {
+        contentResolver.registerContentObserver(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            true,
+            observer
+        )
+    }
+
+    fun unregisterObserver() {
+        contentResolver.unregisterContentObserver(observer)
+    }
+
+    val isScreenshotTaken: State<Boolean>
+        get() = screenshotTaken
+}
 
 
 /**
@@ -34,11 +82,26 @@ fun Level_05(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val screenshotObserver = remember { ScreenshotObserver(context.contentResolver) }
+
+    // État pour suivre si une capture d'écran a été prise
+    var isScreenshotTaken by remember { mutableStateOf(false) }
+
+    DisposableEffect(Unit) {
+        screenshotObserver.registerObserver() // Enregistre l'observateur
+        // Observer l'état de capture d'écran
+        isScreenshotTaken = screenshotObserver.isScreenshotTaken.value // Met à jour l'état
+        onDispose {
+            screenshotObserver.unregisterObserver() // Désinscrit l'observateur
+        }
+    }
+
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Title
         Text(
             text = stringResource(id = R.string.level_05),
             style = MaterialTheme.typography.displayLarge,
@@ -48,16 +111,19 @@ fun Level_05(
             textAlign = TextAlign.Center
         )
 
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 5,
-            modifier,
-            levelName = Screens.Level_06.name,
-            navController
-        )
+        if (isScreenshotTaken) {
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 5,
+                modifier,
+                levelName = Screens.Level_06.name,
+                navController
+            )
+        }
+
     }
 }
+
 
 @Preview
 @Composable

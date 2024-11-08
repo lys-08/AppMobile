@@ -41,6 +41,7 @@ import com.progmobile.clickme.ui.UnlockLevel
  * Composable that allows the user to select the desired action to do and triggers
  * the navigation to next screen
  */
+
 @SuppressLint("ServiceCast")
 @Composable
 fun Level_07(
@@ -69,7 +70,6 @@ fun Level_07(
             context.unregisterReceiver(batteryReceiver)
         } // Free the resources
     }
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween

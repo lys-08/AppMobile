@@ -26,6 +26,17 @@ import com.progmobile.clickme.data.DataSource.levelsMap
 import com.progmobile.clickme.ui.ClickMeBottomBar
 import com.progmobile.clickme.ui.HomePage
 
+import com.progmobile.clickme.ui.levels.Level_01
+import com.progmobile.clickme.ui.levels.Level_02
+import com.progmobile.clickme.ui.levels.Level_03
+import com.progmobile.clickme.ui.levels.Level_04
+import com.progmobile.clickme.ui.levels.Level_05
+import com.progmobile.clickme.ui.levels.Level_06
+import com.progmobile.clickme.ui.levels.Level_07
+import com.progmobile.clickme.ui.levels.Level_08
+import com.progmobile.clickme.ui.levels.Level_09
+import com.progmobile.clickme.ui.levels.Level_10
+
 /*
  * Enum class containing the pages of the app
  */

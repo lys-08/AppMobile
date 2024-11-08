@@ -54,20 +54,26 @@ object DataSource {
         Screens.Level_01.name to listOf("Seriously ?"),
         Screens.Level_02.name to listOf(""),
         Screens.Level_03.name to listOf(""),
-        Screens.Level_04.name to listOf(""),
+        Screens.Level_04.name to listOf("Something doesn't seem right.",
+            "Can you read the title ?",
+            "Maybe if you turn your head it'll be easier."),
         Screens.Level_05.name to listOf(""),
-        Screens.Level_06.name to listOf(""),
+        Screens.Level_06.name to listOf("It's a little dark, isn't it ?","A simple touch can light your way."),
         Screens.Level_07.name to listOf("I'm kind of tired", "I really lack energy"),
         Screens.Level_08.name to listOf(
           "I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?",
           "Listen to the colors of the wind",
           "Just breathing can move mountains"),
-        Screens.Level_09.name to listOf(""),
+        Screens.Level_09.name to listOf("Maybe trying all options is not the greatest idea...",
+            "Try to expand your artistic knowledge.",
+            "Never heard of surrealism ? What a shame.",
+            "Really, no idea ? You need to step up your game. Fine, here's the last clue : René Magritte."),
         Screens.Level_10.name to listOf("Where can it be ?"),
         Screens.Level_11.name to listOf(
           "Seek the shadow to find the light, seek the light to find the shadow",
           "Sometimes you have to dive into the depths to see the light"),
         Screens.Level_12.name to listOf( "Head in the clouds")
+
     )
     var currentLevel = 0;
 }
