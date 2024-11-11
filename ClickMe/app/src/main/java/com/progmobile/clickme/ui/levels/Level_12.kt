@@ -5,10 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.Configuration
-import android.os.BatteryManager
 import android.provider.Settings
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,10 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.LevelButton
-import com.progmobile.clickme.ui.LevelButtonLocked
-import com.progmobile.clickme.ui.UnlockLevel
 
 
 /**
