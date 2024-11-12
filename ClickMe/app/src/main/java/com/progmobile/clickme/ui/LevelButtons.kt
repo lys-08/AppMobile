@@ -2,8 +2,10 @@ package com.progmobile.clickme.ui
 
 import android.media.MediaPlayer
 import androidx.annotation.StringRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +17,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,11 +34,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.data.DataSource.currentLevel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Customizable button composable that displays the [labelResourceId]
  * and triggers [onClick] lambda when this composable is clicked
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LevelButton(
     @StringRes labelResourceId: Int,
@@ -63,6 +74,9 @@ fun LevelButton(
         }
     }
 
+    val scope = rememberCoroutineScope()
+    var isPressed by remember { mutableStateOf(false) }
+
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(24.dp)) // Rounded corners
@@ -70,17 +84,24 @@ fun LevelButton(
             .background(Color(0xFFADD8E6))
             .padding(16.dp)       // Padding for content spacing
             // Clickable area with long click
-            .pointerInput(longClick) {
+            .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
+                        mediaPlayer?.start()
                         if (longClick) {
-                            // For long click: wait for hold duration
-                            mediaPlayer?.start()
-                            val success = tryAwaitRelease().also { kotlinx.coroutines.delay(holdDuration) }
-                            if (success) onClick()
+
+                            isPressed = true
+                            // Start coroutine to wait for the hold duration
+                            scope.launch {
+                                delay(holdDuration)
+                                if (isPressed) {
+                                    onClick()
+                                }
+                            }
+                            // Reset isPressed state when released
+                            tryAwaitRelease()
+                            isPressed = false
                         } else {
-                            // For short click: trigger onClick immediately on press
-                            mediaPlayer?.start()
                             onClick()
                         }
                     }
