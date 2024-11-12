@@ -60,7 +60,7 @@ object DataSource {
 
     val levelHints = mapOf(
         // map three hints to each level
-        Screens.Level_01.name to listOf("Seriously ?"),
+        Screens.Level_01.name to listOf("Seriously ?", "You've got to be kidding me", "Read. The. Title."),
         Screens.Level_02.name to listOf(""),
         Screens.Level_03.name to listOf(""),
         Screens.Level_04.name to listOf("Something doesn't seem right.",

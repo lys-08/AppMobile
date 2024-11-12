@@ -1,13 +1,17 @@
 package com.progmobile.clickme.ui.levels
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+//import androidx.compose.foundation.layout.FlowRowScopeInstance.align
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -41,6 +45,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import com.progmobile.clickme.data.DataSource.levels
 
@@ -88,18 +93,18 @@ fun Level_09(
 
         item {
             Box {
-                Button(
-                    onClick = { expanded = !expanded },
-                    modifier = Modifier
+                LevelButton(
+                    labelResourceId = R.string.button,
+                    onClick = { expanded = true },
+                    modifier = modifier
                         .fillMaxSize()
-                        .wrapContentSize(Alignment.TopCenter)
-                ) {
-                    Text(text = "Button")
-                }
+                        .wrapContentSize(Alignment.Center)
+                )
                 if (expanded) {
                     DropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false },
+                        //modifier = modifier
                         //offset = DpOffset(150.dp, 690.dp)
                     ) {
                         when (currentMenu) {

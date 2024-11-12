@@ -29,6 +29,13 @@ import androidx.core.app.ComponentActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import android.Manifest
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
@@ -73,6 +80,54 @@ fun Level_05(
         )
         registerObserver()
     }
+
+    Image(
+        painter = painterResource(id = R.drawable.corner),
+        contentDescription = "Right Bottom Corner",
+        modifier = Modifier
+            .wrapContentSize(Alignment.BottomEnd)
+            .size(100.dp) // Limiter la taille à un maximum fixe
+            .clipToBounds()
+    )
+
+    Image(
+        painter = painterResource(id = R.drawable.corner),
+        contentDescription = "Left Bottom Corner",
+        modifier = Modifier
+            .wrapContentSize(Alignment.BottomStart)
+            .size(100.dp) // Limiter la taille à un maximum fixe
+            .clipToBounds()
+            .graphicsLayer(
+                scaleX = -1f
+            )
+    )
+
+    Image(
+        painter = painterResource(id = R.drawable.corner),
+        contentDescription = "Left Bottom Corner",
+        modifier = Modifier
+            .wrapContentSize(Alignment.TopStart)
+            .size(100.dp) // Limiter la taille à un maximum fixe
+            .clipToBounds()
+            .graphicsLayer(
+                rotationZ = 180f,
+            )
+    )
+
+    Image(
+        painter = painterResource(id = R.drawable.corner),
+        contentDescription = "Left Bottom Corner",
+        modifier = Modifier
+            .wrapContentSize(Alignment.TopEnd)
+            .size(100.dp) // Limiter la taille à un maximum fixe
+            .clipToBounds()
+            .graphicsLayer(
+                rotationZ = 180f,
+                scaleX = -1f
+            )
+    )
+
+
 
     Column(
         modifier = modifier,
