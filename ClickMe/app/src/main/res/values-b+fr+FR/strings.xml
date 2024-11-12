@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Click Me</string>
+
+    // Levels title
+    <string name="level_01">Tout simplement</string>
+    <string name="level_02">Mère de toutes les vertus</string>
+    <string name="level_03">Duplication</string>
+    <string name="level_04">Roller Coaster</string>
+    <string name="level_05">Level 5</string> <!-- TODO -->
+    <string name="level_06">On the First Day</string>
+    <string name="level_07">Café</string>
+    <string name="level_08">L\'ascension</string>
+    <string name="level_09">Pas ce qu\'il paraît</string>
+    <string name="level_10">Perdu</string>
+    <string name="level_11">Hors de la zone de confort</string>
+    <string name="level_12">Chapeau d\'aluminium</string>
+    <string name="level_13">Labyrinthe</string>
+    <string name="level_14">Attrape-moi</string>
+    <string name="level_15">Klikněte na mě (pokud můžete)</string>
+
+    // Buttons
+    <string name="button">Bouton</string>
+</resources>
