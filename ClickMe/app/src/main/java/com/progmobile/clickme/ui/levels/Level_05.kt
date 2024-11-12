@@ -1,5 +1,6 @@
 package com.progmobile.clickme.ui.levels
 
+import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.database.ContentObserver
 import android.database.Cursor
@@ -23,78 +24,54 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ComponentActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import android.Manifest
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
-
-class ScreenshotObserver(private val contentResolver: ContentResolver) {
-    private val handler = Handler(Looper.getMainLooper())
-    private var screenshotTaken = mutableStateOf(false)
-
-    private val observer = object : ContentObserver(handler) {
-        override fun onChange(selfChange: Boolean) {
-            super.onChange(selfChange)
-
-            // Effectuer l'interrogation sur un thread secondaire
-            Thread {
-                val uri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                val cursor: Cursor? = contentResolver.query(uri, null, null, null, null)
-
-                cursor?.use {
-                    if (it.moveToLast()) {
-                        val columnIndex = it.getColumnIndex(MediaStore.Images.Media.DATA)
-                        val filePath = it.getString(columnIndex)
-
-                        if (filePath.contains("/Screenshots/")) { // Vérifiez si c'est dans le dossier Screenshots
-                            screenshotTaken.value = true
-                        }
-                    }
-                }
-            }.start()
-        }
-    }
-
-    fun registerObserver() {
-        contentResolver.registerContentObserver(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            true,
-            observer
-        )
-    }
-
-    fun unregisterObserver() {
-        contentResolver.unregisterContentObserver(observer)
-    }
-
-    val isScreenshotTaken: State<Boolean>
-        get() = screenshotTaken
-}
-
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
  * the navigation to next screen
  */
+@SuppressLint("RestrictedApi")
 @Composable
 fun Level_05(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val screenshotObserver = remember { ScreenshotObserver(context.contentResolver) }
+    val handler = Handler(Looper.getMainLooper())
+    var isScreenshotTaken by remember {
+        mutableStateOf(false)
+    }
 
-    // État pour suivre si une capture d'écran a été prise
-    var isScreenshotTaken by remember { mutableStateOf(false) }
-
-    DisposableEffect(Unit) {
-        screenshotObserver.registerObserver() // Enregistre l'observateur
-        // Observer l'état de capture d'écran
-        isScreenshotTaken = screenshotObserver.isScreenshotTaken.value // Met à jour l'état
-        onDispose {
-            screenshotObserver.unregisterObserver() // Désinscrit l'observateur
+    val registerObserver = {
+        val observer = object : ContentObserver(handler) {
+            override fun onChange(selfChange: Boolean, uri: Uri?) {
+                super.onChange(selfChange, uri)
+                isScreenshotTaken = true
+            }
         }
+        context.contentResolver.registerContentObserver(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            true,
+            observer
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        ActivityCompat.requestPermissions(
+            (context as ComponentActivity),
+            arrayOf(
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            ),
+            100
+        )
+        registerObserver()
     }
 
     Column(
