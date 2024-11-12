@@ -41,6 +41,7 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
+import com.progmobile.clickme.data.DataSource.currentLevel
 
 
 @Composable
@@ -132,9 +133,8 @@ fun ParameterIconButton(
             onDismissRequest = { showDialog = false },
             onNavigateToHomePage = {
                 navController.navigate(Screens.HomePage.name){
-                    popUpTo(navController.graph.startDestinationId) {
-                        inclusive = true // This clears the back stack up to the start destination
-                    }
+                    popUpTo(0) { inclusive = true } // This clears the entire stack
+                    launchSingleTop = true         // Prevents multiple instances of HomePage
                 }
                 showDialog = false
             },
@@ -287,6 +287,13 @@ fun SwipableDialog(
                             onUnlock = {
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
+                                navController.navigate(Screens.Level_11.name){
+                                    popUpTo(Screens.Level_11.name) { inclusive = false } // Keeps HomePage in the stack
+                                    launchSingleTop = true
+                                }
+                                if (currentLevel < 11) {
+                                    currentLevel++
+                                }
                             },
                             labelResourceId = R.string.button,
                             level = 11,

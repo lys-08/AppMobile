@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.accompanist.pager) // Update to the latest version
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.datastore.preferences)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
