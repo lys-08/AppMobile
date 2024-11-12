@@ -243,6 +243,17 @@ private val highContrastDarkColorScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
 )
 
+private val CustomColors = darkColorScheme(
+    primary = Color(0xFFFF5722),
+    secondary = Color(0xFFFFC107),
+    background = Color(0xFF121212),
+    surface = Color(0xFF1F1F1F),
+    onPrimary = Color(0xFF000000),
+    onSecondary = Color(0xFF000000),
+    onBackground = Color(0xFFFFFFFF),
+    onSurface = Color(0xFFFFFFFF)
+)
+
 @Immutable
 data class ColorFamily(
     val color: Color,
@@ -282,7 +293,7 @@ fun ClickMeTheme(
 @Composable
 fun CustomTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = darkColorScheme(),
+        colorScheme = CustomColors,
         typography = AppTypography,
         content = content
     )
