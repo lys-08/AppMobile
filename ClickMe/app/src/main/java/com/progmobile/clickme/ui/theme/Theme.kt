@@ -278,3 +278,12 @@ fun ClickMeTheme(
         content = content
     )
 }
+
+@Composable
+fun CustomTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = darkColorScheme(),
+        typography = AppTypography,
+        content = content
+    )
+}
