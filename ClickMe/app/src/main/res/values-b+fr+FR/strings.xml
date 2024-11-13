@@ -5,9 +5,9 @@
     <string name="level_01">Tout simplement</string>
     <string name="level_02">Mère de toutes les vertus</string>
     <string name="level_03">Duplication</string>
-    <string name="level_04">Roller Coaster</string>
+    <string name="level_04">Roller Coaster</string> <!-- Montagne russes -->
     <string name="level_05">Level 5</string> <!-- TODO -->
-    <string name="level_06">On the First Day</string>
+    <string name="level_06">On the First Day</string> <!-- TODO -->
     <string name="level_07">Café</string>
     <string name="level_08">L\'ascension</string>
     <string name="level_09">Pas ce qu\'il paraît</string>
@@ -17,6 +17,39 @@
     <string name="level_13">Labyrinthe</string>
     <string name="level_14">Attrape-moi</string>
     <string name="level_15">Klikněte na mě (pokud můžete)</string>
+
+    // Hints
+    <string name="hint_01_1">Sérieusement ?</string>
+    <string name="hint_02_1"> </string>
+    <string name="hint_03_1"> </string>
+    <string name="hint_04_1">Quelque chose semble bizarre</string>
+    <string name="hint_04_2">Tu peux lire le titre ?</string>
+    <string name="hint_04_3">Peut-être que si tu tournes ta tête ça sera plus facile</string>
+    <string name="hint_05_1"> </string>
+    <string name="hint_06_1">Il fait un peu sombre, tu ne trouves pas ?</string>
+    <string name="hint_06_2">Un rien peut éclairer ton chemin</string>
+    <string name="hint_07_1">Je suis fatigué</string>
+    <string name="hint_07_2">Je manque vraiment d\'énergie</string>
+    <string name="hint_08_1">Je murmure dans les champs et hurle dans les tempêtes. Ils me suivent
+        mais je n'ai pas de chemin. Qui suis-je ?</string>
+    <string name="hint_08_2">Écoute l\'air du vent</string>
+    <string name="hint_08_3">Respirer peut faire bouger des montagnes</string>
+    <string name="hint_09_1">Peut-être que tester toutes les options n\'est pas la meilleure idée …</string>
+    <string name="hint_09_2">Essaye de développer ton savoir artistique</string>
+    <string name="hint_09_3">Tu n\'as jamais entendu parlé de surréalisme ? Quelle honte</string>
+    <string name="hint_09_4">Vraiment, pas d\'idée ? Il faut revoir les bases. Bien, voici le
+        dernier indice : René Magritte</string>
+    <string name="hint_10_1">Où est-ce qu\'il peut être ?</string>
+    <string name="hint_11_1">Chercher l’ombre pour trouver la lumière, chercher la lumière pour trouver l’ombre</string>
+    <string name="hint_11_2">Parfois il faut plonger dans les profondeurs pour voir la lumière</string>
+    <string name="hint_12_1">La tête dans les nuages</string>
+    <string name="hint_13_1"> </string>
+    <string name="hint_14_1"> </string>
+    <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string> <!-- Breton -->
+    <string name="hint_15_2">Klike sou mwen (si ou kapab)</string> <!-- Créole haïtien -->
+    <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string> <!-- Basque -->
+    <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string> <!-- Allemand -->
+    <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string> <!-- Gallois -->
 
     // Buttons
     <string name="button">Bouton</string>

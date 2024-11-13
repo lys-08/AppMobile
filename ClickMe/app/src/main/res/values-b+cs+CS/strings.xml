@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Click Me</string>
+
+    // Levels title
+    <string name="level_01">Prosté a jednoduché</string>
+    <string name="level_02">Matka všech ctností</string>
+    <string name="level_03">Duplikace</string>
+    <string name="level_04">Válečková koaster</string>
+    <string name="level_05">Level 5</string> <!-- TODO -->
+    <string name="level_06">Level 6</string> <!-- TODO -->
+    <string name="level_07">Káva</string>
+    <string name="level_08">Stoupání</string>
+    <string name="level_09">Ne, jak se zdá</string>
+    <string name="level_10">Ztraceno</string>
+    <string name="level_11">Mimo vaši komfortní zónu</string>
+    <string name="level_12">Hliníkový klobouk</string>
+    <string name="level_13">Labyrint</string>
+    <string name="level_14">Srazte to dolů</string>
+    <string name="level_15">Kaomi iaʻu (inā hiki iā ʻoe)</string> <!-- Hawaïen -->
+
+    // Hints
+    <string name="hint_01_1">Vážně ?</string>
+    <string name="hint_02_1"> </string>
+    <string name="hint_03_1"> </string>
+    <string name="hint_04_1">Něco se nezdá správné</string>
+    <string name="hint_04_2">Můžete si přečíst název?</string>
+    <string name="hint_04_3">Možná, že když otočíte hlavu, bude to jednodušší</string>
+    <string name="hint_05_1"> </string>
+    <string name="hint_06_1">Je trochu tma, že?</string>
+    <string name="hint_06_2">Jednoduchý dotek vám může osvěttit cestu</string>
+    <string name="hint_07_1">Jsem trochu unavený</string>
+    <string name="hint_07_2">Opravdu mi chybí energie</string>
+    <string name="hint_08_1">Šeptám na polích a vyju v bouřích. Jdou za mnou, ale já nemám
+        žádnou cestu. Kdo jsem?</string>
+    <string name="hint_08_2">Poslechněte si barvy větru</string>
+    <string name="hint_08_3">Jen dýchání může pohnout horami</string>
+    <string name="hint_09_1">Možná, že vyzkoušet všechny možnosti není nejlepší nápad…</string>
+    <string name="hint_09_2">Snažte se rozšířit své umělecké znalosti</string>
+    <string name="hint_09_3">Nikdy jste neslyšeli o surrealismu? Jaká ostuda</string>
+    <string name="hint_09_4">Vážně, žádný nápad? Musíte zvýšit svou hru. Zde je poslední stopa: René Magritte</string>
+    <string name="hint_10_1">Kde to může být?</string>
+    <string name="hint_11_1">Hledejte stín, abyste našli světlo, hledejte světlo, abyste našli stín</string>
+    <string name="hint_11_2">Někdy se musíte ponořit do hlubin, abyste viděli světlo</string>
+    <string name="hint_12_1">Hlavu v oblacích</string>
+    <string name="hint_13_1"> </string>
+    <string name="hint_14_1"> </string>
+    <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>
+    <string name="hint_15_2">Klike sou mwen (si ou kapab)</string>
+    <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string>
+    <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
+    <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
+
+    // Buttons
+    <string name="button">Tlačítko</string>
+</resources>

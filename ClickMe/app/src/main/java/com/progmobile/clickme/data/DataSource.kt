@@ -60,37 +60,42 @@ object DataSource {
 
     val levelHints = mapOf(
         // map three hints to each level
-        Screens.Level_01.name to listOf("Seriously ?"),
-        Screens.Level_02.name to listOf(""),
-        Screens.Level_03.name to listOf(""),
-        Screens.Level_04.name to listOf("Something doesn't seem right.",
-            "Can you read the title ?",
-            "Maybe if you turn your head it'll be easier."),
-        Screens.Level_05.name to listOf(""),
-        Screens.Level_06.name to listOf("It's a little dark, isn't it ?","A simple touch can light your way."),
-        Screens.Level_07.name to listOf("I'm kind of tired", "I really lack energy"),
+        Screens.Level_01.name to listOf(R.string.hint_01_1.toString()),
+        Screens.Level_02.name to listOf(R.string.hint_02_1.toString()),
+        Screens.Level_03.name to listOf(R.string.hint_03_1.toString()),
+        Screens.Level_04.name to listOf(
+            R.string.hint_04_1.toString(),
+            R.string.hint_04_2.toString(),
+            R.string.hint_04_3.toString()),
+        Screens.Level_05.name to listOf(R.string.hint_05_1.toString()),
+        Screens.Level_06.name to listOf(
+            R.string.hint_06_1.toString(),
+            R.string.hint_06_2.toString()),
+        Screens.Level_07.name to listOf(
+            R.string.hint_07_1.toString(),
+            R.string.hint_07_2.toString()),
         Screens.Level_08.name to listOf(
-          "I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?",
-          "Listen to the colors of the wind",
-          "Just breathing can move mountains"),
-        Screens.Level_09.name to listOf("Maybe trying all options is not the greatest idea...",
-            "Try to expand your artistic knowledge.",
-            "Never heard of surrealism ? What a shame.",
-            "Really, no idea ? You need to step up your game. Fine, here's the last clue : René Magritte."),
-        Screens.Level_10.name to listOf("Where can it be ?"),
+            R.string.hint_08_1.toString(),
+            R.string.hint_08_2.toString(),
+            R.string.hint_08_3.toString()),
+        Screens.Level_09.name to listOf(
+            R.string.hint_09_1.toString(),
+            R.string.hint_09_2.toString(),
+            R.string.hint_09_3.toString(),
+            R.string.hint_09_4.toString()),
+        Screens.Level_10.name to listOf(R.string.hint_10_1.toString()),
         Screens.Level_11.name to listOf(
-          "Seek the shadow to find the light, seek the light to find the shadow",
-          "Sometimes you have to dive into the depths to see the light"),
-        Screens.Level_12.name to listOf( "Head in the clouds"),
-        Screens.Level_13.name to listOf(""),
-        Screens.Level_14.name to listOf(""),
+            R.string.hint_11_1.toString(),
+            R.string.hint_11_2.toString()),
+        Screens.Level_12.name to listOf(R.string.hint_12_1.toString()),
+        Screens.Level_13.name to listOf(R.string.hint_13_1.toString()),
+        Screens.Level_14.name to listOf(R.string.hint_14_1.toString()),
         Screens.Level_15.name to listOf(
-            "Klikit warnon (ma c'hellit)",
-            "Klike sou mwen (si ou kapab)",
-            "Egin klik nigan (ahal baduzu)",
-            "Klicken Sie auf mich (wenn Sie können)",
-            "Cliciwch fi (os gallwch chi)")
-
+            R.string.hint_15_1.toString(),
+            R.string.hint_15_2.toString(),
+            R.string.hint_15_3.toString(),
+            R.string.hint_15_4.toString(),
+            R.string.hint_15_5.toString())
     )
     var currentLevel = 11;
 }
