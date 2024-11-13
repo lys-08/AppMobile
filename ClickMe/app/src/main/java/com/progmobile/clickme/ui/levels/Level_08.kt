@@ -1,5 +1,7 @@
 package com.progmobile.clickme.ui.levels
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.media.MediaRecorder
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -68,7 +72,7 @@ fun Level_08(
                 try {
                     while (isMonitoring) {
                         amplitude = mediaRecorder?.maxAmplitude ?: 0
-                        if (amplitude > 3000) {
+                        if (amplitude > 30000) {
                             timeCount += 1
                             // Stop the recording if the Amplitude above 30 000 during 3seconds
                             if (timeCount >= 30) {
@@ -92,8 +96,10 @@ fun Level_08(
 
     // =================== End ===================
 
-    isMonitoring = true
-    startMonitoring()
+    LaunchedEffect(Unit) {
+        isMonitoring = true
+        startMonitoring()
+    }
 
     Column(
         modifier = modifier,
@@ -108,12 +114,7 @@ fun Level_08(
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-
-        Text(text = "Amplitude: $amplitude", style = MaterialTheme.typography.headlineMedium)
-        Text(text = "Count: $timeCount", style = MaterialTheme.typography.headlineMedium)
-        Text(text = "isMonitoring: $isMonitoring", style = MaterialTheme.typography.headlineMedium)
-        Spacer(modifier = Modifier.height(16.dp))
-
+        
         // Level button
         if (!isMonitoring) {
             UnlockLevel(
