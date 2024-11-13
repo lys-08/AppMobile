@@ -114,7 +114,7 @@ fun Level_08(
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-        
+
         // Level button
         if (!isMonitoring) {
             UnlockLevel(

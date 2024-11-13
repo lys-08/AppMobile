@@ -251,9 +251,9 @@ fun SwipableDialog(
     }
 
     val listOfHints = DataSource.levelHints[navController.currentDestination?.route]
-    var mutableListOfHints by remember { mutableStateOf(listOf<String>()) }
+    var mutableListOfHints by remember { mutableStateOf(listOf<Int>()) }
     if (listOfHints == null) {
-        mutableListOfHints = listOf("Sorry, no hint available")
+        mutableListOfHints = listOf(R.string.hint_00)
     } else {
         mutableListOfHints = listOfHints
     }
@@ -296,7 +296,7 @@ fun SwipableDialog(
                         )
                     } else {
                         PageContent(
-                            text = mutableListOfHints[page],
+                            text = mutableListOfHints[page].toString(),
                             backgroundColor = Color.Transparent
                         )
                     }
