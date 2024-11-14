@@ -1,5 +1,9 @@
 <resources>
+    // Ressources
     <string name="app_name">Click Me</string>
+    <string name="music_key">MusicKey</string>
+    <string name="sound_key">SoundKey</string>
+    <string name="level_key">LevelKey</string>
 
     // Levels title
     <string name="level_01">Plain and simple</string>
