@@ -1,9 +1,11 @@
 package com.progmobile.clickme.ui
 
+import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,12 +27,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -82,17 +85,39 @@ fun IconButton(
     @DrawableRes imageResourceId: Int,
     onClick: () -> Unit,
     contentDescription : String? = null,
+    bottomButton: Boolean = false,
     modifier: Modifier = Modifier
 ){
     // Find if the system is in dark of light theme and color the buttons accordingly
     val isDarkTheme = isSystemInDarkTheme()
-    val iconTintColor = if (isDarkTheme) Color.White else Color.Black
+    val colorFilter = if (bottomButton) {
+        ColorFilter.tint(if (isDarkTheme) Color.White else Color.Black)
+    } else {
+        null
+    }
+
+    // Sound section
+    val context = LocalContext.current
+
+    // Add code to onClick
     Image(
         painter = painterResource(id = imageResourceId),
         contentDescription = contentDescription, // Provide content description for accessibility
-        colorFilter = ColorFilter.tint(iconTintColor), // Tint the image to black
+        colorFilter = colorFilter, // Tint the image to black
         modifier = modifier
-            .clickable(onClick = onClick) // Make the image clickable
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = {
+                        if (MainActivity.instance?.isSoundOn == true) {
+                            val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
+                            mediaPlayer.setOnCompletionListener { it.release() }
+                            mediaPlayer.start()
+                        }
+                        onClick()
+                    }
+                )
+            }
+                // Make the image clickable
             .background(Color.Transparent) // Ensure no background color
             .wrapContentSize(Alignment.Center) // Center the image
     )
@@ -120,6 +145,7 @@ fun ParameterIconButton(
             showDialog = true
         },
         contentDescription = "Settings",
+        bottomButton = true,
         modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
@@ -132,19 +158,18 @@ fun ParameterIconButton(
             onDismissRequest = { showDialog = false },
             onNavigateToHomePage = {
                 navController.navigate(Screens.HomePage.name){
-                    popUpTo(navController.graph.startDestinationId) {
-                        inclusive = true // This clears the back stack up to the start destination
-                    }
+                    popUpTo(0) { inclusive = true } // This clears the entire stack
+                    launchSingleTop = true         // Prevents multiple instances of HomePage
                 }
                 showDialog = false
             },
-            onMusicIconClick = {
-            },
-            onVolumeIconClick = { /* Handle volume icon click */ } // TODO : Add volume
+            onMusicIconClick = {},
+            onVolumeIconClick = {}
         )
     }
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ParameterDialog(
     isNotHomePage: Boolean = true,
@@ -178,11 +203,7 @@ fun ParameterDialog(
             }
 
             // Music icon
-            if (MainActivity.instance?.isMusicPlaying() == true) {
-                isMusicUp = true
-            } else {
-                isMusicUp = false
-            }
+            isMusicUp = MainActivity.instance?.isMusicPlaying() == true
             IconButton(
                 onClick = {
                     MainActivity.instance?.switchMusicState()
@@ -195,11 +216,14 @@ fun ParameterDialog(
                     .widthIn(max = 128.dp)
             )
 
+            // Music icon
+            isVolumeUp = MainActivity.instance?.isSoundOn == true
             // Volume icon
             IconButton(
                 onClick = {
+                    MainActivity.instance?.switchSoundState()
                     isVolumeUp = !isVolumeUp
-                    onMusicIconClick()
+                    onVolumeIconClick()
                 },
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
@@ -225,6 +249,7 @@ fun HintIconButton(
             showDialog = true
         },
         contentDescription = "Hint",
+        bottomButton = true,
         modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
@@ -246,7 +271,7 @@ fun SwipableDialog(
     navController: NavHostController,
 ) {
     var isLevel10 = false
-    if (navController.currentDestination?.route != Screens.HomePage.name) {
+    if (navController.currentDestination?.route == Screens.Level_10.name) {
         isLevel10 = true
     }
 
@@ -257,6 +282,7 @@ fun SwipableDialog(
     } else {
         mutableListOfHints = listOfHints
     }
+
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
 
@@ -265,7 +291,7 @@ fun SwipableDialog(
         if (isLevel10) {
             numberOfHints++
         }
-        val pagerState = rememberPagerState(){ numberOfHints }
+        val pagerState = rememberPagerState { numberOfHints }
 
         Box(
             modifier = Modifier
@@ -281,17 +307,21 @@ fun SwipableDialog(
                         .weight(1f) // Take remaining space
                 ) { page ->
                     // Dynamically display content based on the current page
-                    if (isLevel10 && page == mutableListOfHints.lastIndex+1) {
+                    if (isLevel10 && page == mutableListOfHints.lastIndex + 1) {
                         // Display a button on the last page
                         UnlockLevel(
                             onUnlock = {
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
+                                navController.navigate(Screens.Level_11.name)
+                                if (MainActivity.instance?.currentLevel!! < 11) {
+                                    MainActivity.instance?.increaseLevel()
+                                }
                             },
                             labelResourceId = R.string.button,
-                            level = 11,
+                            level = 10,
                             modifier = Modifier,
-                            levelName = Screens.Level_11.name,
+                            levelName = Screens.Level_09.name,
                             navController = navController
                         )
                     } else {
@@ -310,21 +340,22 @@ fun SwipableDialog(
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
-                   repeat(numberOfHints) { pageIndex ->
-                       val color = if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                       Box(
-                           modifier = Modifier
-                               .size(12.dp)
-                               .background(color = color, shape = MaterialTheme.shapes.small)
-                               .padding(8.dp)
-                               .padding(horizontal = 16.dp)
-                       )
+                    repeat(numberOfHints) { pageIndex ->
+                        val color =
+                            if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                        Box(
+                            modifier = Modifier
+                                .size(12.dp)
+                                .background(color = color, shape = MaterialTheme.shapes.small)
+                                .padding(8.dp)
+                                .padding(horizontal = 16.dp)
+                        )
 
-                       // Add Spacer with desired width
-                       if (pageIndex < numberOfHints - 1) {
-                           Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
-                       }
-                   }
+                        // Add Spacer with desired width
+                        if (pageIndex < numberOfHints - 1) {
+                            Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                        }
+                    }
                 }
             }
         }

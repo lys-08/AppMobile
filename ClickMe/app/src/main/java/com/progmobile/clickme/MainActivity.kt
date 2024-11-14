@@ -1,22 +1,36 @@
 package com.progmobile.clickme
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Looper
-import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.lifecycleScope
 import com.progmobile.clickme.ui.theme.ClickMeTheme
-import java.util.logging.Handler
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+
+private val Context.dataStore by preferencesDataStore("user_prefs")
 
 class MainActivity : ComponentActivity() {
-  
+
     // ========== PERMISSIONS ==========
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
@@ -30,6 +44,9 @@ class MainActivity : ComponentActivity() {
         permissionsStatus.value = anyPermissionDenied
     }
 
+    // ========== LEVEL ==========
+    var currentLevel by mutableIntStateOf(0)
+
     // ========== MEDIA PLAYER ==========
     companion object {
         var instance: MainActivity? = null
@@ -37,13 +54,15 @@ class MainActivity : ComponentActivity() {
 
     //var intent = Intent()
     private var mediaPlayer: MediaPlayer? = null
-    var stopFromAppBar:Boolean = false
 
     // Getter for mediaPlayer?.isPlaying
     fun isMusicPlaying(): Boolean {
         return mediaPlayer?.isPlaying ?: false
     }
 
+    var isSoundOn by mutableStateOf(false)
+
+    // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         instance = this // Set the instance to the current activity
@@ -53,6 +72,10 @@ class MainActivity : ComponentActivity() {
             ClickMeTheme {
                 ClickMeApp(permissionsStatus)
             }
+            currentLevel = 12
+            DataStoreApp(currentLevel)
+            isSoundOn = true
+
         }
         //intent = Intent(this, MusicService::class.java)
         //startService(intent)
@@ -73,25 +96,78 @@ class MainActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
-        if(stopFromAppBar == false) {
-            mediaPlayer?.pause()
-        }
+        // Stop the music when the app is paused
+        mediaPlayer?.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        if(stopFromAppBar == false) {
-            mediaPlayer?.start()
+
+        lifecycleScope.launch {
+            if (getMusicState()) {
+                switchMusicState()
+            }
         }
     }
 
+    suspend fun getMusicState(): Boolean {
+        var musicState by mutableStateOf(false)
+        val musicKey = booleanPreferencesKey(R.string.music_key.toString())
+        val dataStore = this.dataStore
+        // get boolean music state
+        musicState = dataStore.data.map { preferences ->
+            preferences[musicKey] ?: false
+        }.first()
+        return musicState
+    }
+
     fun switchMusicState() {
-        if (isMusicPlaying() == true) {
+        val musicKey = booleanPreferencesKey(R.string.music_key.toString())
+        // normal scope not for composable
+        if (isMusicPlaying()) {
             mediaPlayer?.pause()
-            stopFromAppBar = true
+            lifecycleScope.launch {
+                dataStore.edit { preferences ->
+                    preferences[musicKey] = false
+                }
+            }
         } else {
             mediaPlayer?.start()
-            stopFromAppBar = false
+            lifecycleScope.launch {
+                dataStore.edit { preferences ->
+                    preferences[musicKey] = true
+                }
+            }
+        }
+    }
+
+    fun switchSoundState() {
+        val soundKey = booleanPreferencesKey(R.string.sound_key.toString())
+        // normal scope not for composable
+        if (isSoundOn) {
+            lifecycleScope.launch {
+                dataStore.edit { preferences ->
+                    preferences[soundKey] = false
+                }
+            }
+            isSoundOn = false
+        } else {
+            lifecycleScope.launch {
+                dataStore.edit { preferences ->
+                    preferences[soundKey] = true
+                }
+            }
+            isSoundOn = true
+        }
+    }
+
+    fun increaseLevel() {
+        currentLevel++
+        val levelKey = intPreferencesKey(R.string.level_key.toString())
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[levelKey] = currentLevel
+            }
         }
     }
 
@@ -118,4 +194,19 @@ class MainActivity : ComponentActivity() {
             permissionsStatus.value = true
         }
     }
+}
+
+@Composable
+fun DataStoreApp(currentLevel: Int) {
+    val context = LocalContext.current
+    val musicKey = booleanPreferencesKey(R.string.music_key.toString())
+    val soundKey = booleanPreferencesKey(R.string.sound_key.toString())
+    val levelKey = intPreferencesKey(R.string.level_key.toString())
+
+    val dataStore = context.dataStore
+    dataStore.data.map { preferences ->
+        preferences[musicKey] ?: false
+        preferences[soundKey] ?: false
+        preferences[levelKey] ?: currentLevel
+    }.collectAsState(initial = "")
 }

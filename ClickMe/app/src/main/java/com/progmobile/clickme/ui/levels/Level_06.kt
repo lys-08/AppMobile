@@ -7,16 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -76,31 +75,42 @@ fun Level_06(
             torchManager.unregisterTorchCallback()
         }
     }
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(id = R.string.level_06),
-            style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
-        )
 
+    val backgroundColor = if (isTorchOn) {
+        MaterialTheme.colorScheme.primary // Couleur personnalisée si la torche est allumée
+    } else {
+        MaterialTheme.colorScheme.background // Couleur par défaut
+    }
 
-        if (isTorchOn) {
-            UnlockLevel(
-                labelResourceId = R.string.button,
-                level = 6,
-                modifier,
-                levelName = Screens.Level_07.name,
-                navController
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = backgroundColor) {
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(id = R.string.level_06),
+                style = MaterialTheme.typography.displayLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                textAlign = TextAlign.Center
             )
-        }
 
+
+            if (isTorchOn) {
+                UnlockLevel(
+                    labelResourceId = R.string.button,
+                    level = 6,
+                    modifier,
+                    levelName = Screens.Level_07.name,
+                    navController
+                )
+            }
+
+        }
     }
 }
 

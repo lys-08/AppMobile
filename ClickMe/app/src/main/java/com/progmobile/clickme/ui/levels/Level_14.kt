@@ -1,16 +1,27 @@
 package com.progmobile.clickme.ui.levels
 
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -20,9 +31,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.data.DataSource.currentLevel
-import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+import kotlinx.coroutines.delay
+import kotlin.math.abs
+import kotlin.random.Random
 
 
 /**
@@ -34,6 +46,81 @@ fun Level_14(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
+    // State for button position
+    var buttonOffsetX by remember { mutableStateOf(0f) }
+    var buttonOffsetY by remember { mutableStateOf(0f) }
+
+    // State for shake detection
+    var isShaken by remember { mutableStateOf(false) }
+
+    // Sensor Manager setup
+    val sensorManager = remember {
+        context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    }
+
+    // Shake detection threshold
+    val shakeThreshold = 800f
+
+    // Sensor event listener
+    val sensorEventListener = remember {
+        object : SensorEventListener {
+            private var lastUpdate: Long = 0
+            private var lastX = 0f
+            private var lastY = 0f
+            private var lastZ = 0f
+
+            override fun onSensorChanged(event: SensorEvent) {
+                val currentTime = System.currentTimeMillis()
+                if ((currentTime - lastUpdate) > 100) {
+                    val diffTime = currentTime - lastUpdate
+                    lastUpdate = currentTime
+
+                    val x = event.values[0]
+                    val y = event.values[1]
+                    val z = event.values[2]
+
+                    val speed = abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000
+
+                    if (speed > shakeThreshold) {
+                        isShaken = true
+                    }
+
+                    lastX = x
+                    lastY = y
+                    lastZ = z
+                }
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
+    }
+
+    // Register sensor listener
+    DisposableEffect(sensorManager) {
+        val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        sensorManager.registerListener(
+            sensorEventListener,
+            accelerometer,
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
+
+        onDispose {
+            sensorManager.unregisterListener(sensorEventListener)
+        }
+    }
+
+    // Random movement animation
+    LaunchedEffect(isShaken) {
+        while (!isShaken) {
+            // Generate random positions within screen bounds
+            buttonOffsetX = Random.nextFloat() * 600f - 300f // Adjust these values based on screen size
+            buttonOffsetY = Random.nextFloat() * 1000f - 500f
+            delay(500) // Adjust delay to control movement speed
+        }
+    }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween

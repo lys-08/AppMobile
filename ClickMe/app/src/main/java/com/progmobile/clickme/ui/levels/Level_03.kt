@@ -22,9 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.data.DataSource.currentLevel
 import com.progmobile.clickme.ui.UnlockLevel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,8 +58,8 @@ fun Level_03(
         val scope = rememberCoroutineScope()
         val onBothClicked = {
             navController.navigate(Screens.Level_04.name)
-            if (currentLevel < 3) {
-                currentLevel++
+            if (MainActivity.instance?.currentLevel!! < 3) {
+                MainActivity.instance?.increaseLevel()
             }
         }
 
