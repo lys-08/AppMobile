@@ -1,9 +1,7 @@
 package com.progmobile.clickme.ui.levels
 
 import android.annotation.SuppressLint
-import android.content.ContentResolver
 import android.database.ContentObserver
-import android.database.Cursor
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -16,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,11 +30,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ComponentActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import android.Manifest
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource

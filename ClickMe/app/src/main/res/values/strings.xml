@@ -10,7 +10,7 @@
     <string name="level_02">Mother of all virtues</string>
     <string name="level_03">Duplication</string>
     <string name="level_04">Roller Coaster</string>
-    <string name="level_05">Clear Shot</string>
+    <string name="level_05">Clear Shot</string> <!-- Memories -->
     <string name="level_06">Lux Via</string>
     <string name="level_07">Coffee</string> <!-- Hidden connection, On the verge of death -->
     <string name="level_08">The ascent</string>
@@ -25,6 +25,8 @@
     // Hints
     <string name="hint_00">Sorry, no hint available</string> <!-- TODO -->
     <string name="hint_01_1">Seriously ?</string>
+    <string name="hint_01_2">You\'ve got to be kidding me</string>
+    <string name="hint_01_3">Read. The. Title.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
     <string name="hint_04_1">Something doesn\'t seem right</string>

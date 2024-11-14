@@ -1,19 +1,14 @@
 package com.progmobile.clickme.ui.levels
 
-import android.content.Intent
-import android.content.IntentFilter
 import android.media.MediaRecorder
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -72,10 +67,10 @@ fun Level_08(
                 try {
                     while (isMonitoring) {
                         amplitude = mediaRecorder?.maxAmplitude ?: 0
-                        if (amplitude > 30000) {
+                        if (amplitude > 10000) {
                             timeCount += 1
-                            // Stop the recording if the Amplitude above 30 000 during 3seconds
-                            if (timeCount >= 30) {
+                            // Stop the recording if the Amplitude above 10 000 during 2 seconds
+                            if (timeCount >= 20) {
                                 isMonitoring = false
                             }
                         } else {

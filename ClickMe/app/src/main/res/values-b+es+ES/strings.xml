@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Click Me</string>
+    <!-- TODO (je crois) (au secours Gabin) -->
+    <string name="music_key">MusicKey</string>
+    <string name="sound_key">SoundKey</string>
+    <string name="level_key">LevelKey</string>
 
     // Levels title
     <string name="level_01">Simplemente</string>
@@ -7,7 +11,7 @@
     <string name="level_03">Duplicación</string>
     <string name="level_04">Montaña rusa</string>
     <string name="level_05">Level 5</string> <!-- TODO -->
-    <string name="level_06">Level 6</string> <!-- TODO -->
+    <string name="level_06">Lux Via</string>
     <string name="level_07">Café</string>
     <string name="level_08">Ascensión</string>
     <string name="level_09">No es lo que parece</string>
@@ -21,6 +25,8 @@
     // Hints
     <string name="hint_00">Lo sentimos, no hay ningún índice disponible</string>
     <string name="hint_01_1">En serio ?</string>
+    <string name="hint_01_2">Te burlas de mí?</string>
+    <string name="hint_01_3">Lees. El. Título.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
     <string name="hint_04_1">Hay algo que no parece bien</string>

@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">Click Me</string>
+    <!-- TODO (je crois) (au secours Gabin) -->
+    <string name="music_key">MusicKey</string>
+    <string name="sound_key">SoundKey</string>
+    <string name="level_key">LevelKey</string>
 
     // Levels title
     <string name="level_01">Tout simplement</string>
     <string name="level_02">Mère de toutes les vertus</string>
     <string name="level_03">Duplication</string>
     <string name="level_04">Roller Coaster</string> <!-- Montagne russes -->
-    <string name="level_05">Level 5</string> <!-- TODO -->
-    <string name="level_06">Level 6</string> <!-- TODO -->
+    <string name="level_05">Souvenir</string>
+    <string name="level_06">Lux Via</string>
     <string name="level_07">Café</string>
     <string name="level_08">L\'ascension</string>
     <string name="level_09">Pas ce qu\'il paraît</string>
@@ -21,6 +25,8 @@
     // Hints
     <string name="hint_00">Désolé, il n\'y a pas d\'indice disponible</string>
     <string name="hint_01_1">Sérieusement ?</string>
+    <string name="hint_01_2">Tu te moques de moi ?</string>
+    <string name="hint_01_3">Lis. Le. Foutu. Titre.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
     <string name="hint_04_1">Quelque chose semble bizarre</string>

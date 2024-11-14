@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Click Me</string>
+    <!-- TODO (je crois) (au secours Gabin) -->
+    <string name="music_key">MusicKey</string>
+    <string name="sound_key">SoundKey</string>
+    <string name="level_key">LevelKey</string>
 
     // Levels title
     <string name="level_01">Prosté a jednoduché</string>
@@ -7,7 +11,7 @@
     <string name="level_03">Duplikace</string>
     <string name="level_04">Válečková koaster</string>
     <string name="level_05">Level 5</string> <!-- TODO -->
-    <string name="level_06">Level 6</string> <!-- TODO -->
+    <string name="level_06">Lux Via</string> <!-- TODO -->
     <string name="level_07">Káva</string>
     <string name="level_08">Stoupání</string>
     <string name="level_09">Ne, jak se zdá</string>
@@ -21,6 +25,8 @@
     // Hints
     <string name="hint_00">Omlouváme se, žádné vodítko k dispozici</string>
     <string name="hint_01_1">Vážně ?</string>
+    <string name="hint_01_2">Musíš si ze mě dělat srandu</string>
+    <string name="hint_01_3">Číst. Zařízení. Název.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
     <string name="hint_04_1">Něco se nezdá správné</string>

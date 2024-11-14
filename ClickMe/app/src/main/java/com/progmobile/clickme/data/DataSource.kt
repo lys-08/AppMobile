@@ -61,7 +61,10 @@ object DataSource {
 
     val levelHints = mapOf(
         // map three hints to each level
-        Screens.Level_01.name to listOf(R.string.hint_01_1),
+        Screens.Level_01.name to listOf(
+            R.string.hint_01_1,
+            R.string.hint_01_2,
+            R.string.hint_01_3),
         Screens.Level_02.name to listOf(R.string.hint_02_1),
         Screens.Level_03.name to listOf(R.string.hint_03_1),
         Screens.Level_04.name to listOf(
