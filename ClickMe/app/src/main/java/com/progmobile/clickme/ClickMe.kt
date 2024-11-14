@@ -65,11 +65,12 @@ fun ClickMeApp(
     navController: NavHostController = rememberNavController()
 ) {
     // ================= PERMISSION =================
-    var showDialog by remember { mutableStateOf(false) }
+    /*var showDialog by remember { mutableStateOf(false) }
 
     // An Alert message is print if at least one permission have been denied
-    LaunchedEffect(permissionsDenied.value) {
-        if (permissionsDenied.value) {
+    // TODO : fix
+    LaunchedEffect(!permissionsDenied.value) {
+        if (!permissionsDenied.value) {
             showDialog = true
         }
     }
@@ -85,7 +86,7 @@ fun ClickMeApp(
                 }
             }
         )
-    }
+    }*/
     // =============== END PERMISSION ===============
 
     val backStackEntry by navController.currentBackStackEntryAsState()

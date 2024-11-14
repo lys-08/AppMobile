@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Click Me</string>
+
+    // Levels title
+    <string name="level_01">Simplemente</string>
+    <string name="level_02">Madre de todas las virtudes</string>
+    <string name="level_03">Duplicación</string>
+    <string name="level_04">Montaña rusa</string>
+    <string name="level_05">Level 5</string> <!-- TODO -->
+    <string name="level_06">Level 6</string> <!-- TODO -->
+    <string name="level_07">Café</string>
+    <string name="level_08">Ascensión</string>
+    <string name="level_09">No es lo que parece</string>
+    <string name="level_10">Perdido</string>
+    <string name="level_11">Fuera de tu zona segura</string>
+    <string name="level_12">Sombrero de aluminio</string>
+    <string name="level_13">Laberinto</string>
+    <string name="level_14">Hazlo caer</string>
+    <string name="level_15">Klikněte na mě (pokud můžete)</string>
+
+    // Hints
+    <string name="hint_00">Lo sentimos, no hay ningún índice disponible</string>
+    <string name="hint_01_1">En serio ?</string>
+    <string name="hint_02_1">x</string> <!-- TODO -->
+    <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_04_1">Hay algo que no parece bien</string>
+    <string name="hint_04_2">¿Que estas haciendo? lees el título !</string>
+    <string name="hint_04_3">¿Qué pasaría si volvieras la cabeza? Tal vez sería más</string>
+    <string name="hint_05_1">x</string> <!-- TODO -->
+    <string name="hint_06_1">¿Es un poco oscuro, no?</string>
+    <string name="hint_06_2">Con poco, puedes illuminar mucho</string>
+    <string name="hint_07_1">Estoy cansado</string>
+    <string name="hint_07_2">Realmente me falta energía</string>
+    <string name="hint_08_1">Realmente me falta el susurro en los campos y el aullido en las tormentas. Me siguen, pero no tengo camino. ¿Quién soy yo?</string>
+    <string name="hint_08_2">Escucha los colores en el viento</string>
+    <string name="hint_08_3">Respirar puedes mover montañas</string>
+    <string name="hint_09_1">Quizás probar todas las opciones no es la mejor idea…</string>
+    <string name="hint_09_2">Intenta ampliar tus conocimientos artísticos</string>
+    <string name="hint_09_3">¿Nunca he oído hablar del surrealismo? Qué vergüenza</string>
+    <string name="hint_09_4">¿Realmente, no tengo idea? Usted necesita para intensificar su juego. Bien, aquí está la última pista : René Magritte</string>
+    <string name="hint_10_1">¿Dónde puede estar?</string>
+    <string name="hint_11_1">Buscar la sombra para encontrar la luz, buscar la luz para encontrar la sombra</string>
+    <string name="hint_11_2">A veces tienes que sumergirte en las profundidades para ver la luz</string>
+    <string name="hint_12_1">Cabeza en las nubes</string>
+    <string name="hint_13_1">x</string> <!-- TODO -->
+    <string name="hint_14_1">x</string> <!-- TODO -->
+    <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>
+    <string name="hint_15_2">Klike sou mwen (si ou kapab)</string>
+    <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string>
+    <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
+    <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
+
+    // Buttons
+    <string name="button">Botón</string>
+</resources>
