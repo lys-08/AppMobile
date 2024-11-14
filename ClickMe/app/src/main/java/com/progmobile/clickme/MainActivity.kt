@@ -71,9 +71,9 @@ class MainActivity : ComponentActivity() {
             ClickMeTheme {
                 ClickMeApp(permissionsStatus)
             }
-            DataStoreApp()
+            currentLevel = 12
+            DataStoreApp(currentLevel)
             isSoundOn = true
-            currentLevel = 0
 
         }
         //intent = Intent(this, MusicService::class.java)
@@ -196,7 +196,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun DataStoreApp() {
+fun DataStoreApp(currentLevel: Int) {
     val context = LocalContext.current
     val musicKey = booleanPreferencesKey(R.string.music_key.toString())
     val soundKey = booleanPreferencesKey(R.string.sound_key.toString())
@@ -206,6 +206,6 @@ fun DataStoreApp() {
     dataStore.data.map { preferences ->
         preferences[musicKey] ?: false
         preferences[soundKey] ?: false
-        preferences[levelKey] ?: 0
+        preferences[levelKey] ?: currentLevel
     }.collectAsState(initial = "")
 }

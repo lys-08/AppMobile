@@ -12,6 +12,11 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -62,7 +67,7 @@ fun HomePage(
                       onClick = { navController.navigate(levels[i].second) }
                   )
               }
-              //Disable buttons from locked levels
+            //Disable buttons from locked levels
               items((MainActivity.instance?.currentLevel!! + 1..<levels.size).toList()) { i ->
                   LevelButtonLocked(
                       labelResourceId = levels[i].first,

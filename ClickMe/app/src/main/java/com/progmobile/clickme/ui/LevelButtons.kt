@@ -5,7 +5,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,12 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,9 +34,6 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -91,6 +81,12 @@ fun LevelButton(
                                 delay(holdDuration)
                                 if (isPressed) {
                                     onClick()
+                                    if (MainActivity.instance?.isSoundOn == true) {
+                                        val mediaPlayer =
+                                            MediaPlayer.create(context, soundResourceId)
+                                        mediaPlayer.setOnCompletionListener { it.release() }
+                                        mediaPlayer.start()
+                                    }
                                 }
                             }
                             // Reset isPressed state when released
@@ -98,11 +94,12 @@ fun LevelButton(
                             isPressed = false
                         } else {
                             onClick()
-                        }
-                        if (MainActivity.instance?.isSoundOn == true) {
-                            val mediaPlayer = MediaPlayer.create(context, soundResourceId)
-                            mediaPlayer.setOnCompletionListener { it.release() }
-                            mediaPlayer.start()
+                            if (MainActivity.instance?.isSoundOn == true) {
+                                val mediaPlayer =
+                                    MediaPlayer.create(context, soundResourceId)
+                                mediaPlayer.setOnCompletionListener { it.release() }
+                                mediaPlayer.start()
+                            }
                         }
                     }
                 )
