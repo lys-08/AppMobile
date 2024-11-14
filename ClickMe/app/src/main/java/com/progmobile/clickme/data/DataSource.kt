@@ -20,6 +20,7 @@ import com.progmobile.clickme.ui.levels.Level_12
 import com.progmobile.clickme.ui.levels.Level_13
 import com.progmobile.clickme.ui.levels.Level_14
 import com.progmobile.clickme.ui.levels.Level_15
+import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
     val levels = listOf(
@@ -46,7 +47,7 @@ object DataSource {
         Screens.Level_03.name to { navController, modifier -> { Level_03(navController, modifier) } },
         Screens.Level_04.name to { navController, modifier -> { Level_04(navController, modifier) } },
         Screens.Level_05.name to { navController, modifier -> { Level_05(navController, modifier) } },
-        Screens.Level_06.name to { navController, modifier -> { Level_06(navController, modifier) } },
+        Screens.Level_06.name to { navController, modifier -> { CustomTheme{Level_06(navController, modifier)} } },
         Screens.Level_07.name to { navController, modifier -> { Level_07(navController, modifier) } },
         Screens.Level_08.name to { navController, modifier -> { Level_08(navController, modifier) } },
         Screens.Level_09.name to { navController, modifier -> { Level_09(navController, modifier) } },
@@ -60,7 +61,7 @@ object DataSource {
 
     val levelHints = mapOf(
         // map three hints to each level
-        Screens.Level_01.name to listOf("Seriously ?"),
+        Screens.Level_01.name to listOf("Seriously ?", "You've got to be kidding me", "Read. The. Title."),
         Screens.Level_02.name to listOf(""),
         Screens.Level_03.name to listOf(""),
         Screens.Level_04.name to listOf("Something doesn't seem right.",

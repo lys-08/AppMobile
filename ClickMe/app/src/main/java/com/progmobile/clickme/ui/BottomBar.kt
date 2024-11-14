@@ -315,7 +315,7 @@ fun SwipableDialog(
                             labelResourceId = R.string.button,
                             level = 10,
                             modifier = Modifier,
-                            levelName = Screens.Level_11.name,
+                            levelName = Screens.Level_09.name,
                             navController = navController
                         )
                     } else {
