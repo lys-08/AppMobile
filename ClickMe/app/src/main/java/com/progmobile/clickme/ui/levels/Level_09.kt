@@ -1,22 +1,22 @@
 package com.progmobile.clickme.ui.levels
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.outlined.KeyboardArrowRight
-import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -26,22 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.data.DataSource.currentLevel
-import com.progmobile.clickme.ui.LevelButton
-import com.progmobile.clickme.ui.UnlockLevel
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.ui.unit.DpOffset
-import com.progmobile.clickme.data.DataSource.levels
 
 
 /**
@@ -55,7 +42,7 @@ fun Level_09(
 ) {
     var expanded by remember { mutableStateOf(false) }
     var sentence by remember { mutableStateOf("") }
-    var currentMenu by remember { mutableStateOf(1) }
+    var currentMenu by remember { mutableIntStateOf(1) }
 
     LazyColumn(
         modifier = modifier,
@@ -74,7 +61,7 @@ fun Level_09(
 
         item {
             Text(
-                text = "$sentence",
+                text = sentence,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -261,7 +248,7 @@ fun Level_09(
                                 onClick = {
                                     sentence += "button."
                                     expanded = false
-                                    currentLevel++
+                                    MainActivity.instance?.increaseLevel()
                                     navController.navigate(Screens.Level_10.name)
                                 }
                             )

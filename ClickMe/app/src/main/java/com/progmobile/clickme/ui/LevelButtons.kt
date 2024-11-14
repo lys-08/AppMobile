@@ -5,7 +5,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,11 +30,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
-import com.progmobile.clickme.data.DataSource.currentLevel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -56,22 +53,11 @@ fun LevelButton(
 
     // Sound section
     val context = LocalContext.current
-    var mediaPlayer: MediaPlayer? = null
 
-    // Load the sound when the composable enters the composition
-    DisposableEffect(Unit) {
-        if (inLevelButton) {
-            mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
-        } else {
-            // TODO : Change the sound
-            mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
-        }
-        mediaPlayer?.isLooping = false
-        mediaPlayer?.start()
-
-        onDispose {
-            mediaPlayer?.release() // Release the MediaPlayer when not needed
-        }
+    val soundResourceId = if (inLevelButton) {
+        R.raw.victory_sound
+    } else {
+        R.raw.click_button
     }
 
     val scope = rememberCoroutineScope()
@@ -87,7 +73,6 @@ fun LevelButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        mediaPlayer?.start()
                         if (longClick) {
 
                             isPressed = true
@@ -103,6 +88,11 @@ fun LevelButton(
                             isPressed = false
                         } else {
                             onClick()
+                        }
+                        if (MainActivity.instance?.isSoundOn == true) {
+                            val mediaPlayer = MediaPlayer.create(context, soundResourceId)
+                            mediaPlayer.setOnCompletionListener { it.release() }
+                            mediaPlayer.start()
                         }
                     }
                 )
@@ -158,8 +148,8 @@ fun UnlockLevel(
                 onUnlock()
             } else {
                 navController.navigate(levelName)
-                if (currentLevel < level) {
-                    currentLevel++
+                if (MainActivity.instance?.currentLevel!! < level) {
+                    MainActivity.instance?.increaseLevel()
                 }
             }
         },
