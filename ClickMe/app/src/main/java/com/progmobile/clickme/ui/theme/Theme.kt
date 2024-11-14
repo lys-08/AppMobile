@@ -244,7 +244,7 @@ private val highContrastDarkColorScheme = darkColorScheme(
 )
 
 private val CustomColors = darkColorScheme(
-    primary = Color(0xFFFF5722),
+    primary = Color(0xFFFFFFE0),
     secondary = Color(0xFFFFC107),
     background = Color(0xFF121212),
     surface = Color(0xFF1F1F1F),
