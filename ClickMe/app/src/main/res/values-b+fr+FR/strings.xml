@@ -51,9 +51,11 @@
     <string name="hint_09_3">Tu n\'as jamais entendu parlé de surréalisme ? Quelle honte</string>
     <string name="hint_09_4">Vraiment, pas d\'idée ? Il faut revoir les bases. Bien, voici le dernier indice : René Magritte</string>
     <string name="hint_10_1">Où est-ce qu\'il peut être ?</string>
+    <string name="hint_10_2">x</string> <!-- TODO -->
     <string name="hint_11_1">Chercher l’ombre pour trouver la lumière, chercher la lumière pour trouver l’ombre</string>
     <string name="hint_11_2">Parfois il faut plonger dans les profondeurs pour voir la lumière</string>
     <string name="hint_12_1">La tête dans les nuages</string>
+    <string name="hint_12_2">x</string> <!-- TODO -->
     <string name="hint_13_1">x</string> <!-- TODO -->
     <string name="hint_14_1">x</string> <!-- TODO -->
     <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string> <!-- Breton -->

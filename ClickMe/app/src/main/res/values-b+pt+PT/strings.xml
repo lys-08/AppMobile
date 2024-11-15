@@ -51,9 +51,11 @@
     <string name="hint_09_3">Nunca ouvi falar de surrealismo? Que vergonha</string>
     <string name="hint_09_4">Realmente, não tem ideia? Você precisa melhorar seu jogo. Tudo bem, aqui está a última pista : René Magritte</string>
     <string name="hint_10_1">Onde pode ser?</string>
+    <string name="hint_10_2">x</string> <!-- TODO -->
     <string name="hint_11_1">Busque a sombra para encontrar a luz, procure a luz para encontrar a sombra</string>
     <string name="hint_11_2">Às vezes você tem que mergulhar nas profundezas para ver a luz</string>
     <string name="hint_12_1">Mente nas nuvens</string>
+    <string name="hint_12_2">x</string> <!-- TODO -->
     <string name="hint_13_1">x</string> <!-- TODO -->
     <string name="hint_14_1">x</string> <!-- TODO -->
     <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>

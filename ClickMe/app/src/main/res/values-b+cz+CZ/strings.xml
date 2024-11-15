@@ -51,9 +51,11 @@
     <string name="hint_09_3">Nikdy jste neslyšeli o surrealismu? Jaká ostuda</string>
     <string name="hint_09_4">Vážně, žádný nápad? Musíte zvýšit svou hru. Zde je poslední stopa: René Magritte</string>
     <string name="hint_10_1">Kde to může být?</string>
+    <string name="hint_10_2">x</string> <!-- TODO -->
     <string name="hint_11_1">Hledejte stín, abyste našli světlo, hledejte světlo, abyste našli stín</string>
     <string name="hint_11_2">Někdy se musíte ponořit do hlubin, abyste viděli světlo</string>
     <string name="hint_12_1">Hlavu v oblacích</string>
+    <string name="hint_12_2">x</string> <!-- TODO -->
     <string name="hint_13_1">x</string> <!-- TODO -->
     <string name="hint_14_1">x</string> <!-- TODO -->
     <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>
