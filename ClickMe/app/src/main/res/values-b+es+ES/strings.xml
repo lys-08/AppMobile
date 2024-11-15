@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Click Me</string>
-    <!-- TODO (je crois) (au secours Gabin) -->
     <string name="music_key">MusicKey</string>
     <string name="sound_key">SoundKey</string>
     <string name="level_key">LevelKey</string>
