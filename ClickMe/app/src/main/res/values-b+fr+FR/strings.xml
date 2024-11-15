@@ -27,7 +27,11 @@
     <string name="hint_01_2">Tu te moques de moi ?</string>
     <string name="hint_01_3">Lis. Le. Foutu. Titre.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
+    <string name="hint_02_2">x</string> <!-- TODO -->
+    <string name="hint_02_3">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_03_2">x</string> <!-- TODO -->
+    <string name="hint_03_3">x</string> <!-- TODO -->
     <string name="hint_04_1">Quelque chose semble bizarre</string>
     <string name="hint_04_2">Tu peux lire le titre ?</string>
     <string name="hint_04_3">Peut-être que si tu tournes ta tête ça sera plus facile</string>

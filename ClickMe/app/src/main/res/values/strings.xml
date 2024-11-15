@@ -27,8 +27,12 @@
     <string name="hint_01_1">Seriously ?</string>
     <string name="hint_01_2">You\'ve got to be kidding me</string>
     <string name="hint_01_3">Read. The. Title.</string>
-    <string name="hint_02_1">x</string> <!-- TODO -->
-    <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_02_1">In a hurry aren\'t you ?</string>
+    <string name="hint_02_2">Arm yourself with patience</string>
+    <string name="hint_02_3">OK just press longer…</string>
+    <string name="hint_03_1">That. Is. Obvious.</string>
+    <string name="hint_03_2">That\'s even easier than the last level</string>
+    <string name="hint_03_3">You need two fingers</string>
     <string name="hint_04_1">Something doesn\'t seem right</string>
     <string name="hint_04_2">Can you read the title ?</string>
     <string name="hint_04_3">Maybe if you turn your head it\'ll be easier</string>
