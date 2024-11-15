@@ -65,8 +65,14 @@ object DataSource {
             R.string.hint_01_1,
             R.string.hint_01_2,
             R.string.hint_01_3),
-        Screens.Level_02.name to listOf(R.string.hint_02_1),
-        Screens.Level_03.name to listOf(R.string.hint_03_1),
+        Screens.Level_02.name to listOf(
+            R.string.hint_02_1,
+            R.string.hint_02_3,
+            R.string.hint_02_3),
+        Screens.Level_03.name to listOf(
+            R.string.hint_03_1,
+            R.string.hint_03_2,
+            R.string.hint_03_3),
         Screens.Level_04.name to listOf(
             R.string.hint_04_1,
             R.string.hint_04_2,
@@ -87,11 +93,15 @@ object DataSource {
             R.string.hint_09_2,
             R.string.hint_09_3,
             R.string.hint_09_4),
-        Screens.Level_10.name to listOf(R.string.hint_10_1),
+        Screens.Level_10.name to listOf(
+            R.string.hint_10_1,
+            R.string.hint_10_1),
         Screens.Level_11.name to listOf(
             R.string.hint_11_1,
             R.string.hint_11_2),
-        Screens.Level_12.name to listOf(R.string.hint_12_1),
+        Screens.Level_12.name to listOf(
+            R.string.hint_12_1,
+            R.string.hint_12_2),
         /*Screens.Level_13.name to listOf(R.string.hint_13_1),
         Screens.Level_14.name to listOf(R.string.hint_14_1),
         Screens.Level_15.name to listOf(
