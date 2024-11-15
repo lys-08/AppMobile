@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Click Me</string>
-    <!-- TODO (je crois) (au secours Gabin) -->
     <string name="music_key">MusicKey</string>
     <string name="sound_key">SoundKey</string>
     <string name="level_key">LevelKey</string>
@@ -28,7 +27,11 @@
     <string name="hint_01_2">Musíš si ze mě dělat srandu</string>
     <string name="hint_01_3">Číst. Zařízení. Název.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
+    <string name="hint_02_2">x</string> <!-- TODO -->
+    <string name="hint_02_3">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_03_2">x</string> <!-- TODO -->
+    <string name="hint_03_3">x</string> <!-- TODO -->
     <string name="hint_04_1">Něco se nezdá správné</string>
     <string name="hint_04_2">Můžete si přečíst název?</string>
     <string name="hint_04_3">Možná, že když otočíte hlavu, bude to jednodušší</string>

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Click Me</string>
-    <!-- TODO (je crois) (au secours Gabin) -->
     <string name="music_key">MusicKey</string>
     <string name="sound_key">SoundKey</string>
     <string name="level_key">LevelKey</string>
@@ -28,7 +27,11 @@
     <string name="hint_01_2">Estás a gozar comigo?</string>
     <string name="hint_01_3">Lis. O. Título.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
+    <string name="hint_02_2">x</string> <!-- TODO -->
+    <string name="hint_02_3">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_03_2">x</string> <!-- TODO -->
+    <string name="hint_03_3">x</string> <!-- TODO -->
     <string name="hint_04_1">Algo não parece certo</string>
     <string name="hint_04_2">Você pode ler o título?</string>
     <string name="hint_04_3">Talvez se você virar a cabeça será mais fácil</string>

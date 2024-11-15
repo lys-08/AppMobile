@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
             ClickMeTheme {
                 ClickMeApp(permissionsStatus)
             }
-            currentLevel = 12
+            currentLevel = 11
             DataStoreApp(currentLevel)
             isSoundOn = true
 
