@@ -270,6 +270,8 @@ fun SwipableDialog(
     onDismissRequest: () -> Unit,
     navController: NavHostController,
 ) {
+    val context = LocalContext.current;
+
     var isLevel10 = false
     if (navController.currentDestination?.route == Screens.Level_10.name) {
         isLevel10 = true
@@ -326,7 +328,7 @@ fun SwipableDialog(
                         )
                     } else {
                         PageContent(
-                            text = mutableListOfHints[page].toString(),
+                            text = context.getString(mutableListOfHints[page]),
                             backgroundColor = Color.Transparent
                         )
                     }

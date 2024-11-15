@@ -110,6 +110,8 @@ fun Level_08(
             textAlign = TextAlign.Center
         )
 
+        Text(text = "Amplitude: $amplitude", style = MaterialTheme.typography.headlineMedium)
+
         // Level button
         if (!isMonitoring) {
             UnlockLevel(
