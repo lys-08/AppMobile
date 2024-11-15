@@ -33,8 +33,11 @@
     <string name="hint_04_2">¿Que estas haciendo? lees el título !</string>
     <string name="hint_04_3">¿Qué pasaría si volvieras la cabeza? Tal vez sería más</string>
     <string name="hint_05_1">x</string> <!-- TODO -->
+    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
+    <string name="hint_05_3">A picture equals a thousand words.</string>
     <string name="hint_06_1">¿Es un poco oscuro, no?</string>
     <string name="hint_06_2">Con poco, puedes illuminar mucho</string>
+    <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
     <string name="hint_07_1">Estoy cansado</string>
     <string name="hint_07_2">Realmente me falta energía</string>
     <string name="hint_08_1">Realmente me falta el susurro en los campos y el aullido en las tormentas. Me siguen, pero no tengo camino. ¿Quién soy yo?</string>

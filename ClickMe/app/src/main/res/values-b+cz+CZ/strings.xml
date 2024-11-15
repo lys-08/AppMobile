@@ -33,8 +33,11 @@
     <string name="hint_04_2">Můžete si přečíst název?</string>
     <string name="hint_04_3">Možná, že když otočíte hlavu, bude to jednodušší</string>
     <string name="hint_05_1">x</string> <!-- TODO -->
+    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
+    <string name="hint_05_3">A picture equals a thousand words.</string>
     <string name="hint_06_1">Je trochu tma, že?</string>
     <string name="hint_06_2">Jednoduchý dotek vám může osvěttit cestu</string>
+    <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
     <string name="hint_07_1">Jsem trochu unavený</string>
     <string name="hint_07_2">Opravdu mi chybí energie</string>
     <string name="hint_08_1">Šeptám na polích a vyju v bouřích. Jdou za mnou, ale já nemám žádnou cestu. Kdo jsem?</string>

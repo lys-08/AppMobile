@@ -32,9 +32,12 @@
     <string name="hint_04_1">Something doesn\'t seem right</string>
     <string name="hint_04_2">Can you read the title ?</string>
     <string name="hint_04_3">Maybe if you turn your head it\'ll be easier</string>
-    <string name="hint_05_1">x</string> <!-- TODO -->
+    <string name="hint_05_1">Maybe you need to remember this level.</string> <!-- TODO -->
+    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
+    <string name="hint_05_3">A picture equals a thousand words.</string>
     <string name="hint_06_1">It\'s a little dark, isn\'t it ?</string>
     <string name="hint_06_2">A simple touch can light your way</string>
+    <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
     <string name="hint_07_1">I\'m kind of tired</string>
     <string name="hint_07_2">I really lack energy</string>
     <string name="hint_08_1">I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?</string>

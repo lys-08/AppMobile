@@ -113,7 +113,8 @@ fun Level_06(
 
             if (!hasFlashlight(context)) {
                 Text(
-                    text = stringResource(id = R.string.warning_level06)
+                    text = stringResource(id = R.string.warning_level06),
+                    style = MaterialTheme.typography.bodyLarge
                 )
                 UnlockLevel(
                     labelResourceId = R.string.button,
