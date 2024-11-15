@@ -21,6 +21,8 @@ import com.progmobile.clickme.ui.levels.Level_13
 import com.progmobile.clickme.ui.levels.Level_14
 import com.progmobile.clickme.ui.levels.Level_15
 import com.progmobile.clickme.ui.theme.CustomTheme
+import com.progmobile.clickme.ui.levels.Level_16
+import com.progmobile.clickme.ui.levels.Level_17
 
 object DataSource {
     val levels = listOf(
@@ -39,6 +41,8 @@ object DataSource {
         Pair(R.string.level_13, Screens.Level_13.name),
         Pair(R.string.level_14, Screens.Level_14.name),
         Pair(R.string.level_15, Screens.Level_15.name),
+        Pair(R.string.level_16, Screens.Level_16.name),
+        Pair(R.string.level_17, Screens.Level_17.name),
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -56,7 +60,9 @@ object DataSource {
         Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } },
         Screens.Level_13.name to { navController, modifier -> { Level_13(navController, modifier) } },
         Screens.Level_14.name to { navController, modifier -> { Level_14(navController, modifier) } },
-        Screens.Level_15.name to { navController, modifier -> { Level_15(navController, modifier) } }
+        Screens.Level_15.name to { navController, modifier -> { Level_15(navController, modifier) } },
+        Screens.Level_16.name to { navController, modifier -> { Level_16(navController, modifier) } },
+        Screens.Level_17.name to { navController, modifier -> { Level_17(navController, modifier) } }
     )
 
     val levelHints = mapOf(
@@ -81,7 +87,9 @@ object DataSource {
         Screens.Level_08.name to listOf(
             R.string.hint_08_1,
             R.string.hint_08_2,
-            R.string.hint_08_3),
+            R.string.hint_08_3,
+            R.string.hint_08_4,
+            R.string.hint_08_5),
         Screens.Level_09.name to listOf(
             R.string.hint_09_1,
             R.string.hint_09_2,
@@ -99,6 +107,8 @@ object DataSource {
             R.string.hint_15_2,
             R.string.hint_15_3,
             R.string.hint_15_4,
-            R.string.hint_15_5)
+            R.string.hint_15_5),
+        Screens.Level_16.name to listOf(R.string.hint_16_1),
+        Screens.Level_17.name to listOf(R.string.hint_17_1),
     )
 }

@@ -270,7 +270,7 @@ fun SwipableDialog(
     onDismissRequest: () -> Unit,
     navController: NavHostController,
 ) {
-    val context = LocalContext.current;
+    val context = LocalContext.current
 
     var isLevel10 = false
     if (navController.currentDestination?.route == Screens.Level_10.name) {

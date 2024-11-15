@@ -56,7 +56,9 @@ enum class Screens(@StringRes val title: Int) {
     Level_12(title = R.string.level_12),
     Level_13(title = R.string.level_13),
     Level_14(title = R.string.level_14),
-    Level_15(title = R.string.level_15)
+    Level_15(title = R.string.level_15),
+    Level_16(title = R.string.level_16),
+    Level_17(title = R.string.level_17)
 }
 
 @Composable

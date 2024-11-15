@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-  
+
+    <!-- Sensor -->
+    <uses-feature android:name="android.hardware.sensor.light" android:required="true" />
+
+
     <!-- Permissions -->
     <uses-feature
         android:name="android.hardware.camera"
