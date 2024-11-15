@@ -22,6 +22,9 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.material3.Text
 
 
 /**
@@ -39,11 +42,12 @@ fun Level_04(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         val configuration = LocalConfiguration.current
+        val screenWidth = configuration.screenWidthDp
         if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            RotatedText(configuration)
+            RotatedText(screenWidth)
         }
         else {
-            NormalText()
+            NormalText(screenWidth)
             UnlockLevel(
                 labelResourceId = R.string.button,
                 level = 4,
@@ -57,22 +61,26 @@ fun Level_04(
 
 @Composable
 fun RotatedText(
-    configuration: Configuration
+    screenWidth: Int
 ) {
+    val textSize = (screenWidth / 2).sp
     Text(
         text = stringResource(id = R.string.level_04),
         style = MaterialTheme.typography.displayLarge,
-        fontSize = 200.sp,
+        fontSize = textSize,
         modifier = Modifier,
     )
 }
 
 @Composable
-fun NormalText() {
+fun NormalText(
+    screenWidth: Int
+) {
+    val textSize = (screenWidth / 10).sp
     Text(
         text = stringResource(id = R.string.level_04),
         style = MaterialTheme.typography.displayLarge,
-        fontSize = 150.sp,
+        fontSize = textSize,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
