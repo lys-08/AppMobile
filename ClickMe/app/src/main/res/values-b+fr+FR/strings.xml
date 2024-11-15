@@ -58,4 +58,7 @@
 
     // Buttons
     <string name="button">Bouton</string>
+
+    //Warning Level 06
+    <string name="warning_level06">Votre apparail ne posséde pas l\'outil approprié. Voici un niveau gratuit :)</string>
 </resources>

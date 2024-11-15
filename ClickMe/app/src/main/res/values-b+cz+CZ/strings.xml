@@ -58,4 +58,7 @@
 
     // Buttons
     <string name="button">Tlačítko</string>
+
+    //Warning Level 06
+    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
 </resources>
