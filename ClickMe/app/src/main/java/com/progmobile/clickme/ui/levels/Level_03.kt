@@ -1,5 +1,6 @@
 package com.progmobile.clickme.ui.levels
 
+import android.media.MediaPlayer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -53,12 +55,26 @@ fun Level_03(
             textAlign = TextAlign.Center
         )
 
+        // Dual buttons
         var box1Pressed by remember { mutableStateOf(false) }
         var box2Pressed by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
+
+        // Music stuff, overriden here to avoid playing it two times
+        val soundResourceId = R.raw.victory_sound
+        val mediaPlayer = MediaPlayer.create(LocalContext.current, soundResourceId)
         val onBothClicked = {
+            // Play music
+            scope.launch {
+                if (MainActivity.instance?.userSoundPreference == true) {
+                    mediaPlayer.setOnCompletionListener { mediaPlayer.release() }
+                    mediaPlayer.start()
+                }
+            }
+
+            // Navigate to level 4
             navController.navigate(Screens.Level_04.name)
-            if (MainActivity.instance?.currentLevel!! < 3) {
+            if (MainActivity.instance?.currentLevelUnlocked!! < 3) {
                 MainActivity.instance?.increaseLevel()
             }
         }
@@ -90,7 +106,10 @@ fun Level_03(
                 onUnlock = {
                     box1Pressed = true
                     checkBothPressed()
-                }
+                },
+                // disable music on the button Composable to avoid playing it two times
+                // Play it here instead at CheckBothPressed() completion
+                 playMusic = false
             )
 
             UnlockLevel(
@@ -102,7 +121,8 @@ fun Level_03(
                 onUnlock = {
                     box2Pressed = true
                     checkBothPressed()
-                }
+                },
+                playMusic = false
             )
         }
     }

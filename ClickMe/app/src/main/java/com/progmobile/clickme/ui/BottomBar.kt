@@ -108,7 +108,7 @@ fun IconButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        if (MainActivity.instance?.isSoundOn == true) {
+                        if (MainActivity.instance?.userSoundPreference == true) {
                             val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
                             mediaPlayer.setOnCompletionListener { it.release() }
                             mediaPlayer.start()
@@ -162,9 +162,7 @@ fun ParameterIconButton(
                     launchSingleTop = true         // Prevents multiple instances of HomePage
                 }
                 showDialog = false
-            },
-            onMusicIconClick = {},
-            onVolumeIconClick = {}
+            }
         )
     }
 }
@@ -174,13 +172,8 @@ fun ParameterIconButton(
 fun ParameterDialog(
     isNotHomePage: Boolean = true,
     onDismissRequest: () -> Unit,
-    onNavigateToHomePage: () -> Unit,
-    onMusicIconClick: () -> Unit,
-    onVolumeIconClick: () -> Unit
+    onNavigateToHomePage: () -> Unit
 ) {
-    var isMusicUp by remember { mutableStateOf(true) }
-    var isVolumeUp by remember { mutableStateOf(true) }
-
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
@@ -202,13 +195,15 @@ fun ParameterDialog(
                 )
             }
 
-            // Music icon
-            isMusicUp = MainActivity.instance?.isMusicPlaying() == true
+            // MUSIC ICON
+            // Do a safe call
+            var isMusicUp = MainActivity.instance?.userMusicPreference == true
             IconButton(
                 onClick = {
-                    MainActivity.instance?.switchMusicState()
+                    MainActivity.instance?.switchMusicState(stopMusic = isMusicUp)
+                    // switch Music State locally to know which icon to display below
+                    // isMusicUp value will be crushed next call to this composable
                     isMusicUp = !isMusicUp
-                    onMusicIconClick()
                 },
                 imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
                 contentDescription = if (isMusicUp) "Music Up" else "Music Off",
@@ -216,14 +211,13 @@ fun ParameterDialog(
                     .widthIn(max = 128.dp)
             )
 
-            // Music icon
-            isVolumeUp = MainActivity.instance?.isSoundOn == true
-            // Volume icon
+            // VOLUME ICON
+            var isVolumeUp = MainActivity.instance?.userSoundPreference == true
             IconButton(
                 onClick = {
                     MainActivity.instance?.switchSoundState()
+                    // same explication than for music
                     isVolumeUp = !isVolumeUp
-                    onVolumeIconClick()
                 },
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
@@ -270,7 +264,7 @@ fun SwipableDialog(
     onDismissRequest: () -> Unit,
     navController: NavHostController,
 ) {
-    val context = LocalContext.current;
+    val context = LocalContext.current
 
     var isLevel10 = false
     if (navController.currentDestination?.route == Screens.Level_10.name) {
@@ -316,7 +310,7 @@ fun SwipableDialog(
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
                                 navController.navigate(Screens.Level_11.name)
-                                if (MainActivity.instance?.currentLevel!! < 11) {
+                                if (MainActivity.instance?.currentLevelUnlocked!! < 11) {
                                     MainActivity.instance?.increaseLevel()
                                 }
                             },
