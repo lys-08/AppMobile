@@ -2,7 +2,6 @@ package com.progmobile.clickme.ui
 
 import android.media.MediaPlayer
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -39,7 +38,6 @@ import kotlinx.coroutines.launch
  * Customizable button composable that displays the [labelResourceId]
  * and triggers [onClick] lambda when this composable is clicked
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LevelButton(
     @StringRes labelResourceId: Int,
