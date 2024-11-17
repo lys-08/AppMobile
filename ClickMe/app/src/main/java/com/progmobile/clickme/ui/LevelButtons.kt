@@ -45,6 +45,7 @@ fun LevelButton(
     @StringRes labelResourceId: Int,
     onClick: () -> Unit,
     longClick: Boolean = false,
+    playMusic: Boolean = false,
     inLevelButton: Boolean = false,
     modifier: Modifier = Modifier
 ) {
@@ -81,7 +82,7 @@ fun LevelButton(
                                 delay(holdDuration)
                                 if (isPressed) {
                                     onClick()
-                                    if (MainActivity.instance?.isSoundOn == true) {
+                                    if (MainActivity.instance?.userSoundPreference == true && playMusic) {
                                         val mediaPlayer =
                                             MediaPlayer.create(context, soundResourceId)
                                         mediaPlayer.setOnCompletionListener { it.release() }
@@ -94,7 +95,7 @@ fun LevelButton(
                             isPressed = false
                         } else {
                             onClick()
-                            if (MainActivity.instance?.isSoundOn == true) {
+                            if (MainActivity.instance?.userSoundPreference == true && playMusic) {
                                 val mediaPlayer =
                                     MediaPlayer.create(context, soundResourceId)
                                 mediaPlayer.setOnCompletionListener { it.release() }
@@ -116,7 +117,6 @@ fun LevelButton(
 
 @Composable
 fun LevelButtonLocked(
-    @StringRes labelResourceId: Int, // TODO : argument is passed but never used ?
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -147,7 +147,8 @@ fun UnlockLevel(
     levelName: String,
     navController: NavHostController,
     longClick:Boolean = false,
-    onUnlock: (() -> Unit)? = null
+    onUnlock: (() -> Unit)? = null,
+    playMusic: Boolean = true
 ) {
     LevelButton(
         onClick = {
@@ -155,13 +156,14 @@ fun UnlockLevel(
                 onUnlock()
             } else {
                 navController.navigate(levelName)
-                if (MainActivity.instance?.currentLevel!! < level) {
+                if (MainActivity.instance?.currentLevelUnlocked!! < level) {
                     MainActivity.instance?.increaseLevel()
                 }
             }
         },
         labelResourceId = labelResourceId,
         longClick = longClick,
+        playMusic = playMusic,
         inLevelButton = true,
         modifier = modifier
             .fillMaxSize()
