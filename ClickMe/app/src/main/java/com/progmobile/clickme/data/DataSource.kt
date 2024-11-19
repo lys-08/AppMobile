@@ -77,10 +77,14 @@ object DataSource {
             R.string.hint_04_1,
             R.string.hint_04_2,
             R.string.hint_04_3),
-        Screens.Level_05.name to listOf(R.string.hint_05_1),
+        Screens.Level_05.name to listOf(
+            R.string.hint_05_1,
+            R.string.hint_05_2,
+            R.string.hint_05_3),
         Screens.Level_06.name to listOf(
             R.string.hint_06_1,
-            R.string.hint_06_2),
+            R.string.hint_06_2,
+            R.string.hint_06_3),
         Screens.Level_07.name to listOf(
             R.string.hint_07_1,
             R.string.hint_07_2),
@@ -95,7 +99,7 @@ object DataSource {
             R.string.hint_09_4),
         Screens.Level_10.name to listOf(
             R.string.hint_10_1,
-            R.string.hint_10_1),
+            R.string.hint_10_2),
         Screens.Level_11.name to listOf(
             R.string.hint_11_1,
             R.string.hint_11_2),
