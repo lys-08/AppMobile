@@ -74,13 +74,14 @@ fun Level_09(
         }
 
         item {
-            Box {
+            Box (
+                modifier = modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center)
+            ) {
                 LevelButton(
                     labelResourceId = R.string.button,
-                    onClick = { expanded = true },
-                    modifier = modifier
-                        .fillMaxSize()
-                        .wrapContentSize(Alignment.Center)
+                    onClick = { expanded = true }
                 )
                 if (expanded) {
                     DropdownMenu(
