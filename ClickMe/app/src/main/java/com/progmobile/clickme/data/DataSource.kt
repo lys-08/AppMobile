@@ -23,6 +23,15 @@ import com.progmobile.clickme.ui.levels.Level_15
 import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
+    // Max number of levels to display
+    const val LEVEL_NUMBERS = 14
+    const val STARTING_LEVEL = 14
+    const val MUSIC_DEFAULT = true
+    const val SOUND_DEFAULT = true
+
+    // How long to stay pressed on the button of level 2
+    const val LEVEL_TWO_LONG_PRESS_DURATION = 3000L
+
     val levels = listOf(
         Pair(R.string.level_01, Screens.Level_01.name),
         Pair(R.string.level_02, Screens.Level_02.name),
@@ -36,9 +45,9 @@ object DataSource {
         Pair(R.string.level_10, Screens.Level_10.name),
         Pair(R.string.level_11, Screens.Level_11.name),
         Pair(R.string.level_12, Screens.Level_12.name),
-        //Pair(R.string.level_13, Screens.Level_13.name),
-        //Pair(R.string.level_14, Screens.Level_14.name),
-        //Pair(R.string.level_15, Screens.Level_15.name),
+        Pair(R.string.level_13, Screens.Level_13.name),
+        Pair(R.string.level_14, Screens.Level_14.name),
+        Pair(R.string.level_15, Screens.Level_15.name),
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -54,9 +63,9 @@ object DataSource {
         Screens.Level_10.name to { navController, modifier -> { Level_10(navController, modifier) } },
         Screens.Level_11.name to { navController, modifier -> { Level_11(navController, modifier) } },
         Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } },
-        /*Screens.Level_13.name to { navController, modifier -> { Level_13(navController, modifier) } },
+        Screens.Level_13.name to { navController, modifier -> { Level_13(navController, modifier) } },
         Screens.Level_14.name to { navController, modifier -> { Level_14(navController, modifier) } },
-        Screens.Level_15.name to { navController, modifier -> { Level_15(navController, modifier) } }*/
+        Screens.Level_15.name to { navController, modifier -> { Level_15(navController, modifier) } }
     )
 
     val levelHints = mapOf(
@@ -106,13 +115,13 @@ object DataSource {
         Screens.Level_12.name to listOf(
             R.string.hint_12_1,
             R.string.hint_12_2),
-        /*Screens.Level_13.name to listOf(R.string.hint_13_1),
+        Screens.Level_13.name to listOf(R.string.hint_13_1),
         Screens.Level_14.name to listOf(R.string.hint_14_1),
         Screens.Level_15.name to listOf(
             R.string.hint_15_1,
             R.string.hint_15_2,
             R.string.hint_15_3,
             R.string.hint_15_4,
-            R.string.hint_15_5)*/
+            R.string.hint_15_5)
     )
 }

@@ -1,6 +1,7 @@
 package com.progmobile.clickme
 
 
+import androidx.activity.addCallback
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -62,7 +63,8 @@ enum class Screens(@StringRes val title: Int) {
 @Composable
 fun ClickMeApp(
     permissionsDenied : MutableState<Boolean>,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    mainActivityInstance: MainActivity
 ) {
     // ================= PERMISSION =================
     /*var showDialog by remember { mutableStateOf(false) }
@@ -88,6 +90,14 @@ fun ClickMeApp(
         )
     }*/
     // =============== END PERMISSION ===============
+
+    // Override callback behaviour to always go back to HomePage
+    mainActivityInstance.onBackPressedDispatcher.addCallback() {
+        // Handle the back button event
+        navController.navigate(Screens.HomePage.name) {
+            popUpTo(0) // Clear the back stack
+        }
+    }
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = Screens.valueOf(

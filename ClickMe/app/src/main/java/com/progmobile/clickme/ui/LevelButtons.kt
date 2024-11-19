@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
+import com.progmobile.clickme.data.DataSource.LEVEL_TWO_LONG_PRESS_DURATION
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -48,7 +49,7 @@ fun LevelButton(
     modifier: Modifier = Modifier
 ) {
     // Long click duration
-    val holdDuration = 4000L
+    val holdDuration = LEVEL_TWO_LONG_PRESS_DURATION
 
     // Sound section
     val context = LocalContext.current
