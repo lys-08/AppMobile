@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore by preferencesDataStore("user_prefs")
-private const val STARTING_LEVEL = 11
+private const val STARTING_LEVEL = 0
 private const val MUSIC_DEFAULT = true
 private const val SOUND_DEFAULT = true
 
@@ -184,6 +184,16 @@ class MainActivity : ComponentActivity() {
 
     fun increaseLevel() {
         currentLevelUnlocked++
+        val levelKey = intPreferencesKey(R.string.level_key.toString())
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[levelKey] = currentLevelUnlocked
+            }
+        }
+    }
+
+    fun resetLevels() {
+        currentLevelUnlocked = STARTING_LEVEL
         val levelKey = intPreferencesKey(R.string.level_key.toString())
         lifecycleScope.launch {
             dataStore.edit { preferences ->
