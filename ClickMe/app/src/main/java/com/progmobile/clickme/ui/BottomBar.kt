@@ -1,6 +1,8 @@
 package com.progmobile.clickme.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -44,7 +46,6 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
-
 
 @Composable
 fun ClickMeBottomBar(
@@ -117,7 +118,7 @@ fun IconButton(
                     }
                 )
             }
-                // Make the image clickable
+            // Make the image clickable
             .background(Color.Transparent) // Ensure no background color
             .wrapContentSize(Alignment.Center) // Center the image
     )
@@ -224,6 +225,21 @@ fun ParameterDialog(
                 modifier = Modifier
                     .widthIn(max = 128.dp)
             )
+
+            // REINITIALIZE LEVELS ICON
+            val context = LocalContext.current
+            if (!isNotHomePage) {
+                IconButton(
+                    onClick = {
+                        // display a confirmation dialog
+                        showConfirmationDialog(context)
+                    },
+                    imageResourceId = R.drawable.restart_icon,
+                    contentDescription = "Restart",
+                    modifier = Modifier
+                        .widthIn(max = 128.dp)
+                )
+            }
         }
     }
 }
@@ -358,4 +374,17 @@ fun SwipableDialog(
             }
         }
     }
+}
+
+fun showConfirmationDialog(context: Context) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(R.string.reset_levels_title)
+    builder.setMessage(R.string.reset_levels_message)
+    builder.setPositiveButton(R.string.reset_levels_positive_button) { dialog, which ->
+        // User clicked Yes button, call resetLevels()
+        MainActivity.instance?.resetLevels()
+    }
+    builder.setNegativeButton(R.string.reset_levels_negative_button, null) // Do nothing on No click
+    val dialog = builder.create()
+    dialog.show()
 }
