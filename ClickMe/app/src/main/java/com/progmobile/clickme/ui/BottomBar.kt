@@ -328,28 +328,30 @@ fun SwipableDialog(
                     }
                 }
 
-                // Add a row of dots to indicate which page is active
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    repeat(numberOfHints) { pageIndex ->
-                        val color =
-                            if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                        Box(
-                            modifier = Modifier
-                                .size(12.dp)
-                                .background(color = color, shape = MaterialTheme.shapes.small)
-                                .padding(8.dp)
-                                .padding(horizontal = 16.dp)
-                        )
+                // If there are more than one hint, add a row of dots to indicate which page is active
+                if(numberOfHints > 1) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        repeat(numberOfHints) { pageIndex ->
+                            val color =
+                                if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                            Box(
+                                modifier = Modifier
+                                    .size(12.dp)
+                                    .background(color = color, shape = MaterialTheme.shapes.small)
+                                    .padding(8.dp)
+                                    .padding(horizontal = 16.dp)
+                            )
 
-                        // Add Spacer with desired width
-                        if (pageIndex < numberOfHints - 1) {
-                            Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                            // Add Spacer with desired width
+                            if (pageIndex < numberOfHints - 1) {
+                                Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                            }
                         }
                     }
                 }
