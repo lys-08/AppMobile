@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +20,10 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
+import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
+import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -63,13 +68,27 @@ class MainActivity : ComponentActivity() {
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /*
+        val navController = rememberNavController()
+
+        // Override callback behaviour to always go back to HomePage
+        onBackPressedDispatcher.addCallback() {
+            // Handle the back button event
+            navController.navigate("home") {
+                popUpTo(0) // Clear the back stack
+            }
+
+        }
+        */
+
         instance = this // Set the instance to the current activity
         enableEdgeToEdge()
         checkPermissions()
 
         setContent {
             ClickMeTheme {
-                ClickMeApp(permissionsStatus)
+                ClickMeApp(permissionsDenied = permissionsStatus, mainActivityInstance = this)
             }
 
         }

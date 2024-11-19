@@ -25,6 +25,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +38,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
@@ -287,13 +290,9 @@ fun SwipableDialog(
         isLevel10 = true
     }
 
-    val listOfHints = DataSource.levelHints[navController.currentDestination?.route]
     var mutableListOfHints by remember { mutableStateOf(listOf<Int>()) }
-    if (listOfHints == null) {
-        mutableListOfHints = listOf(R.string.hint_00)
-    } else {
-        mutableListOfHints = listOfHints
-    }
+    mutableListOfHints =
+        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.hint_00)
 
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
@@ -337,15 +336,21 @@ fun SwipableDialog(
                             navController = navController
                         )
                     } else {
+                        /*
                         PageContent(
                             text = context.getString(mutableListOfHints[page]),
                             backgroundColor = Color.Transparent
+                        )*/
+                        Text(
+                            text = context.getString(mutableListOfHints[page]),
+                            fontSize = TextUnit(6f, TextUnitType.Em),
+                            color = Color.Black
                         )
                     }
                 }
 
                 // If there are more than one hint, add a row of dots to indicate which page is active
-                if(numberOfHints > 1) {
+                if (numberOfHints > 1) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
@@ -380,7 +385,8 @@ fun showConfirmationDialog(context: Context) {
     val builder = AlertDialog.Builder(context)
     builder.setTitle(R.string.reset_levels_title)
     builder.setMessage(R.string.reset_levels_message)
-    builder.setPositiveButton(R.string.reset_levels_positive_button) { dialog, which ->
+    // If needed, get (dialog, which) instead of (_,_)
+    builder.setPositiveButton(R.string.reset_levels_positive_button) { _, _ ->
         // User clicked Yes button, call resetLevels()
         MainActivity.instance?.resetLevels()
     }

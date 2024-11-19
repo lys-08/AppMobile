@@ -22,6 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
+import com.progmobile.clickme.data.DataSource.LEVEL_NUMBERS
 import com.progmobile.clickme.data.DataSource.levels
 
 
@@ -63,7 +64,7 @@ fun HomePage(
                   )
               }
             //Disable buttons from locked levels
-              items((MainActivity.instance?.currentLevelUnlocked!! + 1..<levels.size).toList()) { i ->
+              items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
                   LevelButtonLocked(
                       onClick = { navController.navigate(levels[i].second) }
                   )
