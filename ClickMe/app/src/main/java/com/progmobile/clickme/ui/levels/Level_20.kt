@@ -21,7 +21,6 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
-import com.progmobile.clickme.ui.UnlockLevel
 
 
 /**
@@ -29,7 +28,7 @@ import com.progmobile.clickme.ui.UnlockLevel
  * the navigation to next screen
  */
 @Composable
-fun Level_15(
+fun Level_20(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -39,7 +38,7 @@ fun Level_15(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_15),
+            text = stringResource(id = R.string.level_20),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,21 +47,22 @@ fun Level_15(
         )
 
         // Level button
-        UnlockLevel(
+        LevelButton(
             labelResourceId = R.string.button,
-            level = 15,
-            modifier,
-            levelName = Screens.Level_16.name,
-            navController
+            onClick = { navController.navigate(Screens.HomePage.name) },
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
         )
     }
 }
 
 @Preview
 @Composable
-fun StartLevel15Preview() {
+fun StartLevel20Preview() {
     MaterialTheme {
-        Level_15(
+
+        Level_20(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

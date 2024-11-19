@@ -26,17 +26,6 @@ import com.progmobile.clickme.data.DataSource.levelsMap
 import com.progmobile.clickme.ui.ClickMeBottomBar
 import com.progmobile.clickme.ui.HomePage
 
-import com.progmobile.clickme.ui.levels.Level_01
-import com.progmobile.clickme.ui.levels.Level_02
-import com.progmobile.clickme.ui.levels.Level_03
-import com.progmobile.clickme.ui.levels.Level_04
-import com.progmobile.clickme.ui.levels.Level_05
-import com.progmobile.clickme.ui.levels.Level_06
-import com.progmobile.clickme.ui.levels.Level_07
-import com.progmobile.clickme.ui.levels.Level_08
-import com.progmobile.clickme.ui.levels.Level_09
-import com.progmobile.clickme.ui.levels.Level_10
-
 /*
  * Enum class containing the pages of the app
  */
@@ -56,7 +45,12 @@ enum class Screens(@StringRes val title: Int) {
     Level_12(title = R.string.level_12),
     Level_13(title = R.string.level_13),
     Level_14(title = R.string.level_14),
-    Level_15(title = R.string.level_15)
+    Level_15(title = R.string.level_15),
+    Level_16(title = R.string.level_16),
+    Level_17(title = R.string.level_17),
+    Level_18(title = R.string.level_18),
+    Level_19(title = R.string.level_19),
+    Level_20(title = R.string.level_20)
 }
 
 @Composable

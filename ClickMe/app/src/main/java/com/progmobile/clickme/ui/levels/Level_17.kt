@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -20,16 +18,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
-
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
  * the navigation to next screen
  */
 @Composable
-fun Level_15(
+fun Level_17(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -39,7 +36,7 @@ fun Level_15(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_15),
+            text = stringResource(id = R.string.level_17),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,19 +47,19 @@ fun Level_15(
         // Level button
         UnlockLevel(
             labelResourceId = R.string.button,
-            level = 15,
-            modifier,
-            levelName = Screens.Level_16.name,
-            navController
+            level = 17,
+            modifier = Modifier,
+            levelName = Screens.Level_18.name,
+            navController = navController
         )
     }
 }
 
 @Preview
 @Composable
-fun StartLevel15Preview() {
-    MaterialTheme {
-        Level_15(
+fun StartLevel17Preview() {
+    ClickMeTheme {
+        Level_17(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

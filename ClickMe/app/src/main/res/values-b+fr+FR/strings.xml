@@ -1,8 +1,4 @@
 <resources>
-    <string name="app_name">Click Me</string>
-    <string name="music_key">MusicKey</string>
-    <string name="sound_key">SoundKey</string>
-    <string name="level_key">LevelKey</string>
 
     // Levels title
     <string name="level_01">Tout simplement</string>
@@ -20,6 +16,11 @@
     <string name="level_13">Labyrinthe</string>
     <string name="level_14">Attrape-moi</string>
     <string name="level_15">Klikněte na mě (pokud můžete)</string>
+    <string name="level_16">TODO</string> <!-- TODO -->
+    <string name="level_17">TODO</string> <!-- TODO -->
+    <string name="level_18">TODO</string> <!-- TODO -->
+    <string name="level_19">TODO</string> <!-- TODO -->
+    <string name="level_20">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Désolé, il n\'y a pas d\'indice disponible</string>
@@ -63,6 +64,11 @@
     <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string> <!-- Basque -->
     <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string> <!-- Allemand -->
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string> <!-- Gallois -->
+    <string name="hint_16_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_18_1">TODO</string> <!-- TODO -->
+    <string name="hint_19_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Bouton</string>
