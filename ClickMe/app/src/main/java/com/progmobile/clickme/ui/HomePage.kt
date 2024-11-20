@@ -56,19 +56,19 @@ fun HomePage(
                 .fillMaxWidth()
                 .fillMaxHeight()
           ) {
-              //Enable buttons from unlocked levels
-              items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
-                  LevelButton(
-                      labelResourceId = levels[i].first,
-                      onClick = { navController.navigate(levels[i].second) }
-                  )
-              }
+            //Enable buttons from unlocked levels
+            items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
+                LevelButton(
+                    labelResourceId = levels[i].first,
+                    onClick = { navController.navigate(levels[i].second) }
+                )
+            }
             //Disable buttons from locked levels
-              items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
-                  LevelButtonLocked(
-                      onClick = { navController.navigate(levels[i].second) }
-                  )
-              }
+            items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
+                LevelButtonLocked(
+                    onClick = { navController.navigate(levels[i].second) }
+                )
+            }
         }
 
     }

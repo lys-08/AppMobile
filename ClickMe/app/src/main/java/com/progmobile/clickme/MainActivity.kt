@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore by preferencesDataStore("user_prefs")
-private const val STARTING_LEVEL = 0
+private const val STARTING_LEVEL = 19
 private const val MUSIC_DEFAULT = true
 private const val SOUND_DEFAULT = true
 
