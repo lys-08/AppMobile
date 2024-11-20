@@ -67,6 +67,7 @@ fun HomePage(
                     onClick = { navController.navigate(levels[i].second) }
                 )
             }
+
             if (MainActivity.instance?.currentLevelUnlocked!! == 17) {
                 item {
                     UnlockLevel(

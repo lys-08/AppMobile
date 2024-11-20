@@ -19,7 +19,7 @@
     <string name="level_15">Klikněte na mě (pokud můžete)</string>
     <string name="level_16">TODO</string> <!-- TODO -->
     <string name="level_17">TODO</string> <!-- TODO -->
-    <string name="level_18">TODO</string> <!-- TODO -->
+    <string name="level_18">Perdu 2</string> <!-- TODO -->
     <string name="level_19">TODO</string> <!-- TODO -->
     <string name="level_20">TODO</string> <!-- TODO -->
 
@@ -28,12 +28,12 @@
     <string name="hint_01_1">Sérieusement ?</string>
     <string name="hint_01_2">Tu te moques de moi ?</string>
     <string name="hint_01_3">Lis. Le. Foutu. Titre.</string>
-    <string name="hint_02_1">x</string> <!-- TODO -->
-    <string name="hint_02_2">x</string> <!-- TODO -->
-    <string name="hint_02_3">x</string> <!-- TODO -->
-    <string name="hint_03_1">x</string> <!-- TODO -->
-    <string name="hint_03_2">x</string> <!-- TODO -->
-    <string name="hint_03_3">x</string> <!-- TODO -->
+    <string name="hint_02_1">On est pressé, hein ?</string> <!-- TODO -->
+    <string name="hint_02_2">Armes toi de patience</string> <!-- TODO -->
+    <string name="hint_02_3">Ok, appuie juste plus longtemps...</string> <!-- TODO -->
+    <string name="hint_03_1">C\'est. Tellement. Evident</string> <!-- TODO -->
+    <string name="hint_03_2">C\'est plus simple que le dernier niveau</string> <!-- TODO -->
+    <string name="hint_03_3">Tu as besoin de deux doigts</string> <!-- TODO -->
     <string name="hint_04_1">Quelque chose semble bizarre</string>
     <string name="hint_04_2">Tu peux lire le titre ?</string>
     <string name="hint_04_3">Peut-être que si tu tournes ta tête ça sera plus facile</string>
@@ -53,11 +53,11 @@
     <string name="hint_09_3">Tu n\'as jamais entendu parlé de surréalisme ? Quelle honte</string>
     <string name="hint_09_4">Vraiment, pas d\'idée ? Il faut revoir les bases. Bien, voici le dernier indice : René Magritte</string>
     <string name="hint_10_1">Où est-ce qu\'il peut être ?</string>
-    <string name="hint_10_2">x</string> <!-- TODO -->
+    <string name="hint_10_2">Presque arrivé...</string> <!-- TODO -->
     <string name="hint_11_1">Chercher l’ombre pour trouver la lumière, chercher la lumière pour trouver l’ombre</string>
     <string name="hint_11_2">Parfois il faut plonger dans les profondeurs pour voir la lumière</string>
     <string name="hint_12_1">La tête dans les nuages</string>
-    <string name="hint_12_2">x</string> <!-- TODO -->
+    <string name="hint_12_2">C\'est le moment de partir en vacances</string> <!-- TODO -->
     <string name="hint_13_1">x</string> <!-- TODO -->
     <string name="hint_14_1">x</string> <!-- TODO -->
     <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string> <!-- Breton -->
