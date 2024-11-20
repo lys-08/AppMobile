@@ -1,11 +1,7 @@
 <resources>
-    <string name="app_name">Click Me</string>
-    <!-- TODO (je crois) (au secours Gabin) -->
-    <string name="music_key">MusicKey</string>
-    <string name="sound_key">SoundKey</string>
-    <string name="level_key">LevelKey</string>
 
     // Levels title
+    <string name="reset_levels_negative_button">x</string>
     <string name="level_01">Prosté a jednoduché</string>
     <string name="level_02">Matka všech ctností</string>
     <string name="level_03">Duplikace</string>
@@ -14,15 +10,18 @@
     <string name="level_06">Lux Via</string> <!-- TODO -->
     <string name="level_07">Káva</string>
     <string name="level_08">Stoupání</string>
-    <string name="level_09">Ne, jak se zdá</string>
-    <string name="level_10">Ztraceno</string>
+    <string name="level_09">Ne jak se zdá</string>
+    <string name="level_10">Ztraceni</string>
     <string name="level_11">Mimo vaši komfortní zónu</string>
     <string name="level_12">Hliníkový klobouk</string>
     <string name="level_13">Labyrint</string>
     <string name="level_14">Srazte to dolů</string>
     <string name="level_15">Kaomi iaʻu (inā hiki iā ʻoe)</string> <!-- Hawaïen -->
-    <string name="level_16">Level 16</string> <!-- TODO -->
-    <string name="level_17">Level 17</string> <!-- TODO -->
+    <string name="level_16">TODO</string> <!-- TODO -->
+    <string name="level_17">TODO</string> <!-- TODO -->
+    <string name="level_18">TODO</string> <!-- TODO -->
+    <string name="level_19">TODO</string> <!-- TODO -->
+    <string name="level_20">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Omlouváme se, žádné vodítko k dispozici</string>
@@ -30,13 +29,20 @@
     <string name="hint_01_2">Musíš si ze mě dělat srandu</string>
     <string name="hint_01_3">Číst. Zařízení. Název.</string>
     <string name="hint_02_1">x</string> <!-- TODO -->
+    <string name="hint_02_2">x</string> <!-- TODO -->
+    <string name="hint_02_3">x</string> <!-- TODO -->
     <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_03_2">x</string> <!-- TODO -->
+    <string name="hint_03_3">x</string> <!-- TODO -->
     <string name="hint_04_1">Něco se nezdá správné</string>
     <string name="hint_04_2">Můžete si přečíst název?</string>
     <string name="hint_04_3">Možná, že když otočíte hlavu, bude to jednodušší</string>
     <string name="hint_05_1">x</string> <!-- TODO -->
+    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
+    <string name="hint_05_3">A picture equals a thousand words.</string>
     <string name="hint_06_1">Je trochu tma, že?</string>
     <string name="hint_06_2">Jednoduchý dotek vám může osvěttit cestu</string>
+    <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
     <string name="hint_07_1">Jsem trochu unavený</string>
     <string name="hint_07_2">Opravdu mi chybí energie</string>
     <string name="hint_08_1">Šeptám na polích a vyju v bouřích. Jdou za mnou, ale já nemám žádnou cestu. Kdo jsem?</string>
@@ -49,9 +55,11 @@
     <string name="hint_09_3">Nikdy jste neslyšeli o surrealismu? Jaká ostuda</string>
     <string name="hint_09_4">Vážně, žádný nápad? Musíte zvýšit svou hru. Zde je poslední stopa: René Magritte</string>
     <string name="hint_10_1">Kde to může být?</string>
+    <string name="hint_10_2">x</string> <!-- TODO -->
     <string name="hint_11_1">Hledejte stín, abyste našli světlo, hledejte světlo, abyste našli stín</string>
     <string name="hint_11_2">Někdy se musíte ponořit do hlubin, abyste viděli světlo</string>
     <string name="hint_12_1">Hlavu v oblacích</string>
+    <string name="hint_12_2">x</string> <!-- TODO -->
     <string name="hint_13_1">x</string> <!-- TODO -->
     <string name="hint_14_1">x</string> <!-- TODO -->
     <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>
@@ -59,9 +67,18 @@
     <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string>
     <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
-    <string name="hint_16_1">x</string> <!-- TODO -->
-    <string name="hint_17_1">x</string> <!-- TODO -->
+    <string name="hint_16_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_18_1">TODO</string> <!-- TODO -->
+    <string name="hint_19_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Tlačítko</string>
+
+    //Warning Level 06
+    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
+    <string name="reset_levels_title">x</string>
+    <string name="reset_levels_message">x</string>
+    <string name="reset_levels_positive_button">x</string>
 </resources>

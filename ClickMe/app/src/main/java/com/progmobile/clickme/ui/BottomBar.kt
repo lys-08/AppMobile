@@ -1,6 +1,8 @@
 package com.progmobile.clickme.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -23,6 +25,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +38,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
@@ -44,7 +49,6 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
-
 
 @Composable
 fun ClickMeBottomBar(
@@ -108,7 +112,7 @@ fun IconButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        if (MainActivity.instance?.isSoundOn == true) {
+                        if (MainActivity.instance?.userSoundPreference == true) {
                             val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
                             mediaPlayer.setOnCompletionListener { it.release() }
                             mediaPlayer.start()
@@ -117,7 +121,7 @@ fun IconButton(
                     }
                 )
             }
-                // Make the image clickable
+            // Make the image clickable
             .background(Color.Transparent) // Ensure no background color
             .wrapContentSize(Alignment.Center) // Center the image
     )
@@ -162,9 +166,7 @@ fun ParameterIconButton(
                     launchSingleTop = true         // Prevents multiple instances of HomePage
                 }
                 showDialog = false
-            },
-            onMusicIconClick = {},
-            onVolumeIconClick = {}
+            }
         )
     }
 }
@@ -174,13 +176,8 @@ fun ParameterIconButton(
 fun ParameterDialog(
     isNotHomePage: Boolean = true,
     onDismissRequest: () -> Unit,
-    onNavigateToHomePage: () -> Unit,
-    onMusicIconClick: () -> Unit,
-    onVolumeIconClick: () -> Unit
+    onNavigateToHomePage: () -> Unit
 ) {
-    var isMusicUp by remember { mutableStateOf(true) }
-    var isVolumeUp by remember { mutableStateOf(true) }
-
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
@@ -202,13 +199,15 @@ fun ParameterDialog(
                 )
             }
 
-            // Music icon
-            isMusicUp = MainActivity.instance?.isMusicPlaying() == true
+            // MUSIC ICON
+            // Do a safe call
+            var isMusicUp = MainActivity.instance?.userMusicPreference == true
             IconButton(
                 onClick = {
-                    MainActivity.instance?.switchMusicState()
+                    MainActivity.instance?.switchMusicState(stopMusic = isMusicUp)
+                    // switch Music State locally to know which icon to display below
+                    // isMusicUp value will be crushed next call to this composable
                     isMusicUp = !isMusicUp
-                    onMusicIconClick()
                 },
                 imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
                 contentDescription = if (isMusicUp) "Music Up" else "Music Off",
@@ -216,20 +215,34 @@ fun ParameterDialog(
                     .widthIn(max = 128.dp)
             )
 
-            // Music icon
-            isVolumeUp = MainActivity.instance?.isSoundOn == true
-            // Volume icon
+            // VOLUME ICON
+            var isVolumeUp = MainActivity.instance?.userSoundPreference == true
             IconButton(
                 onClick = {
                     MainActivity.instance?.switchSoundState()
+                    // same explication than for music
                     isVolumeUp = !isVolumeUp
-                    onVolumeIconClick()
                 },
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
                 modifier = Modifier
                     .widthIn(max = 128.dp)
             )
+
+            // REINITIALIZE LEVELS ICON
+            val context = LocalContext.current
+            if (!isNotHomePage) {
+                IconButton(
+                    onClick = {
+                        // display a confirmation dialog
+                        showConfirmationDialog(context)
+                    },
+                    imageResourceId = R.drawable.restart_icon,
+                    contentDescription = "Restart",
+                    modifier = Modifier
+                        .widthIn(max = 128.dp)
+                )
+            }
         }
     }
 }
@@ -277,13 +290,9 @@ fun SwipableDialog(
         isLevel10 = true
     }
 
-    val listOfHints = DataSource.levelHints[navController.currentDestination?.route]
     var mutableListOfHints by remember { mutableStateOf(listOf<Int>()) }
-    if (listOfHints == null) {
-        mutableListOfHints = listOf(R.string.hint_00)
-    } else {
-        mutableListOfHints = listOfHints
-    }
+    mutableListOfHints =
+        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.hint_00)
 
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
@@ -316,7 +325,7 @@ fun SwipableDialog(
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
                                 navController.navigate(Screens.Level_11.name)
-                                if (MainActivity.instance?.currentLevel!! < 11) {
+                                if (MainActivity.instance?.currentLevelUnlocked!! < 11) {
                                     MainActivity.instance?.increaseLevel()
                                 }
                             },
@@ -327,39 +336,61 @@ fun SwipableDialog(
                             navController = navController
                         )
                     } else {
+                        /*
                         PageContent(
                             text = context.getString(mutableListOfHints[page]),
                             backgroundColor = Color.Transparent
+                        )*/
+                        Text(
+                            text = context.getString(mutableListOfHints[page]),
+                            fontSize = TextUnit(6f, TextUnitType.Em),
+                            color = Color.Black
                         )
                     }
                 }
 
-                // Add a row of dots to indicate which page is active
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    repeat(numberOfHints) { pageIndex ->
-                        val color =
-                            if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                        Box(
-                            modifier = Modifier
-                                .size(12.dp)
-                                .background(color = color, shape = MaterialTheme.shapes.small)
-                                .padding(8.dp)
-                                .padding(horizontal = 16.dp)
-                        )
+                // If there are more than one hint, add a row of dots to indicate which page is active
+                if (numberOfHints > 1) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        repeat(numberOfHints) { pageIndex ->
+                            val color =
+                                if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                            Box(
+                                modifier = Modifier
+                                    .size(12.dp)
+                                    .background(color = color, shape = MaterialTheme.shapes.small)
+                                    .padding(8.dp)
+                                    .padding(horizontal = 16.dp)
+                            )
 
-                        // Add Spacer with desired width
-                        if (pageIndex < numberOfHints - 1) {
-                            Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                            // Add Spacer with desired width
+                            if (pageIndex < numberOfHints - 1) {
+                                Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                            }
                         }
                     }
                 }
             }
         }
     }
+}
+
+fun showConfirmationDialog(context: Context) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(R.string.reset_levels_title)
+    builder.setMessage(R.string.reset_levels_message)
+    // If needed, get (dialog, which) instead of (_,_)
+    builder.setPositiveButton(R.string.reset_levels_positive_button) { _, _ ->
+        // User clicked Yes button, call resetLevels()
+        MainActivity.instance?.resetLevels()
+    }
+    builder.setNegativeButton(R.string.reset_levels_negative_button, null) // Do nothing on No click
+    val dialog = builder.create()
+    dialog.show()
 }

@@ -1,9 +1,13 @@
 <resources>
     // Ressources
-    <string name="app_name">Click Me</string>
-    <string name="music_key">MusicKey</string>
-    <string name="sound_key">SoundKey</string>
-    <string name="level_key">LevelKey</string>
+    <string name="app_name" translatable="false">Click Me</string>
+    <string name="music_key" translatable="false">MusicKey</string>
+    <string name="sound_key" translatable="false">SoundKey</string>
+    <string name="level_key" translatable="false">LevelKey</string>
+    <string name="reset_levels_title">Confirm Reset</string>
+    <string name="reset_levels_message">Are you sure you want to reset all levels ?</string>
+    <string name="reset_levels_positive_button">Yes</string>"
+    <string name="reset_levels_negative_button">No</string>
 
     // Levels title
     <string name="level_01">Plain and simple</string>
@@ -20,48 +24,64 @@
     <string name="level_12">Aluminium hat</string> <!-- Beyond the Antennae, Crash -->
     <string name="level_13">Labyrinth</string>
     <string name="level_14">Knock it down</string>
-    <string name="level_15">Klikněte na mě (pokud můžete)</string> <!-- Tchèque -->
-    <string name="level_16">Level 16</string> <!-- TODO -->
-    <string name="level_17">Level 17</string> <!-- TODO -->
+    <string name="level_15">Klikněte na mě (pokud můžete)</string>
+    <string name="level_16">TODO</string> <!-- TODO -->
+    <string name="level_17">TODO</string> <!-- TODO -->
+    <string name="level_18">TODO</string> <!-- TODO -->
+    <string name="level_19">TODO</string> <!-- TODO -->
+    <string name="level_20">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Sorry, no hint available</string> <!-- TODO -->
     <string name="hint_01_1">Seriously ?</string>
     <string name="hint_01_2">You\'ve got to be kidding me</string>
     <string name="hint_01_3">Read. The. Title.</string>
-    <string name="hint_02_1">x</string> <!-- TODO -->
-    <string name="hint_03_1">x</string> <!-- TODO -->
+    <string name="hint_02_1">In a hurry aren\'t you ?</string>
+    <string name="hint_02_2">Arm yourself with patience</string>
+    <string name="hint_02_3">OK just press longer…</string>
+    <string name="hint_03_1">That. Is. Obvious.</string>
+    <string name="hint_03_2">That\'s even easier than the last level</string>
+    <string name="hint_03_3">You need two fingers</string>
     <string name="hint_04_1">Something doesn\'t seem right</string>
     <string name="hint_04_2">Can you read the title ?</string>
     <string name="hint_04_3">Maybe if you turn your head it\'ll be easier</string>
-    <string name="hint_05_1">x</string> <!-- TODO -->
+    <string name="hint_05_1">Maybe you need to remember this level.</string> <!-- TODO -->
+    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
+    <string name="hint_05_3">A picture equals a thousand words.</string>
     <string name="hint_06_1">It\'s a little dark, isn\'t it ?</string>
     <string name="hint_06_2">A simple touch can light your way</string>
+    <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
     <string name="hint_07_1">I\'m kind of tired</string>
     <string name="hint_07_2">I really lack energy</string>
     <string name="hint_08_1">I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?</string>
-    <string name="hint_08_2">Listen to the "colors of the wind"</string>
-    <string name="hint_08_3">I think you lack patience</string>
-    <string name="hint_08_4">A little longer ?</string>
-    <string name="hint_08_5">Okay, blow hard for a few seconds. you can do it (we all believe it… I think)</string>
+    <string name="hint_08_2">Give it everything you got</string>
+    <string name="hint_08_3">Just blow in the fucking mic for god\'s sake !</string>
     <string name="hint_09_1">Maybe trying all options is not the greatest idea…</string>
     <string name="hint_09_2">Try to expand your artistic knowledge</string>
     <string name="hint_09_3">Never heard of surrealism ? What a shame</string>
     <string name="hint_09_4">Really, no idea ? You need to step up your game. Fine, here\'s the last clue : René Magritte</string>
     <string name="hint_10_1">Where can it be ?</string>
+    <string name="hint_10_2">Almost there</string>
     <string name="hint_11_1">Seek the shadow to find the light, seek the light to find the shadow</string>
     <string name="hint_11_2">Sometimes you have to dive into the depths to see the light</string>
     <string name="hint_12_1">Head in the clouds</string>
+    <string name="hint_12_2">It\'s time to go on a vacation</string>
     <string name="hint_13_1">x</string> <!-- TODO -->
     <string name="hint_14_1">x</string> <!-- TODO -->
-    <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string> <!-- Breton -->
-    <string name="hint_15_2">Klike sou mwen (si ou kapab)</string> <!-- Créole haïtien -->
-    <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string> <!-- Basque -->
-    <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string> <!-- Allemand -->
-    <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string> <!-- Gallois -->
-    <string name="hint_16_1">x</string> <!-- TODO -->
-    <string name="hint_17_1">x</string> <!-- TODO -->
+    <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>
+    <string name="hint_15_2">Klike sou mwen (si ou kapab)</string>
+    <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string>
+    <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
+    <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
+    <string name="hint_16_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_18_1">TODO</string> <!-- TODO -->
+    <string name="hint_19_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Button</string>
+
+    //Warning Level 06
+    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
 </resources>

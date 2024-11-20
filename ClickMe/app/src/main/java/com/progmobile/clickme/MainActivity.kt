@@ -6,28 +6,35 @@ import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
+import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
+import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore by preferencesDataStore("user_prefs")
+private const val STARTING_LEVEL = 0
+private const val MUSIC_DEFAULT = true
+private const val SOUND_DEFAULT = true
+
 
 class MainActivity : ComponentActivity() {
 
@@ -45,7 +52,7 @@ class MainActivity : ComponentActivity() {
     }
 
     // ========== LEVEL ==========
-    var currentLevel by mutableIntStateOf(0)
+    var currentLevelUnlocked by mutableIntStateOf(STARTING_LEVEL)
 
     // ========== MEDIA PLAYER ==========
     companion object {
@@ -55,26 +62,34 @@ class MainActivity : ComponentActivity() {
     //var intent = Intent()
     private var mediaPlayer: MediaPlayer? = null
 
-    // Getter for mediaPlayer?.isPlaying
-    fun isMusicPlaying(): Boolean {
-        return mediaPlayer?.isPlaying ?: false
-    }
-
-    var isSoundOn by mutableStateOf(false)
+    var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
+    var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /*
+        val navController = rememberNavController()
+
+        // Override callback behaviour to always go back to HomePage
+        onBackPressedDispatcher.addCallback() {
+            // Handle the back button event
+            navController.navigate("home") {
+                popUpTo(0) // Clear the back stack
+            }
+
+        }
+        */
+
         instance = this // Set the instance to the current activity
         enableEdgeToEdge()
         checkPermissions()
+
         setContent {
             ClickMeTheme {
-                ClickMeApp(permissionsStatus)
+                ClickMeApp(permissionsDenied = permissionsStatus, mainActivityInstance = this)
             }
-            currentLevel = 12
-            DataStoreApp(currentLevel)
-            isSoundOn = true
 
         }
         //intent = Intent(this, MusicService::class.java)
@@ -82,8 +97,6 @@ class MainActivity : ComponentActivity() {
 
         mediaPlayer = MediaPlayer.create(applicationContext, R.raw.background_music_1)
         mediaPlayer?.isLooping = true
-        mediaPlayer?.start()
-
     }
 
     override fun onDestroy() {
@@ -103,34 +116,60 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
 
-        lifecycleScope.launch {
-            if (getMusicState()) {
-                switchMusicState()
-            }
-        }
+        // Get music state in datastore : if true, user wants it on, then reactivate it.
+        // If false, user wants it off, don't do anything as it has been paused at onPause or stopped at onDestroy
+        userMusicPreference = runBlocking { getUserMusicPreference() }
+        if (userMusicPreference) switchMusicState(stopMusic = false)
+
+        // Get sound state, for the buttons to know if they should play sound when clicked
+        userSoundPreference = runBlocking { getUserSoundPreference() }
+
+        // Get current level unlocked
+        currentLevelUnlocked = runBlocking { getCurrentLevelUnlocked() }
+
     }
 
-    suspend fun getMusicState(): Boolean {
-        var musicState by mutableStateOf(false)
+    private suspend fun getUserMusicPreference(): Boolean {
         val musicKey = booleanPreferencesKey(R.string.music_key.toString())
         val dataStore = this.dataStore
         // get boolean music state
-        musicState = dataStore.data.map { preferences ->
-            preferences[musicKey] ?: false
+        val musicState = dataStore.data.map { preferences ->
+            preferences[musicKey] ?: MUSIC_DEFAULT
         }.first()
         return musicState
     }
 
-    fun switchMusicState() {
+    private suspend fun getUserSoundPreference(): Boolean {
+        val soundKey = booleanPreferencesKey(R.string.sound_key.toString())
+        val dataStore = this.dataStore
+        // get boolean sound state
+        val soundState = dataStore.data.map { preferences ->
+            preferences[soundKey] ?: SOUND_DEFAULT
+        }.first()
+        return soundState
+    }
+
+    private suspend fun getCurrentLevelUnlocked(): Int {
+        val levelKey = intPreferencesKey(R.string.level_key.toString())
+        val dataStore = this.dataStore
+        // get boolean music state
+        val currentLevel = dataStore.data.map { preferences ->
+            preferences[levelKey] ?: STARTING_LEVEL
+        }.first()
+        return currentLevel
+    }
+
+    fun switchMusicState(stopMusic: Boolean = false) {
         val musicKey = booleanPreferencesKey(R.string.music_key.toString())
         // normal scope not for composable
-        if (isMusicPlaying()) {
+        if (stopMusic) {
             mediaPlayer?.pause()
             lifecycleScope.launch {
                 dataStore.edit { preferences ->
                     preferences[musicKey] = false
                 }
             }
+            userMusicPreference = false
         } else {
             mediaPlayer?.start()
             lifecycleScope.launch {
@@ -138,35 +177,46 @@ class MainActivity : ComponentActivity() {
                     preferences[musicKey] = true
                 }
             }
+            userMusicPreference = true
         }
     }
 
     fun switchSoundState() {
         val soundKey = booleanPreferencesKey(R.string.sound_key.toString())
         // normal scope not for composable
-        if (isSoundOn) {
+        if (userSoundPreference) {
             lifecycleScope.launch {
                 dataStore.edit { preferences ->
                     preferences[soundKey] = false
                 }
             }
-            isSoundOn = false
+            userSoundPreference = false
         } else {
             lifecycleScope.launch {
                 dataStore.edit { preferences ->
                     preferences[soundKey] = true
                 }
             }
-            isSoundOn = true
+            userSoundPreference = true
         }
     }
 
     fun increaseLevel() {
-        currentLevel++
+        currentLevelUnlocked++
         val levelKey = intPreferencesKey(R.string.level_key.toString())
         lifecycleScope.launch {
             dataStore.edit { preferences ->
-                preferences[levelKey] = currentLevel
+                preferences[levelKey] = currentLevelUnlocked
+            }
+        }
+    }
+
+    fun resetLevels() {
+        currentLevelUnlocked = STARTING_LEVEL
+        val levelKey = intPreferencesKey(R.string.level_key.toString())
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[levelKey] = currentLevelUnlocked
             }
         }
     }
@@ -194,19 +244,4 @@ class MainActivity : ComponentActivity() {
             permissionsStatus.value = true
         }
     }
-}
-
-@Composable
-fun DataStoreApp(currentLevel: Int) {
-    val context = LocalContext.current
-    val musicKey = booleanPreferencesKey(R.string.music_key.toString())
-    val soundKey = booleanPreferencesKey(R.string.sound_key.toString())
-    val levelKey = intPreferencesKey(R.string.level_key.toString())
-
-    val dataStore = context.dataStore
-    dataStore.data.map { preferences ->
-        preferences[musicKey] ?: false
-        preferences[soundKey] ?: false
-        preferences[levelKey] ?: currentLevel
-    }.collectAsState(initial = "")
 }

@@ -29,6 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import android.content.pm.PackageManager
 
 // Classe TorchManager pour gérer la lampe torche
 class TorchManager(context: Context) {
@@ -110,8 +111,27 @@ fun Level_06(
                 )
             }
 
+            if (!hasFlashlight(context)) {
+                Text(
+                    text = stringResource(id = R.string.warning_level06),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                UnlockLevel(
+                    labelResourceId = R.string.button,
+                    level = 6,
+                    modifier,
+                    levelName = Screens.Level_07.name,
+                    navController
+                )
+
+            }
+
         }
     }
+}
+
+fun hasFlashlight(context: Context): Boolean {
+    return context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
 }
 
 @Preview

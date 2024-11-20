@@ -1,6 +1,7 @@
 package com.progmobile.clickme
 
 
+import androidx.activity.addCallback
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,17 +27,6 @@ import com.progmobile.clickme.data.DataSource.levelsMap
 import com.progmobile.clickme.ui.ClickMeBottomBar
 import com.progmobile.clickme.ui.HomePage
 
-import com.progmobile.clickme.ui.levels.Level_01
-import com.progmobile.clickme.ui.levels.Level_02
-import com.progmobile.clickme.ui.levels.Level_03
-import com.progmobile.clickme.ui.levels.Level_04
-import com.progmobile.clickme.ui.levels.Level_05
-import com.progmobile.clickme.ui.levels.Level_06
-import com.progmobile.clickme.ui.levels.Level_07
-import com.progmobile.clickme.ui.levels.Level_08
-import com.progmobile.clickme.ui.levels.Level_09
-import com.progmobile.clickme.ui.levels.Level_10
-
 /*
  * Enum class containing the pages of the app
  */
@@ -58,13 +48,17 @@ enum class Screens(@StringRes val title: Int) {
     Level_14(title = R.string.level_14),
     Level_15(title = R.string.level_15),
     Level_16(title = R.string.level_16),
-    Level_17(title = R.string.level_17)
+    Level_17(title = R.string.level_17),
+    Level_18(title = R.string.level_18),
+    Level_19(title = R.string.level_19),
+    Level_20(title = R.string.level_20)
 }
 
 @Composable
 fun ClickMeApp(
     permissionsDenied : MutableState<Boolean>,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    mainActivityInstance: MainActivity
 ) {
     // ================= PERMISSION =================
     /*var showDialog by remember { mutableStateOf(false) }
@@ -90,6 +84,14 @@ fun ClickMeApp(
         )
     }*/
     // =============== END PERMISSION ===============
+
+    // Override callback behaviour to always go back to HomePage
+    mainActivityInstance.onBackPressedDispatcher.addCallback() {
+        // Handle the back button event
+        navController.navigate(Screens.HomePage.name) {
+            popUpTo(0) // Clear the back stack
+        }
+    }
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = Screens.valueOf(

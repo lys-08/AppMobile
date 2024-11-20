@@ -70,7 +70,7 @@ fun Level_08(
                         if (amplitude > 10000) {
                             timeCount += 1
                             // Stop the recording if the Amplitude above 10 000 during 2 seconds
-                            if (timeCount >= 20) {
+                            if (timeCount >= 15) {
                                 isMonitoring = false
                             }
                         } else {
@@ -110,7 +110,7 @@ fun Level_08(
             textAlign = TextAlign.Center
         )
 
-        Text(text = "Amplitude: $amplitude", style = MaterialTheme.typography.headlineMedium)
+          // Text(text = "Amplitude: $amplitude", style = MaterialTheme.typography.headlineMedium)
 
         // Level button
         if (!isMonitoring) {

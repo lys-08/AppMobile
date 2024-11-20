@@ -12,11 +12,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -27,6 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
+import com.progmobile.clickme.data.DataSource.LEVEL_NUMBERS
 import com.progmobile.clickme.data.DataSource.levels
 
 
@@ -61,16 +57,15 @@ fun HomePage(
                 .fillMaxHeight()
           ) {
               //Enable buttons from unlocked levels
-              items((0..MainActivity.instance?.currentLevel!!).toList()) { i ->
+              items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
                   LevelButton(
                       labelResourceId = levels[i].first,
                       onClick = { navController.navigate(levels[i].second) }
                   )
               }
             //Disable buttons from locked levels
-              items((MainActivity.instance?.currentLevel!! + 1..<levels.size).toList()) { i ->
+              items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
                   LevelButtonLocked(
-                      labelResourceId = levels[i].first,
                       onClick = { navController.navigate(levels[i].second) }
                   )
               }
