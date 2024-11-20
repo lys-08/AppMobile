@@ -29,8 +29,8 @@ import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
     // Max number of levels to display
-    const val LEVEL_NUMBERS = 14
-    const val STARTING_LEVEL = 14
+    const val LEVEL_NUMBERS = 19
+    const val STARTING_LEVEL = 16
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
 
