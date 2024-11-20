@@ -31,8 +31,8 @@ import com.progmobile.clickme.ui.levels.Level_17
 
 object DataSource {
     // Max number of levels to display
-    const val LEVEL_NUMBERS = 14
-    const val STARTING_LEVEL = 14
+    const val LEVEL_NUMBERS = 19
+    const val STARTING_LEVEL = 19
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
 
@@ -117,9 +117,7 @@ object DataSource {
         Screens.Level_08.name to listOf(
             R.string.hint_08_1,
             R.string.hint_08_2,
-            R.string.hint_08_3,
-            R.string.hint_08_4,
-            R.string.hint_08_5),
+            R.string.hint_08_3),
         Screens.Level_09.name to listOf(
             R.string.hint_09_1,
             R.string.hint_09_2,

@@ -28,8 +28,8 @@
     <string name="level_16">TODO</string> <!-- TODO -->
     <string name="level_17">TODO</string> <!-- TODO -->
     <string name="level_18">TODO</string> <!-- TODO -->
-    <string name="level_19">TODO</string> <!-- TODO -->
-    <string name="level_20">TODO</string> <!-- TODO -->
+    <string name="level_19">Blackout</string>
+    <string name="level_20">Patience</string>
 
     // Hints
     <string name="hint_00">Sorry, no hint available</string> <!-- TODO -->
