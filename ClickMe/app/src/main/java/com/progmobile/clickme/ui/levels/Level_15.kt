@@ -20,6 +20,7 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -59,7 +60,7 @@ fun Level_15(
 @Preview
 @Composable
 fun StartLevel15Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_15(
             navController = rememberNavController(),
             modifier = Modifier

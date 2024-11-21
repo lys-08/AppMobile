@@ -31,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -100,7 +101,7 @@ fun Level_12(
 @Preview
 @Composable
 fun StartLevel12Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_12(
             navController = rememberNavController(),
             modifier = Modifier

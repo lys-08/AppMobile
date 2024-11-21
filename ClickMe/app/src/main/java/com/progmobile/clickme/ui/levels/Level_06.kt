@@ -30,6 +30,7 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
 import android.content.pm.PackageManager
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 // Classe TorchManager pour gérer la lampe torche
 class TorchManager(context: Context) {
@@ -137,7 +138,7 @@ fun hasFlashlight(context: Context): Boolean {
 @Preview
 @Composable
 fun StartLevel06Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_06(
             navController = rememberNavController(),
             modifier = Modifier

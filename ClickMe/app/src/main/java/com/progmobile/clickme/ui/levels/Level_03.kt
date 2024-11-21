@@ -28,6 +28,7 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -131,7 +132,7 @@ fun Level_03(
 @Preview
 @Composable
 fun StartLevel03Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_03(
             navController = rememberNavController(),
             modifier = Modifier

@@ -2,7 +2,6 @@ package com.progmobile.clickme.ui.levels
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -27,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -77,7 +75,7 @@ fun Level_11(
 @Preview
 @Composable
 fun StartLevel11Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_11(
             navController = rememberNavController(),
             modifier = Modifier
