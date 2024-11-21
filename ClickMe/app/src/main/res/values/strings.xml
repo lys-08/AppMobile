@@ -74,7 +74,9 @@
     <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_16_1">TODO</string> <!-- TODO -->
-    <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_1">It\'s in the dark that we see the stars best</string>
+    <string name="hint_17_2">It\'s in the shadows that we hide best</string>
+    <string name="hint_17_3">Will you turn off the lights please ?</string>
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->

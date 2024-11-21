@@ -48,8 +48,6 @@
     <string name="hint_08_1">Sussurro nos campos e uivo nas tempestades. Eles me seguem, mas eu não tenho caminho. Quem sou eu?</string>
     <string name="hint_08_2">Ouve "quantas cores o vento tem"</string>
     <string name="hint_08_3">Eu acho que você está ficando sem paciência</string>
-    <string name="hint_08_4">Mais um pouco?</string>
-    <string name="hint_08_5">Bem, sopre forte por alguns segundos. Você pode fazer isso (vá lá)</string>
     <string name="hint_09_1">Talvez tentar todas as opções não é a melhor ideia…</string>
     <string name="hint_09_2">Tente expandir seu conhecimento artístico</string>
     <string name="hint_09_3">Nunca ouvi falar de surrealismo? Que vergonha</string>
@@ -69,6 +67,8 @@
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_16_1">TODO</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_2">TODO</string> <!-- TODO -->
+    <string name="hint_17_3">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->

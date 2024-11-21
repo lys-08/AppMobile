@@ -141,7 +141,10 @@ object DataSource {
             R.string.hint_15_4,
             R.string.hint_15_5),
         Screens.Level_16.name to listOf(R.string.hint_16_1),
-        Screens.Level_17.name to listOf(R.string.hint_17_1),
+        Screens.Level_17.name to listOf(
+            R.string.hint_17_1,
+            R.string.hint_17_2,
+            R.string.hint_17_3),
         Screens.Level_18.name to listOf(R.string.hint_18_1),
         Screens.Level_19.name to listOf(R.string.hint_19_1),
         Screens.Level_20.name to listOf(R.string.hint_20_1),

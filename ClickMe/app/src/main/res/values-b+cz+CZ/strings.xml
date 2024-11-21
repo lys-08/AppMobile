@@ -48,8 +48,6 @@
     <string name="hint_08_1">Šeptám na polích a vyju v bouřích. Jdou za mnou, ale já nemám žádnou cestu. Kdo jsem?</string>
     <string name="hint_08_2">Poslouchejte "Barvy větru"</string>
     <string name="hint_08_3">Myslím, že vám chybí trpělivost</string>
-    <string name="hint_08_4">Trochu déle?</string>
-    <string name="hint_08_5">Vyfoukněte na několik sekund. Můžeš to udělat (jdeme věřit)</string>
     <string name="hint_09_1">Možná, že vyzkoušet všechny možnosti není nejlepší nápad…</string>
     <string name="hint_09_2">Snažte se rozšířit své umělecké znalosti</string>
     <string name="hint_09_3">Nikdy jste neslyšeli o surrealismu? Jaká ostuda</string>
@@ -69,6 +67,8 @@
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_16_1">TODO</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_2">TODO</string> <!-- TODO -->
+    <string name="hint_17_3">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->
