@@ -1,47 +1,57 @@
 package com.progmobile.clickme.ui
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
+import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-
+import com.progmobile.clickme.data.DataSource
 
 @Composable
 fun ClickMeBottomBar(
-    levelHints: Map<String, List<String>>,
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ) {
@@ -50,7 +60,7 @@ fun ClickMeBottomBar(
     ) {
         val currentRoute = navController.currentDestination?.route
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp), // Apply padding to both left and right
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -63,8 +73,7 @@ fun ClickMeBottomBar(
             if (currentRoute != Screens.HomePage.name) {
                 // Right-aligned: HintIconButton
                 HintIconButton(
-                    listOfHints = levelHints[currentRoute]
-                        ?: emptyList() // Pass hints for the current level
+                    navController = navController
                 )
             }
         }
@@ -80,17 +89,39 @@ fun IconButton(
     @DrawableRes imageResourceId: Int,
     onClick: () -> Unit,
     contentDescription : String? = null,
+    bottomButton: Boolean = false,
     modifier: Modifier = Modifier
 ){
     // Find if the system is in dark of light theme and color the buttons accordingly
     val isDarkTheme = isSystemInDarkTheme()
-    val iconTintColor = if (isDarkTheme) Color.White else Color.Black
+    val colorFilter = if (bottomButton) {
+        ColorFilter.tint(if (isDarkTheme) Color.White else Color.Black)
+    } else {
+        null
+    }
+
+    // Sound section
+    val context = LocalContext.current
+
+    // Add code to onClick
     Image(
         painter = painterResource(id = imageResourceId),
         contentDescription = contentDescription, // Provide content description for accessibility
-        colorFilter = ColorFilter.tint(iconTintColor), // Tint the image to black
-        modifier = Modifier
-            .clickable(onClick = onClick) // Make the image clickable
+        colorFilter = colorFilter, // Tint the image to black
+        modifier = modifier
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = {
+                        if (MainActivity.instance?.userSoundPreference == true) {
+                            val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
+                            mediaPlayer.setOnCompletionListener { it.release() }
+                            mediaPlayer.start()
+                        }
+                        onClick()
+                    }
+                )
+            }
+            // Make the image clickable
             .background(Color.Transparent) // Ensure no background color
             .wrapContentSize(Alignment.Center) // Center the image
     )
@@ -105,7 +136,7 @@ fun ParameterIconButton(
     var showDialog by remember { mutableStateOf(false) }
 
     // Initialize a var to check if we are on the homepage
-    var isNotHomePage: Boolean = false
+    var isNotHomePage = false
     // Get the current route to determine which icon to show
     if (navController.currentDestination?.route != Screens.HomePage.name) {
         isNotHomePage = true
@@ -118,7 +149,8 @@ fun ParameterIconButton(
             showDialog = true
         },
         contentDescription = "Settings",
-        modifier = Modifier
+        bottomButton = true,
+        modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
@@ -130,29 +162,22 @@ fun ParameterIconButton(
             onDismissRequest = { showDialog = false },
             onNavigateToHomePage = {
                 navController.navigate(Screens.HomePage.name){
-                    popUpTo(navController.graph.startDestinationId) {
-                        inclusive = true // This clears the back stack up to the start destination
-                    }
+                    popUpTo(0) { inclusive = true } // This clears the entire stack
+                    launchSingleTop = true         // Prevents multiple instances of HomePage
                 }
                 showDialog = false
-            },
-            onMusicIconClick = { /* Handle music icon click */ }, // TODO : Add music
-            onVolumeIconClick = { /* Handle volume icon click */ } // TODO : Add volume
+            }
         )
     }
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ParameterDialog(
     isNotHomePage: Boolean = true,
     onDismissRequest: () -> Unit,
-    onNavigateToHomePage: () -> Unit,
-    onMusicIconClick: () -> Unit,
-    onVolumeIconClick: () -> Unit
+    onNavigateToHomePage: () -> Unit
 ) {
-    var isMusicUp by remember { mutableStateOf(true) }
-    var isVolumeUp by remember { mutableStateOf(true) }
-
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
@@ -174,11 +199,15 @@ fun ParameterDialog(
                 )
             }
 
-            // Music icon
+            // MUSIC ICON
+            // Do a safe call
+            var isMusicUp = MainActivity.instance?.userMusicPreference == true
             IconButton(
                 onClick = {
+                    MainActivity.instance?.switchMusicState(stopMusic = isMusicUp)
+                    // switch Music State locally to know which icon to display below
+                    // isMusicUp value will be crushed next call to this composable
                     isMusicUp = !isMusicUp
-                    onMusicIconClick()
                 },
                 imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
                 contentDescription = if (isMusicUp) "Music Up" else "Music Off",
@@ -186,24 +215,41 @@ fun ParameterDialog(
                     .widthIn(max = 128.dp)
             )
 
-            // Volume icon
+            // VOLUME ICON
+            var isVolumeUp = MainActivity.instance?.userSoundPreference == true
             IconButton(
                 onClick = {
+                    MainActivity.instance?.switchSoundState()
+                    // same explication than for music
                     isVolumeUp = !isVolumeUp
-                    onMusicIconClick()
                 },
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
                 modifier = Modifier
                     .widthIn(max = 128.dp)
             )
+
+            // REINITIALIZE LEVELS ICON
+            val context = LocalContext.current
+            if (!isNotHomePage) {
+                IconButton(
+                    onClick = {
+                        // display a confirmation dialog
+                        showConfirmationDialog(context)
+                    },
+                    imageResourceId = R.drawable.restart_icon,
+                    contentDescription = "Restart",
+                    modifier = Modifier
+                        .widthIn(max = 128.dp)
+                )
+            }
         }
     }
 }
 
 @Composable
 fun HintIconButton(
-    listOfHints: List<String>,
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     // Maintain a state to control when the dialog should be shown
@@ -216,7 +262,8 @@ fun HintIconButton(
             showDialog = true
         },
         contentDescription = "Hint",
-        modifier = Modifier
+        bottomButton = true,
+        modifier = modifier
             .padding(16.dp)
             .size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
@@ -224,15 +271,9 @@ fun HintIconButton(
 
     // Show a dialog when showDialog is true
     if (showDialog) {
-        /**
-        BubbleDialog(
-        onDismissRequest = { showDialog = false }, // Close dialog when dismissed
-        hintText = hintText
-        )
-         */
         SwipableDialog(
             onDismissRequest = { showDialog = false },
-            listOfHints = listOfHints
+            navController = navController
         )
     }
 }
@@ -240,19 +281,28 @@ fun HintIconButton(
 @Composable
 fun SwipableDialog(
     onDismissRequest: () -> Unit,
-    listOfHints: List<String>,
+    navController: NavHostController,
 ) {
-    var mutableListOfHints by remember { mutableStateOf(listOfHints) }
+    val context = LocalContext.current
+
+    var isLevel10 = false
+    if (navController.currentDestination?.route == Screens.Level_10.name) {
+        isLevel10 = true
+    }
+
+    var mutableListOfHints by remember { mutableStateOf(listOf<Int>()) }
+    mutableListOfHints =
+        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.hint_00)
+
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
-        if (mutableListOfHints.isEmpty()) {
-            mutableListOfHints = listOf("Sorry, no hint available")
-        }
 
         // Create a pager to swipe between 3 elements
-        val numberOfHints = mutableListOfHints.size
-        val pagerState = rememberPagerState(){ numberOfHints }
-        val coroutineScope = rememberCoroutineScope()
+        var numberOfHints = mutableListOfHints.size
+        if (isLevel10) {
+            numberOfHints++
+        }
+        val pagerState = rememberPagerState { numberOfHints }
 
         Box(
             modifier = Modifier
@@ -268,31 +318,79 @@ fun SwipableDialog(
                         .weight(1f) // Take remaining space
                 ) { page ->
                     // Dynamically display content based on the current page
-                    PageContent(
-                        text = mutableListOfHints[page],
-                        backgroundColor = Color.Transparent
-                    )
+                    if (isLevel10 && page == mutableListOfHints.lastIndex + 1) {
+                        // Display a button on the last page
+                        UnlockLevel(
+                            onUnlock = {
+                                // Trigger onDismissRequest after unlocking
+                                onDismissRequest()
+                                navController.navigate(Screens.Level_11.name)
+                                if (MainActivity.instance?.currentLevelUnlocked!! < 11) {
+                                    MainActivity.instance?.increaseLevel()
+                                }
+                            },
+                            labelResourceId = R.string.button,
+                            level = 10,
+                            modifier = Modifier,
+                            levelName = Screens.Level_09.name,
+                            navController = navController
+                        )
+                    } else {
+                        /*
+                        PageContent(
+                            text = context.getString(mutableListOfHints[page]),
+                            backgroundColor = Color.Transparent
+                        )*/
+                        Text(
+                            text = context.getString(mutableListOfHints[page]),
+                            fontSize = TextUnit(6f, TextUnitType.Em),
+                            color = Color.Black
+                        )
+                    }
                 }
 
-                // Add a row of dots to indicate which page is active
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    repeat(numberOfHints) { pageIndex ->
-                        val color = if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
-                        Box(
-                            modifier = Modifier
-                                .size(12.dp)
-                                .background(color = color, shape = MaterialTheme.shapes.small)
-                                .padding(4.dp)
-                        )
+                // If there are more than one hint, add a row of dots to indicate which page is active
+                if (numberOfHints > 1) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        repeat(numberOfHints) { pageIndex ->
+                            val color =
+                                if (pagerState.currentPage == pageIndex) Color.Black else Color.Gray
+                            Box(
+                                modifier = Modifier
+                                    .size(12.dp)
+                                    .background(color = color, shape = MaterialTheme.shapes.small)
+                                    .padding(8.dp)
+                                    .padding(horizontal = 16.dp)
+                            )
+
+                            // Add Spacer with desired width
+                            if (pageIndex < numberOfHints - 1) {
+                                Spacer(modifier = Modifier.width(8.dp)) // Adjust the width as needed
+                            }
+                        }
                     }
                 }
             }
         }
     }
+}
+
+fun showConfirmationDialog(context: Context) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(R.string.reset_levels_title)
+    builder.setMessage(R.string.reset_levels_message)
+    // If needed, get (dialog, which) instead of (_,_)
+    builder.setPositiveButton(R.string.reset_levels_positive_button) { _, _ ->
+        // User clicked Yes button, call resetLevels()
+        MainActivity.instance?.resetLevels()
+    }
+    builder.setNegativeButton(R.string.reset_levels_negative_button, null) // Do nothing on No click
+    val dialog = builder.create()
+    dialog.show()
 }
