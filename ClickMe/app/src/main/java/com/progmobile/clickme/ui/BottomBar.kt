@@ -35,8 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
@@ -49,6 +51,7 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun ClickMeBottomBar(
@@ -102,6 +105,7 @@ fun IconButton(
 
     // Sound section
     val context = LocalContext.current
+    val hapticFeedback = LocalHapticFeedback.current
 
     // Add code to onClick
     Image(
@@ -112,10 +116,13 @@ fun IconButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        if (MainActivity.instance?.userSoundPreference == true) {
-                            val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
-                            mediaPlayer.setOnCompletionListener { it.release() }
-                            mediaPlayer.start()
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        runBlocking {
+                            if (MainActivity.instance?.userSoundPreference == true) {
+                                val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
+                                mediaPlayer.setOnCompletionListener { it.release() }
+                                mediaPlayer.start()
+                            }
                         }
                         onClick()
                     }

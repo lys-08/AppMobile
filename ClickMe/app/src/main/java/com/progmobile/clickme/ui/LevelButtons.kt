@@ -23,8 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,6 +36,7 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.data.DataSource.LEVEL_TWO_LONG_PRESS_DURATION
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -62,6 +65,7 @@ fun LevelButton(
 
     val scope = rememberCoroutineScope()
     var isPressed by remember { mutableStateOf(false) }
+    val hapticFeedback = LocalHapticFeedback.current
 
     Box(
         modifier = modifier
@@ -73,6 +77,7 @@ fun LevelButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                         if (longClick) {
 
                             isPressed = true
@@ -81,11 +86,13 @@ fun LevelButton(
                                 delay(holdDuration)
                                 if (isPressed) {
                                     onClick()
-                                    if (MainActivity.instance?.userSoundPreference == true && playMusic) {
-                                        val mediaPlayer =
-                                            MediaPlayer.create(context, soundResourceId)
-                                        mediaPlayer.setOnCompletionListener { it.release() }
-                                        mediaPlayer.start()
+                                    runBlocking {
+                                        if (MainActivity.instance?.userSoundPreference == true && playMusic) {
+                                            val mediaPlayer =
+                                                MediaPlayer.create(context, soundResourceId)
+                                            mediaPlayer.setOnCompletionListener { it.release() }
+                                            mediaPlayer.start()
+                                        }
                                     }
                                 }
                             }
@@ -94,11 +101,13 @@ fun LevelButton(
                             isPressed = false
                         } else {
                             onClick()
-                            if (MainActivity.instance?.userSoundPreference == true && playMusic) {
-                                val mediaPlayer =
-                                    MediaPlayer.create(context, soundResourceId)
-                                mediaPlayer.setOnCompletionListener { it.release() }
-                                mediaPlayer.start()
+                            runBlocking {
+                                if (MainActivity.instance?.userSoundPreference == true && playMusic) {
+                                    val mediaPlayer =
+                                        MediaPlayer.create(context, soundResourceId)
+                                    mediaPlayer.setOnCompletionListener { it.release() }
+                                    mediaPlayer.start()
+                                }
                             }
                         }
                     }

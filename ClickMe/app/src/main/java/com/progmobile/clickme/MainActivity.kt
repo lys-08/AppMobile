@@ -69,19 +69,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-        val navController = rememberNavController()
-
-        // Override callback behaviour to always go back to HomePage
-        onBackPressedDispatcher.addCallback() {
-            // Handle the back button event
-            navController.navigate("home") {
-                popUpTo(0) // Clear the back stack
-            }
-
-        }
-        */
-
         instance = this // Set the instance to the current activity
         enableEdgeToEdge()
         checkPermissions()
@@ -119,7 +106,7 @@ class MainActivity : ComponentActivity() {
         // Get music state in datastore : if true, user wants it on, then reactivate it.
         // If false, user wants it off, don't do anything as it has been paused at onPause or stopped at onDestroy
         userMusicPreference = runBlocking { getUserMusicPreference() }
-        if (userMusicPreference) switchMusicState(stopMusic = false)
+        if (userMusicPreference) runBlocking { switchMusicState(stopMusic = false) }
 
         // Get sound state, for the buttons to know if they should play sound when clicked
         userSoundPreference = runBlocking { getUserSoundPreference() }
