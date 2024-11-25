@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
-import com.progmobile.clickme.data.DataSource.LEVEL_TWO_LONG_PRESS_DURATION
+import com.progmobile.clickme.data.DataSource.LEVEL_PATIENCE_LONG_PRESS_DURATION
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -51,9 +51,6 @@ fun LevelButton(
     inLevelButton: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    // Long click duration
-    val holdDuration = LEVEL_TWO_LONG_PRESS_DURATION
-
     // Sound section
     val context = LocalContext.current
 
@@ -83,7 +80,7 @@ fun LevelButton(
                             isPressed = true
                             // Start coroutine to wait for the hold duration
                             scope.launch {
-                                delay(holdDuration)
+                                delay(LEVEL_PATIENCE_LONG_PRESS_DURATION)
                                 if (isPressed) {
                                     onClick()
                                     runBlocking {

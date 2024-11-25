@@ -3,10 +3,11 @@ package com.progmobile.clickme
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,7 +21,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACTIVITY_RECOGNITION,
         /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
     private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
 
@@ -64,6 +65,12 @@ class MainActivity : ComponentActivity() {
 
     var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
     var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
+
+    // ========= STEP COUNT ===========
+    private lateinit var sensorManager: SensorManager
+    private var stepCounterSensor: Sensor? = null
+    private var totalSteps = 0f
+    private var previousSteps = 0f
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {

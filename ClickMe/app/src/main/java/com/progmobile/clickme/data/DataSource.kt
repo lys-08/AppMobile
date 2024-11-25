@@ -29,13 +29,16 @@ import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
     // Max number of levels to display
-    const val LEVEL_NUMBERS = 14
-    const val STARTING_LEVEL = 14
+    const val LEVEL_NUMBERS = 16
+    const val STARTING_LEVEL = 16
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
 
     // How long to stay pressed on the button of level 2
-    const val LEVEL_TWO_LONG_PRESS_DURATION = 3000L
+    const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
+
+    //
+    const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
 
     val levels = listOf(
         Pair(R.string.level_01, Screens.Level_01.name),

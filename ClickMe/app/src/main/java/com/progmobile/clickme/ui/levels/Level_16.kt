@@ -20,6 +20,63 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
+import com.progmobile.clickme.data.DataSource.LEVEL_STEP_COUNT_STEP_THRESHOLD
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+
+class StepCounter(context: Context) : SensorEventListener {
+    private val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+    private val stepCounterSensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+
+    private var totalSteps = 0f
+    private var previousSteps = 0f
+
+    // Expose step count as a StateFlow for observing changes
+    private val _stepCount = MutableStateFlow(0)
+        val stepCount: StateFlow<Int> get() = _stepCount
+
+    // Start listening to step counter sensor
+    fun start() {
+        stepCounterSensor?.let { sensor ->
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST)
+        }
+    }
+
+    // Stop listening to step counter sensor
+    fun stop() {
+        sensorManager.unregisterListener(this)
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_STEP_COUNTER) {
+            if (previousSteps == 0f) {
+                // Initialize previousSteps to the first recorded step count
+                previousSteps = event.values[0]
+            }
+            totalSteps = event.values[0]
+            _stepCount.value = (totalSteps - previousSteps).toInt()
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Not used in this example
+    }
+}
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
@@ -30,6 +87,27 @@ fun Level_16(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val stepCount = remember { mutableIntStateOf(0) }
+    val context = LocalContext.current
+    val stepCounter = remember { StepCounter(context) }
+
+    // Start and stop step detection when composable enters or exits composition
+    DisposableEffect(Unit) {
+        stepCounter.start()
+        onDispose {
+            stepCounter.stop()
+        }
+    }
+
+    // Collect step count from StepCounter's StateFlow
+    LaunchedEffect(stepCounter) {
+        launch {
+            stepCounter.stepCount.collectLatest { steps ->
+                stepCount.intValue = steps
+            }
+        }
+    }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
@@ -44,14 +122,22 @@ fun Level_16(
             textAlign = TextAlign.Center
         )
 
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 16,
-            modifier = Modifier,
-            levelName = Screens.Level_17.name,
-            navController = navController
-        )
+        // Display the step count in the UI
+        Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+            Text(text = "${stepCount.intValue}")
+        }
+
+        // Only show level button when steps are greater than STEP_THRESHOLD
+        if (stepCount.intValue > LEVEL_STEP_COUNT_STEP_THRESHOLD) {
+            // Level button
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 16,
+                modifier = Modifier,
+                levelName = Screens.Level_17.name,
+                navController = navController
+            )
+        }
     }
 }
 

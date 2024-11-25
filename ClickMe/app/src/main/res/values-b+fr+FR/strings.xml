@@ -28,12 +28,12 @@
     <string name="hint_01_1">Sérieusement ?</string>
     <string name="hint_01_2">Tu te moques de moi ?</string>
     <string name="hint_01_3">Lis. Le. Foutu. Titre.</string>
-    <string name="hint_02_1">x</string> <!-- TODO -->
-    <string name="hint_02_2">x</string> <!-- TODO -->
-    <string name="hint_02_3">x</string> <!-- TODO -->
-    <string name="hint_03_1">x</string> <!-- TODO -->
-    <string name="hint_03_2">x</string> <!-- TODO -->
-    <string name="hint_03_3">x</string> <!-- TODO -->
+    <string name="hint_02_1">Pressé ?</string> <!-- TODO -->
+    <string name="hint_02_2">Arme toi de patience</string> <!-- TODO -->
+    <string name="hint_02_3">Ok tu as gagné, presse plus longtemps…</string> <!-- TODO -->
+    <string name="hint_03_1">C\'est évident.</string> <!-- TODO -->
+    <string name="hint_03_2">C\'est carrément plus simple que le précédent niveau…</string> <!-- TODO -->
+    <string name="hint_03_3">Deux doigts, tu as besoin de deux doigts…</string> <!-- TODO -->
     <string name="hint_04_1">Quelque chose semble bizarre</string>
     <string name="hint_04_2">Tu peux lire le titre ?</string>
     <string name="hint_04_3">Peut-être que si tu tournes ta tête ça sera plus facile</string>
@@ -53,7 +53,7 @@
     <string name="hint_09_3">Tu n\'as jamais entendu parlé de surréalisme ? Quelle honte</string>
     <string name="hint_09_4">Vraiment, pas d\'idée ? Il faut revoir les bases. Bien, voici le dernier indice : René Magritte</string>
     <string name="hint_10_1">Où est-ce qu\'il peut être ?</string>
-    <string name="hint_10_2">x</string> <!-- TODO -->
+    <string name="hint_10_2">Tu y es presque</string> <!-- TODO -->
     <string name="hint_11_1">Chercher l’ombre pour trouver la lumière, chercher la lumière pour trouver l’ombre</string>
     <string name="hint_11_2">Parfois il faut plonger dans les profondeurs pour voir la lumière</string>
     <string name="hint_12_1">La tête dans les nuages</string>
@@ -65,7 +65,7 @@
     <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string> <!-- Basque -->
     <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string> <!-- Allemand -->
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string> <!-- Gallois -->
-    <string name="hint_16_1">TODO</string> <!-- TODO -->
+    <string name="hint_16_1">Allez, ça te fera du bien</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
@@ -79,4 +79,6 @@
     <string name="reset_levels_title">Confirmer la réinitialisation</string>
     <string name="reset_levels_message">Êtes-vous sûrs de vouloir réinitialiser ?</string>
     <string name="reset_levels_positive_button">Oui</string>
+    <string name="hint_16_2">Et en plus c\'est bon pour la planète !</string>
+    <string name="hint_16_3">Bouge tes fesses et fais un peu d\'exercice</string>
 </resources>
