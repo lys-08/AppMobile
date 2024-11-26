@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,11 +18,16 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
+import com.progmobile.clickme.data.DataSource.isAppInForeground
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -36,14 +40,38 @@ private const val MUSIC_DEFAULT = true
 private const val SOUND_DEFAULT = true
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), LifecycleObserver {
+
+    // =========== LifeCycle ===========
+
+    init {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onAppForeground() {
+        isAppInForeground.value = true
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onAppBackground() {
+        isAppInForeground.value = false
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (!hasFocus) {
+            isAppInForeground.value = false
+        } else {
+            isAppInForeground.value = true
+        }
+    }
 
     // ========== PERMISSIONS ==========
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.CAMERA,
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
+        Manifest.permission.READ_EXTERNAL_STORAGE)
     private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->

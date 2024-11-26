@@ -1,6 +1,7 @@
 package com.progmobile.clickme.data
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
@@ -29,6 +30,9 @@ import com.progmobile.clickme.ui.levels.Level_21
 import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
+    // State of the application
+    var isAppInForeground = mutableStateOf(false)
+
     // Max number of levels to display
     const val LEVEL_NUMBERS = 20
     const val STARTING_LEVEL = 20

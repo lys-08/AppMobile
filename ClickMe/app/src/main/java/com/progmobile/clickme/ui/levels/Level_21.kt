@@ -40,6 +40,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.isAppInForeground
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.CoroutineScope
@@ -59,6 +60,7 @@ fun Level_21(
 ) {
     var timeCount by remember { mutableIntStateOf(0) }
     var showButton by remember { mutableStateOf(false) }
+    val isForeground by remember { isAppInForeground }
 
     // =========== Monitoring Functions ===========
 
@@ -68,6 +70,9 @@ fun Level_21(
             try {
                 while (!showButton) {
                     timeCount++
+                    if (!isForeground) {
+                        timeCount = 0
+                    }
                     if (timeCount > 20) {
                         showButton = true
                     }
