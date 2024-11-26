@@ -25,14 +25,13 @@ import com.progmobile.clickme.ui.levels.Level_17
 import com.progmobile.clickme.ui.levels.Level_18
 import com.progmobile.clickme.ui.levels.Level_19
 import com.progmobile.clickme.ui.levels.Level_20
+import com.progmobile.clickme.ui.levels.Level_21
 import com.progmobile.clickme.ui.theme.CustomTheme
-import com.progmobile.clickme.ui.levels.Level_16
-import com.progmobile.clickme.ui.levels.Level_17
 
 object DataSource {
     // Max number of levels to display
-    const val LEVEL_NUMBERS = 19
-    const val STARTING_LEVEL = 19
+    const val LEVEL_NUMBERS = 20
+    const val STARTING_LEVEL = 20
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
 
@@ -59,7 +58,8 @@ object DataSource {
         Pair(R.string.level_17, Screens.Level_17.name),
         Pair(R.string.level_18, Screens.Level_18.name),
         Pair(R.string.level_19, Screens.Level_19.name),
-        Pair(R.string.level_20, Screens.Level_20.name)
+        Pair(R.string.level_20, Screens.Level_20.name),
+        Pair(R.string.level_21, Screens.Level_21.name)
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -82,7 +82,8 @@ object DataSource {
         Screens.Level_17.name to { navController, modifier -> { Level_17(navController, modifier) } },
         Screens.Level_18.name to { navController, modifier -> { Level_18(navController, modifier) } },
         Screens.Level_19.name to { navController, modifier -> { Level_19(navController, modifier) } },
-        Screens.Level_20.name to { navController, modifier -> { Level_20(navController, modifier) } }
+        Screens.Level_20.name to { navController, modifier -> { Level_20(navController, modifier) } },
+        Screens.Level_21.name to { navController, modifier -> { Level_21(navController, modifier) } }
     )
 
     val levelHints = mapOf(
@@ -147,6 +148,9 @@ object DataSource {
             R.string.hint_17_3),
         Screens.Level_18.name to listOf(R.string.hint_18_1),
         Screens.Level_19.name to listOf(R.string.hint_19_1),
-        Screens.Level_20.name to listOf(R.string.hint_20_1),
+        Screens.Level_20.name to listOf(
+            R.string.hint_20_1,
+            R.string.hint_20_2),
+        Screens.Level_21.name to listOf(R.string.hint_21_1),
     )
 }

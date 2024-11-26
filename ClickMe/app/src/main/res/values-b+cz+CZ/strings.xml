@@ -22,6 +22,7 @@
     <string name="level_18">TODO</string> <!-- TODO -->
     <string name="level_19">TODO</string> <!-- TODO -->
     <string name="level_20">TODO</string> <!-- TODO -->
+    <string name="level_21">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Omlouváme se, žádné vodítko k dispozici</string>
@@ -72,6 +73,8 @@
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_2">TODO</string> <!-- TODO -->
+    <string name="hint_21_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Tlačítko</string>
