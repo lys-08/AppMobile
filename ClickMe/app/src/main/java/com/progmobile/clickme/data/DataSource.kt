@@ -2,6 +2,7 @@ package com.progmobile.clickme.data
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
@@ -34,6 +35,8 @@ object DataSource {
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
+    const val IN_PARAMETER_BUTTONS_SIZE = 128
+    const val IN_PARAMETER_BUTTONS_SPACE= 16
 
     // Level-specific constants
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L

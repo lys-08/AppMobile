@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
@@ -52,6 +53,8 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
+import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SIZE
+import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SPACE
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -198,6 +201,9 @@ fun ParameterDialog(
     onDismissRequest: () -> Unit,
     onNavigateToHomePage: () -> Unit
 ) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
@@ -206,7 +212,7 @@ fun ParameterDialog(
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(screenWidth * 0.1f)
         ) {
             if (isNotHomePage) {
                 // Home button
@@ -215,7 +221,10 @@ fun ParameterDialog(
                     imageResourceId = R.drawable.home_icon,
                     contentDescription = "Home",
                     modifier = Modifier
-                        .widthIn(max = 128.dp)
+                        .widthIn(max = screenWidth * 0.2f)
+                        //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
+                        //.fillMaxSize(0.5f)
+
                 )
             }
 
@@ -232,7 +241,9 @@ fun ParameterDialog(
                 imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
                 contentDescription = if (isMusicUp) "Music Up" else "Music Off",
                 modifier = Modifier
-                    .widthIn(max = 128.dp)
+                    .widthIn(max = screenWidth * 0.2f)
+                    //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
+                    //.fillMaxSize(0.5f)
             )
 
             // VOLUME ICON
@@ -246,7 +257,9 @@ fun ParameterDialog(
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
                 modifier = Modifier
-                    .widthIn(max = 128.dp)
+                    .widthIn(max = screenWidth * 0.2f)
+                    //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
+                    //.fillMaxSize(0.5f)
             )
 
             // REINITIALIZE LEVELS ICON
@@ -260,7 +273,9 @@ fun ParameterDialog(
                     imageResourceId = R.drawable.restart_icon,
                     contentDescription = "Restart",
                     modifier = Modifier
-                        .widthIn(max = 128.dp)
+                        .widthIn(max = screenWidth * 0.2f)
+                        //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
+                        //.fillMaxSize(0.5f)
                 )
             }
         }
