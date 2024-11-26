@@ -38,6 +38,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Class that handles step counting using the Android SensorManager
+ */
 class StepCounter(context: Context) : SensorEventListener {
     private val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
@@ -79,8 +82,8 @@ class StepCounter(context: Context) : SensorEventListener {
 }
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that display a level that counts user steps.
+ * Prints a little counter at the bottom, until the value reaches a threshold, defined in [LEVEL_STEP_COUNT_STEP_THRESHOLD].
  */
 @Composable
 fun Level_16(

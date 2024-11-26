@@ -53,6 +53,12 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import kotlinx.coroutines.runBlocking
 
+/**
+ * Composable that displays the bottom bar of the app. Displays a [ParameterIconButton] on every page, and a [HintIconButton] only on the homepage.
+ * When out of the Home page, the [ParameterIconButton] contains, on top of the sound and music buttons, a return to home page button.
+ * @param navController the navigation controller, needed to know which icon to display
+ * @param modifier the modifier to apply to the composable
+ */
 @Composable
 fun ClickMeBottomBar(
     navController: NavHostController = rememberNavController(),
@@ -84,7 +90,7 @@ fun ClickMeBottomBar(
 }
 
 /**
- * Customizable hint button composable that uses the [imageResourceId] icon
+ * Customizable button composable that uses the [imageResourceId] icon
  * and triggers [onClick] lambda when this composable is clicked
  */
 @Composable
@@ -134,6 +140,9 @@ fun IconButton(
     )
 }
 
+/**
+ * Specific composable for the settings button, that uses the [IconButton] composable
+ */
 @Composable
 fun ParameterIconButton(
     navController: NavController,
@@ -178,6 +187,9 @@ fun ParameterIconButton(
     }
 }
 
+/**
+ * Dialog that displays the settings options
+ */
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ParameterDialog(
@@ -254,6 +266,9 @@ fun ParameterDialog(
     }
 }
 
+/**
+ * Specific composable for the hint button, that uses the [IconButton] composable
+ */
 @Composable
 fun HintIconButton(
     navController: NavHostController,
@@ -285,6 +300,10 @@ fun HintIconButton(
     }
 }
 
+/**
+ * Dialog that displays the hints for the current level
+ * Specific behaviour for level 10 : unlock the next level
+ */
 @Composable
 fun SwipableDialog(
     onDismissRequest: () -> Unit,

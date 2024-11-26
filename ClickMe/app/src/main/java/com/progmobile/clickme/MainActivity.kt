@@ -1,10 +1,9 @@
 package com.progmobile.clickme
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -30,15 +29,20 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+// Datastore, declared out of the class to be able to use it in multiple functions
 private val Context.dataStore by preferencesDataStore("user_prefs")
-private const val STARTING_LEVEL = 0
-private const val MUSIC_DEFAULT = true
-private const val SOUND_DEFAULT = true
 
-
+/**
+ * Main Activity of the application.
+ * Provides for :
+ * - Permissions
+ * - Sound and music state
+ * - Level unlocked state
+ */
 class MainActivity : ComponentActivity() {
 
     // ========== PERMISSIONS ==========
+    @SuppressLint("InlinedApi")
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.CAMERA,
@@ -65,12 +69,6 @@ class MainActivity : ComponentActivity() {
 
     var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
     var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
-
-    // ========= STEP COUNT ===========
-    private lateinit var sensorManager: SensorManager
-    private var stepCounterSensor: Sensor? = null
-    private var totalSteps = 0f
-    private var previousSteps = 0f
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {

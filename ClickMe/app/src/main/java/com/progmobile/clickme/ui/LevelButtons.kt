@@ -120,6 +120,9 @@ fun LevelButton(
     }
 }
 
+/**
+ * Composable that displays a locked level button
+ */
 @Composable
 fun LevelButtonLocked(
     onClick: () -> Unit,
