@@ -127,7 +127,7 @@ fun Level_16(
 
         // Display the step count in the UI
         Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-            Text(text = "${stepCount.intValue}")
+            if (stepCount.intValue <= LEVEL_STEP_COUNT_STEP_THRESHOLD) Text(text = "${stepCount.intValue}")
         }
 
         // Only show level button when steps are greater than STEP_THRESHOLD
