@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +41,7 @@ import com.progmobile.clickme.ui.UnlockLevel
 import kotlin.math.log
 import kotlin.math.sqrt
 
-class OrientationSensor(context: Context, private val onMove: (Int, Int) -> Unit) : SensorEventListener {
+/*class OrientationSensor(context: Context, private val onMove: (Int, Int) -> Unit) : SensorEventListener {
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)  // Utilisation du gyroscope
 
@@ -86,7 +87,7 @@ class OrientationSensor(context: Context, private val onMove: (Int, Int) -> Unit
         // Désabonnez-vous du gyroscope lorsque vous n'en avez plus besoin
         sensorManager.unregisterListener(this)
     }
-}
+}*/
 
 
 
@@ -123,18 +124,80 @@ fun Level_13(
     val movePlayer: (Int, Int) -> Unit = { rowDelta, colDelta ->
         val newRow = playerPosition.first + rowDelta
         val newCol = playerPosition.second + colDelta
-        Log.d("MyActivity", "Here2!!")
+        Log.d("MyActivity", "Here3!!")
         if (maze.getOrNull(newRow)?.getOrNull(newCol) == 0) {
             playerPosition = newRow to newCol
         }
     }
 
-    // Sensor management
-    val sensorManager = remember { OrientationSensor(context, onMove = movePlayer) }
+    val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    DisposableEffect(Unit) {
-        onDispose { sensorManager.stop() }
+    // Déclaration de la variable d'accéléromètre
+    val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+    // Variables pour stocker les rotations
+    var pitch by remember { mutableStateOf(0f) }
+    var roll by remember { mutableStateOf(0f) }
+    // Sensor management
+    //val sensorManager = remember { OrientationSensor(context, onMove = movePlayer) }7
+
+    LaunchedEffect(Unit) {
+        // Créer un Listener pour l'accéléromètre
+        val accelerometerListener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event == null || event.sensor.type != Sensor.TYPE_ACCELEROMETER) return
+
+                // Récupérer les valeurs de l'accéléromètre
+                val x = event.values[0]
+                val y = event.values[1]
+                val z = event.values[2]
+
+                // Calculer les angles d'inclinaison (pitch et roll)
+                pitch = Math.toDegrees(Math.atan2(y.toDouble(), z.toDouble())).toFloat()
+                roll = Math.toDegrees(Math.atan2(x.toDouble(), z.toDouble())).toFloat()
+
+                // Log des valeurs pour le debug
+                Log.d("Orientation", "Pitch: $pitch° Roll: $roll°")
+
+                // Interprétation de l'orientation
+                when {
+                    pitch > 30 ->  {
+                        Log.d("Orientation", "Inclinaison arrière")
+                        movePlayer(1,0)
+                    }
+                    pitch < -30 -> {
+                        Log.d("Orientation", "Inclinaison avant")
+                        movePlayer(-1,0)
+                    }
+                    roll > 30 -> {
+                        Log.d("Orientation", "Inclinaison à gauche")
+                        movePlayer(0,-1)
+                    }
+                    roll < -30 -> {
+                        Log.d("Orientation", "Inclinaison à droite")
+                        movePlayer(0,1)
+                    }
+                    else -> Log.d("Orientation", "Tablette droite")
+                }
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+                // Pas nécessaire dans ce cas, mais obligatoire de l'implémenter
+            }
+        }
+
+        // Enregistrer le listener pour écouter les changements de l'accéléromètre
+        sensorManager.registerListener(accelerometerListener, accelerometer, SensorManager.SENSOR_DELAY_UI)
+
+        // N'oubliez pas de vous désinscrire lorsque le composable est supprimé pour éviter les fuites de mémoire
+        /*onDispose {
+            sensorManager.unregisterListener(sensorEventListener)
+        }*/
     }
+
+    /*DisposableEffect(Unit) {
+        onDispose { sensorManager.unregisterListener(gyroscopeSensorListener) }
+    }*/
 
     Column(
         modifier = modifier,
