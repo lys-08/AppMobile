@@ -53,8 +53,8 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
-import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SIZE
-import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SPACE
+import com.progmobile.clickme.data.DataSource.IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH
+import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -152,6 +152,9 @@ fun ParameterIconButton(
     navController: NavController,
     modifier: Modifier = Modifier,
 ){
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
 
@@ -172,8 +175,9 @@ fun ParameterIconButton(
         bottomButton = true,
         modifier = modifier
             .padding(16.dp)
-            .size(48.dp) // Set the size of the image)
+            //.size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
+            .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
     )
 
     if(showDialog){
@@ -212,7 +216,7 @@ fun ParameterDialog(
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(screenWidth * 0.1f)
+            verticalArrangement = Arrangement.spacedBy(screenWidth * IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH)
         ) {
             if (isNotHomePage) {
                 // Home button
@@ -221,9 +225,7 @@ fun ParameterDialog(
                     imageResourceId = R.drawable.home_icon,
                     contentDescription = "Home",
                     modifier = Modifier
-                        .widthIn(max = screenWidth * 0.2f)
-                        //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
-                        //.fillMaxSize(0.5f)
+                        .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
 
                 )
             }
@@ -241,9 +243,7 @@ fun ParameterDialog(
                 imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
                 contentDescription = if (isMusicUp) "Music Up" else "Music Off",
                 modifier = Modifier
-                    .widthIn(max = screenWidth * 0.2f)
-                    //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
-                    //.fillMaxSize(0.5f)
+                    .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
             )
 
             // VOLUME ICON
@@ -257,9 +257,7 @@ fun ParameterDialog(
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
                 modifier = Modifier
-                    .widthIn(max = screenWidth * 0.2f)
-                    //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
-                    //.fillMaxSize(0.5f)
+                    .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
             )
 
             // REINITIALIZE LEVELS ICON
@@ -273,9 +271,7 @@ fun ParameterDialog(
                     imageResourceId = R.drawable.restart_icon,
                     contentDescription = "Restart",
                     modifier = Modifier
-                        .widthIn(max = screenWidth * 0.2f)
-                        //.size(IN_PARAMETER_BUTTONS_SIZE.dp)
-                        //.fillMaxSize(0.5f)
+                        .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
                 )
             }
         }
@@ -290,6 +286,9 @@ fun HintIconButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
 
@@ -303,8 +302,9 @@ fun HintIconButton(
         bottomButton = true,
         modifier = modifier
             .padding(16.dp)
-            .size(48.dp) // Set the size of the image)
+            //.size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
+            .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
     )
 
     // Show a dialog when showDialog is true

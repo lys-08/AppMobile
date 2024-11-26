@@ -35,8 +35,8 @@ object DataSource {
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
-    const val IN_PARAMETER_BUTTONS_SIZE = 128
-    const val IN_PARAMETER_BUTTONS_SPACE= 16
+    const val IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH = 0.2f
+    const val IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH = 0.1f
 
     // Level-specific constants
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L

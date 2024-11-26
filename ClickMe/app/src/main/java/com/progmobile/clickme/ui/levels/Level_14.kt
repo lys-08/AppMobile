@@ -76,48 +76,7 @@ fun Level_14(
         )
 
         // loop and every time move it by a random amount
-        RandomlyMovingBox()
-    }
-}
-
-@Composable
-fun RandomlyMovingBox() {
-    var screenSize by remember { mutableStateOf(IntSize.Zero) }
-    val xPosition = remember { Animatable(0f) }
-    val yPosition = remember { Animatable(0f) }
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-        coroutineScope.launch {
-            while (true) {
-                // Generate random target positions within screen bounds
-                val targetX = Random.nextInt(0, screenSize.width)
-                val targetY = Random.nextInt(0, screenSize.height)
-
-                // Animate to the new position
-                xPosition.animateTo(targetX.toFloat(), animationSpec = tween(durationMillis = 1000))
-                yPosition.animateTo(targetY.toFloat(), animationSpec = tween(durationMillis = 1000))
-
-                // Optional delay between movements
-                delay(500)
-            }
-        }
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .onGloballyPositioned { coordinates ->
-                screenSize = coordinates.size
-            }
-    ) {
-        Box(
-            modifier = Modifier
-                .size(50.dp)
-                .background(Color.Red)
-                .offset { IntOffset(xPosition.value.toInt(), yPosition.value.toInt()) }
-                .align(Alignment.TopStart)
-        )
+        MovingSquareApp()
     }
 }
 
