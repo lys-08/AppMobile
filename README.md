@@ -118,8 +118,6 @@ MainActivity : The `MainActivity.kt` file is the main activity of the applicatio
 
 ## Credits
 
-// TODO
-
 This project was developed by :
 
 - [Gabin](https://github.com/LittleBangTheory)
