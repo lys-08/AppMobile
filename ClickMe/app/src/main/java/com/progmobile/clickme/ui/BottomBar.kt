@@ -51,6 +51,7 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
+import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -369,7 +370,7 @@ fun SwipableDialog(
                         )*/
                         Text(
                             text = context.getString(mutableListOfHints[page]),
-                            fontSize = TextUnit(6f, TextUnitType.Em),
+                            fontSize = TextUnit(HINT_TEXT_SIZE, TextUnitType.Sp),
                             color = Color.Black
                         )
                     }
