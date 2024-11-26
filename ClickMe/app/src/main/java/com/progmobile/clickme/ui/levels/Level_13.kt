@@ -38,59 +38,6 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
-import kotlin.math.log
-import kotlin.math.sqrt
-
-/*class OrientationSensor(context: Context, private val onMove: (Int, Int) -> Unit) : SensorEventListener {
-    private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    private val gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)  // Utilisation du gyroscope
-
-    // Variables pour le suivi de la rotation
-    private var rotationX = 0f
-    private var rotationY = 0f
-    private var rotationZ = 0f
-
-    init {
-        sensorManager.registerListener(this, gyroscope, SensorManager.SENSOR_DELAY_UI)
-    }
-
-    // Logique pour gérer les changements dans les valeurs du gyroscope
-    override fun onSensorChanged(event: SensorEvent?) {
-        Log.d("MyActivity", "here10")
-        Log.d("MyActivity", "Event : $event")
-        if (event == null || event.sensor.type != Sensor.TYPE_GYROSCOPE) return
-        Log.d("MyActivity", "here2")
-
-        // Les valeurs du gyroscope (degré de rotation sur les axes X, Y, Z)
-        val deltaX = event.values[0]
-        val deltaY = event.values[1]
-        val deltaZ = event.values[2]
-
-        // Mettez à jour les valeurs de rotation cumulées
-        rotationX += deltaX
-        rotationY += deltaY
-        rotationZ += deltaZ
-
-        // Utilisez les rotations pour déterminer les mouvements (par exemple, dans les 4 directions)
-        // Vous pouvez définir des seuils pour déterminer quand le joueur se déplace
-        when {
-            rotationX > 1 -> onMove(1, 0)  // Déplacer vers le bas
-            rotationX < -1 -> onMove(-1, 0) // Déplacer vers le haut
-            rotationY > 1 -> onMove(0, 1)   // Déplacer vers la droite
-            rotationY < -1 -> onMove(0, -1) // Déplacer vers la gauche
-        }
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
-
-    fun stop() {
-        // Désabonnez-vous du gyroscope lorsque vous n'en avez plus besoin
-        sensorManager.unregisterListener(this)
-    }
-}*/
-
-
-
 
 
 /**
@@ -106,27 +53,27 @@ fun Level_13(
     var playerPosition by remember { mutableStateOf(Pair(10, 5)) }
     val maze = listOf(
         listOf(1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1),
-        listOf(1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1),
-        listOf(1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1),
-        listOf(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1),
+        listOf(1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 1),
+        listOf(1, 1, 1, 1, 1, 0, 1, 0, 2, 0, 1),
+        listOf(1, 0, 0, 2, 1, 0, 0, 0, 0, 0, 1),
         listOf(1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1),
         listOf(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1),
-        listOf(1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1),
-        listOf(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1),
+        listOf(1, 0, 0, 0, 1, 1, 1, 2, 1, 0, 1),
+        listOf(1, 0, 2, 0, 1, 0, 0, 0, 1, 0, 1),
         listOf(1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1),
         listOf(1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1),
         listOf(1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1)
     )
 
-    Log.d("MyActivity", "Here!!")
-
     // Move player based on direction
     val movePlayer: (Int, Int) -> Unit = { rowDelta, colDelta ->
         val newRow = playerPosition.first + rowDelta
         val newCol = playerPosition.second + colDelta
-        Log.d("MyActivity", "Here3!!")
         if (maze.getOrNull(newRow)?.getOrNull(newCol) == 0) {
             playerPosition = newRow to newCol
+        }
+        else if (maze.getOrNull(newRow)?.getOrNull(newCol) == 2) {
+            playerPosition = Pair(10,5)
         }
     }
 
@@ -139,9 +86,8 @@ fun Level_13(
     var pitch by remember { mutableStateOf(0f) }
     var roll by remember { mutableStateOf(0f) }
     // Sensor management
-    //val sensorManager = remember { OrientationSensor(context, onMove = movePlayer) }7
 
-    LaunchedEffect(Unit) {
+    DisposableEffect(Unit) {
         // Créer un Listener pour l'accéléromètre
         val accelerometerListener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
@@ -155,9 +101,6 @@ fun Level_13(
                 // Calculer les angles d'inclinaison (pitch et roll)
                 pitch = Math.toDegrees(Math.atan2(y.toDouble(), z.toDouble())).toFloat()
                 roll = Math.toDegrees(Math.atan2(x.toDouble(), z.toDouble())).toFloat()
-
-                // Log des valeurs pour le debug
-                Log.d("Orientation", "Pitch: $pitch° Roll: $roll°")
 
                 // Interprétation de l'orientation
                 when {
@@ -189,15 +132,10 @@ fun Level_13(
         // Enregistrer le listener pour écouter les changements de l'accéléromètre
         sensorManager.registerListener(accelerometerListener, accelerometer, SensorManager.SENSOR_DELAY_UI)
 
-        // N'oubliez pas de vous désinscrire lorsque le composable est supprimé pour éviter les fuites de mémoire
-        /*onDispose {
-            sensorManager.unregisterListener(sensorEventListener)
-        }*/
-    }
+        onDispose { sensorManager.unregisterListener(accelerometerListener) }
 
-    /*DisposableEffect(Unit) {
-        onDispose { sensorManager.unregisterListener(gyroscopeSensorListener) }
-    }*/
+
+    }
 
     Column(
         modifier = modifier,
@@ -223,7 +161,14 @@ fun Level_13(
             // Dessiner le labyrinthe
             maze.forEachIndexed { rowIndex, row ->
                 row.forEachIndexed { colIndex, cell ->
-                    val color = if (cell == 1) Color.Black else Color.White
+                    val color =
+                        if (cell == 1)
+                            Color.Black
+                        else if (cell == 2)
+                            Color.Gray
+                        else if (rowIndex == 0 && colIndex == 5)
+                            Color.Green
+                        else Color.White
                     drawRect(
                         color = color,
                         topLeft = Offset(colIndex * cellSize, rowIndex * cellSize),
@@ -243,14 +188,19 @@ fun Level_13(
             )
         }
 
+        Log.d("MyActivity", "Player : $playerPosition")
+
         // Level button
-        /*UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 13,
-            modifier,
-            levelName = Screens.Level_14.name,
-            navController
-        )*/
+        if (playerPosition.first == 0 && playerPosition.second == 5){
+            Log.d("MyActivity", "Here")
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 13,
+                modifier,
+                levelName = Screens.Level_14.name,
+                navController
+            )
+        }
     }
 }
 
