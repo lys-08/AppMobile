@@ -27,8 +27,7 @@ import com.progmobile.clickme.data.DataSource.levels
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that allows the user to select the level he/she wants to play
  */
 @Composable
 fun HomePage(

@@ -79,4 +79,6 @@
     <string name="reset_levels_title">x</string>
     <string name="reset_levels_message">x</string>
     <string name="reset_levels_positive_button">x</string>
+    <string name="hint_16_2">TODO</string>
+    <string name="hint_16_3">TODO</string>
 </resources>

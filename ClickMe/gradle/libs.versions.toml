@@ -17,6 +17,7 @@ appcompat = "1.7.0"
 coordinatorlayout = "1.2.0"
 material = "1.12.0"
 uiTextGoogleFonts = "1.7.3"
+foundationLayoutAndroid = "1.7.2"
 
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
@@ -42,6 +43,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
+androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
