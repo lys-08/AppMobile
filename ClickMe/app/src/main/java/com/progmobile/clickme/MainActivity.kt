@@ -48,6 +48,7 @@ class MainActivity : ComponentActivity() {
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.ACTIVITY_RECOGNITION,
+        Manifest.permission.BODY_SENSORS
         /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
     private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
 
