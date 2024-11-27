@@ -13,6 +13,7 @@
         android:maxSdkVersion="32" />
     <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> TODO : GPS permission -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
 
     <application
         android:allowBackup="true"
