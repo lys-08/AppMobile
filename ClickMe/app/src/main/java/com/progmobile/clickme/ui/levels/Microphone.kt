@@ -40,6 +40,8 @@ import java.io.File
  */
 @Composable
 fun Microphone(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -117,9 +119,9 @@ fun Microphone(
         if (!isMonitoring) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 8,
+                level = idLevel,
                 modifier,
-                levelName = Screens.DropDownMenu.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -132,6 +134,8 @@ fun Microphone(
 fun StartMicrophonePreview() {
     ClickMeTheme {
         Microphone(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

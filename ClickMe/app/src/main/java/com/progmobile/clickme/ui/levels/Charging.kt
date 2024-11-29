@@ -39,6 +39,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 @SuppressLint("ServiceCast")
 @Composable
 fun Charging(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -84,9 +86,9 @@ fun Charging(
         {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 7,
+                level = idLevel,
                 modifier,
-                levelName = Screens.Microphone.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -98,6 +100,8 @@ fun Charging(
 fun StartChargingPreview() {
     ClickMeTheme {
         Charging(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

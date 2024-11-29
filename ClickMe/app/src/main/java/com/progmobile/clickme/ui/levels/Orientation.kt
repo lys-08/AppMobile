@@ -34,6 +34,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun Orientation(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -51,9 +53,9 @@ fun Orientation(
             NormalText(screenWidth)
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 4,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.Screenshot.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -95,6 +97,8 @@ fun NormalText(
 fun StartOrientationPreview() {
     ClickMeTheme {
         Orientation(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

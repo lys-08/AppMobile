@@ -35,6 +35,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun Place10Finger(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -77,9 +79,9 @@ fun Place10Finger(
             if (showButton.value) {
                 UnlockLevel(
                     labelResourceId = R.string.button,
-                    level = 20,
+                    level = idLevel,
                     modifier = Modifier,
-                    levelName = Screens.Wait20s.name,
+                    levelName = nextLevel,
                     navController = navController
                 )
             } else {
@@ -102,6 +104,8 @@ fun Place10Finger(
 fun StartPlace10FingerPreview() {
     ClickMeTheme {
         Place10Finger(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

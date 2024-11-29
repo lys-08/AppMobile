@@ -44,6 +44,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun Labyrinth(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -193,9 +195,9 @@ fun Labyrinth(
             Log.d("MyActivity", "Here")
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 13,
+                level = idLevel,
                 modifier,
-                levelName = Screens.MovingButton.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -207,6 +209,8 @@ fun Labyrinth(
 fun StartLabyrinthPreview() {
     ClickMeTheme {
         Labyrinth(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

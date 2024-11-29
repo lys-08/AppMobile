@@ -34,6 +34,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 @SuppressLint("ServiceCast")
 @Composable
 fun DarkMode(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -63,9 +65,9 @@ fun DarkMode(
         if (currentNightMode != initialDarkMode) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 11,
+                level = idLevel,
                 modifier,
-                levelName = Screens.AirplaneMode.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -77,6 +79,8 @@ fun DarkMode(
 fun StartDarkModePreview() {
     ClickMeTheme {
         DarkMode(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

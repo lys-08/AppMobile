@@ -36,6 +36,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun LightSensor(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -88,9 +90,9 @@ fun LightSensor(
         if (lightLevel.value != null && lightLevel.value!! < 10) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 17,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.ButtonInHomepage.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -102,6 +104,8 @@ fun LightSensor(
 fun StartLightSensorPreview() {
     ClickMeTheme {
         LightSensor(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

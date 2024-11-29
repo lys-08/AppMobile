@@ -134,6 +134,8 @@ class ShakeDetector(
  */
 @Composable
 fun MovingButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -169,9 +171,9 @@ fun MovingButton(
             // Level button
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 14,
+                level = idLevel,
                 modifier,
-                levelName = Screens.ChangeLanguage.name,
+                levelName = nextLevel,
                 navController
             )
         } else {
@@ -260,6 +262,8 @@ fun SmoothMovingButton(duration: Long) {
 fun StartLevel14Preview() {
     ClickMeTheme {
         Microphone(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

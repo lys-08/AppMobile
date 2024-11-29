@@ -25,8 +25,8 @@ import com.progmobile.clickme.ui.levels.LostButton
 import com.progmobile.clickme.ui.levels.Labyrinth
 import com.progmobile.clickme.ui.levels.MovingButton
 import com.progmobile.clickme.ui.levels.ChangeLanguage
-import com.progmobile.clickme.ui.levels.StepCountingLevel
 import com.progmobile.clickme.ui.levels.ButtonInHomepage
+import com.progmobile.clickme.ui.levels.ScroolToFindTheButton
 import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
@@ -67,31 +67,33 @@ object DataSource {
         Pair(R.string.level_18, Screens.ButtonInHomepage.name),
         Pair(R.string.level_19, Screens.ShutdownDevice.name),
         Pair(R.string.level_20, Screens.Place10Finger.name),
-        Pair(R.string.level_21, Screens.Wait20s.name)
+        Pair(R.string.level_21, Screens.Wait20s.name),
+        Pair(R.string.level_21, Screens.ScrollToFindTheButton.name) // TODO : change string
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
-       Screens.SimpleButton.name to { navController, modifier -> { SimpleButton(navController, modifier) } },
-        Screens.LongPressButton.name to { navController, modifier -> { LongPressButton(navController, modifier) } },
-        Screens.DoubleButtons.name to { navController, modifier -> { DoubleButtons(navController, modifier) } },
-        Screens.Orientation.name to { navController, modifier -> { Orientation(navController, modifier) } },
-        Screens.Screenshot.name to { navController, modifier -> { Screenshot(navController, modifier) } },
-        Screens.LightTorch.name to { navController, modifier -> { CustomTheme{LightTorch(navController, modifier)} } },
-        Screens.Charging.name to { navController, modifier -> { Charging(navController, modifier) } },
-        Screens.Microphone.name to { navController, modifier -> { Microphone(navController, modifier) } },
-        Screens.DropDownMenu.name to { navController, modifier -> { DropDownMenu(navController, modifier) } },
-        Screens.LostButton.name to { _, modifier -> { LostButton(modifier) } },
-        Screens.DarkMode.name to { navController, modifier -> { DarkMode(navController, modifier) } },
-        Screens.AirplaneMode.name to { navController, modifier -> { AirplaneMode(navController, modifier) } },
-        Screens.Labyrinth.name to { navController, modifier -> { Labyrinth(navController, modifier) } },
-        Screens.MovingButton.name to { navController, modifier -> { MovingButton(navController, modifier) } },
-        Screens.ChangeLanguage.name to { navController, modifier -> { ChangeLanguage(navController, modifier) } },
-        Screens.ChangeLanguage.name to { navController, modifier -> { ChangeLanguage(navController, modifier) } },
-        Screens.LightSensor.name to { navController, modifier -> { LightSensor(navController, modifier) } },
-        Screens.ButtonInHomepage.name to { navController, modifier -> { ButtonInHomepage(navController, modifier) } },
-        Screens.ShutdownDevice.name to { navController, modifier -> { ShutdownDevice(navController, modifier) } },
-        Screens.Place10Finger.name to { navController, modifier -> { Place10Finger(navController, modifier) } },
-        Screens.Wait20s.name to { navController, modifier -> { Wait20s(navController, modifier) } }
+       Screens.SimpleButton.name to {navController, modifier -> { SimpleButton(1, Screens.DoubleButtons.name, navController, modifier) } },
+        Screens.DoubleButtons.name to { navController, modifier -> { DoubleButtons(2, Screens.LongPressButton.name, navController, modifier) } },
+        Screens.LongPressButton.name to { navController, modifier -> { LongPressButton(3, Screens.Orientation.name, navController, modifier) } },
+        Screens.Orientation.name to { navController, modifier -> { Orientation(4, Screens.AirplaneMode.name, navController, modifier) } },
+        Screens.AirplaneMode.name to { navController, modifier -> { AirplaneMode(5, Screens.DropDownMenu.name, navController, modifier) } },
+        Screens.DropDownMenu.name to { navController, modifier -> { DropDownMenu(/* idLevel = 6*/ Screens.Place10Finger.name, navController, modifier) } },
+        Screens.Place10Finger.name to { navController, modifier -> { Place10Finger(7, Screens.ScrollToFindTheButton.name, navController, modifier) } },
+        Screens.ScrollToFindTheButton.name to { navController, modifier -> { ScroolToFindTheButton(8, Screens.LostButton.name, navController, modifier) } },
+        Screens.LostButton.name to { navController, modifier -> { LostButton(/* idLevel = 9*/ modifier) } },
+        Screens.LightTorch.name to { navController, modifier -> { CustomTheme{LightTorch(10, Screens.Charging.name, navController, modifier)} } },
+        Screens.Charging.name to { navController, modifier -> { Charging(11, Screens.ChangeLanguage.name, navController, modifier) } },
+        Screens.ChangeLanguage.name to { navController, modifier -> { ChangeLanguage(12, Screens.DarkMode.name, navController, modifier) } },
+        Screens.DarkMode.name to { navController, modifier -> { DarkMode(13, Screens.MovingButton.name, navController, modifier) } },
+        Screens.MovingButton.name to { navController, modifier -> { MovingButton(14, Screens.Screenshot.name, navController, modifier) } },
+        Screens.Screenshot.name to { navController, modifier -> { Screenshot(15, Screens.StepCountingLevel.name, navController, modifier) } },
+        Screens.StepCountingLevel.name to { navController, modifier -> { Screenshot(16, Screens.ButtonInHomepage.name, navController, modifier) } },
+        Screens.ButtonInHomepage.name to { navController, modifier -> { ButtonInHomepage(/* idLevel = 17*/ modifier) } },
+        Screens.Microphone.name to { navController, modifier -> { Microphone(18, Screens.Labyrinth.name, navController, modifier) } },
+        Screens.Labyrinth.name to { navController, modifier -> { Labyrinth(19, Screens.LightSensor.name, navController, modifier) } },
+        Screens.LightSensor.name to { navController, modifier -> { LightSensor(20, Screens.ShutdownDevice.name, navController, modifier) } },
+        Screens.ShutdownDevice.name to { navController, modifier -> { ShutdownDevice(21, Screens.Wait20s.name, navController, modifier) } },
+        Screens.Wait20s.name to { navController, modifier -> { Wait20s(/* idLevel = 22*/ Screens.HomePage.name, navController, modifier) } },
     )
 
     val levelHints = mapOf(
@@ -160,5 +162,6 @@ object DataSource {
             R.string.hint_20_1,
             R.string.hint_20_2),
         Screens.Wait20s.name to listOf(R.string.hint_21_1),
+        // TODO : add Scroll to find the burron
     )
 }

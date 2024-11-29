@@ -26,7 +26,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * Only click on the button to go to the next level.
  */
 @Composable
-fun SimpleButton(
+fun ScroolToFindTheButton(
     idLevel: Int,
     nextLevel: String,
     navController: NavHostController,
@@ -59,9 +59,9 @@ fun SimpleButton(
 
 @Preview
 @Composable
-fun StartLevel01Preview() {
+fun StartScrollToFinfTheButtonPreview() {
     ClickMeTheme {
-        SimpleButton(
+        ScroolToFindTheButton(
             idLevel = -1,
             nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),

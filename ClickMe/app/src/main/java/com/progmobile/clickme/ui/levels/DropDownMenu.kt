@@ -39,6 +39,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun DropDownMenu(
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -251,7 +252,7 @@ fun DropDownMenu(
                                         sentence += "button."
                                         expanded = false
                                         MainActivity.instance?.increaseLevel()
-                                        navController.navigate(Screens.LostButton.name)
+                                        navController.navigate(nextLevel)
                                     }
                                 )
                                 HorizontalDivider()
@@ -288,11 +289,6 @@ fun DropDownMenu(
                 }
             }
         }
-
-        // Le menu ne se ferme pas après chaque choix
-//        item {
-//
-//        }
     }
 }
 @Preview
@@ -300,6 +296,7 @@ fun DropDownMenu(
 fun StartDropDownMenuPreview() {
     ClickMeTheme {
         DropDownMenu(
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

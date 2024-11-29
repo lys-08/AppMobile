@@ -39,6 +39,8 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun DoubleButtons(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -100,9 +102,9 @@ fun DoubleButtons(
         Row {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 3,
+                level = idLevel,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.DoubleButtons.name,
+                levelName = nextLevel,
                 navController = navController,
                 onUnlock = {
                     box1Pressed = true
@@ -115,9 +117,9 @@ fun DoubleButtons(
 
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 3,
+                level = idLevel,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.Orientation.name,
+                levelName = nextLevel,
                 navController = navController,
                 onUnlock = {
                     box2Pressed = true
@@ -134,6 +136,8 @@ fun DoubleButtons(
 fun StartLevel03Preview() {
     ClickMeTheme {
         DoubleButtons(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

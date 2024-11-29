@@ -28,6 +28,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun LongPressButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -48,9 +50,9 @@ fun LongPressButton(
         // Level button
         UnlockLevel(
             labelResourceId = R.string.button,
-            level = 2,
+            level = idLevel,
             modifier,
-            levelName = Screens.DoubleButtons.name,
+            levelName = nextLevel,
             longClick = true,
             navController = navController
         )
@@ -62,6 +64,8 @@ fun LongPressButton(
 fun StartLevel02Preview() {
     ClickMeTheme {
         LongPressButton(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

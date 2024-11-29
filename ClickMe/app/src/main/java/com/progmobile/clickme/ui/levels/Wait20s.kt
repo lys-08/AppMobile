@@ -44,6 +44,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun Wait20s(
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -120,7 +121,7 @@ fun Wait20s(
         if (showButton) {
             LevelButton(
                 labelResourceId = R.string.button,
-                onClick = { navController.navigate(Screens.HomePage.name) },
+                onClick = { navController.navigate(nextLevel) },
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
@@ -134,6 +135,7 @@ fun Wait20s(
 fun StartWait20sPreview() {
     ClickMeTheme {
         Wait20s(
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

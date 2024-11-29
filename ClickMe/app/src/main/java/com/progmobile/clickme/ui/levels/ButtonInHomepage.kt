@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
+import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
@@ -25,7 +26,6 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun ButtonInHomepage(
-    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -49,7 +49,6 @@ fun ButtonInHomepage(
 fun StartButtonInHomepagePreview() {
     ClickMeTheme {
         ButtonInHomepage(
-            navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))

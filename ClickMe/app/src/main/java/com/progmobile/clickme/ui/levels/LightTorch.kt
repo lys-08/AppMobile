@@ -70,6 +70,8 @@ class TorchManager(context: Context) {
 
 @Composable
 fun LightTorch(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -112,9 +114,9 @@ fun LightTorch(
             if (isTorchOn) {
                 UnlockLevel(
                     labelResourceId = R.string.button,
-                    level = 6,
+                    level = idLevel,
                     modifier,
-                    levelName = Screens.Charging.name,
+                    levelName = nextLevel,
                     navController
                 )
             }
@@ -126,9 +128,9 @@ fun LightTorch(
                 )
                 UnlockLevel(
                     labelResourceId = R.string.button,
-                    level = 6,
+                    level = idLevel,
                     modifier,
-                    levelName = Screens.Charging.name,
+                    levelName = nextLevel,
                     navController
                 )
 
@@ -147,6 +149,8 @@ fun hasFlashlight(context: Context): Boolean {
 fun StartLightTorchPreview() {
     ClickMeTheme {
         LightTorch(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

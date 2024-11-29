@@ -35,6 +35,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @Composable
 fun ChangeLanguage(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -68,9 +70,9 @@ fun ChangeLanguage(
         if (isLanguageChanged) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 15,
+                level = idLevel,
                 modifier = Modifier.wrapContentSize(),
-                levelName = Screens.StepCountingLevel.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -82,6 +84,8 @@ fun ChangeLanguage(
 fun StartChangeLanguagePreview() {
     ClickMeTheme {
         ChangeLanguage(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

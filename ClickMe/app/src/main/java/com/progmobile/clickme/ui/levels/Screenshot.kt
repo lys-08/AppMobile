@@ -54,6 +54,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 @SuppressLint("RestrictedApi")
 @Composable
 fun Screenshot(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -153,9 +155,9 @@ fun Screenshot(
         if (isScreenshotTaken) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 5,
+                level = idLevel,
                 modifier,
-                levelName = Screens.LightTorch.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -169,6 +171,8 @@ fun Screenshot(
 fun StartScreenshotPreview() {
     ClickMeTheme {
         Screenshot(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

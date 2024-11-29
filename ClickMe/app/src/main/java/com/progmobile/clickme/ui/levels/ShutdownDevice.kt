@@ -45,6 +45,8 @@ val IS_DEVICE_SHUTDOWN_KEY = booleanPreferencesKey("isDeviceShutdown")
  */
 @Composable
 fun ShutdownDevice(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -109,9 +111,9 @@ fun ShutdownDevice(
         if (isDeviceShutdown.value) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 19,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.Place10Finger.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -123,6 +125,8 @@ fun ShutdownDevice(
 fun StartShutdownDevicePreview() {
     ClickMeTheme {
         ShutdownDevice(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

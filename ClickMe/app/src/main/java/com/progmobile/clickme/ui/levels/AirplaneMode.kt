@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -30,7 +29,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
@@ -42,6 +40,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 @SuppressLint("ServiceCast")
 @Composable
 fun AirplaneMode(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -88,12 +88,12 @@ fun AirplaneMode(
         // Level button
         if (isInAirplaneMode.value)
         {
-            LevelButton(
+            UnlockLevel(
                 labelResourceId = R.string.button,
-                onClick = { navController.navigate(Screens.HomePage.name) },
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(Alignment.Center)
+                level = idLevel,
+                modifier = Modifier.wrapContentSize(),
+                levelName = nextLevel,
+                navController = navController
             )
         }
     }
@@ -104,6 +104,8 @@ fun AirplaneMode(
 fun StartAirplaneModePreview() {
     ClickMeTheme {
         AirplaneMode(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

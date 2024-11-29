@@ -89,6 +89,8 @@ class StepCounter(context: Context) : SensorEventListener {
  */
 @Composable
 fun StepCountingLevel(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -141,9 +143,9 @@ fun StepCountingLevel(
             )
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 16,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.LightSensor.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -153,9 +155,9 @@ fun StepCountingLevel(
             // Level button
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 16,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.LightSensor.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -171,6 +173,8 @@ fun hasStepCounterSensor(context: Context): Boolean{
 fun StartLevel16Preview() {
     ClickMeTheme {
         StepCountingLevel(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
