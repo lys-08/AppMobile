@@ -53,7 +53,7 @@ fun Orientation(
                 labelResourceId = R.string.button,
                 level = 4,
                 modifier = Modifier,
-                levelName = Screens.Level_05.name,
+                levelName = Screens.Screenshot.name,
                 navController = navController
             )
         }

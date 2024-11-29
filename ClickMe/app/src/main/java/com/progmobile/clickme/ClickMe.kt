@@ -32,7 +32,7 @@ enum class Screens(@StringRes val title: Int) {
     LightSensor(title = R.string.level_17),
     ShutdownDevice(title = R.string.level_19),
     Place10Finger(title = R.string.level_20),
-    Wait20s(title = R.string.level_20)
+    Wait20s(title = R.string.level_20),
     SimpleButton(title = R.string.level_01),
     LongPressButton(title = R.string.level_02),
     DoubleButtons(title = R.string.level_03),
