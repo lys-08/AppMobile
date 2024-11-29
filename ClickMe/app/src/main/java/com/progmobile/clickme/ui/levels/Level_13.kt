@@ -42,8 +42,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays a labyrinth.
+ * Solve the labyrinth using the device inclination.
  */
 @Composable
 fun Level_13(

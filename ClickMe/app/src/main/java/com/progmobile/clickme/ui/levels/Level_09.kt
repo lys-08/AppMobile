@@ -34,8 +34,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays a drop down menu where you have to make the sentence "This is not a button".
+ * Make the right sentence.
  */
 @Composable
 fun Level_09(

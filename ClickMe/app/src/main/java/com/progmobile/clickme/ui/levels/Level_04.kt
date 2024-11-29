@@ -29,8 +29,11 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where you have to change the orientation's device from vertical to horizontal.
+ *
+ * Check the device's orientation then if the device is vertical, use [RotatedText] to show overflow title,
+ * else, if the device is horizontal, use [NormalText] to show normal title and [UnlockLevel] to show button to
+ * next level.
  */
 @Composable
 fun Level_04(

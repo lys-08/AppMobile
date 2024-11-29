@@ -32,7 +32,7 @@ import com.progmobile.clickme.ui.UnlockLevel
 import android.content.pm.PackageManager
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
-// Classe TorchManager pour gérer la lampe torche
+// Classe TorchManager to manage light torch
 class TorchManager(context: Context) {
     private val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private var torchCallback: ((Boolean) -> Unit)? = null
@@ -57,8 +57,15 @@ class TorchManager(context: Context) {
 // Composable Level_06
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays a button when the light torch is on.
+ *
+ * Use class [TorchManager] to register or unregister a listener for the light torch.
+ * If the light torch is on, [UnlockLevel] show the button to the next level.
+ * If the device doesn't have a light torch, a text appear and [UnlockLevel] show the
+ * next level button is already on the screen.
+ *
+ * [Surface] allows the background to change color depending on the light torch state.
+ * (black when off, light yellow when on)
  */
 
 @Composable
