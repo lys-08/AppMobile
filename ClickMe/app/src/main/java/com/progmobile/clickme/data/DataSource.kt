@@ -97,6 +97,11 @@ object DataSource {
     )
 
     val levelHints = mapOf(
+        // Map game advices to Home Page
+        Screens.HomePage.name to listOf(
+            R.string.hint_00_1,
+            R.string.hint_00_2,
+        ),
         // map three hints to each level
         Screens.SimpleButton.name to listOf(
             R.string.hint_01_1,

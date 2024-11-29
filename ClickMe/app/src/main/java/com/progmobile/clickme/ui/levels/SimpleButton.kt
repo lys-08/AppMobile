@@ -38,7 +38,7 @@ fun SimpleButton(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_01),
+            text = stringResource(id = R.string.level_simple_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

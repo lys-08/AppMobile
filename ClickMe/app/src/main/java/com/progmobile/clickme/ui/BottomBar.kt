@@ -84,12 +84,10 @@ fun ClickMeBottomBar(
             ParameterIconButton(navController)
 
             // Only display HintIconButton if not on homepage
-            if (currentRoute != Screens.HomePage.name) {
-                // Right-aligned: HintIconButton
-                HintIconButton(
-                    navController = navController
-                )
-            }
+            // Right-aligned: HintIconButton
+            HintIconButton(
+                navController = navController
+            )
         }
     }
 }
