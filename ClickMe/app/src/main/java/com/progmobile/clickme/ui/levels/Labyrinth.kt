@@ -195,7 +195,7 @@ fun Labyrinth(
                 labelResourceId = R.string.button,
                 level = 13,
                 modifier,
-                levelName = Screens.Level_14.name,
+                levelName = Screens.MovingButton.name,
                 navController
             )
         }

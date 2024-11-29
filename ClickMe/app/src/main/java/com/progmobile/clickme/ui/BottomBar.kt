@@ -368,7 +368,7 @@ fun SwipableDialog(
     val context = LocalContext.current
 
     var isLevel10 = false
-    if (navController.currentDestination?.route == Screens.Level_10.name) {
+    if (navController.currentDestination?.route == Screens.LostButton.name) {
         isLevel10 = true
     }
 

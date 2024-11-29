@@ -70,7 +70,7 @@ fun ChangeLanguage(
                 labelResourceId = R.string.button,
                 level = 15,
                 modifier = Modifier.wrapContentSize(),
-                levelName = Screens.Level_16.name,
+                levelName = Screens.StepCountingLevel.name,
                 navController = navController
             )
         }
