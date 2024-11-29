@@ -77,6 +77,8 @@
     <string name="hint_20_1">TODO</string> <!-- TODO -->
     <string name="hint_20_2">TODO</string> <!-- TODO -->
     <string name="hint_21_1">TODO</string> <!-- TODO -->
+    <string name="hint_22_1">Never seen Alice in Wonderland ?</string>
+    <string name="hint_22_2">Go down the page !</string>
 
     // Buttons
     <string name="button">Botão</string>
