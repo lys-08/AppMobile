@@ -34,8 +34,8 @@ object DataSource {
     var isAppInForeground = mutableStateOf(false)
 
     // Max number of levels to display
-    const val LEVEL_NUMBERS = 20
-    const val STARTING_LEVEL = 20
+    const val LEVEL_NUMBERS = 21
+    const val STARTING_LEVEL = 21
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
@@ -46,29 +46,29 @@ object DataSource {
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
     const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
 
-    val levels = listOf(
-        Pair(R.string.level_01, Screens.SimpleButton.name),
-        Pair(R.string.level_02, Screens.LongPressButton.name),
-        Pair(R.string.level_03, Screens.DoubleButtons.name),
-        Pair(R.string.level_04, Screens.Orientation.name),
-        Pair(R.string.level_05, Screens.Screenshot.name),
-        Pair(R.string.level_06, Screens.LightTorch.name),
-        Pair(R.string.level_07, Screens.Charging.name),
-        Pair(R.string.level_08, Screens.Microphone.name),
-        Pair(R.string.level_09, Screens.DropDownMenu.name),
-        Pair(R.string.level_10, Screens.LostButton.name),
-        Pair(R.string.level_11, Screens.DarkMode.name),
-        Pair(R.string.level_12, Screens.AirplaneMode.name),
-        Pair(R.string.level_13, Screens.Labyrinth.name),
-        Pair(R.string.level_14, Screens.MovingButton.name),
-        Pair(R.string.level_15, Screens.ChangeLanguage.name),
-        Pair(R.string.level_16, Screens.StepCountingLevel.name),
-        Pair(R.string.level_17, Screens.LightSensor.name),
-        Pair(R.string.level_18, Screens.ButtonInHomepage.name),
-        Pair(R.string.level_19, Screens.ShutdownDevice.name),
-        Pair(R.string.level_20, Screens.Place10Finger.name),
-        Pair(R.string.level_21, Screens.Wait20s.name),
-        Pair(R.string.level_21, Screens.ScrollToFindTheButton.name) // TODO : change string
+    val levels = mapOf(
+        Screens.SimpleButton.name to R.string.level_01,
+        Screens.LongPressButton.name to R.string.level_02,
+        Screens.DoubleButtons.name to R.string.level_03,
+        Screens.Orientation.name to R.string.level_04,
+        Screens.Screenshot.name to R.string.level_05,
+        Screens.LightTorch.name to R.string.level_06,
+        Screens.Charging.name to R.string.level_07,
+        Screens.Microphone.name to R.string.level_08,
+        Screens.DropDownMenu.name to R.string.level_09,
+        Screens.LostButton.name to R.string.level_10,
+        Screens.DarkMode.name to R.string.level_11,
+        Screens.AirplaneMode.name to R.string.level_12,
+        Screens.Labyrinth.name to R.string.level_13,
+        Screens.MovingButton.name to R.string.level_14,
+        Screens.ChangeLanguage.name to R.string.level_15,
+        Screens.StepCountingLevel.name to R.string.level_16,
+        Screens.LightSensor.name to R.string.level_17,
+        Screens.ButtonInHomepage.name to R.string.level_18,
+        Screens.ShutdownDevice.name to R.string.level_19,
+        Screens.Place10Finger.name to R.string.level_20,
+        Screens.Wait20s.name to R.string.level_21,
+        Screens.ScrollToFindTheButton.name to R.string.level_21 // TODO: Change string
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(

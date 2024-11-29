@@ -24,6 +24,7 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.data.DataSource.LEVEL_NUMBERS
 import com.progmobile.clickme.data.DataSource.levels
+import com.progmobile.clickme.data.DataSource.levelsMap
 
 
 /**
@@ -55,17 +56,19 @@ fun HomePage(
                 .fillMaxWidth()
                 .fillMaxHeight()
           ) {
+              val levelList = levelsMap.keys.toList();
+
               //Enable buttons from unlocked levels
               items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
                   LevelButton(
-                      labelResourceId = levels[i].first,
-                      onClick = { navController.navigate(levels[i].second) }
+                      labelResourceId = levels.get(levelList[i]) ?: R.string.error,//levels[i].first,
+                      onClick = { navController.navigate(levelList[i]) } //levels[i].second
                   )
               }
             //Disable buttons from locked levels
               items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
                   LevelButtonLocked(
-                      onClick = { navController.navigate(levels[i].second) }
+                      onClick = { navController.navigate(levelList[i]) }
                   )
               }
         }

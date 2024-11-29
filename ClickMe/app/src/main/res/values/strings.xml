@@ -9,6 +9,8 @@
     <string name="reset_levels_positive_button">Yes</string>"
     <string name="reset_levels_negative_button">No</string>
 
+    <string name="error" translatable="false">Error</string>
+
     // Levels title
     <string name="level_01">Plain and simple</string>
     <string name="level_02">Mother of all virtues</string>
