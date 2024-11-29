@@ -39,7 +39,7 @@ import java.io.File
  * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
-fun Level_08(
+fun Microphone(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -129,9 +129,9 @@ fun Level_08(
 
 @Preview
 @Composable
-fun StartLevel08Preview() {
+fun StartMicrophonePreview() {
     ClickMeTheme {
-        Level_08(
+        Microphone(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

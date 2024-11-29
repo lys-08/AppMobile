@@ -34,7 +34,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
-fun Level_20(
+fun Place10Finger(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -79,7 +79,7 @@ fun Level_20(
                     labelResourceId = R.string.button,
                     level = 20,
                     modifier = Modifier,
-                    levelName = Screens.Level_21.name,
+                    levelName = Screens.Wait20s.name,
                     navController = navController
                 )
             } else {
@@ -99,9 +99,9 @@ fun Level_20(
 
 @Preview
 @Composable
-fun StartLevel20Preview() {
+fun StartPlace10FingerPreview() {
     ClickMeTheme {
-        Level_20(
+        Place10Finger(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

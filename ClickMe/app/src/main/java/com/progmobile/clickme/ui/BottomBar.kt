@@ -56,7 +56,6 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
 import com.progmobile.clickme.data.DataSource.IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH
-import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -407,7 +406,7 @@ fun SwipableDialog(
                             onUnlock = {
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
-                                navController.navigate(Screens.Level_11.name)
+                                navController.navigate(Screens.DarkMode.name)
                                 if (MainActivity.instance?.currentLevelUnlocked!! < 11) {
                                     MainActivity.instance?.increaseLevel()
                                 }

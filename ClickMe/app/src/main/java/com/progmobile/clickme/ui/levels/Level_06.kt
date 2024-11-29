@@ -107,7 +107,7 @@ fun Level_06(
                     labelResourceId = R.string.button,
                     level = 6,
                     modifier,
-                    levelName = Screens.Level_07.name,
+                    levelName = Screens.Charging.name,
                     navController
                 )
             }
@@ -121,7 +121,7 @@ fun Level_06(
                     labelResourceId = R.string.button,
                     level = 6,
                     modifier,
-                    levelName = Screens.Level_07.name,
+                    levelName = Screens.Charging.name,
                     navController
                 )
 

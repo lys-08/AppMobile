@@ -3,7 +3,6 @@ package com.progmobile.clickme.data
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
@@ -13,21 +12,21 @@ import com.progmobile.clickme.ui.levels.Level_03
 import com.progmobile.clickme.ui.levels.Level_04
 import com.progmobile.clickme.ui.levels.Level_05
 import com.progmobile.clickme.ui.levels.Level_06
-import com.progmobile.clickme.ui.levels.Level_07
-import com.progmobile.clickme.ui.levels.Level_08
+import com.progmobile.clickme.ui.levels.Charging
+import com.progmobile.clickme.ui.levels.Microphone
 import com.progmobile.clickme.ui.levels.Level_09
 import com.progmobile.clickme.ui.levels.Level_10
-import com.progmobile.clickme.ui.levels.Level_11
-import com.progmobile.clickme.ui.levels.Level_12
+import com.progmobile.clickme.ui.levels.DarkMode
+import com.progmobile.clickme.ui.levels.AirplaneMode
 import com.progmobile.clickme.ui.levels.Level_13
 import com.progmobile.clickme.ui.levels.Level_14
 import com.progmobile.clickme.ui.levels.Level_15
 import com.progmobile.clickme.ui.levels.Level_16
-import com.progmobile.clickme.ui.levels.Level_17
+import com.progmobile.clickme.ui.levels.LightSensor
 import com.progmobile.clickme.ui.levels.Level_18
-import com.progmobile.clickme.ui.levels.Level_19
-import com.progmobile.clickme.ui.levels.Level_20
-import com.progmobile.clickme.ui.levels.Level_21
+import com.progmobile.clickme.ui.levels.ShutdownDevice
+import com.progmobile.clickme.ui.levels.Place10Finger
+import com.progmobile.clickme.ui.levels.Wait20s
 import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
@@ -54,21 +53,21 @@ object DataSource {
         Pair(R.string.level_04, Screens.Level_04.name),
         Pair(R.string.level_05, Screens.Level_05.name),
         Pair(R.string.level_06, Screens.Level_06.name),
-        Pair(R.string.level_07, Screens.Level_07.name),
-        Pair(R.string.level_08, Screens.Level_08.name),
+        Pair(R.string.level_07, Screens.Charging.name),
+        Pair(R.string.level_08, Screens.Microphone.name),
         Pair(R.string.level_09, Screens.Level_09.name),
         Pair(R.string.level_10, Screens.Level_10.name),
-        Pair(R.string.level_11, Screens.Level_11.name),
-        Pair(R.string.level_12, Screens.Level_12.name),
+        Pair(R.string.level_11, Screens.DarkMode.name),
+        Pair(R.string.level_12, Screens.AirplaneMode.name),
         Pair(R.string.level_13, Screens.Level_13.name),
         Pair(R.string.level_14, Screens.Level_14.name),
         Pair(R.string.level_15, Screens.Level_15.name),
         Pair(R.string.level_16, Screens.Level_16.name),
-        Pair(R.string.level_17, Screens.Level_17.name),
+        Pair(R.string.level_17, Screens.LightSensor.name),
         Pair(R.string.level_18, Screens.Level_18.name),
-        Pair(R.string.level_19, Screens.Level_19.name),
-        Pair(R.string.level_20, Screens.Level_20.name),
-        Pair(R.string.level_21, Screens.Level_21.name)
+        Pair(R.string.level_19, Screens.ShutdownDevice.name),
+        Pair(R.string.level_20, Screens.Place10Finger.name),
+        Pair(R.string.level_21, Screens.Wait20s.name)
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -78,21 +77,21 @@ object DataSource {
         Screens.Level_04.name to { navController, modifier -> { Level_04(navController, modifier) } },
         Screens.Level_05.name to { navController, modifier -> { Level_05(navController, modifier) } },
         Screens.Level_06.name to { navController, modifier -> { CustomTheme{Level_06(navController, modifier)} } },
-        Screens.Level_07.name to { navController, modifier -> { Level_07(navController, modifier) } },
-        Screens.Level_08.name to { navController, modifier -> { Level_08(navController, modifier) } },
+        Screens.Charging.name to { navController, modifier -> { Charging(navController, modifier) } },
+        Screens.Microphone.name to { navController, modifier -> { Microphone(navController, modifier) } },
         Screens.Level_09.name to { navController, modifier -> { Level_09(navController, modifier) } },
         Screens.Level_10.name to { _, modifier -> { Level_10(modifier) } },
-        Screens.Level_11.name to { navController, modifier -> { Level_11(navController, modifier) } },
-        Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } },
+        Screens.DarkMode.name to { navController, modifier -> { DarkMode(navController, modifier) } },
+        Screens.AirplaneMode.name to { navController, modifier -> { AirplaneMode(navController, modifier) } },
         Screens.Level_13.name to { navController, modifier -> { Level_13(navController, modifier) } },
         Screens.Level_14.name to { navController, modifier -> { Level_14(navController, modifier) } },
         Screens.Level_15.name to { navController, modifier -> { Level_15(navController, modifier) } },
         Screens.Level_16.name to { navController, modifier -> { Level_16(navController, modifier) } },
-        Screens.Level_17.name to { navController, modifier -> { Level_17(navController, modifier) } },
+        Screens.LightSensor.name to { navController, modifier -> { LightSensor(navController, modifier) } },
         Screens.Level_18.name to { navController, modifier -> { Level_18(navController, modifier) } },
-        Screens.Level_19.name to { navController, modifier -> { Level_19(navController, modifier) } },
-        Screens.Level_20.name to { navController, modifier -> { Level_20(navController, modifier) } },
-        Screens.Level_21.name to { navController, modifier -> { Level_21(navController, modifier) } }
+        Screens.ShutdownDevice.name to { navController, modifier -> { ShutdownDevice(navController, modifier) } },
+        Screens.Place10Finger.name to { navController, modifier -> { Place10Finger(navController, modifier) } },
+        Screens.Wait20s.name to { navController, modifier -> { Wait20s(navController, modifier) } }
     )
 
     val levelHints = mapOf(
@@ -121,10 +120,10 @@ object DataSource {
             R.string.hint_06_1,
             R.string.hint_06_2,
             R.string.hint_06_3),
-        Screens.Level_07.name to listOf(
+        Screens.Charging.name to listOf(
             R.string.hint_07_1,
             R.string.hint_07_2),
-        Screens.Level_08.name to listOf(
+        Screens.Microphone.name to listOf(
             R.string.hint_08_1,
             R.string.hint_08_2,
             R.string.hint_08_3),
@@ -136,10 +135,10 @@ object DataSource {
         Screens.Level_10.name to listOf(
             R.string.hint_10_1,
             R.string.hint_10_2),
-        Screens.Level_11.name to listOf(
+        Screens.DarkMode.name to listOf(
             R.string.hint_11_1,
             R.string.hint_11_2),
-        Screens.Level_12.name to listOf(
+        Screens.AirplaneMode.name to listOf(
             R.string.hint_12_1,
             R.string.hint_12_2),
         Screens.Level_13.name to listOf(R.string.hint_13_1),
@@ -151,15 +150,15 @@ object DataSource {
             R.string.hint_15_4,
             R.string.hint_15_5),
         Screens.Level_16.name to listOf(R.string.hint_16_1),
-        Screens.Level_17.name to listOf(
+        Screens.LightSensor.name to listOf(
             R.string.hint_17_1,
             R.string.hint_17_2,
             R.string.hint_17_3),
         Screens.Level_18.name to listOf(R.string.hint_18_1),
-        Screens.Level_19.name to listOf(R.string.hint_19_1),
-        Screens.Level_20.name to listOf(
+        Screens.ShutdownDevice.name to listOf(R.string.hint_19_1),
+        Screens.Place10Finger.name to listOf(
             R.string.hint_20_1,
             R.string.hint_20_2),
-        Screens.Level_21.name to listOf(R.string.hint_21_1),
+        Screens.Wait20s.name to listOf(R.string.hint_21_1),
     )
 }

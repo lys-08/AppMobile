@@ -33,7 +33,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  */
 @SuppressLint("ServiceCast")
 @Composable
-fun Level_11(
+fun DarkMode(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -65,7 +65,7 @@ fun Level_11(
                 labelResourceId = R.string.button,
                 level = 11,
                 modifier,
-                levelName = Screens.Level_12.name,
+                levelName = Screens.AirplaneMode.name,
                 navController
             )
         }
@@ -74,9 +74,9 @@ fun Level_11(
 
 @Preview
 @Composable
-fun StartLevel11Preview() {
+fun StartDarkModePreview() {
     ClickMeTheme {
-        Level_11(
+        DarkMode(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

@@ -31,21 +31,21 @@ enum class Screens(@StringRes val title: Int) {
     Level_04(title = R.string.level_04),
     Level_05(title = R.string.level_05),
     Level_06(title = R.string.level_06),
-    Level_07(title = R.string.level_07),
-    Level_08(title = R.string.level_08),
+    Charging(title = R.string.level_07),
+    Microphone(title = R.string.level_08),
     Level_09(title = R.string.level_09),
     Level_10(title = R.string.level_10),
-    Level_11(title = R.string.level_11),
-    Level_12(title = R.string.level_12),
+    DarkMode(title = R.string.level_11),
+    AirplaneMode(title = R.string.level_12),
     Level_13(title = R.string.level_13),
     Level_14(title = R.string.level_14),
     Level_15(title = R.string.level_15),
     Level_16(title = R.string.level_16),
-    Level_17(title = R.string.level_17),
+    LightSensor(title = R.string.level_17),
     Level_18(title = R.string.level_18),
-    Level_19(title = R.string.level_19),
-    Level_20(title = R.string.level_20),
-    Level_21(title = R.string.level_20)
+    ShutdownDevice(title = R.string.level_19),
+    Place10Finger(title = R.string.level_20),
+    Wait20s(title = R.string.level_20)
 }
 
 /**

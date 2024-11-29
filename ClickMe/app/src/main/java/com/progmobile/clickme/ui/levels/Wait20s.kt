@@ -1,12 +1,7 @@
 package com.progmobile.clickme.ui.levels
 
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +10,15 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,45 +28,76 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.isAppInForeground
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
- * Composable that displays the next level button when the device is in airplane mode.
+ * Composable that displays the next level button when the nothing is done during 20 seconds (no touch, ...).
  * It uses a [UnlockLevel] composable to display the next level button.
  */
-@SuppressLint("ServiceCast")
 @Composable
-fun Level_12(
+fun Wait20s(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val isInAirplaneMode = remember { mutableStateOf(false) }
+    var timeCount by remember { mutableIntStateOf(0) }
+    var showButton by remember { mutableStateOf(false) }
+    val isForeground by remember { isAppInForeground }
 
-    // Creation of a BroadcastReceiver to check the battery state
-    val batteryReceiver = remember {
-        object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val isAirplaneModeOn = Settings.Global.getInt(
-                    context?.contentResolver,
-                    Settings.Global.AIRPLANE_MODE_ON, 0
-                ) != 0
+    // =========== Monitoring Functions ===========
 
-                isInAirplaneMode.value = isAirplaneModeOn
+    fun startMonitoring() {
+        // Start the coroutine
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                while (!showButton) {
+                    timeCount++
+                    if (!isForeground) {
+                        timeCount = 0
+                    }
+                    if (timeCount > 20) {
+                        showButton = true
+                    }
+                    delay(1000)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
-    // Register the BroadcastReceiver
-    DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED) // Listen to the battery change state
-        context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
-        onDispose {
-            context.unregisterReceiver(batteryReceiver)
-        } // Free the resources
+    // =================== End ===================
+
+    LaunchedEffect(Unit) {
+        startMonitoring()
+    }
+
+    val fingerCount = remember { mutableIntStateOf(0) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent()
+                        val touches = event.changes.filter { it.pressed }
+
+                        fingerCount.intValue = touches.size
+                    }
+                }
+            }
+    ) {
+        if (fingerCount.intValue != 0) {
+            timeCount = 0
+        }
     }
 
     Column(
@@ -77,7 +106,7 @@ fun Level_12(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_12),
+            text = stringResource(id = R.string.level_21),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -85,9 +114,10 @@ fun Level_12(
             textAlign = TextAlign.Center
         )
 
+        Text(text = "lastTouchTime: $timeCount", style = MaterialTheme.typography.headlineMedium)
+
         // Level button
-        if (isInAirplaneMode.value)
-        {
+        if (showButton) {
             LevelButton(
                 labelResourceId = R.string.button,
                 onClick = { navController.navigate(Screens.HomePage.name) },
@@ -101,9 +131,9 @@ fun Level_12(
 
 @Preview
 @Composable
-fun StartLevel12Preview() {
+fun StartWait20sPreview() {
     ClickMeTheme {
-        Level_12(
+        Wait20s(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

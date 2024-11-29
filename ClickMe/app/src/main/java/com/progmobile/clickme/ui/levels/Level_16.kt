@@ -143,7 +143,7 @@ fun Level_16(
                 labelResourceId = R.string.button,
                 level = 16,
                 modifier = Modifier,
-                levelName = Screens.Level_17.name,
+                levelName = Screens.LightSensor.name,
                 navController = navController
             )
         }
@@ -155,7 +155,7 @@ fun Level_16(
                 labelResourceId = R.string.button,
                 level = 16,
                 modifier = Modifier,
-                levelName = Screens.Level_17.name,
+                levelName = Screens.LightSensor.name,
                 navController = navController
             )
         }
