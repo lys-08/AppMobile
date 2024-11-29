@@ -3,6 +3,7 @@ package com.progmobile.clickme.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.res.Configuration
 import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -41,6 +42,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -207,74 +209,113 @@ fun ParameterDialog(
 ) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
+    val screenHeight = configuration.screenHeightDp.dp
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    val iconSize = if (isLandscape) screenHeight * 0.2f else screenWidth * 0.2f
+    val spacing = if (isLandscape) screenWidth * 0.04f else screenHeight * 0.04f
 
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(screenWidth * IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH)
-        ) {
-            if (isNotHomePage) {
-                // Home button
-                IconButton(
-                    onClick = onNavigateToHomePage,
-                    imageResourceId = R.drawable.home_icon,
-                    contentDescription = "Home",
-                    modifier = Modifier
-                        .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
-
+        if (isLandscape) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(spacing),
+                verticalAlignment = Alignment.CenterVertically)
+            {
+                IconList(
+                    isNotHomePage = isNotHomePage,
+                    onNavigateToHomePage = onNavigateToHomePage,
+                    iconSize = iconSize
                 )
             }
-
-            // MUSIC ICON
-            // Do a safe call
-            var isMusicUp = MainActivity.instance?.userMusicPreference == true
-            IconButton(
-                onClick = {
-                    MainActivity.instance?.switchMusicState(stopMusic = isMusicUp)
-                    // switch Music State locally to know which icon to display below
-                    // isMusicUp value will be crushed next call to this composable
-                    isMusicUp = !isMusicUp
-                },
-                imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
-                contentDescription = if (isMusicUp) "Music Up" else "Music Off",
+        } else {
+            Column(
                 modifier = Modifier
-                    .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
-            )
-
-            // VOLUME ICON
-            var isVolumeUp = MainActivity.instance?.userSoundPreference == true
-            IconButton(
-                onClick = {
-                    MainActivity.instance?.switchSoundState()
-                    // same explication than for music
-                    isVolumeUp = !isVolumeUp
-                },
-                imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
-                contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
-                modifier = Modifier
-                    .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
-            )
-
-            // REINITIALIZE LEVELS ICON
-            val context = LocalContext.current
-            if (!isNotHomePage) {
-                IconButton(
-                    onClick = {
-                        // display a confirmation dialog
-                        showConfirmationDialog(context)
-                    },
-                    imageResourceId = R.drawable.restart_icon,
-                    contentDescription = "Restart",
-                    modifier = Modifier
-                        .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(spacing)
+            ) {
+                IconList(
+                    isNotHomePage = isNotHomePage,
+                    onNavigateToHomePage = onNavigateToHomePage,
+                    iconSize = iconSize
                 )
             }
         }
+    }
+}
+
+@Composable
+/**
+ * Specific composable for the settings options
+ * Allows to call the icon list in a row or a column depending on the screen orientation
+ */
+fun IconList(
+    isNotHomePage: Boolean = true,
+    onNavigateToHomePage: () -> Unit,
+    iconSize: Dp,
+    modifier: Modifier = Modifier
+){
+    if (isNotHomePage) {
+        // Home button
+        IconButton(
+            onClick = onNavigateToHomePage,
+            imageResourceId = R.drawable.home_icon,
+            contentDescription = "Home",
+            modifier = modifier
+                .widthIn(max = iconSize)
+
+        )
+    }
+
+    // MUSIC ICON
+    // Do a safe call
+    var isMusicUp = MainActivity.instance?.userMusicPreference == true
+    IconButton(
+        onClick = {
+            MainActivity.instance?.switchMusicState(stopMusic = isMusicUp)
+            // switch Music State locally to know which icon to display below
+            // isMusicUp value will be crushed next call to this composable
+            isMusicUp = !isMusicUp
+        },
+        imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
+        contentDescription = if (isMusicUp) "Music Up" else "Music Off",
+        modifier = modifier
+            .widthIn(max = iconSize)
+    )
+
+    // VOLUME ICON
+    var isVolumeUp = MainActivity.instance?.userSoundPreference == true
+    IconButton(
+        onClick = {
+            MainActivity.instance?.switchSoundState()
+            // same explication than for music
+            isVolumeUp = !isVolumeUp
+        },
+        imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
+        contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
+        modifier = modifier
+            .widthIn(max = iconSize)
+    )
+
+    // REINITIALIZE LEVELS ICON
+    val context = LocalContext.current
+    if (!isNotHomePage) {
+        IconButton(
+            onClick = {
+                // display a confirmation dialog
+                showConfirmationDialog(context)
+            },
+            imageResourceId = R.drawable.restart_icon,
+            contentDescription = "Restart",
+            modifier = modifier
+                .widthIn(max = iconSize)
+        )
     }
 }
 
