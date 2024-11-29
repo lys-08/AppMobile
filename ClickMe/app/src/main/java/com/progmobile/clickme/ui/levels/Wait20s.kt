@@ -115,7 +115,7 @@ fun Wait20s(
             textAlign = TextAlign.Center
         )
 
-        Text(text = "lastTouchTime: $timeCount", style = MaterialTheme.typography.headlineMedium)
+        // Text(text = "lastTouchTime: $timeCount", style = MaterialTheme.typography.headlineMedium)
 
         // Level button
         if (showButton) {
