@@ -20,7 +20,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
  * Composable that displays the level with an empty page,
- * as the button composable for this level is in the Swipable composable of the bottom app bar
+ * as the button composable for this level is in the Swipe composable of the bottom app bar
  */
 @Composable
 fun LostButton(

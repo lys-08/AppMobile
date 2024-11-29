@@ -32,7 +32,7 @@ import com.progmobile.clickme.ui.UnlockLevel
 import android.content.pm.PackageManager
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
-// Classe TorchManager to manage light torch
+// Class TorchManager to manage light torch
 class TorchManager(context: Context) {
     private val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private var torchCallback: ((Boolean) -> Unit)? = null
@@ -88,9 +88,9 @@ fun LightTorch(
     }
 
     val backgroundColor = if (isTorchOn) {
-        MaterialTheme.colorScheme.primary // Couleur personnalisée si la torche est allumée
+        MaterialTheme.colorScheme.primary // Personalized color if the torch is light
     } else {
-        MaterialTheme.colorScheme.background // Couleur par défaut
+        MaterialTheme.colorScheme.background // Default Color
     }
 
     Surface(

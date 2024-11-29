@@ -45,7 +45,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 /**
  * Composable that displays the level where you have to take a screenshot or a picture.
  *
- * Use a [ContextObserver] to check if a picture was added to storage during the level.
+ * Use a ContextObserver to check if a picture was added to storage during the level.
  * If it is the case, it means a picture has been taken (screenshot or else) and [UnlockLevel]
  * show the button to the current level.
  *
@@ -95,7 +95,7 @@ fun Screenshot(
         contentDescription = "Right Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.BottomEnd)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
     )
 
@@ -104,7 +104,7 @@ fun Screenshot(
         contentDescription = "Left Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.BottomStart)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
             .graphicsLayer(
                 scaleX = -1f
@@ -116,7 +116,7 @@ fun Screenshot(
         contentDescription = "Left Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
             .graphicsLayer(
                 rotationZ = 180f,
@@ -128,7 +128,7 @@ fun Screenshot(
         contentDescription = "Left Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.TopEnd)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
             .graphicsLayer(
                 rotationZ = 180f,
