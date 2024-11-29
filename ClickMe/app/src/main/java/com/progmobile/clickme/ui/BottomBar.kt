@@ -56,7 +56,6 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
 import com.progmobile.clickme.data.DataSource.IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH
-import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -369,7 +368,7 @@ fun SwipableDialog(
     val context = LocalContext.current
 
     var isLevel10 = false
-    if (navController.currentDestination?.route == Screens.Level_10.name) {
+    if (navController.currentDestination?.route == Screens.LostButton.name) {
         isLevel10 = true
     }
 

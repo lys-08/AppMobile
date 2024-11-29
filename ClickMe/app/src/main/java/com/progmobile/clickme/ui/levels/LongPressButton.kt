@@ -27,7 +27,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * It uses a [UnlockLevel] composable to display the level button, with a specific parameter to demand a long click.
  */
 @Composable
-fun Level_02(
+fun LongPressButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -50,7 +50,7 @@ fun Level_02(
             labelResourceId = R.string.button,
             level = 2,
             modifier,
-            levelName = Screens.Level_03.name,
+            levelName = Screens.DoubleButtons.name,
             longClick = true,
             navController = navController
         )
@@ -61,7 +61,7 @@ fun Level_02(
 @Composable
 fun StartLevel02Preview() {
     ClickMeTheme {
-        Level_02(
+        LongPressButton(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

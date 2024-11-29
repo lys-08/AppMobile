@@ -251,7 +251,7 @@ fun Level_09(
                                         sentence += "button."
                                         expanded = false
                                         MainActivity.instance?.increaseLevel()
-                                        navController.navigate(Screens.Level_10.name)
+                                        navController.navigate(Screens.LostButton.name)
                                     }
                                 )
                                 HorizontalDivider()

@@ -70,7 +70,7 @@ fun Level_15(
                 labelResourceId = R.string.button,
                 level = 15,
                 modifier = Modifier.wrapContentSize(),
-                levelName = Screens.Level_16.name,
+                levelName = Screens.StepCountingLevel.name,
                 navController = navController
             )
         }

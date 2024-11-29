@@ -88,7 +88,7 @@ class StepCounter(context: Context) : SensorEventListener {
  * Prints a little counter at the bottom, until the value reaches a threshold, defined in [LEVEL_STEP_COUNT_STEP_THRESHOLD].
  */
 @Composable
-fun Level_16(
+fun StepCountingLevel(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -170,7 +170,7 @@ fun hasStepCounterSensor(context: Context): Boolean{
 @Composable
 fun StartLevel16Preview() {
     ClickMeTheme {
-        Level_16(
+        StepCountingLevel(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
