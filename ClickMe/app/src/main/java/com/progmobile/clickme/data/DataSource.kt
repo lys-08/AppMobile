@@ -47,7 +47,7 @@ object DataSource {
     const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
 
     val levels = mapOf(
-        Screens.SimpleButton.name to R.string.level_01,
+        Screens.SimpleButton.name to R.string.level_simple_button,
         Screens.LongPressButton.name to R.string.level_02,
         Screens.DoubleButtons.name to R.string.level_03,
         Screens.Orientation.name to R.string.level_04,
