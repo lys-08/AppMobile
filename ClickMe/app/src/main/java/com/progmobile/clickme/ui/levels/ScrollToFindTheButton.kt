@@ -1,10 +1,10 @@
 package com.progmobile.clickme.ui.levels
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,42 +26,45 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * Only click on the button to go to the next level.
  */
 @Composable
-fun ScroolToFindTheButton(
+fun ScrollToFindTheButton(
     idLevel: Int,
     nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    LazyColumn(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.spacedBy(10000.dp)
     ) {
         // Title
-        Text(
-            text = stringResource(id = R.string.level_01),
-            style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
-        )
+         item {
+             Text(
+                 text = stringResource(id = R.string.level_01),
+                 style = MaterialTheme.typography.displayLarge,
+                 modifier = Modifier
+                     .fillMaxWidth()
+                     .padding(vertical = 16.dp),
+                 textAlign = TextAlign.Center
+             )
+         }
 
         // Level button
-        UnlockLevel(
+        item {
+            UnlockLevel(
             labelResourceId = R.string.button,
             level = idLevel,
             modifier = Modifier,
             levelName = nextLevel,
             navController = navController
-        )
+        ) }
     }
 }
 
 @Preview
 @Composable
-fun StartScrollToFinfTheButtonPreview() {
+fun StartScrollToFindTheButtonPreview() {
     ClickMeTheme {
-        ScroolToFindTheButton(
+        ScrollToFindTheButton(
             idLevel = -1,
             nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),

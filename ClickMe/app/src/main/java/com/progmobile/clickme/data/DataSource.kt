@@ -26,7 +26,7 @@ import com.progmobile.clickme.ui.levels.Labyrinth
 import com.progmobile.clickme.ui.levels.MovingButton
 import com.progmobile.clickme.ui.levels.ChangeLanguage
 import com.progmobile.clickme.ui.levels.ButtonInHomepage
-import com.progmobile.clickme.ui.levels.ScroolToFindTheButton
+import com.progmobile.clickme.ui.levels.ScrollToFindTheButton
 import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
@@ -79,7 +79,7 @@ object DataSource {
         Screens.AirplaneMode.name to { navController, modifier -> { AirplaneMode(5, Screens.DropDownMenu.name, navController, modifier) } },
         Screens.DropDownMenu.name to { navController, modifier -> { DropDownMenu(/* idLevel = 6*/ Screens.Place10Finger.name, navController, modifier) } },
         Screens.Place10Finger.name to { navController, modifier -> { Place10Finger(7, Screens.ScrollToFindTheButton.name, navController, modifier) } },
-        Screens.ScrollToFindTheButton.name to { navController, modifier -> { ScroolToFindTheButton(8, Screens.LostButton.name, navController, modifier) } },
+        Screens.ScrollToFindTheButton.name to { navController, modifier -> { ScrollToFindTheButton(8, Screens.LostButton.name, navController, modifier) } },
         Screens.LostButton.name to { navController, modifier -> { LostButton(/* idLevel = 9*/ modifier) } },
         Screens.LightTorch.name to { navController, modifier -> { CustomTheme{LightTorch(10, Screens.Charging.name, navController, modifier)} } },
         Screens.Charging.name to { navController, modifier -> { Charging(11, Screens.ChangeLanguage.name, navController, modifier) } },
