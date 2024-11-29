@@ -62,7 +62,6 @@ class ShakeDetector(
     context: Context,
     private val onShake: () -> Unit
 ) : SensorEventListener {
-    private val context = context.applicationContext
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val accelerometer: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     private var firstShakeTime: Long = 0
@@ -200,7 +199,6 @@ fun SmoothMovingButton(duration: Long) {
     val positionY = remember { Animatable(0f) }
     var parentSize by remember { mutableStateOf(IntSize(0, 0)) }
     var boxSize by remember { mutableStateOf(IntSize(0, 0)) }
-    val density = LocalDensity.current
 
     LaunchedEffect(parentSize) {
         while (parentSize.width > 0 && parentSize.height > 0 && boxSize.width > 0 && boxSize.height > 0) {

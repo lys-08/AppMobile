@@ -39,7 +39,7 @@ fun DarkMode(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val configuration = LocalConfiguration.current;
+    val configuration = LocalConfiguration.current
     val initialDarkMode = rememberSaveable {
         configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }

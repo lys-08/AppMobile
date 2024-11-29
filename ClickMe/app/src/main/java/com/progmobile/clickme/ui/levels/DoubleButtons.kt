@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 
 
 /**
- * Composable that displays the level with two buttons scren.
+ * Composable that displays the level with two buttons screen.
  * Uses two [UnlockLevel] buttons with a checkBothPressed() function to navigate to the next level if the buttons are both pressed at the same time.
  */
 @Composable
@@ -63,7 +63,7 @@ fun DoubleButtons(
         var box2Pressed by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
 
-        // Music stuff, overriden here to avoid playing it two times
+        // Music stuff, override here to avoid playing it two times
         val soundResourceId = R.raw.victory_sound
         val mediaPlayer = MediaPlayer.create(LocalContext.current, soundResourceId)
         val onBothClicked = {
