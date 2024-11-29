@@ -35,8 +35,8 @@ import java.io.File
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the player blow in the microphone.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
 fun Level_08(

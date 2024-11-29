@@ -29,13 +29,13 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the device is charging.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
-
 @SuppressLint("ServiceCast")
 @Composable
 fun Level_07(
@@ -96,7 +96,7 @@ fun Level_07(
 @Preview
 @Composable
 fun StartLevel07Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_07(
             navController = rememberNavController(),
             modifier = Modifier

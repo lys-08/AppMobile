@@ -30,6 +30,7 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.isAppInForeground
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,8 +39,8 @@ import kotlinx.coroutines.launch
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the nothing is done during 20 seconds (no touch, ...).
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
 fun Level_21(

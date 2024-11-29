@@ -30,8 +30,8 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when their is 10 fingers on the device.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
 fun Level_20(

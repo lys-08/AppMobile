@@ -23,7 +23,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable tgat displays the level with the long click button.
+ * Composable that displays the level with the long click button.
  * It uses a [UnlockLevel] composable to display the level button, with a specific parameter to demand a long click.
  */
 @Composable
