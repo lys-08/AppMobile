@@ -19,10 +19,15 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
+import com.progmobile.clickme.data.DataSource.isAppInForeground
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -39,7 +44,32 @@ private val Context.dataStore by preferencesDataStore("user_prefs")
  * - Sound and music state
  * - Level unlocked state
  */
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), LifecycleObserver {
+
+    // =========== LifeCycle ===========
+
+    init {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onAppForeground() {
+        isAppInForeground.value = true
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onAppBackground() {
+        isAppInForeground.value = false
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (!hasFocus) {
+            isAppInForeground.value = false
+        } else {
+            isAppInForeground.value = true
+        }
+    }
 
     // ========== PERMISSIONS ==========
     @SuppressLint("InlinedApi")
@@ -48,8 +78,7 @@ class MainActivity : ComponentActivity() {
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.ACTIVITY_RECOGNITION,
-        Manifest.permission.BODY_SENSORS
-        /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
+        Manifest.permission.BODY_SENSORS)
     private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->

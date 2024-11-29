@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -129,8 +130,7 @@ fun Level_08(
 @Preview
 @Composable
 fun StartLevel08Preview() {
-    MaterialTheme {
-
+    ClickMeTheme {
         Level_08(
             navController = rememberNavController(),
             modifier = Modifier

@@ -22,6 +22,7 @@
     <string name="level_18">TODO</string> <!-- TODO -->
     <string name="level_19">TODO</string> <!-- TODO -->
     <string name="level_20">TODO</string> <!-- TODO -->
+    <string name="level_21">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Desculpe, não há nenhuma pista disponível</string>
@@ -47,8 +48,8 @@
     <string name="hint_07_1">Eu estou meio cansado</string>
     <string name="hint_07_2">Eu realmente falta energia</string>
     <string name="hint_08_1">Sussurro nos campos e uivo nas tempestades. Eles me seguem, mas eu não tenho caminho. Quem sou eu?</string>
-    <string name="hint_08_2">Ouça as cores do vento</string>
-    <string name="hint_08_3">Apenas respirando pode mover montanhas</string>
+    <string name="hint_08_2">Ouve "quantas cores o vento tem"</string>
+    <string name="hint_08_3">Eu acho que você está ficando sem paciência</string>
     <string name="hint_09_1">Talvez tentar todas as opções não é a melhor ideia…</string>
     <string name="hint_09_2">Tente expandir seu conhecimento artístico</string>
     <string name="hint_09_3">Nunca ouvi falar de surrealismo? Que vergonha</string>
@@ -68,9 +69,13 @@
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_16_1">TODO</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_2">TODO</string> <!-- TODO -->
+    <string name="hint_17_3">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_2">TODO</string> <!-- TODO -->
+    <string name="hint_21_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Botão</string>

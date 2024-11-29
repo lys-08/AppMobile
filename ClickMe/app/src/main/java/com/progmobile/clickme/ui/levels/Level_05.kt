@@ -40,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
@@ -161,7 +162,7 @@ fun Level_05(
 @Preview
 @Composable
 fun StartLevel05Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_05(
             navController = rememberNavController(),
             modifier = Modifier

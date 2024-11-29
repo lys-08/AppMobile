@@ -22,6 +22,7 @@
     <string name="level_18">Perdido 2</string> <!-- TODO -->
     <string name="level_19">TODO</string> <!-- TODO -->
     <string name="level_20">TODO</string> <!-- TODO -->
+    <string name="level_21">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Lo sentimos, no hay ningún índice disponible</string>
@@ -46,8 +47,8 @@
     <string name="hint_07_1">Estoy cansado</string>
     <string name="hint_07_2">Realmente me falta energía</string>
     <string name="hint_08_1">Realmente me falta el susurro en los campos y el aullido en las tormentas. Me siguen, pero no tengo camino. ¿Quién soy yo?</string>
-    <string name="hint_08_2">Escucha los colores en el viento</string>
-    <string name="hint_08_3">Respirar puedes mover montañas</string>
+    <string name="hint_08_2">Escucha los "colores en el viento"</string>
+    <string name="hint_08_3">Creo que te falta paciencia</string>
     <string name="hint_09_1">Quizás probar todas las opciones no es la mejor idea…</string>
     <string name="hint_09_2">Intenta ampliar tus conocimientos artísticos</string>
     <string name="hint_09_3">¿Nunca he oído hablar del surrealismo? Qué vergüenza</string>
@@ -67,9 +68,13 @@
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_16_1">Hazlo, es bueno para ti.</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_2">TODO</string> <!-- TODO -->
+    <string name="hint_17_3">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_2">TODO</string> <!-- TODO -->
+    <string name="hint_21_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Botón</string>

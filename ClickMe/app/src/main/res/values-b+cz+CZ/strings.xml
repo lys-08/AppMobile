@@ -22,6 +22,7 @@
     <string name="level_18">TODO</string> <!-- TODO -->
     <string name="level_19">TODO</string> <!-- TODO -->
     <string name="level_20">TODO</string> <!-- TODO -->
+    <string name="level_21">TODO</string> <!-- TODO -->
 
     // Hints
     <string name="hint_00">Omlouváme se, žádné vodítko k dispozici</string>
@@ -46,8 +47,8 @@
     <string name="hint_07_1">Jsem trochu unavený</string>
     <string name="hint_07_2">Opravdu mi chybí energie</string>
     <string name="hint_08_1">Šeptám na polích a vyju v bouřích. Jdou za mnou, ale já nemám žádnou cestu. Kdo jsem?</string>
-    <string name="hint_08_2">Poslechněte si barvy větru</string>
-    <string name="hint_08_3">Jen dýchání může pohnout horami</string>
+    <string name="hint_08_2">Poslouchejte "Barvy větru"</string>
+    <string name="hint_08_3">Myslím, že vám chybí trpělivost</string>
     <string name="hint_09_1">Možná, že vyzkoušet všechny možnosti není nejlepší nápad…</string>
     <string name="hint_09_2">Snažte se rozšířit své umělecké znalosti</string>
     <string name="hint_09_3">Nikdy jste neslyšeli o surrealismu? Jaká ostuda</string>
@@ -67,9 +68,13 @@
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_16_1">TODO</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
+    <string name="hint_17_2">TODO</string> <!-- TODO -->
+    <string name="hint_17_3">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
     <string name="hint_20_1">TODO</string> <!-- TODO -->
+    <string name="hint_20_2">TODO</string> <!-- TODO -->
+    <string name="hint_21_1">TODO</string> <!-- TODO -->
 
     // Buttons
     <string name="button">Tlačítko</string>

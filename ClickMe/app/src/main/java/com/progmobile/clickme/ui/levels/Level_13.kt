@@ -38,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -207,8 +208,7 @@ fun Level_13(
 @Preview
 @Composable
 fun StartLevel13Preview() {
-    MaterialTheme {
-
+    ClickMeTheme {
         Level_13(
             navController = rememberNavController(),
             modifier = Modifier

@@ -44,7 +44,8 @@ enum class Screens(@StringRes val title: Int) {
     Level_17(title = R.string.level_17),
     Level_18(title = R.string.level_18),
     Level_19(title = R.string.level_19),
-    Level_20(title = R.string.level_20)
+    Level_20(title = R.string.level_20),
+    Level_21(title = R.string.level_20)
 }
 
 /**

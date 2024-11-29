@@ -64,6 +64,7 @@ fun Level_07(
             context.unregisterReceiver(batteryReceiver)
         } // Free the resources
     }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween

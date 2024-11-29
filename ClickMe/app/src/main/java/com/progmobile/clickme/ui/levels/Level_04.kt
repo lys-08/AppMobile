@@ -25,6 +25,7 @@ import com.progmobile.clickme.ui.UnlockLevel
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.material3.Text
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -92,7 +93,7 @@ fun NormalText(
 @Preview
 @Composable
 fun StartLevel04Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_04(
             navController = rememberNavController(),
             modifier = Modifier

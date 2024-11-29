@@ -1,5 +1,12 @@
 package com.progmobile.clickme.ui.levels
 
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +15,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +42,37 @@ fun Level_17(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val lightLevel = remember { mutableStateOf<Float?>(null) }
+
+    DisposableEffect(Unit) {
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+
+        val lightSensorListener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                event?.let {
+                    lightLevel.value = it.values[0]
+                }
+            }
+
+            // Not necessary -> for the object
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+            }
+        }
+
+        // Saving the listener
+        sensorManager.registerListener(
+            lightSensorListener,
+            lightSensor,
+            SensorManager.SENSOR_DELAY_UI
+        )
+
+        onDispose {
+            sensorManager.unregisterListener(lightSensorListener)
+        } // Free the resources
+    }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
@@ -45,13 +88,15 @@ fun Level_17(
         )
 
         // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 17,
-            modifier = Modifier,
-            levelName = Screens.Level_18.name,
-            navController = navController
-        )
+        if (lightLevel.value != null && lightLevel.value!! < 10) {
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = 17,
+                modifier = Modifier,
+                levelName = Screens.Level_18.name,
+                navController = navController
+            )
+        }
     }
 }
 

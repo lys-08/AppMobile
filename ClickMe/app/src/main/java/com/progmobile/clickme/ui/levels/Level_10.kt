@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.progmobile.clickme.R
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
@@ -46,7 +47,7 @@ fun Level_10(
 @Preview
 @Composable
 fun StartLevel10Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_10(
             modifier = Modifier
                 .fillMaxSize()

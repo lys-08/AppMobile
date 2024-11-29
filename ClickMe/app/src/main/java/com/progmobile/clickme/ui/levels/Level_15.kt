@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,9 +35,9 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.delay
 import java.util.Locale
-
 
 /**
  * Composable that allows the user to select the desired action to do and triggers
@@ -91,7 +90,7 @@ fun Level_15(
 @Preview
 @Composable
 fun StartLevel15Preview() {
-    MaterialTheme {
+    ClickMeTheme {
         Level_15(
             navController = rememberNavController(),
             modifier = Modifier
