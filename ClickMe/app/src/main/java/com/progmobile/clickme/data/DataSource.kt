@@ -68,7 +68,7 @@ object DataSource {
         Screens.ShutdownDevice.name to R.string.level_19,
         Screens.Place10Finger.name to R.string.level_20,
         Screens.Wait20s.name to R.string.level_21,
-        Screens.ScrollToFindTheButton.name to R.string.level_21 // TODO: Change string
+        Screens.ScrollToFindTheButton.name to R.string.level_22 // TODO: Change string
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
