@@ -2,6 +2,7 @@ package com.progmobile.clickme.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,9 +52,10 @@ fun HomePage(
         // Levels button
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(8.dp), // Ajoute un espace global autour de la grille
+            horizontalArrangement = Arrangement.spacedBy(8.dp), // Espacement horizontal entre les items
+            verticalArrangement = Arrangement.spacedBy(8.dp)
           ) {
               //Enable buttons from unlocked levels
               items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
