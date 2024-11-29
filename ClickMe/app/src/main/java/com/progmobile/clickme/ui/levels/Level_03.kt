@@ -74,7 +74,7 @@ fun Level_03(
             }
 
             // Navigate to level 4
-            navController.navigate(Screens.Level_04.name)
+            navController.navigate(Screens.Orientation.name)
             if (MainActivity.instance?.currentLevelUnlocked!! < 3) {
                 MainActivity.instance?.increaseLevel()
             }
@@ -117,7 +117,7 @@ fun Level_03(
                 labelResourceId = R.string.button,
                 level = 3,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.Level_04.name,
+                levelName = Screens.Orientation.name,
                 navController = navController,
                 onUnlock = {
                     box2Pressed = true

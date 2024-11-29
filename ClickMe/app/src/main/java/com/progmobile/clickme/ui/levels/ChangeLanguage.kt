@@ -34,7 +34,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * Change the device language (any language) to go to the next level.
  */
 @Composable
-fun Level_15(
+fun ChangeLanguage(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -79,9 +79,9 @@ fun Level_15(
 
 @Preview
 @Composable
-fun StartLevel15Preview() {
+fun StartChangeLanguagePreview() {
     ClickMeTheme {
-        Level_15(
+        ChangeLanguage(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

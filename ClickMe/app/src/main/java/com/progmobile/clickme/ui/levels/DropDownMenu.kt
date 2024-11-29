@@ -38,7 +38,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * Make the right sentence.
  */
 @Composable
-fun Level_09(
+fun DropDownMenu(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -297,9 +297,9 @@ fun Level_09(
 }
 @Preview
 @Composable
-fun StartLevel09Preview() {
+fun StartDropDownMenuPreview() {
     ClickMeTheme {
-        Level_09(
+        DropDownMenu(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

@@ -7,7 +7,6 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -46,7 +43,7 @@ import com.progmobile.clickme.ui.theme.ClickMeTheme
  * Solve the labyrinth using the device inclination.
  */
 @Composable
-fun Level_13(
+fun Labyrinth(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -207,9 +204,9 @@ fun Level_13(
 
 @Preview
 @Composable
-fun StartLevel13Preview() {
+fun StartLabyrinthPreview() {
     ClickMeTheme {
-        Level_13(
+        Labyrinth(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

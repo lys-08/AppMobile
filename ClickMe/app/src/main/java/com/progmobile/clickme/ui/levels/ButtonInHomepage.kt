@@ -20,11 +20,11 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where the button is hidden in the Homepage.
+ * Go to home page to see the button (available one time).
  */
 @Composable
-fun Level_18(
+fun ButtonInHomepage(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -46,9 +46,9 @@ fun Level_18(
 
 @Preview
 @Composable
-fun StartLevel18Preview() {
+fun StartButtonInHomepagePreview() {
     ClickMeTheme {
-        Level_18(
+        ButtonInHomepage(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

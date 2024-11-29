@@ -69,7 +69,7 @@ class TorchManager(context: Context) {
  */
 
 @Composable
-fun Level_06(
+fun LightTorch(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -144,9 +144,9 @@ fun hasFlashlight(context: Context): Boolean {
 
 @Preview
 @Composable
-fun StartLevel06Preview() {
+fun StartLightTorchPreview() {
     ClickMeTheme {
-        Level_06(
+        LightTorch(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
