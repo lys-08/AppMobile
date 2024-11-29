@@ -39,8 +39,8 @@
     <string name="hint_04_2">¿Que estas haciendo? lees el título !</string>
     <string name="hint_04_3">¿Qué pasaría si volvieras la cabeza? Tal vez sería más</string>
     <string name="hint_05_1">x</string> <!-- TODO -->
-    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
-    <string name="hint_05_3">A picture equals a thousand words.</string>
+    <string name="hint_05_2"> ¿Cómo lo compartirías con tus amigos?</string>
+    <string name="hint_05_3">Una imagen equivale a mil palabras.</string>
     <string name="hint_06_1">¿Es un poco oscuro, no?</string>
     <string name="hint_06_2">Con poco, puedes illuminar mucho</string>
     <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
@@ -80,7 +80,7 @@
     <string name="button">Botón</string>
 
     //Warning Level 06
-    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
+    <string name="warning_level06">Su dispositivo no tiene la herramienta correcta disponible. Aquí hay un nivel gratis :)</string>
     <string name="reset_levels_title">Confirmar la reinicialización</string>
     <string name="reset_levels_message">¿Estás seguro de que quieres restablecer?</string>
     <string name="reset_levels_positive_button">Sí</string>

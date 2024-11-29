@@ -88,7 +88,7 @@
     <string name="button">Button</string>
 
     //Warning Level 06
-    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
+    <string name="warning_level06">Your device doesn\'t have the correct tool available. Here\'s a level for free :)</string>
     <string name="hint_16_2">And it\'s good for the planet !</string>
     <string name="hint_16_3">Just move your ass and get some exercise</string>
 </resources>

@@ -80,7 +80,7 @@
     <string name="button">Tlačítko</string>
 
     //Warning Level 06
-    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
+    <string name="warning_level06">Your device doesn\'t have the correct tool available. Here\'s a level for free :)</string>
     <string name="reset_levels_title">x</string>
     <string name="reset_levels_message">x</string>
     <string name="reset_levels_positive_button">x</string>
