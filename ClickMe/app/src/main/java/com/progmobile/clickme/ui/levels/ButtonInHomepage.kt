@@ -17,17 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
-import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
-
 /**
- * Composable that displays the level with the long click button.
- * It uses a [UnlockLevel] composable to display the level button, with a specific parameter to demand a long click.
+ * Composable that displays the level where the button is hidden in the Homepage.
+ * Go to home page to see the button (available one time).
  */
 @Composable
-fun Level_02(
+fun ButtonInHomepage(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -37,31 +34,21 @@ fun Level_02(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_02),
+            text = stringResource(id = R.string.level_18),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 2,
-            modifier,
-            levelName = Screens.Level_03.name,
-            longClick = true,
-            navController = navController
-        )
     }
 }
 
 @Preview
 @Composable
-fun StartLevel02Preview() {
+fun StartButtonInHomepagePreview() {
     ClickMeTheme {
-        Level_02(
+        ButtonInHomepage(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

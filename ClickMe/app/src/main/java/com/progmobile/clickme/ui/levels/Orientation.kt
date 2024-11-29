@@ -22,18 +22,18 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.material3.Text
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where you have to change the orientation's device from vertical to horizontal.
+ *
+ * Check the device's orientation then if the device is vertical, use [RotatedText] to show overflow title,
+ * else, if the device is horizontal, use [NormalText] to show normal title and [UnlockLevel] to show button to
+ * next level.
  */
 @Composable
-fun Level_04(
+fun Orientation(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -92,9 +92,9 @@ fun NormalText(
 
 @Preview
 @Composable
-fun StartLevel04Preview() {
+fun StartOrientationPreview() {
     ClickMeTheme {
-        Level_04(
+        Orientation(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

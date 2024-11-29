@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
  * Uses two [UnlockLevel] buttons with a checkBothPressed() function to navigate to the next level if the buttons are both pressed at the same time.
  */
 @Composable
-fun Level_03(
+fun DoubleButtons(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -74,7 +74,7 @@ fun Level_03(
             }
 
             // Navigate to level 4
-            navController.navigate(Screens.Level_04.name)
+            navController.navigate(Screens.Orientation.name)
             if (MainActivity.instance?.currentLevelUnlocked!! < 3) {
                 MainActivity.instance?.increaseLevel()
             }
@@ -102,7 +102,7 @@ fun Level_03(
                 labelResourceId = R.string.button,
                 level = 3,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.Level_03.name,
+                levelName = Screens.DoubleButtons.name,
                 navController = navController,
                 onUnlock = {
                     box1Pressed = true
@@ -117,7 +117,7 @@ fun Level_03(
                 labelResourceId = R.string.button,
                 level = 3,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.Level_04.name,
+                levelName = Screens.Orientation.name,
                 navController = navController,
                 onUnlock = {
                     box2Pressed = true
@@ -133,7 +133,7 @@ fun Level_03(
 @Composable
 fun StartLevel03Preview() {
     ClickMeTheme {
-        Level_03(
+        DoubleButtons(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

@@ -133,7 +133,7 @@ class ShakeDetector(
  * the navigation to next screen
  */
 @Composable
-fun Level_14(
+fun MovingButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -171,7 +171,7 @@ fun Level_14(
                 labelResourceId = R.string.button,
                 level = 14,
                 modifier,
-                levelName = Screens.Level_15.name,
+                levelName = Screens.ChangeLanguage.name,
                 navController
             )
         } else {

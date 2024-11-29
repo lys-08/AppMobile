@@ -17,14 +17,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
+import com.progmobile.clickme.Screens
+import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the first level of the game.
+ * Only click on the button to go to the next level.
  */
 @Composable
-fun Level_18(
+fun SimpleButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -34,21 +36,30 @@ fun Level_18(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_18),
+            text = stringResource(id = R.string.level_01),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
+
+        // Level button
+        UnlockLevel(
+            labelResourceId = R.string.button,
+            level = 1,
+            modifier = Modifier,
+            levelName = Screens.LongPressButton.name,
+            navController = navController
+        )
     }
 }
 
 @Preview
 @Composable
-fun StartLevel18Preview() {
+fun StartLevel01Preview() {
     ClickMeTheme {
-        Level_18(
+        SimpleButton(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

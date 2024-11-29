@@ -43,12 +43,17 @@ import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where you have to take a screenshot or a picture.
+ *
+ * Use a [ContextObserver] to check if a picture was added to storage during the level.
+ * If it is the case, it means a picture has been taken (screenshot or else) and [UnlockLevel]
+ * show the button to the current level.
+ *
+ * Four images are placed to imitate a camera screen.
  */
 @SuppressLint("RestrictedApi")
 @Composable
-fun Level_05(
+fun Screenshot(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -150,7 +155,7 @@ fun Level_05(
                 labelResourceId = R.string.button,
                 level = 5,
                 modifier,
-                levelName = Screens.Level_06.name,
+                levelName = Screens.LightTorch.name,
                 navController
             )
         }
@@ -161,9 +166,9 @@ fun Level_05(
 
 @Preview
 @Composable
-fun StartLevel05Preview() {
+fun StartScreenshotPreview() {
     ClickMeTheme {
-        Level_05(
+        Screenshot(
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

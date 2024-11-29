@@ -90,7 +90,7 @@ fun LightSensor(
                 labelResourceId = R.string.button,
                 level = 17,
                 modifier = Modifier,
-                levelName = Screens.Level_18.name,
+                levelName = Screens.ButtonInHomepage.name,
                 navController = navController
             )
         }

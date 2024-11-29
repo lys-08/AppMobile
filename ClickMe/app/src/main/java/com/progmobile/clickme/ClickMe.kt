@@ -25,27 +25,27 @@ import com.progmobile.clickme.ui.HomePage
  */
 enum class Screens(@StringRes val title: Int) {
     HomePage(title = R.string.app_name),
-    Level_01(title = R.string.level_01),
-    Level_02(title = R.string.level_02),
-    Level_03(title = R.string.level_03),
-    Level_04(title = R.string.level_04),
-    Level_05(title = R.string.level_05),
-    Level_06(title = R.string.level_06),
     Charging(title = R.string.level_07),
     Microphone(title = R.string.level_08),
-    Level_09(title = R.string.level_09),
-    Level_10(title = R.string.level_10),
     DarkMode(title = R.string.level_11),
     AirplaneMode(title = R.string.level_12),
-    Level_13(title = R.string.level_13),
-    Level_14(title = R.string.level_14),
-    Level_15(title = R.string.level_15),
-    Level_16(title = R.string.level_16),
     LightSensor(title = R.string.level_17),
-    Level_18(title = R.string.level_18),
     ShutdownDevice(title = R.string.level_19),
     Place10Finger(title = R.string.level_20),
     Wait20s(title = R.string.level_20)
+    SimpleButton(title = R.string.level_01),
+    LongPressButton(title = R.string.level_02),
+    DoubleButtons(title = R.string.level_03),
+    Orientation(title = R.string.level_04),
+    Screenshot(title = R.string.level_05),
+    LightTorch(title = R.string.level_06),
+    DropDownMenu(title = R.string.level_09),
+    LostButton(title = R.string.level_10),
+    Labyrinth(title = R.string.level_13),
+    MovingButton(title = R.string.level_14),
+    ChangeLanguage(title = R.string.level_15),
+    StepCountingLevel(title = R.string.level_16),
+    ButtonInHomepage(title = R.string.level_18)
 }
 
 /**
