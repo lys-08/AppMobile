@@ -31,8 +31,8 @@ import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when light sensor of the device does not detect light.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
 fun Level_17(

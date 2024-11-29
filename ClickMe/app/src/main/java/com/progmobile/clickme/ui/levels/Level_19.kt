@@ -40,8 +40,8 @@ val Context.dataStore by preferencesDataStore(name = "device_prefs")
 val IS_DEVICE_SHUTDOWN_KEY = booleanPreferencesKey("isDeviceShutdown")
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the device is shutdown once.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
 fun Level_19(

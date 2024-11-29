@@ -39,7 +39,7 @@ fun Level_15(
     modifier: Modifier = Modifier
 ) {
     val configuration = LocalConfiguration.current
-    val currentLocale = configuration.locales[0]//Récupère la langue
+    val currentLocale = configuration.locales[0]// Get the language
 
     var previousLocale by rememberSaveable { mutableStateOf(currentLocale) }
     var isLanguageChanged by remember { mutableStateOf(false) }
