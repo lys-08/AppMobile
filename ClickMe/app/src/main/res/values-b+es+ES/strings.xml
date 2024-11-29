@@ -2,7 +2,7 @@
 
     // Levels title
     <string name="reset_levels_negative_button">No</string>
-    <string name="level_01">Simplemente</string>
+    <string name="level_simple_button">Simplemente</string>
     <string name="level_02">Madre de todas las virtudes</string>
     <string name="level_03">Duplicación</string>
     <string name="level_04">Montaña rusa</string>

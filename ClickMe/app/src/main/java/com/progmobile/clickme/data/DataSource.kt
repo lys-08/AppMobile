@@ -47,7 +47,7 @@ object DataSource {
     const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
 
     val levels = listOf(
-        Pair(R.string.level_01, Screens.SimpleButton.name),
+        Pair(R.string.level_simple_button, Screens.SimpleButton.name),
         Pair(R.string.level_02, Screens.LongPressButton.name),
         Pair(R.string.level_03, Screens.DoubleButtons.name),
         Pair(R.string.level_04, Screens.Orientation.name),
@@ -97,6 +97,11 @@ object DataSource {
     )
 
     val levelHints = mapOf(
+        // Map game advices to Home Page
+        Screens.HomePage.name to listOf(
+            R.string.hint_00_1,
+            R.string.hint_00_2,
+        ),
         // map three hints to each level
         Screens.SimpleButton.name to listOf(
             R.string.hint_01_1,

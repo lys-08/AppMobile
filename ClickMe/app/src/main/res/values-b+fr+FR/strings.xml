@@ -2,7 +2,7 @@
 
     // Levels title
     <string name="reset_levels_negative_button">Non</string>
-    <string name="level_01">Tout simplement</string>
+    <string name="level_simple_button">Tout simplement</string>
     <string name="level_02">Mère de toutes les vertus</string>
     <string name="level_03">Duplication</string>
     <string name="level_04">Roller Coaster</string> <!-- Montagne russes -->

@@ -2,7 +2,7 @@
 
     // Levels title
     <string name="reset_levels_negative_button">x</string>
-    <string name="level_01">Prosté a jednoduché</string>
+    <string name="level_simple_button">Prosté a jednoduché</string>
     <string name="level_02">Matka všech ctností</string>
     <string name="level_03">Duplikace</string>
     <string name="level_04">Válečková koaster</string>
