@@ -1,6 +1,7 @@
 package com.progmobile.clickme
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
@@ -23,7 +24,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
@@ -34,12 +34,16 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+// Datastore, declared out of the class to be able to use it in multiple functions
 private val Context.dataStore by preferencesDataStore("user_prefs")
-private const val STARTING_LEVEL = 0
-private const val MUSIC_DEFAULT = true
-private const val SOUND_DEFAULT = true
 
-
+/**
+ * Main Activity of the application.
+ * Provides for :
+ * - Permissions
+ * - Sound and music state
+ * - Level unlocked state
+ */
 class MainActivity : ComponentActivity(), LifecycleObserver {
 
     // =========== LifeCycle ===========
@@ -68,10 +72,13 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
     }
 
     // ========== PERMISSIONS ==========
+    @SuppressLint("InlinedApi")
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.CAMERA,
-        Manifest.permission.READ_EXTERNAL_STORAGE)
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACTIVITY_RECOGNITION,
+        Manifest.permission.BODY_SENSORS)
     private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -96,19 +103,6 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        /*
-        val navController = rememberNavController()
-
-        // Override callback behaviour to always go back to HomePage
-        onBackPressedDispatcher.addCallback() {
-            // Handle the back button event
-            navController.navigate("home") {
-                popUpTo(0) // Clear the back stack
-            }
-
-        }
-        */
 
         instance = this // Set the instance to the current activity
         enableEdgeToEdge()
@@ -147,7 +141,7 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
         // Get music state in datastore : if true, user wants it on, then reactivate it.
         // If false, user wants it off, don't do anything as it has been paused at onPause or stopped at onDestroy
         userMusicPreference = runBlocking { getUserMusicPreference() }
-        if (userMusicPreference) switchMusicState(stopMusic = false)
+        if (userMusicPreference) runBlocking { switchMusicState(stopMusic = false) }
 
         // Get sound state, for the buttons to know if they should play sound when clicked
         userSoundPreference = runBlocking { getUserSoundPreference() }

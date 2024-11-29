@@ -34,8 +34,8 @@ import kotlinx.coroutines.launch
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level with two buttons scren.
+ * Uses two [UnlockLevel] buttons with a checkBothPressed() function to navigate to the next level if the buttons are both pressed at the same time.
  */
 @Composable
 fun Level_03(

@@ -35,8 +35,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
@@ -49,7 +52,17 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
+import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
+import com.progmobile.clickme.data.DataSource.IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH
+import com.progmobile.clickme.data.DataSource.IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH
+import kotlinx.coroutines.runBlocking
 
+/**
+ * Composable that displays the bottom bar of the app. Displays a [ParameterIconButton] on every page, and a [HintIconButton] only on the homepage.
+ * When out of the Home page, the [ParameterIconButton] contains, on top of the sound and music buttons, a return to home page button.
+ * @param navController the navigation controller, needed to know which icon to display
+ * @param modifier the modifier to apply to the composable
+ */
 @Composable
 fun ClickMeBottomBar(
     navController: NavHostController = rememberNavController(),
@@ -81,7 +94,7 @@ fun ClickMeBottomBar(
 }
 
 /**
- * Customizable hint button composable that uses the [imageResourceId] icon
+ * Customizable button composable that uses the [imageResourceId] icon
  * and triggers [onClick] lambda when this composable is clicked
  */
 @Composable
@@ -102,6 +115,7 @@ fun IconButton(
 
     // Sound section
     val context = LocalContext.current
+    val hapticFeedback = LocalHapticFeedback.current
 
     // Add code to onClick
     Image(
@@ -112,10 +126,13 @@ fun IconButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        if (MainActivity.instance?.userSoundPreference == true) {
-                            val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
-                            mediaPlayer.setOnCompletionListener { it.release() }
-                            mediaPlayer.start()
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        runBlocking {
+                            if (MainActivity.instance?.userSoundPreference == true) {
+                                val mediaPlayer = MediaPlayer.create(context, R.raw.click_button)
+                                mediaPlayer.setOnCompletionListener { it.release() }
+                                mediaPlayer.start()
+                            }
                         }
                         onClick()
                     }
@@ -127,11 +144,17 @@ fun IconButton(
     )
 }
 
+/**
+ * Specific composable for the settings button, that uses the [IconButton] composable
+ */
 @Composable
 fun ParameterIconButton(
     navController: NavController,
     modifier: Modifier = Modifier,
 ){
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
 
@@ -152,8 +175,9 @@ fun ParameterIconButton(
         bottomButton = true,
         modifier = modifier
             .padding(16.dp)
-            .size(48.dp) // Set the size of the image)
+            //.size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
+            .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
     )
 
     if(showDialog){
@@ -171,6 +195,9 @@ fun ParameterIconButton(
     }
 }
 
+/**
+ * Dialog that displays the settings options
+ */
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ParameterDialog(
@@ -178,6 +205,9 @@ fun ParameterDialog(
     onDismissRequest: () -> Unit,
     onNavigateToHomePage: () -> Unit
 ) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
@@ -186,7 +216,7 @@ fun ParameterDialog(
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(screenWidth * IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH)
         ) {
             if (isNotHomePage) {
                 // Home button
@@ -195,7 +225,8 @@ fun ParameterDialog(
                     imageResourceId = R.drawable.home_icon,
                     contentDescription = "Home",
                     modifier = Modifier
-                        .widthIn(max = 128.dp)
+                        .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
+
                 )
             }
 
@@ -212,7 +243,7 @@ fun ParameterDialog(
                 imageResourceId = if (isMusicUp) R.drawable.music_up_icon else R.drawable.music_off_icon,
                 contentDescription = if (isMusicUp) "Music Up" else "Music Off",
                 modifier = Modifier
-                    .widthIn(max = 128.dp)
+                    .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
             )
 
             // VOLUME ICON
@@ -226,7 +257,7 @@ fun ParameterDialog(
                 imageResourceId = if (isVolumeUp) R.drawable.volume_up_icon else R.drawable.volume_off_icon,
                 contentDescription = if (isVolumeUp) "Volume Up" else "Volume Off",
                 modifier = Modifier
-                    .widthIn(max = 128.dp)
+                    .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
             )
 
             // REINITIALIZE LEVELS ICON
@@ -240,18 +271,24 @@ fun ParameterDialog(
                     imageResourceId = R.drawable.restart_icon,
                     contentDescription = "Restart",
                     modifier = Modifier
-                        .widthIn(max = 128.dp)
+                        .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
                 )
             }
         }
     }
 }
 
+/**
+ * Specific composable for the hint button, that uses the [IconButton] composable
+ */
 @Composable
 fun HintIconButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
 
@@ -265,8 +302,9 @@ fun HintIconButton(
         bottomButton = true,
         modifier = modifier
             .padding(16.dp)
-            .size(48.dp) // Set the size of the image)
+            //.size(48.dp) // Set the size of the image)
             .wrapContentSize(Alignment.BottomEnd)
+            .widthIn(max = screenWidth * IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH)
     )
 
     // Show a dialog when showDialog is true
@@ -278,6 +316,10 @@ fun HintIconButton(
     }
 }
 
+/**
+ * Dialog that displays the hints for the current level
+ * Specific behaviour for level 10 : unlock the next level
+ */
 @Composable
 fun SwipableDialog(
     onDismissRequest: () -> Unit,
@@ -343,7 +385,7 @@ fun SwipableDialog(
                         )*/
                         Text(
                             text = context.getString(mutableListOfHints[page]),
-                            fontSize = TextUnit(6f, TextUnitType.Em),
+                            fontSize = TextUnit(HINT_TEXT_SIZE, TextUnitType.Sp),
                             color = Color.Black
                         )
                     }

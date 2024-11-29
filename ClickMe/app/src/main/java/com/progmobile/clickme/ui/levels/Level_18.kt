@@ -43,15 +43,6 @@ fun Level_18(
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 18,
-            modifier = Modifier,
-            levelName = Screens.Level_19.name,
-            navController = navController
-        )
     }
 }
 

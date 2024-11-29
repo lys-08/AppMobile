@@ -32,7 +32,8 @@
     <string name="hint_02_1">x</string> <!-- TODO -->
     <string name="hint_02_2">x</string> <!-- TODO -->
     <string name="hint_02_3">x</string> <!-- TODO -->
-    <string name="hint_03_1">x</string> <!-- TODO -->
+    <!-- TODO -->
+    <string name="hint_03_1">x</string>
     <string name="hint_03_2">x</string> <!-- TODO -->
     <string name="hint_03_3">x</string> <!-- TODO -->
     <string name="hint_04_1">Algo não parece certo</string>
@@ -84,4 +85,6 @@
     <string name="reset_levels_title">x</string>
     <string name="reset_levels_message">x</string>
     <string name="reset_levels_positive_button">x</string>
+    <string name="hint_16_2">TODO</string>
+    <string name="hint_16_3">TODO</string>
 </resources>

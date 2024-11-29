@@ -14,19 +14,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level with an empty page,
+ * as the button composable for this level is in the Swipable composable of the bottom app bar
  */
 @Composable
 fun Level_10(
-    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -52,7 +49,6 @@ fun Level_10(
 fun StartLevel10Preview() {
     ClickMeTheme {
         Level_10(
-            navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))
