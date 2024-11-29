@@ -1,6 +1,8 @@
 package com.progmobile.clickme.ui
 
+import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,29 +50,28 @@ fun HomePage(
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-
-        // Levels button
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-          ) {
-              //Enable buttons from unlocked levels
-              items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
-                  LevelButton(
-                      labelResourceId = levels[i].first,
-                      onClick = { navController.navigate(levels[i].second) }
-                  )
-              }
+        ) {
+            //Enable buttons from unlocked levels
+            items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
+                LevelButton(
+                    labelResourceId = levels[i].first,
+                    onClick = { navController.navigate(levels[i].second) },
+                    // Concatenate level number and the dash
+                    prefix = "${i + 1}-",
+                )
+            }
             //Disable buttons from locked levels
-              items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
-                  LevelButtonLocked(
-                      onClick = { navController.navigate(levels[i].second) }
-                  )
-              }
+            items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
+                LevelButtonLocked(
+                    onClick = { navController.navigate(levels[i].second) }
+                )
+            }
         }
-
     }
 }
 
