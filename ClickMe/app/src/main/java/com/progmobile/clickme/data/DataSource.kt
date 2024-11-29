@@ -2,6 +2,7 @@ package com.progmobile.clickme.data
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
@@ -33,9 +34,13 @@ object DataSource {
     const val STARTING_LEVEL = 16
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
+    const val HINT_TEXT_SIZE = 20f
+    const val IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH = 0.2f
+    const val IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH = 0.1f
 
-    // How long to stay pressed on the button of level 2
-    const val LEVEL_TWO_LONG_PRESS_DURATION = 3000L
+    // Level-specific constants
+    const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
+    const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
 
     val levels = listOf(
         Pair(R.string.level_01, Screens.Level_01.name),
@@ -70,7 +75,7 @@ object DataSource {
         Screens.Level_07.name to { navController, modifier -> { Level_07(navController, modifier) } },
         Screens.Level_08.name to { navController, modifier -> { Level_08(navController, modifier) } },
         Screens.Level_09.name to { navController, modifier -> { Level_09(navController, modifier) } },
-        Screens.Level_10.name to { navController, modifier -> { Level_10(navController, modifier) } },
+        Screens.Level_10.name to { _, modifier -> { Level_10(modifier) } },
         Screens.Level_11.name to { navController, modifier -> { Level_11(navController, modifier) } },
         Screens.Level_12.name to { navController, modifier -> { Level_12(navController, modifier) } },
         Screens.Level_13.name to { navController, modifier -> { Level_13(navController, modifier) } },

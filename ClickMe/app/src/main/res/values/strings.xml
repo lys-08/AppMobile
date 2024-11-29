@@ -25,7 +25,7 @@
     <string name="level_13">Labyrinth</string>
     <string name="level_14">Knock it down</string>
     <string name="level_15">Klikněte na mě (pokud můžete)</string>
-    <string name="level_16">TODO</string> <!-- TODO -->
+    <string name="level_16">Weight loss</string> <!-- TODO -->
     <string name="level_17">TODO</string> <!-- TODO -->
     <string name="level_18">Lost 2</string> <!-- TODO -->
     <string name="level_19">TODO</string> <!-- TODO -->
@@ -73,7 +73,7 @@
     <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string>
     <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
     <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
-    <string name="hint_16_1">TODO</string> <!-- TODO -->
+    <string name="hint_16_1">Do it, it\'s good for you</string> <!-- TODO -->
     <string name="hint_17_1">TODO</string> <!-- TODO -->
     <string name="hint_18_1">TODO</string> <!-- TODO -->
     <string name="hint_19_1">TODO</string> <!-- TODO -->
@@ -84,4 +84,6 @@
 
     //Warning Level 06
     <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
+    <string name="hint_16_2">And it\'s good for the planet !</string>
+    <string name="hint_16_3">Just move your ass and get some exercise</string>
 </resources>

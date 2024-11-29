@@ -22,8 +22,8 @@ import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the first level of the game.
+ * Only click on the button to go to the next level.
  */
 @Composable
 fun Level_01(
