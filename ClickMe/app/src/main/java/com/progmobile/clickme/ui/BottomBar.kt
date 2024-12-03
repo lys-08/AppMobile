@@ -56,6 +56,7 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.data.DataSource.HINT_TEXT_SIZE
 import com.progmobile.clickme.data.DataSource.IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH
+import com.progmobile.clickme.data.DataSource.LEVEL_LOST_NAVIGATION_VALUE
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -72,7 +73,7 @@ fun ClickMeBottomBar(
     BottomAppBar(
         containerColor = Color.Transparent
     ) {
-        val currentRoute = navController.currentDestination?.route
+        //val currentRoute = navController.currentDestination?.route
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -84,12 +85,10 @@ fun ClickMeBottomBar(
             ParameterIconButton(navController)
 
             // Only display HintIconButton if not on homepage
-            if (currentRoute != Screens.HomePage.name) {
-                // Right-aligned: HintIconButton
-                HintIconButton(
-                    navController = navController
-                )
-            }
+            // Right-aligned: HintIconButton
+            HintIconButton(
+                navController = navController
+            )
         }
     }
 }
@@ -374,7 +373,7 @@ fun SwipableDialog(
 
     var mutableListOfHints by remember { mutableStateOf(listOf<Int>()) }
     mutableListOfHints =
-        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.hint_00)
+        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.no_hint_message)
 
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message
@@ -406,7 +405,7 @@ fun SwipableDialog(
                             onUnlock = {
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
-                                navController.navigate(Screens.DarkMode.name)
+                                navController.navigate(LEVEL_LOST_NAVIGATION_VALUE)
                                 if (MainActivity.instance?.currentLevelUnlocked!! < 11) {
                                     MainActivity.instance?.increaseLevel()
                                 }

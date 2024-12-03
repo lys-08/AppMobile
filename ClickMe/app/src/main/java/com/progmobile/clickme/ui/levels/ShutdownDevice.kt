@@ -99,7 +99,7 @@ fun ShutdownDevice(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_19),
+            text = stringResource(id = R.string.level_shutdown_device),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

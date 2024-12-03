@@ -144,7 +144,7 @@ fun Screenshot(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(id = R.string.level_05),
+            text = stringResource(id = R.string.level_screenshot),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

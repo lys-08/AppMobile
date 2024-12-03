@@ -31,7 +31,7 @@ fun ButtonInHomepage(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_18),
+            text = stringResource(id = R.string.level_button_in_home_page),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

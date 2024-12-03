@@ -105,7 +105,7 @@ fun Microphone(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_08),
+            text = stringResource(id = R.string.level_microphone),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

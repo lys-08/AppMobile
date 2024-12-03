@@ -68,7 +68,7 @@ fun RotatedText(
 ) {
     val textSize = (screenWidth / 2).sp
     Text(
-        text = stringResource(id = R.string.level_04),
+        text = stringResource(id = R.string.level_orientation),
         style = MaterialTheme.typography.displayLarge,
         fontSize = textSize,
         modifier = Modifier,
@@ -81,7 +81,7 @@ fun NormalText(
 ) {
     val textSize = (screenWidth / 10).sp
     Text(
-        text = stringResource(id = R.string.level_04),
+        text = stringResource(id = R.string.level_orientation),
         style = MaterialTheme.typography.displayLarge,
         fontSize = textSize,
         modifier = Modifier

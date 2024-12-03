@@ -102,7 +102,7 @@ fun LightTorch(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.level_06),
+                text = stringResource(id = R.string.level_ligh_torch),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -123,7 +123,7 @@ fun LightTorch(
 
             if (!hasFlashlight(context)) {
                 Text(
-                    text = stringResource(id = R.string.warning_level06),
+                    text = stringResource(id = R.string.warning_level_light_torch),
                     style = MaterialTheme.typography.bodyLarge
                 )
                 UnlockLevel(

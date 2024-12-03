@@ -39,7 +39,7 @@ fun LongPressButton(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_02),
+            text = stringResource(id = R.string.level_long_press_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

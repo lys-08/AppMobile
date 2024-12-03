@@ -123,7 +123,7 @@ fun StepCountingLevel(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_16),
+            text = stringResource(id = R.string.level_step_counting),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -138,7 +138,7 @@ fun StepCountingLevel(
 
         if (!hasStepCounterSensor(context)) {
             Text(
-                text = stringResource(id = R.string.warning_level06),
+                text = stringResource(id = R.string.warning_level_light_torch),
                 style = MaterialTheme.typography.bodyLarge
             )
             UnlockLevel(

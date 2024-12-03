@@ -40,35 +40,35 @@ object DataSource {
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
     const val IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH = 0.2f
-    const val IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH = 0.1f
+    //const val IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH = 0.1f
 
     // Level-specific constants
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
     const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
 
     val levels = mapOf(
-        Screens.SimpleButton.name to R.string.level_01,
-        Screens.LongPressButton.name to R.string.level_02,
-        Screens.DoubleButtons.name to R.string.level_03,
-        Screens.Orientation.name to R.string.level_04,
-        Screens.Screenshot.name to R.string.level_05,
-        Screens.LightTorch.name to R.string.level_06,
-        Screens.Charging.name to R.string.level_07,
-        Screens.Microphone.name to R.string.level_08,
-        Screens.DropDownMenu.name to R.string.level_09,
-        Screens.LostButton.name to R.string.level_10,
-        Screens.DarkMode.name to R.string.level_11,
-        Screens.AirplaneMode.name to R.string.level_12,
-        Screens.Labyrinth.name to R.string.level_13,
-        Screens.MovingButton.name to R.string.level_14,
-        Screens.ChangeLanguage.name to R.string.level_15,
-        Screens.StepCountingLevel.name to R.string.level_16,
-        Screens.LightSensor.name to R.string.level_17,
-        Screens.ButtonInHomepage.name to R.string.level_18,
-        Screens.ShutdownDevice.name to R.string.level_19,
-        Screens.Place10Finger.name to R.string.level_20,
-        Screens.Wait20s.name to R.string.level_21,
-        Screens.ScrollToFindTheButton.name to R.string.level_22 // TODO: Change string
+        Screens.SimpleButton.name to R.string.level_simple_button,
+        Screens.LongPressButton.name to R.string.level_long_press_button,
+        Screens.DoubleButtons.name to R.string.level_double_buttons,
+        Screens.Orientation.name to R.string.level_orientation,
+        Screens.Screenshot.name to R.string.level_screenshot,
+        Screens.LightTorch.name to R.string.level_ligh_torch,
+        Screens.Charging.name to R.string.level_charging,
+        Screens.Microphone.name to R.string.level_microphone,
+        Screens.DropDownMenu.name to R.string.level_drop_down_menu,
+        Screens.LostButton.name to R.string.level_lost_button,
+        Screens.DarkMode.name to R.string.level_dark_mode,
+        Screens.AirplaneMode.name to R.string.level_airplane_mode,
+        Screens.Labyrinth.name to R.string.level_labyrinth,
+        Screens.MovingButton.name to R.string.level_moving_button,
+        Screens.ChangeLanguage.name to R.string.level_change_language,
+        Screens.StepCountingLevel.name to R.string.level_step_counting,
+        Screens.LightSensor.name to R.string.level_light_sensor,
+        Screens.ButtonInHomepage.name to R.string.level_button_in_home_page,
+        Screens.ShutdownDevice.name to R.string.level_shutdown_device,
+        Screens.Place10Finger.name to R.string.level_place_ten_fingers,
+        Screens.Wait20s.name to R.string.level_wait_20_seconds,
+        Screens.ScrollToFindTheButton.name to R.string.level_scroll_to_find_button // TODO: Change string
     )
 
     val levelsMap: Map<String, (NavHostController, Modifier) -> @Composable () -> Unit> = mapOf(
@@ -96,72 +96,96 @@ object DataSource {
         Screens.Wait20s.name to { navController, modifier -> { Wait20s(/* idLevel = 22*/ Screens.HomePage.name, navController, modifier) } },
     )
 
+    val LEVEL_LOST_NAVIGATION_VALUE = Screens.LightTorch.name
+
     val levelHints = mapOf(
+        // Map game advices to Home Page
+        Screens.HomePage.name to listOf(
+            R.string.home_page_explication_1,
+            R.string.home_page_explication_2,
+        ),
         // map three hints to each level
         Screens.SimpleButton.name to listOf(
-            R.string.hint_01_1,
-            R.string.hint_01_2,
-            R.string.hint_01_3),
+            R.string.hint_simple_button_1,
+            R.string.hint_simple_button_2,
+            R.string.hint_simple_button_3
+        ),
         Screens.LongPressButton.name to listOf(
-            R.string.hint_02_1,
-            R.string.hint_02_3,
-            R.string.hint_02_3),
+            R.string.hint_long_press_button_1,
+            R.string.hint_long_press_button_2,
+            R.string.hint_long_press_button_3
+        ),
         Screens.DoubleButtons.name to listOf(
-            R.string.hint_03_1,
-            R.string.hint_03_2,
-            R.string.hint_03_3),
+            R.string.hint_double_buttons_1,
+            R.string.hint_double_buttons_2,
+            R.string.hint_double_buttons_3
+        ),
         Screens.Orientation.name to listOf(
-            R.string.hint_04_1,
-            R.string.hint_04_2,
-            R.string.hint_04_3),
+            R.string.hint_orientation_1,
+            R.string.hint_orientation_2,
+            R.string.hint_orientation_3
+        ),
         Screens.Screenshot.name to listOf(
-            R.string.hint_05_1,
-            R.string.hint_05_2,
-            R.string.hint_05_3),
+            R.string.hint_screenshot_1,
+            R.string.hint_screenshot_2,
+            R.string.hint_screenshot_3
+        ),
         Screens.LightTorch.name to listOf(
-            R.string.hint_06_1,
-            R.string.hint_06_2,
-            R.string.hint_06_3),
+            R.string.hint_light_torch_1,
+            R.string.hint_light_torch_2,
+            R.string.hint_light_torch_3
+        ),
         Screens.Charging.name to listOf(
-            R.string.hint_07_1,
-            R.string.hint_07_2),
+            R.string.hint_charging_1,
+            R.string.hint_charging_2
+        ),
         Screens.Microphone.name to listOf(
-            R.string.hint_08_1,
-            R.string.hint_08_2,
-            R.string.hint_08_3),
+            R.string.hint_microphone_1,
+            R.string.hint_microphone_2,
+            R.string.hint_microphone_3
+        ),
         Screens.DropDownMenu.name to listOf(
-            R.string.hint_09_1,
-            R.string.hint_09_2,
-            R.string.hint_09_3,
-            R.string.hint_09_4),
+            R.string.hint_drop_down_menu_1,
+            R.string.hint_drop_down_menu_2,
+            R.string.hint_drop_down_menu_3,
+            R.string.hint_drop_down_menu_4
+        ),
         Screens.LostButton.name to listOf(
-            R.string.hint_10_1,
-            R.string.hint_10_2),
+            R.string.hint_lost_button_1,
+            R.string.hint_lost_button_2
+        ),
         Screens.DarkMode.name to listOf(
-            R.string.hint_11_1,
-            R.string.hint_11_2),
+            R.string.hint_dark_mode_1,
+            R.string.hint_dark_mode_2
+        ),
         Screens.AirplaneMode.name to listOf(
-            R.string.hint_12_1,
-            R.string.hint_12_2),
-        Screens.Labyrinth.name to listOf(R.string.hint_13_1),
-        Screens.MovingButton.name to listOf(R.string.hint_14_1),
+            R.string.hint_airplane_mode_1,
+            R.string.hint_airplane_mode_2
+        ),
+        Screens.Labyrinth.name to listOf(R.string.hint_labyrinth_1),
+        Screens.MovingButton.name to listOf(R.string.hint_moving_button_1),
         Screens.ChangeLanguage.name to listOf(
-            R.string.hint_15_1,
-            R.string.hint_15_2,
-            R.string.hint_15_3,
-            R.string.hint_15_4,
-            R.string.hint_15_5),
-        Screens.StepCountingLevel.name to listOf(R.string.hint_16_1),
+            R.string.hint_change_language_1,
+            R.string.hint_change_language_2,
+            R.string.hint_change_language_3,
+            R.string.hint_change_language_4,
+            R.string.hint_change_language_5
+        ),
+        Screens.StepCountingLevel.name to listOf(
+            R.string.hint_step_counting_1,
+            R.string.hint_step_counting_2,
+            R.string.hint_step_counting_3
+        ),
         Screens.LightSensor.name to listOf(
-            R.string.hint_17_1,
-            R.string.hint_17_2,
-            R.string.hint_17_3),
-        Screens.ButtonInHomepage.name to listOf(R.string.hint_18_1),
-        Screens.ShutdownDevice.name to listOf(R.string.hint_19_1),
+            R.string.hint_light_sensor_1,
+            R.string.hint_light_sensor_2,
+            R.string.hint_light_sensor_3),
+        Screens.ButtonInHomepage.name to listOf(R.string.hint_button_in_home_page_1),
+        Screens.ShutdownDevice.name to listOf(R.string.hint_shutdown_device_1),
         Screens.Place10Finger.name to listOf(
-            R.string.hint_20_1,
-            R.string.hint_20_2),
-        Screens.Wait20s.name to listOf(R.string.hint_21_1),
+            R.string.hint_place_ten_fingers_1,
+            R.string.hint_place_ten_fingers_2),
+        Screens.Wait20s.name to listOf(R.string.hint_wait_20_seconds_1),
         // TODO : add Scroll to find the burron
     )
 }

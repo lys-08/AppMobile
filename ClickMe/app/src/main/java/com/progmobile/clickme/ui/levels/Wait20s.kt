@@ -107,7 +107,7 @@ fun Wait20s(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_21),
+            text = stringResource(id = R.string.level_wait_20_seconds),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

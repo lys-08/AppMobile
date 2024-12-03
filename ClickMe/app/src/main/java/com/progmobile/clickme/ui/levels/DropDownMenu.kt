@@ -55,7 +55,7 @@ fun DropDownMenu(
     ) {
         item {
             Text(
-                text = stringResource(id = R.string.level_09),
+                text = stringResource(id = R.string.level_drop_down_menu),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .fillMaxWidth()

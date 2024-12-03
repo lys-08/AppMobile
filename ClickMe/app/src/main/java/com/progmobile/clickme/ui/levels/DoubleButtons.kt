@@ -50,7 +50,7 @@ fun DoubleButtons(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_03),
+            text = stringResource(id = R.string.level_double_buttons),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
