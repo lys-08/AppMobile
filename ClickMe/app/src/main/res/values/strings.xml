@@ -11,6 +11,12 @@
 
     <string name="error" translatable="false">Error</string>
 
+    // Permission
+    <string name="permission_denied">Permission denied</string>
+    <string name="permission_denied_msg">At least one permission have been denied.\nWARNING : you may not be able to complete some level, please accept all permissions.\n\nYou can accept the permission in the settings.</string>
+    <string name="settings">Settings</string>
+    <string name="cancel">Continue</string>
+
     // Levels title
     <string name="level_simple_button">Plain and simple</string>
     <string name="level_long_press_button">Mother of all virtues</string>

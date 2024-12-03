@@ -1,4 +1,9 @@
 <resources>
+    // Permission
+    <string name="permission_denied">Permission refusée</string>
+    <string name="permission_denied_msg">Au moins une permission a été refusée.\nATTENTION : vous pourrez vous retrouver dans l\'incapacité de compléter certains niveaux, pour cela, accepter toutes les permissions.\n\nVous pouvez accepter les permissions depuis les paramètres.</string>
+    <string name="settings">Paramètre</string>
+    <string name="cancel">Continuer</string>
 
     // Levels title
     <string name="reset_levels_negative_button">Non</string>

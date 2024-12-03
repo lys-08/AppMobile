@@ -1,4 +1,9 @@
 <resources>
+    // Permission
+    <string name="permission_denied">Povolení bylo zamítnuto</string>
+    <string name="permission_denied_msg">Alespoň jedna dovolená byla zamítnuta.\nATTENTION: Možná zjistíte, že nejste schopni dokončit určité úrovně, pro to přijměte všechna oprávnění. \nnmůžete přijmout oprávnění z nastavení.</string>
+    <string name="settings">Parametr</string>
+    <string name="cancel">Pokračovat</string>
 
     // Levels title
     <string name="reset_levels_negative_button">x</string>

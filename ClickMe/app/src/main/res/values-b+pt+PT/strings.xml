@@ -1,4 +1,9 @@
 <resources>
+    // Permission
+    <string name="permission_denied">Permissão negada</string>
+    <string name="permission_denied_msg">Pelo menos uma licença foi recusada.\nATENÇÃO: você pode não conseguir completar alguns níveis, para isso, aceite todas as permissões.\n\nVocê pode aceitar as permissões nas configurações.</string>
+    <string name="settings">Configurações</string>
+    <string name="cancel">Continuar</string>
 
     // Levels title
     <string name="reset_levels_negative_button">x</string>
