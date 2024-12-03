@@ -96,6 +96,8 @@ object DataSource {
         Screens.Wait20s.name to { navController, modifier -> { Wait20s(/* idLevel = 22*/ Screens.HomePage.name, navController, modifier) } },
     )
 
+    val LEVEL_LOST_NAVIGATION_VALUE = Screens.LightTorch.name
+
     val levelHints = mapOf(
         // Map game advices to Home Page
         Screens.HomePage.name to listOf(
