@@ -58,7 +58,7 @@ fun ChangeLanguage(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_15),
+            text = stringResource(id = R.string.level_change_language),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

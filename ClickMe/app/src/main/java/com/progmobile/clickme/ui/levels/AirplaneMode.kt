@@ -77,7 +77,7 @@ fun AirplaneMode(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_12),
+            text = stringResource(id = R.string.level_airplane_mode),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

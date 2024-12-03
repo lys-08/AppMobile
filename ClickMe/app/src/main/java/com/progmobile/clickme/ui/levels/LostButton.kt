@@ -32,7 +32,7 @@ fun LostButton(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_10),
+            text = stringResource(id = R.string.level_lost_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

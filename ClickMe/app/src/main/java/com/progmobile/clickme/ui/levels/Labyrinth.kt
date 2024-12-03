@@ -144,7 +144,7 @@ fun Labyrinth(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = stringResource(id = R.string.level_13),
+            text = stringResource(id = R.string.level_labyrinth),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

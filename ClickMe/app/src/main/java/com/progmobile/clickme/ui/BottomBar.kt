@@ -373,7 +373,7 @@ fun SwipableDialog(
 
     var mutableListOfHints by remember { mutableStateOf(listOf<Int>()) }
     mutableListOfHints =
-        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.hint_00)
+        DataSource.levelHints[navController.currentDestination?.route] ?: listOf(R.string.no_hint_message)
 
     Dialog(onDismissRequest = onDismissRequest) {
         // If listOfHints is empty, display a message

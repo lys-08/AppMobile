@@ -78,7 +78,7 @@ fun LightSensor(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_17),
+            text = stringResource(id = R.string.level_light_sensor),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

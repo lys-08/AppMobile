@@ -39,7 +39,7 @@ fun ScrollToFindTheButton(
         // Title
          item {
              Text(
-                 text = stringResource(id = R.string.level_22),
+                 text = stringResource(id = R.string.level_scroll_to_find_button),
                  style = MaterialTheme.typography.displayLarge,
                  modifier = Modifier
                      .fillMaxWidth()

@@ -53,7 +53,7 @@ fun DarkMode(
     ) {
         // Titre
         Text(
-            text = stringResource(id = R.string.level_11),
+            text = stringResource(id = R.string.level_dark_mode),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

@@ -73,7 +73,7 @@ fun Charging(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_07),
+            text = stringResource(id = R.string.level_charging),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()

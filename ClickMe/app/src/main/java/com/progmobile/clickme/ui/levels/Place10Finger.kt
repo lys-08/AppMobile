@@ -67,7 +67,7 @@ fun Place10Finger(
         ) {
             // Title
             Text(
-                text = stringResource(id = R.string.level_20),
+                text = stringResource(id = R.string.level_place_ten_fingers),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .fillMaxWidth()
