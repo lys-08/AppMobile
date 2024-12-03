@@ -73,7 +73,7 @@ fun ClickMeBottomBar(
     BottomAppBar(
         containerColor = Color.Transparent
     ) {
-        val currentRoute = navController.currentDestination?.route
+        //val currentRoute = navController.currentDestination?.route
         Row(
             modifier = modifier
                 .fillMaxWidth()
