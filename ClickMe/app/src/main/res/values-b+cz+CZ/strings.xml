@@ -32,7 +32,7 @@
     <string name="hint_simple_button_3">Číst. Zařízení. Název.</string>
     <string name="hint_long_press_button_1">Spěcháte, že?</string> <!-- TODO -->
     <string name="hint_long_press_button_2">Vyzbrojte se trpělivostí.</string> <!-- TODO -->
-    <string name="hint_long_press_button_3">Ok, stačí stisknout delší...</string> <!-- TODO -->
+    <string name="hint_long_press_button_3">Ok, stačí stisknout delší…</string> <!-- TODO -->
     <string name="hint_double_buttons_1">To. Je. Zřejmé.</string> <!-- TODO -->
     <string name="hint_double_buttons_2">To je ještě jednodušší než to poslední.</string> <!-- TODO -->
     <string name="hint_double_buttons_3">Potřebujete dva prsty</string> <!-- TODO -->
@@ -60,9 +60,9 @@
     <string name="hint_dark_mode_2">Někdy se musíte ponořit do hlubin, abyste viděli světlo</string>
     <string name="hint_airplane_mode_1">Hlavu v oblacích</string>
     <string name="hint_airplane_mode_2">Je čas jít na dovolenou</string> <!-- TODO -->
-    <string name="hint_labyrinth_1">Je to labyrint... Prostě odsud vypadni!</string>
+    <string name="hint_labyrinth_1">Je to labyrint… Prostě odsud vypadni!</string>
     <string name="hint_labyrinth_2">Představte si, že jde omramor.</string>
-    <string name="hint_labyrinth_3">Co se stane smramorem, když nakloníte labyrint ... ?</string>
+    <string name="hint_labyrinth_3">Co se stane smramorem, když nakloníte labyrint … ?</string>
     <string name="hint_moving_button_1">Je třeba se uklidnit</string> <!-- TODO -->
     <string name="hint_change_language_1">Klikit warnon (ma c\'hellit)</string>
     <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string>

@@ -60,9 +60,9 @@
     <string name="hint_dark_mode_2">Parfois il faut plonger dans les profondeurs pour voir la lumière</string>
     <string name="hint_airplane_mode_1">La tête dans les nuages</string>
     <string name="hint_airplane_mode_2">C\'est le moment de partir en vacances</string> <!-- TODO -->
-    <string name="hint_labyrinth_1">C\'est un labyrinthe... Juste sort de là !</string>
+    <string name="hint_labyrinth_1">C\'est un labyrinthe… Juste sort de là !</string>
     <string name="hint_labyrinth_2">Imagine que le point est une bille.</string>
-    <string name="hint_labyrinth_3">Qu'est ce qui arrive à une bille lorsqu'on penche un labyrinthe... ?</string>
+    <string name="hint_labyrinth_3">Qu\'est ce qui arrive à une bille lorsqu\'on penche un labyrinthe… ?</string>
     <string name="hint_moving_button_1">Calmez-le !</string> <!-- TODO -->
     <string name="hint_change_language_1">Klikit warnon (ma c\'hellit)</string> <!-- Breton -->
     <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string> <!-- Créole haïtien -->
