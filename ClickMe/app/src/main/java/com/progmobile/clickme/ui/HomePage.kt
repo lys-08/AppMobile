@@ -23,6 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
+import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource.LEVEL_NUMBERS
 import com.progmobile.clickme.data.DataSource.levels
 import com.progmobile.clickme.data.DataSource.levelsMap
@@ -64,9 +65,24 @@ fun HomePage(
               items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
                   LevelButton(
                       labelResourceId = levels.get(levelList[i]) ?: R.string.error,//levels[i].first,
-                      onClick = { navController.navigate(levelList[i]) } //levels[i].second
+                      onClick = { navController.navigate(levelList[i]) }, //levels[i].second
+                      // Concatenate level number and the dash
+                      prefix = "${i + 1}-",
                   )
               }
+
+            if (MainActivity.instance?.currentLevelUnlocked!! == 17) {
+                item {
+                    UnlockLevel(
+                        labelResourceId = R.string.button,
+                        level = 18,
+                        //modifier = Modifier.wrapContentSize(),
+                        levelName = Screens.Labyrinth.name,
+                        navController = navController
+                    )
+                }
+            }
+
             //Disable buttons from locked levels
               items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
                   LevelButtonLocked(
