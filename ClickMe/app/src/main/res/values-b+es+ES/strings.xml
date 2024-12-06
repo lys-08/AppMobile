@@ -60,7 +60,9 @@
     <string name="hint_dark_mode_2">A veces tienes que sumergirte en las profundidades para ver la luz</string>
     <string name="hint_airplane_mode_1">Cabeza en las nubes</string>
     <string name="hint_airplane_mode_2">x</string> <!-- TODO -->
-    <string name="hint_labyrinth_1">x</string> <!-- TODO -->
+    <string name="hint_labyrinth_1">It\'s a labyrinth... Just get out of there.</string>
+    <string name="hint_labyrinth_2">Imagine the point is a marble.</string>
+    <string name="hint_labyrinth_3">What happens to a marble when you tilt a labyrinth ... ?</string>
     <string name="hint_moving_button_1">¡calmalo!</string> <!-- TODO -->
     <string name="hint_change_language_1">Klikit warnon (ma c\'hellit)</string>
     <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string>
