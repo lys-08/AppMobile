@@ -12,7 +12,7 @@
     <string name="level_double_buttons">Duplikace</string>
     <string name="level_orientation">Válečková koaster</string>
     <string name="level_screenshot">Level 5</string> <!-- TODO -->
-    <string name="level_ligh_torch">Lux Via</string> <!-- TODO -->
+    <string name="level_light_torch">Lux Via</string> <!-- TODO -->
     <string name="level_charging">Káva</string>
     <string name="level_microphone">Stoupání</string>
     <string name="level_drop_down_menu">Ne jak se zdá</string>
@@ -23,11 +23,11 @@
     <string name="level_moving_button">Srazte to dolů</string>
     <string name="level_change_language">Kaomi iaʻu (inā hiki iā ʻoe)</string> <!-- Hawaïen -->
     <string name="level_step_counting">TODO</string> <!-- TODO -->
-    <string name="level_light_sensor">TODO</string> <!-- TODO -->
+    <string name="level_light_sensor">Obskurní</string>
     <string name="level_button_in_home_page">TODO</string> <!-- TODO -->
-    <string name="level_shutdown_device">TODO</string> <!-- TODO -->
-    <string name="level_place_ten_fingers">TODO</string> <!-- TODO -->
-    <string name="level_wait_20_seconds">TODO</string> <!-- TODO -->
+    <string name="level_shutdown_device">Zatemnění</string>
+    <string name="level_place_ten_fingers">Naučte se počítat</string>
+    <string name="level_wait_20_seconds">Trpělivost</string>
     <string name="level_scroll_to_find_button">TODO</string> <!-- TODO -->
 
     // Hints
@@ -64,7 +64,7 @@
     <string name="hint_dark_mode_1">Hledejte stín, abyste našli světlo, hledejte světlo, abyste našli stín</string>
     <string name="hint_dark_mode_2">Někdy se musíte ponořit do hlubin, abyste viděli světlo</string>
     <string name="hint_airplane_mode_1">Hlavu v oblacích</string>
-    <string name="hint_airplane_mode_2">x</string> <!-- TODO -->
+    <string name="hint_airplane_mode_2">Je čas jít na dovolenou</string>
     <string name="hint_labyrinth_1">x</string> <!-- TODO -->
     <string name="hint_moving_button_1">x</string> <!-- TODO -->
     <string name="hint_change_language_1">Klikit warnon (ma c\'hellit)</string>
@@ -73,14 +73,18 @@
     <string name="hint_change_language_4">Klicken Sie auf mich (wenn Sie können)</string>
     <string name="hint_change_language_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_step_counting_1">TODO</string> <!-- TODO -->
-    <string name="hint_light_sensor_1">TODO</string> <!-- TODO -->
-    <string name="hint_light_sensor_2">TODO</string> <!-- TODO -->
-    <string name="hint_light_sensor_3">TODO</string> <!-- TODO -->
+    <string name="hint_light_sensor_1">Ve tmě vidíme hvězdy nejlépe</string>
+    <string name="hint_light_sensor_2">Ve tmě se lépe schováme</string>
+    <string name="hint_light_sensor_3">Zhasnete ta světla ano?</string>
     <string name="hint_button_in_home_page_1">TODO</string> <!-- TODO -->
-    <string name="hint_shutdown_device_1">TODO</string> <!-- TODO -->
-    <string name="hint_place_ten_fingers_1">TODO</string> <!-- TODO -->
-    <string name="hint_place_ten_fingers_2">TODO</string> <!-- TODO -->
-    <string name="hint_wait_20_seconds_1">TODO</string> <!-- TODO -->
+    <string name="hint_shutdown_device_1">Pokuste se odříznout veškerý kontakt</string>
+    <string name="hint_shutdown_device_2">Zkuste se rozpadnout, abyste viděli</string>
+    <string name="hint_shutdown_device_3">Vypneš svůj zatracený telefon !</string>
+    <string name="hint_place_ten_fingers_1">Zkuste počítat do 10</string>
+    <string name="hint_place_ten_fingers_2">Vyvede dítě do vás</string>
+    <string name="hint_wait_20_seconds_1">Jste opravdu netrpěliví, tak!</string>
+    <string name="hint_wait_20_seconds_2">Zkuste meditaci</string>
+    <string name="hint_wait_20_seconds_3">Budete čekat nebo ne?</string>
     <string name="hint_scroll_to_find_the_button_1">Never seen Alice in Wonderland ?</string>
     <string name="hint_scroll_to_find_the_button_2">Go down the page !</string>
 

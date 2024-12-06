@@ -23,7 +23,7 @@
     <string name="level_double_buttons">Duplication</string>
     <string name="level_orientation">Roller Coaster</string>
     <string name="level_screenshot">Clear Shot</string> <!-- Memories -->
-    <string name="level_ligh_torch">Lux Via</string>
+    <string name="level_light_torch">Lux Via</string>
     <string name="level_charging">Coffee</string> <!-- Hidden connection, On the verge of death -->
     <string name="level_microphone">The ascent</string>
     <string name="level_drop_down_menu">Not what it seems</string>
@@ -35,7 +35,7 @@
     <string name="level_change_language">Klikněte na mě (pokud můžete)</string>
     <string name="level_step_counting">Weight loss</string>
     <string name="level_light_sensor">Dark</string> <!-- Hidding, Veiled, Hidden -->
-    <string name="level_button_in_home_page">Lost (2)</string> <!-- TODO -->
+    <string name="level_button_in_home_page">Lost (2)</string>
     <string name="level_shutdown_device">Blackout</string>
     <string name="level_place_ten_fingers">Learn to count</string>
     <string name="level_wait_20_seconds">Patience</string>
@@ -92,10 +92,14 @@
     <string name="hint_light_sensor_2">It\'s in the shadows that we hide best</string>
     <string name="hint_light_sensor_3">Will you turn off the lights please ?</string>
     <string name="hint_button_in_home_page_1">TODO</string> <!-- TODO -->
-    <string name="hint_shutdown_device_1">TODO</string> <!-- TODO -->
+    <string name="hint_shutdown_device_1">Try to cut all contact</string>
+    <string name="hint_shutdown_device_2">Try passing out</string>
+    <string name="hint_shutdown_device_3">Are you gonna turn off your phone !</string>
     <string name="hint_place_ten_fingers_1">Try counting to ten</string>
     <string name="hint_place_ten_fingers_2">You\'re still a child</string>
-    <string name="hint_wait_20_seconds_1">TODO</string> <!-- TODO -->
+    <string name="hint_wait_20_seconds_1">You\'re a little impatient</string>
+    <string name="hint_wait_20_seconds_2">Try meditation</string>
+    <string name="hint_wait_20_seconds_3">Are you gonna wait or not ?</string>
     <string name="hint_scroll_to_find_the_button_1">Never seen Alice in Wonderland ?</string>
     <string name="hint_scroll_to_find_the_button_2">Go down the page !</string>
 

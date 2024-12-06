@@ -12,7 +12,7 @@
     <string name="level_double_buttons">Duplicação</string>
     <string name="level_orientation">Montanha-russa</string>
     <string name="level_screenshot">Level 5</string> <!-- TODO -->
-    <string name="level_ligh_torch">Lux Via</string>
+    <string name="level_light_torch">Lux Via</string>
     <string name="level_charging">Café</string>
     <string name="level_microphone">Ascensão </string>
     <string name="level_drop_down_menu">Não o que parece</string>
@@ -23,11 +23,11 @@
     <string name="level_moving_button">Derrubá-lo</string>
     <string name="level_change_language">Klikněte na mě (pokud můžete)</string>
     <string name="level_step_counting">TODO</string> <!-- TODO -->
-    <string name="level_light_sensor">TODO</string> <!-- TODO -->
+    <string name="level_light_sensor">Obscuro</string>
     <string name="level_button_in_home_page">TODO</string> <!-- TODO -->
-    <string name="level_shutdown_device">TODO</string> <!-- TODO -->
-    <string name="level_place_ten_fingers">TODO</string> <!-- TODO -->
-    <string name="level_wait_20_seconds">TODO</string> <!-- TODO -->
+    <string name="level_shutdown_device">Blackout</string>
+    <string name="level_place_ten_fingers">Aprender a contar</string>
+    <string name="level_wait_20_seconds">Paciência</string>
     <string name="level_scroll_to_find_button">TODO</string> <!-- TODO -->
 
     // Hints
@@ -65,7 +65,7 @@
     <string name="hint_dark_mode_1">Busque a sombra para encontrar a luz, procure a luz para encontrar a sombra</string>
     <string name="hint_dark_mode_2">Às vezes você tem que mergulhar nas profundezas para ver a luz</string>
     <string name="hint_airplane_mode_1">Mente nas nuvens</string>
-    <string name="hint_airplane_mode_2">x</string> <!-- TODO -->
+    <string name="hint_airplane_mode_2">É hora de ir de férias</string>
     <string name="hint_labyrinth_1">x</string> <!-- TODO -->
     <string name="hint_moving_button_1">x</string> <!-- TODO -->
     <string name="hint_change_language_1">Klikit warnon (ma c\'hellit)</string>
@@ -74,14 +74,18 @@
     <string name="hint_change_language_4">Klicken Sie auf mich (wenn Sie können)</string>
     <string name="hint_change_language_5">Cliciwch fi (os gallwch chi)</string>
     <string name="hint_step_counting_1">TODO</string> <!-- TODO -->
-    <string name="hint_light_sensor_1">TODO</string> <!-- TODO -->
-    <string name="hint_light_sensor_2">TODO</string> <!-- TODO -->
-    <string name="hint_light_sensor_3">TODO</string> <!-- TODO -->
+    <string name="hint_light_sensor_1">É no escuro que se vê melhor as estrelas</string>
+    <string name="hint_light_sensor_2">É no escuro que me escondo melhor</string>
+    <string name="hint_light_sensor_3">Vais apagar as luzes?</string>
     <string name="hint_button_in_home_page_1">TODO</string> <!-- TODO -->
-    <string name="hint_shutdown_device_1">TODO</string> <!-- TODO -->
-    <string name="hint_place_ten_fingers_1">TODO</string> <!-- TODO -->
-    <string name="hint_place_ten_fingers_2">TODO</string> <!-- TODO -->
-    <string name="hint_wait_20_seconds_1">TODO</string> <!-- TODO -->
+    <string name="hint_shutdown_device_1">Tenta cortar o contacto</string>
+    <string name="hint_shutdown_device_2">Tente cair em si para ver</string>
+    <string name="hint_shutdown_device_3">Vais acabar por desligar o teu maldito telemóvel !</string>
+    <string name="hint_place_ten_fingers_1">Tente contar até dez</string>
+    <string name="hint_place_ten_fingers_2">Faz a criança em você</string>
+    <string name="hint_wait_20_seconds_1">Estás impaciente</string>
+    <string name="hint_wait_20_seconds_2">Try meditação</string>
+    <string name="hint_wait_20_seconds_3">Vais esperar ou não?</string>
     <string name="hint_scroll_to_find_the_button_1">Never seen Alice in Wonderland ?</string>
     <string name="hint_scroll_to_find_the_button_2">Go down the page !</string>
 

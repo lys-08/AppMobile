@@ -52,7 +52,7 @@ object DataSource {
         Screens.DoubleButtons.name to R.string.level_double_buttons,
         Screens.Orientation.name to R.string.level_orientation,
         Screens.Screenshot.name to R.string.level_screenshot,
-        Screens.LightTorch.name to R.string.level_ligh_torch,
+        Screens.LightTorch.name to R.string.level_light_torch,
         Screens.Charging.name to R.string.level_charging,
         Screens.Microphone.name to R.string.level_microphone,
         Screens.DropDownMenu.name to R.string.level_drop_down_menu,
@@ -181,11 +181,17 @@ object DataSource {
             R.string.hint_light_sensor_2,
             R.string.hint_light_sensor_3),
         Screens.ButtonInHomepage.name to listOf(R.string.hint_button_in_home_page_1),
-        Screens.ShutdownDevice.name to listOf(R.string.hint_shutdown_device_1),
+        Screens.ShutdownDevice.name to listOf(
+            R.string.hint_shutdown_device_1,
+            R.string.hint_shutdown_device_2,
+            R.string.hint_shutdown_device_3),
         Screens.Place10Finger.name to listOf(
             R.string.hint_place_ten_fingers_1,
             R.string.hint_place_ten_fingers_2),
-        Screens.Wait20s.name to listOf(R.string.hint_wait_20_seconds_1),
-        // TODO : add Scroll to find the burron
+        Screens.Wait20s.name to listOf(
+            R.string.hint_wait_20_seconds_1,
+            R.string.hint_wait_20_seconds_2,
+            R.string.hint_wait_20_seconds_3),
+        // TODO : add Scroll to find the button
     )
 }
