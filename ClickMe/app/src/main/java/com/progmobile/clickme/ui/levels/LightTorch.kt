@@ -102,7 +102,7 @@ fun LightTorch(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.level_ligh_torch),
+                text = stringResource(id = R.string.level_light_torch),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .fillMaxWidth()

@@ -35,7 +35,7 @@ enum class Screens(@StringRes val title: Int) {
     DoubleButtons(title = R.string.level_double_buttons),
     Orientation(title = R.string.level_orientation),
     Screenshot(title = R.string.level_screenshot),
-    LightTorch(title = R.string.level_ligh_torch),
+    LightTorch(title = R.string.level_light_torch),
     DropDownMenu(title = R.string.level_drop_down_menu),
     LostButton(title = R.string.level_lost_button),
     Labyrinth(title = R.string.level_labyrinth),

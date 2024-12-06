@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     // Permission
     <string name="permission_denied">Povolení bylo zamítnuto</string>
     <string name="permission_denied_msg">Alespoň jedna dovolená byla zamítnuta.\nATTENTION: Možná zjistíte, že nejste schopni dokončit určité úrovně, pro to přijměte všechna oprávnění. \nnmůžete přijmout oprávnění z nastavení.</string>
@@ -12,7 +12,7 @@
     <string name="level_double_buttons">Duplikace</string>
     <string name="level_orientation">Válečková koaster</string>
     <string name="level_screenshot">Suvenýr</string>
-    <string name="level_ligh_torch">Lux Via</string>
+    <string name="level_light_torch" tools:ignore="Typos">Lux Via</string>
     <string name="level_charging">Káva</string>
     <string name="level_microphone">Stoupání</string>
     <string name="level_drop_down_menu">Ne jak se zdá</string>
