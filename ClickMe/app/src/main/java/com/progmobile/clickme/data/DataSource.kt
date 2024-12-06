@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.levels.Charging
-import com.progmobile.clickme.ui.levels.Microphone
 import com.progmobile.clickme.ui.levels.DarkMode
 import com.progmobile.clickme.ui.levels.AirplaneMode
 import com.progmobile.clickme.ui.levels.LightSensor
@@ -35,7 +34,7 @@ object DataSource {
 
     // Max number of levels to display
     const val LEVEL_NUMBERS = 21
-    const val STARTING_LEVEL = 17
+    const val STARTING_LEVEL = 0
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
@@ -89,11 +88,11 @@ object DataSource {
         Screens.Screenshot.name to { navController, modifier -> { Screenshot(15, Screens.StepCountingLevel.name, navController, modifier) } },
         Screens.StepCountingLevel.name to { navController, modifier -> { Screenshot(16, Screens.ButtonInHomepage.name, navController, modifier) } },
         Screens.ButtonInHomepage.name to { navController, modifier -> { ButtonInHomepage(/* idLevel = 17*/ modifier) } },
-        Screens.Microphone.name to { navController, modifier -> { Microphone(18, Screens.Labyrinth.name, navController, modifier) } },
-        Screens.Labyrinth.name to { navController, modifier -> { Labyrinth(19, Screens.LightSensor.name, navController, modifier) } },
-        Screens.LightSensor.name to { navController, modifier -> { LightSensor(20, Screens.ShutdownDevice.name, navController, modifier) } },
-        Screens.ShutdownDevice.name to { navController, modifier -> { ShutdownDevice(21, Screens.Wait20s.name, navController, modifier) } },
-        Screens.Wait20s.name to { navController, modifier -> { Wait20s(/* idLevel = 22*/ Screens.HomePage.name, navController, modifier) } },
+        //Screens.Microphone.name to { navController, modifier -> { Microphone(18, Screens.Labyrinth.name, navController, modifier) } },
+        Screens.Labyrinth.name to { navController, modifier -> { Labyrinth(18, Screens.LightSensor.name, navController, modifier) } },
+        Screens.LightSensor.name to { navController, modifier -> { LightSensor(19, Screens.ShutdownDevice.name, navController, modifier) } },
+        Screens.ShutdownDevice.name to { navController, modifier -> { ShutdownDevice(20, Screens.Wait20s.name, navController, modifier) } },
+        Screens.Wait20s.name to { navController, modifier -> { Wait20s(/* idLevel = 21*/ Screens.HomePage.name, navController, modifier) } },
     )
 
     val LEVEL_LOST_NAVIGATION_VALUE = Screens.LightTorch.name

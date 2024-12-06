@@ -76,8 +76,8 @@ fun DoubleButtons(
             }
 
             // Navigate to level 4
-            navController.navigate(Screens.Orientation.name)
-            if (MainActivity.instance?.currentLevelUnlocked!! < 3) {
+            navController.navigate(nextLevel)
+            if (MainActivity.instance?.currentLevelUnlocked!! < 2) {
                 MainActivity.instance?.increaseLevel()
             }
         }
