@@ -4,6 +4,7 @@
     <string name="music_key" translatable="false">MusicKey</string>
     <string name="sound_key" translatable="false">SoundKey</string>
     <string name="level_key" translatable="false">LevelKey</string>
+    <string name="first_launch_key" translatable="false">FirstLaunchKey</string>
     <string name="reset_levels_title">Confirm Reset</string>
     <string name="reset_levels_message">Are you sure you want to reset all levels ?</string>
     <string name="reset_levels_positive_button">Yes</string>"
