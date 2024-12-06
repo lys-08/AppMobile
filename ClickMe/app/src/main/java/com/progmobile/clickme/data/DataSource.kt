@@ -35,7 +35,7 @@ object DataSource {
 
     // Max number of levels to display
     const val LEVEL_NUMBERS = 21
-    const val STARTING_LEVEL = 21
+    const val STARTING_LEVEL = 17
     const val MUSIC_DEFAULT = true
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f

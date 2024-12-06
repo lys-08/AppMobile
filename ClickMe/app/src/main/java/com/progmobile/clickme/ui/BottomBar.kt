@@ -73,7 +73,6 @@ fun ClickMeBottomBar(
     BottomAppBar(
         containerColor = Color.Transparent
     ) {
-        //val currentRoute = navController.currentDestination?.route
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -325,15 +324,24 @@ fun HintIconButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val currentRoute = navController.currentDestination?.route
+    // Initialize a var to check if we are on the homepage
+    val isHomePage = currentRoute == Screens.HomePage.name
+
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
 
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
 
+    if (MainActivity.instance?.isFirstLaunch == true) {
+        showDialog = true
+        MainActivity.instance?.switchFirstLaunch()
+    }
+
     // IconButton with onClick to show dialog
     IconButton(
-        imageResourceId = R.drawable.interrogation,
+        imageResourceId = if(isHomePage) {R.drawable.info} else {R.drawable.interrogation},
         onClick = {
             showDialog = true
         },

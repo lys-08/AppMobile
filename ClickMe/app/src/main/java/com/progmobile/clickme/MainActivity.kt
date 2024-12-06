@@ -112,11 +112,11 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
         var instance: MainActivity? = null
     }
 
-    //var intent = Intent()
     private var mediaPlayer: MediaPlayer? = null
 
     var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
     var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
+    var isFirstLaunch by mutableStateOf(true)
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,6 +167,27 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
         // Get current level unlocked
         currentLevelUnlocked = runBlocking { getCurrentLevelUnlocked() }
 
+        isFirstLaunch = runBlocking { getFirstLaunch() }
+    }
+
+    private suspend fun getFirstLaunch(): Boolean {
+        val firstLaunchKey = booleanPreferencesKey(R.string.first_launch_key.toString())
+        val dataStore = this.dataStore
+
+        // get boolean first launch state
+        val firstLaunch = dataStore.data.map { preferences ->
+            preferences[firstLaunchKey] ?: true
+        }.first()
+        return firstLaunch
+    }
+
+    fun switchFirstLaunch() {
+        val firstLaunchKey = booleanPreferencesKey(R.string.first_launch_key.toString())
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[firstLaunchKey] = false
+            }
+        }
     }
 
     private suspend fun getUserMusicPreference(): Boolean {
