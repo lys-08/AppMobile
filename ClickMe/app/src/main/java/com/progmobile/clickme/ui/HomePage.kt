@@ -54,9 +54,10 @@ fun HomePage(
         // Levels button
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                                .fillMaxHeight(),
             contentPadding = PaddingValues(8.dp), // Ajoute un espace global autour de la grille
-            horizontalArrangement = Arrangement.spacedBy(8.dp), // Espacement horizontal entre les items
+            horizontalArrangement = Arrangement.spacedBy(8.dp), // Space between items
             verticalArrangement = Arrangement.spacedBy(8.dp)
           ) {
               val levelList = levelsMap.keys.toList();
