@@ -414,14 +414,14 @@ fun SwipableDialog(
                                 // Trigger onDismissRequest after unlocking
                                 onDismissRequest()
                                 navController.navigate(LEVEL_LOST_NAVIGATION_VALUE)
-                                if (MainActivity.instance?.currentLevelUnlocked!! < 11) {
+                                if (MainActivity.instance?.currentLevelUnlocked!! < 19) {
                                     MainActivity.instance?.increaseLevel()
                                 }
                             },
                             labelResourceId = R.string.button,
-                            level = 10,
+                            level = 18,
                             modifier = Modifier,
-                            levelName = Screens.DropDownMenu.name,
+                            levelName = Screens.Labyrinth.name,
                             navController = navController
                         )
                     } else {

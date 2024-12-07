@@ -16,7 +16,7 @@
     <string name="level_charging">Káva</string>
     <string name="level_microphone">Stoupání</string>
     <string name="level_drop_down_menu">Ne jak se zdá</string>
-    <string name="level_lost_button">Ztraceni</string>
+    <string name="level_lost_button">Ztraceni (2)</string>
     <string name="level_dark_mode">Mimo vaši komfortní zónu</string>
     <string name="level_airplane_mode">Hliníkový klobouk</string>
     <string name="level_labyrinth">Labyrint</string>
@@ -24,7 +24,7 @@
     <string name="level_change_language">Kaomi iaʻu (inā hiki iā ʻoe)</string> <!-- Hawaïen -->
     <string name="level_step_counting">Úbytek hmotnosti</string>
     <string name="level_light_sensor">Tmavá</string>
-    <string name="level_button_in_home_page">Ztraceni (2)</string> <!-- TODO -->
+    <string name="level_button_in_home_page">Ztraceni</string> <!-- TODO -->
     <string name="level_shutdown_device">Zatemnění</string> <!-- TODO -->
     <string name="level_place_ten_fingers">Naučte se počítat</string> <!-- TODO -->
     <string name="level_wait_20_seconds">Trpělivost</string> <!-- TODO -->

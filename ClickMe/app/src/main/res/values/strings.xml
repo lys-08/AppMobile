@@ -28,7 +28,7 @@
     <string name="level_charging">Coffee</string> <!-- Hidden connection, On the verge of death -->
     <string name="level_microphone">The ascent</string>
     <string name="level_drop_down_menu">Not what it seems</string>
-    <string name="level_lost_button">Lost</string>
+    <string name="level_lost_button">Lost (2)</string>
     <string name="level_dark_mode">Out of your comfort zone</string> <!-- Ying Yang, Reverse -->
     <string name="level_airplane_mode">Aluminium hat</string> <!-- Beyond the Antennae, Crash -->
     <string name="level_labyrinth">Labyrinth</string>
@@ -36,7 +36,7 @@
     <string name="level_change_language">Klikněte na mě (pokud můžete)</string>
     <string name="level_step_counting">Weight loss</string>
     <string name="level_light_sensor">Dark</string> <!-- Hidding, Veiled, Hidden -->
-    <string name="level_button_in_home_page">Lost (2)</string>
+    <string name="level_button_in_home_page">Lost</string>
     <string name="level_shutdown_device">Blackout</string>
     <string name="level_place_ten_fingers">Learn to count</string>
     <string name="level_wait_20_seconds">Patience</string>

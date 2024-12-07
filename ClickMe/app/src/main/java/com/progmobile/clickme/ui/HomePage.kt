@@ -72,13 +72,13 @@ fun HomePage(
                   )
               }
 
-            if (MainActivity.instance?.currentLevelUnlocked!! == 17) {
+            if (MainActivity.instance?.currentLevelUnlocked!! == 8) {
                 item {
                     UnlockLevel(
                         labelResourceId = R.string.button,
-                        level = 18,
+                        level = 9,
                         //modifier = Modifier.wrapContentSize(),
-                        levelName = Screens.Labyrinth.name,
+                        levelName = Screens.LightTorch.name,
                         navController = navController
                     )
                 }

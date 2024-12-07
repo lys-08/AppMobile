@@ -16,7 +16,7 @@
     <string name="level_charging">Café</string>
     <string name="level_microphone">L\'ascension</string>
     <string name="level_drop_down_menu">Pas ce qu\'il paraît</string>
-    <string name="level_lost_button">Perdu</string>
+    <string name="level_lost_button">Perdu (2)</string>
     <string name="level_dark_mode">Hors de la zone de confort</string>
     <string name="level_airplane_mode">Chapeau d\'aluminium</string>
     <string name="level_labyrinth">Labyrinthe</string>
@@ -24,7 +24,7 @@
     <string name="level_change_language">Klikněte na mě (pokud můžete)</string>
     <string name="level_step_counting">Perte de poids</string> <!-- TODO -->
     <string name="level_light_sensor">Obscure</string>
-    <string name="level_button_in_home_page">Perdu (2)</string>
+    <string name="level_button_in_home_page">Perdu</string>
     <string name="level_shutdown_device">Blackout</string>
     <string name="level_place_ten_fingers">Apprendre à compter</string>
     <string name="level_wait_20_seconds">Patience</string>
