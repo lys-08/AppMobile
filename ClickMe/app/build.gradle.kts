@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.androidx.lifecycle.runtime.ktx.v261)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.accompanist.pager) // Update to the latest version
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.foundation.layout.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

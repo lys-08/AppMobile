@@ -5,7 +5,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.widget.Toast
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +34,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -49,6 +46,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.sqrt
@@ -63,7 +61,6 @@ class ShakeDetector(
     context: Context,
     private val onShake: () -> Unit
 ) : SensorEventListener {
-    private val context = context.applicationContext
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val accelerometer: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     private var firstShakeTime: Long = 0
@@ -134,7 +131,9 @@ class ShakeDetector(
  * the navigation to next screen
  */
 @Composable
-fun Level_14(
+fun MovingButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -158,7 +157,7 @@ fun Level_14(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_14),
+            text = stringResource(id = R.string.level_moving_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -170,9 +169,9 @@ fun Level_14(
             // Level button
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 14,
+                level = idLevel,
                 modifier,
-                levelName = Screens.Level_15.name,
+                levelName = nextLevel,
                 navController
             )
         } else {
@@ -199,7 +198,6 @@ fun SmoothMovingButton(duration: Long) {
     val positionY = remember { Animatable(0f) }
     var parentSize by remember { mutableStateOf(IntSize(0, 0)) }
     var boxSize by remember { mutableStateOf(IntSize(0, 0)) }
-    val density = LocalDensity.current
 
     LaunchedEffect(parentSize) {
         while (parentSize.width > 0 && parentSize.height > 0 && boxSize.width > 0 && boxSize.height > 0) {
@@ -259,9 +257,10 @@ fun SmoothMovingButton(duration: Long) {
 @Preview
 @Composable
 fun StartLevel14Preview() {
-    MaterialTheme {
-
-        Level_08(
+    ClickMeTheme {
+        Microphone(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

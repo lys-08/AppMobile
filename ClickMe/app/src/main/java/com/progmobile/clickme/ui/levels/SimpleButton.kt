@@ -22,11 +22,13 @@ import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the first level of the game.
+ * Only click on the button to go to the next level.
  */
 @Composable
-fun Level_18(
+fun SimpleButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -36,21 +38,32 @@ fun Level_18(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_18),
+            text = stringResource(id = R.string.level_simple_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
+
+        // Level button
+        UnlockLevel(
+            labelResourceId = R.string.button,
+            level = idLevel,
+            modifier = Modifier,
+            levelName = nextLevel,
+            navController = navController
+        )
     }
 }
 
 @Preview
 @Composable
-fun StartLevel18Preview() {
+fun StartLevel01Preview() {
     ClickMeTheme {
-        Level_18(
+        SimpleButton(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

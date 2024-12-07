@@ -1,10 +1,10 @@
 package com.progmobile.clickme.ui.levels
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,44 +22,51 @@ import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the first level of the game.
+ * Only click on the button to go to the next level.
  */
 @Composable
-fun Level_19(
+fun ScrollToFindTheButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    LazyColumn(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.spacedBy(10000.dp)
     ) {
         // Title
-        Text(
-            text = stringResource(id = R.string.level_19),
-            style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            textAlign = TextAlign.Center
-        )
+         item {
+             Text(
+                 text = stringResource(id = R.string.level_scroll_to_find_button),
+                 style = MaterialTheme.typography.displayLarge,
+                 modifier = Modifier
+                     .fillMaxWidth()
+                     .padding(vertical = 16.dp),
+                 textAlign = TextAlign.Center
+             )
+         }
 
         // Level button
-        UnlockLevel(
+        item {
+            UnlockLevel(
             labelResourceId = R.string.button,
-            level = 19,
+            level = idLevel,
             modifier = Modifier,
-            levelName = Screens.Level_20.name,
+            levelName = nextLevel,
             navController = navController
-        )
+        ) }
     }
 }
 
 @Preview
 @Composable
-fun StartLevel19Preview() {
+fun StartScrollToFindTheButtonPreview() {
     ClickMeTheme {
-        Level_19(
+        ScrollToFindTheButton(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

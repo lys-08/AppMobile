@@ -2,10 +2,14 @@ package com.progmobile.clickme
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,10 +23,13 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
+import com.progmobile.clickme.data.DataSource.isAppInForeground
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -39,22 +46,61 @@ private val Context.dataStore by preferencesDataStore("user_prefs")
  * - Sound and music state
  * - Level unlocked state
  */
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), LifecycleObserver {
+
+    // =========== LifeCycle ===========
+
+    init {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        isAppInForeground.value = hasFocus
+    }
 
     // ========== PERMISSIONS ==========
     @SuppressLint("InlinedApi")
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.CAMERA,
-        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE, // TODO : fix
         Manifest.permission.ACTIVITY_RECOGNITION,
-        Manifest.permission.BODY_SENSORS
-        /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
-    private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
+        Manifest.permission.BODY_SENSORS)
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        val anyPermissionDenied = permissions.values.any { !it }
-        permissionsStatus.value = anyPermissionDenied
+    private fun checkPermissions() {
+        val permissionsToRequest = permissionsToCheck.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            requestMultiplePermissions.launch(permissionsToRequest.toTypedArray())
+        }
+    }
+
+    private val requestMultiplePermissions = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val deniedPermissions = permissions.filter { (_, isGranted) -> !isGranted }
+
+        if (deniedPermissions.isNotEmpty()) {
+            showPermissionDeniedDialog()
+        }
+    }
+
+    private fun showPermissionDeniedDialog() {
+        return // TODO : remove
+        AlertDialog.Builder(this)
+            .setTitle(R.string.permission_denied)
+            .setMessage(R.string.permission_denied_msg)
+            .setPositiveButton(R.string.settings) { _, _ ->
+                // Open parameters
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", packageName, null)
+                }
+                startActivity(intent)
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     // ========== LEVEL ==========
@@ -65,11 +111,11 @@ class MainActivity : ComponentActivity() {
         var instance: MainActivity? = null
     }
 
-    //var intent = Intent()
     private var mediaPlayer: MediaPlayer? = null
 
     var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
     var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
+    var isFirstLaunch by mutableStateOf(true)
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +127,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ClickMeTheme {
-                ClickMeApp(permissionsDenied = permissionsStatus, mainActivityInstance = this)
+                ClickMeApp(mainActivityInstance = this)
             }
 
         }
@@ -120,6 +166,27 @@ class MainActivity : ComponentActivity() {
         // Get current level unlocked
         currentLevelUnlocked = runBlocking { getCurrentLevelUnlocked() }
 
+        isFirstLaunch = runBlocking { getFirstLaunch() }
+    }
+
+    private suspend fun getFirstLaunch(): Boolean {
+        val firstLaunchKey = booleanPreferencesKey(R.string.first_launch_key.toString())
+        val dataStore = this.dataStore
+
+        // get boolean first launch state
+        val firstLaunch = dataStore.data.map { preferences ->
+            preferences[firstLaunchKey] ?: true
+        }.first()
+        return firstLaunch
+    }
+
+    fun switchFirstLaunch() {
+        val firstLaunchKey = booleanPreferencesKey(R.string.first_launch_key.toString())
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[firstLaunchKey] = false
+            }
+        }
     }
 
     private suspend fun getUserMusicPreference(): Boolean {
@@ -211,30 +278,6 @@ class MainActivity : ComponentActivity() {
             dataStore.edit { preferences ->
                 preferences[levelKey] = currentLevelUnlocked
             }
-        }
-    }
-
-    private fun checkPermissions() {
-        // Check current permissions
-        val permissionsNeeded = permissionsToCheck.filter { permission ->
-            ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED
-        }
-
-        // Needed permissions
-        if (permissionsNeeded.isNotEmpty()) {
-            requestPermissionLauncher.launch(permissionsNeeded.toTypedArray())
-        } else {
-            permissionsStatus.value = false
-        }
-
-        // Check if at least one permission have been denied
-        val anyPermissionDeniedPreviously = permissionsToCheck.any { permission ->
-            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
-        }
-
-        // Update the status is a permission have been denied
-        if (anyPermissionDeniedPreviously) {
-            permissionsStatus.value = true
         }
     }
 }

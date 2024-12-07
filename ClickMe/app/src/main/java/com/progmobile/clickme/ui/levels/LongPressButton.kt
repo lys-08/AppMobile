@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -20,15 +18,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level with the long click button.
+ * It uses a [UnlockLevel] composable to display the level button, with a specific parameter to demand a long click.
  */
 @Composable
-fun Level_20(
+fun LongPressButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -38,7 +39,7 @@ fun Level_20(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_20),
+            text = stringResource(id = R.string.level_long_press_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,22 +48,24 @@ fun Level_20(
         )
 
         // Level button
-        LevelButton(
+        UnlockLevel(
             labelResourceId = R.string.button,
-            onClick = { navController.navigate(Screens.HomePage.name) },
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.Center)
+            level = idLevel,
+            modifier,
+            levelName = nextLevel,
+            longClick = true,
+            navController = navController
         )
     }
 }
 
 @Preview
 @Composable
-fun StartLevel20Preview() {
-    MaterialTheme {
-
-        Level_20(
+fun StartLevel02Preview() {
+    ClickMeTheme {
+        LongPressButton(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

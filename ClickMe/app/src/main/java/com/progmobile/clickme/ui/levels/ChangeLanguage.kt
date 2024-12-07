@@ -5,10 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -22,21 +30,35 @@ import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that displays the first level of the game.
- * Only click on the button to go to the next level.
+ * Composable that displays the language level.
+ * Change the device language (any language) to go to the next level.
  */
 @Composable
-fun Level_01(
+fun ChangeLanguage(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val configuration = LocalConfiguration.current
+    val currentLocale = configuration.locales[0]// Get the language
+
+    var previousLocale by rememberSaveable { mutableStateOf(currentLocale) }
+    var isLanguageChanged by remember { mutableStateOf(false) }
+
+    if (currentLocale != previousLocale) {
+        isLanguageChanged = true
+        previousLocale = currentLocale
+    }
+
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_01),
+            text = stringResource(id = R.string.level_change_language),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -45,21 +67,25 @@ fun Level_01(
         )
 
         // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 1,
-            modifier = Modifier,
-            levelName = Screens.Level_02.name,
-            navController = navController
-        )
+        if (isLanguageChanged) {
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = idLevel,
+                modifier = Modifier.wrapContentSize(),
+                levelName = nextLevel,
+                navController = navController
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-fun StartLevel01Preview() {
+fun StartChangeLanguagePreview() {
     ClickMeTheme {
-        Level_01(
+        ChangeLanguage(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

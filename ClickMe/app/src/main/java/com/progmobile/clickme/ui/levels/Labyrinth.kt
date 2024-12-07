@@ -7,7 +7,6 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,8 +16,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -38,14 +36,18 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
+import kotlin.math.atan2
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays a labyrinth.
+ * Solve the labyrinth using the device inclination.
  */
 @Composable
-fun Level_13(
+fun Labyrinth(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -79,57 +81,57 @@ fun Level_13(
 
     val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    // Déclaration de la variable d'accéléromètre
+    // Declaration of the accelerometer
     val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-    // Variables pour stocker les rotations
-    var pitch by remember { mutableStateOf(0f) }
-    var roll by remember { mutableStateOf(0f) }
+    // Variable to stock rotations
+    var pitch by remember { mutableFloatStateOf(0f) }
+    var roll by remember { mutableFloatStateOf(0f) }
     // Sensor management
 
     DisposableEffect(Unit) {
-        // Créer un Listener pour l'accéléromètre
+        // Creation of a Listener for the accelerometer
         val accelerometerListener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event == null || event.sensor.type != Sensor.TYPE_ACCELEROMETER) return
 
-                // Récupérer les valeurs de l'accéléromètre
+                // Get the accelerometer variable
                 val x = event.values[0]
                 val y = event.values[1]
                 val z = event.values[2]
 
-                // Calculer les angles d'inclinaison (pitch et roll)
-                pitch = Math.toDegrees(Math.atan2(y.toDouble(), z.toDouble())).toFloat()
-                roll = Math.toDegrees(Math.atan2(x.toDouble(), z.toDouble())).toFloat()
+                // Inclination angles (pitch et roll)
+                pitch = Math.toDegrees(atan2(y.toDouble(), z.toDouble())).toFloat()
+                roll = Math.toDegrees(atan2(x.toDouble(), z.toDouble())).toFloat()
 
-                // Interprétation de l'orientation
+                // Interpretation
                 when {
                     pitch > 30 ->  {
-                        Log.d("Orientation", "Inclinaison arrière")
+                        Log.d("Orientation", "Back Inclination")
                         movePlayer(1,0)
                     }
                     pitch < -30 -> {
-                        Log.d("Orientation", "Inclinaison avant")
+                        Log.d("Orientation", "Forward Inclination")
                         movePlayer(-1,0)
                     }
                     roll > 30 -> {
-                        Log.d("Orientation", "Inclinaison à gauche")
+                        Log.d("Orientation", "Left Inclination")
                         movePlayer(0,-1)
                     }
                     roll < -30 -> {
-                        Log.d("Orientation", "Inclinaison à droite")
+                        Log.d("Orientation", "Right Inclination")
                         movePlayer(0,1)
                     }
-                    else -> Log.d("Orientation", "Tablette droite")
+                    else -> Log.d("Orientation", "Device to the right")
                 }
             }
 
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-                // Pas nécessaire dans ce cas, mais obligatoire de l'implémenter
+                // Not necessary
             }
         }
 
-        // Enregistrer le listener pour écouter les changements de l'accéléromètre
+        // Register the listener
         sensorManager.registerListener(accelerometerListener, accelerometer, SensorManager.SENSOR_DELAY_UI)
 
         onDispose { sensorManager.unregisterListener(accelerometerListener) }
@@ -142,7 +144,7 @@ fun Level_13(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = stringResource(id = R.string.level_13),
+            text = stringResource(id = R.string.level_labyrinth),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -150,7 +152,7 @@ fun Level_13(
             textAlign = TextAlign.Center
         )
 
-        // Canvas pour le labyrinthe
+        // Canvas for the labyrinth
         Canvas(
             modifier = Modifier
                 .fillMaxSize()
@@ -158,7 +160,7 @@ fun Level_13(
         ) {
             val cellSize = size.width / maze[0].size
 
-            // Dessiner le labyrinthe
+            // Draw the labyrinth
             maze.forEachIndexed { rowIndex, row ->
                 row.forEachIndexed { colIndex, cell ->
                     val color =
@@ -177,7 +179,7 @@ fun Level_13(
                 }
             }
 
-            // Dessiner le joueur
+            // Draw the player
             drawCircle(
                 color = Color.Red,
                 radius = cellSize / 4,
@@ -195,9 +197,9 @@ fun Level_13(
             Log.d("MyActivity", "Here")
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 13,
+                level = idLevel,
                 modifier,
-                levelName = Screens.Level_14.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -206,10 +208,11 @@ fun Level_13(
 
 @Preview
 @Composable
-fun StartLevel13Preview() {
-    MaterialTheme {
-
-        Level_13(
+fun StartLabyrinthPreview() {
+    ClickMeTheme {
+        Labyrinth(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

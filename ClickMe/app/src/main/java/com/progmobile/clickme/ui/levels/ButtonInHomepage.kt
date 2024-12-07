@@ -15,14 +15,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.progmobile.clickme.R
-
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that displays the level with an empty page,
- * as the button composable for this level is in the Swipable composable of the bottom app bar
+ * Composable that displays the level where the button is hidden in the Homepage.
+ * Go to home page to see the button (available one time).
  */
 @Composable
-fun Level_10(
+fun ButtonInHomepage(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -31,23 +31,21 @@ fun Level_10(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_10),
+            text = stringResource(id = R.string.level_button_in_home_page),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
-
-        /* Button is in bottom app bar :) */
     }
 }
 
 @Preview
 @Composable
-fun StartLevel10Preview() {
-    MaterialTheme {
-        Level_10(
+fun StartButtonInHomepagePreview() {
+    ClickMeTheme {
+        ButtonInHomepage(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))

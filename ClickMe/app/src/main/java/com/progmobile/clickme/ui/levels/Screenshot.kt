@@ -40,14 +40,22 @@ import androidx.compose.ui.res.painterResource
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where you have to take a screenshot or a picture.
+ *
+ * Use a ContextObserver to check if a picture was added to storage during the level.
+ * If it is the case, it means a picture has been taken (screenshot or else) and [UnlockLevel]
+ * show the button to the current level.
+ *
+ * Four images are placed to imitate a camera screen.
  */
 @SuppressLint("RestrictedApi")
 @Composable
-fun Level_05(
+fun Screenshot(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -87,7 +95,7 @@ fun Level_05(
         contentDescription = "Right Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.BottomEnd)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
     )
 
@@ -96,7 +104,7 @@ fun Level_05(
         contentDescription = "Left Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.BottomStart)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
             .graphicsLayer(
                 scaleX = -1f
@@ -108,7 +116,7 @@ fun Level_05(
         contentDescription = "Left Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
             .graphicsLayer(
                 rotationZ = 180f,
@@ -120,7 +128,7 @@ fun Level_05(
         contentDescription = "Left Bottom Corner",
         modifier = Modifier
             .wrapContentSize(Alignment.TopEnd)
-            .size(100.dp) // Limiter la taille à un maximum fixe
+            .size(100.dp)
             .clipToBounds()
             .graphicsLayer(
                 rotationZ = 180f,
@@ -136,7 +144,7 @@ fun Level_05(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(id = R.string.level_05),
+            text = stringResource(id = R.string.level_screenshot),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -147,9 +155,9 @@ fun Level_05(
         if (isScreenshotTaken) {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 5,
+                level = idLevel,
                 modifier,
-                levelName = Screens.Level_06.name,
+                levelName = nextLevel,
                 navController
             )
         }
@@ -160,9 +168,11 @@ fun Level_05(
 
 @Preview
 @Composable
-fun StartLevel05Preview() {
-    MaterialTheme {
-        Level_05(
+fun StartScreenshotPreview() {
+    ClickMeTheme {
+        Screenshot(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

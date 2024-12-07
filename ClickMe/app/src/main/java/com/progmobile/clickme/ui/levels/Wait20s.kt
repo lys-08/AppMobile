@@ -1,11 +1,12 @@
 package com.progmobile.clickme.ui.levels
 
-import android.media.MediaRecorder
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,7 +16,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -25,66 +28,48 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.isAppInForeground
+import com.progmobile.clickme.ui.LevelButton
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.File
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the nothing is done during 20 seconds (no touch, ...).
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
 @Composable
-fun Level_08(
+fun Wait20s(
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    var amplitude by remember { mutableIntStateOf(0) }
-    var isMonitoring by remember { mutableStateOf(false) }
-    var mediaRecorder: MediaRecorder? by remember { mutableStateOf(null) }
     var timeCount by remember { mutableIntStateOf(0) }
-
-    val outputFile = File.createTempFile("temp_record", ".3gp").absolutePath
+    var showButton by remember { mutableStateOf(false) }
+    val isForeground by remember { isAppInForeground }
 
     // =========== Monitoring Functions ===========
 
     fun startMonitoring() {
-        if (mediaRecorder == null) {
-            mediaRecorder = MediaRecorder().apply {
-                setAudioSource(MediaRecorder.AudioSource.MIC)
-                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                setOutputFile(outputFile)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-                prepare()
-                start()
-            }
-
-            // Start the coroutine
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    while (isMonitoring) {
-                        amplitude = mediaRecorder?.maxAmplitude ?: 0
-                        if (amplitude > 10000) {
-                            timeCount += 1
-                            // Stop the recording if the Amplitude above 10 000 during 2 seconds
-                            if (timeCount >= 15) {
-                                isMonitoring = false
-                            }
-                        } else {
-                            timeCount = 0
-                        }
-                        delay(100)
+        // Start the coroutine
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                while (!showButton) {
+                    timeCount++
+                    if (!isForeground) {
+                        timeCount = 0
                     }
-                } finally { // Free the resources
-                    mediaRecorder?.apply {
-                        stop()
-                        release()
+                    if (timeCount > 20) {
+                        showButton = true
                     }
-                    mediaRecorder = null
+                    delay(1000)
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
@@ -92,8 +77,28 @@ fun Level_08(
     // =================== End ===================
 
     LaunchedEffect(Unit) {
-        isMonitoring = true
         startMonitoring()
+    }
+
+    val fingerCount = remember { mutableIntStateOf(0) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent()
+                        val touches = event.changes.filter { it.pressed }
+
+                        fingerCount.intValue = touches.size
+                    }
+                }
+            }
+    ) {
+        if (fingerCount.intValue != 0) {
+            timeCount = 0
+        }
     }
 
     Column(
@@ -102,7 +107,7 @@ fun Level_08(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_08),
+            text = stringResource(id = R.string.level_wait_20_seconds),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -110,28 +115,27 @@ fun Level_08(
             textAlign = TextAlign.Center
         )
 
-          // Text(text = "Amplitude: $amplitude", style = MaterialTheme.typography.headlineMedium)
+        // Text(text = "lastTouchTime: $timeCount", style = MaterialTheme.typography.headlineMedium)
 
         // Level button
-        if (!isMonitoring) {
-            UnlockLevel(
+        if (showButton) {
+            LevelButton(
                 labelResourceId = R.string.button,
-                level = 8,
-                modifier,
-                levelName = Screens.Level_09.name,
-                navController
+                onClick = { navController.navigate(nextLevel) },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center)
             )
         }
     }
 }
 
-
 @Preview
 @Composable
-fun StartLevel08Preview() {
-    MaterialTheme {
-
-        Level_08(
+fun StartWait20sPreview() {
+    ClickMeTheme {
+        Wait20s(
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

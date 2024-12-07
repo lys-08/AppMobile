@@ -1,6 +1,13 @@
 package com.progmobile.clickme.ui.levels
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,7 +15,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -18,25 +31,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.LEVEL_STEP_COUNT_STEP_THRESHOLD
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
-import android.content.Context
-import android.content.Context.SENSOR_SERVICE
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Box
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat.getSystemService
-import com.progmobile.clickme.data.DataSource.LEVEL_STEP_COUNT_STEP_THRESHOLD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,7 +46,6 @@ import kotlinx.coroutines.withContext
  */
 class StepCounter(context: Context) : SensorEventListener {
     private val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-
     private val stepCounterSensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
     private var totalSteps = 0f
@@ -92,7 +88,9 @@ class StepCounter(context: Context) : SensorEventListener {
  * Prints a little counter at the bottom, until the value reaches a threshold, defined in [LEVEL_STEP_COUNT_STEP_THRESHOLD].
  */
 @Composable
-fun Level_16(
+fun StepCountingLevel(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -125,7 +123,7 @@ fun Level_16(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_16),
+            text = stringResource(id = R.string.level_step_counting),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -138,25 +136,45 @@ fun Level_16(
             if (stepCount.intValue <= LEVEL_STEP_COUNT_STEP_THRESHOLD) Text(text = "${stepCount.intValue}")
         }
 
+        if (!hasStepCounterSensor(context)) {
+            Text(
+                text = stringResource(id = R.string.warning_level_light_torch),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = idLevel,
+                modifier = Modifier,
+                levelName = nextLevel,
+                navController = navController
+            )
+        }
+
         // Only show level button when steps are greater than STEP_THRESHOLD
         if (stepCount.intValue > LEVEL_STEP_COUNT_STEP_THRESHOLD) {
             // Level button
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 16,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.Level_17.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
     }
 }
 
+fun hasStepCounterSensor(context: Context): Boolean{
+    return context.packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)
+}
+
 @Preview
 @Composable
 fun StartLevel16Preview() {
     ClickMeTheme {
-        Level_16(
+        StepCountingLevel(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

@@ -49,6 +49,7 @@ fun LevelButton(
     longClick: Boolean = false,
     playMusic: Boolean = false,
     inLevelButton: Boolean = false,
+    prefix: String = "",
     modifier: Modifier = Modifier
 ) {
     // Sound section
@@ -113,7 +114,7 @@ fun LevelButton(
         contentAlignment = Alignment.Center   // Center text in Box
     ) {
         Text(
-            text = stringResource(labelResourceId),
+            text = prefix + stringResource(labelResourceId),
             color = Color.White,
             //style = MaterialTheme.typography.button // Adjust font style as needed
         )

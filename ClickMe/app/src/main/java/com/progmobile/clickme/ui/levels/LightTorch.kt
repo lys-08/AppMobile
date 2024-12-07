@@ -30,8 +30,9 @@ import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
 import android.content.pm.PackageManager
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
-// Classe TorchManager pour gérer la lampe torche
+// Class TorchManager to manage light torch
 class TorchManager(context: Context) {
     private val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private var torchCallback: ((Boolean) -> Unit)? = null
@@ -56,12 +57,21 @@ class TorchManager(context: Context) {
 // Composable Level_06
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays a button when the light torch is on.
+ *
+ * Use class [TorchManager] to register or unregister a listener for the light torch.
+ * If the light torch is on, [UnlockLevel] show the button to the next level.
+ * If the device doesn't have a light torch, a text appear and [UnlockLevel] show the
+ * next level button is already on the screen.
+ *
+ * [Surface] allows the background to change color depending on the light torch state.
+ * (black when off, light yellow when on)
  */
 
 @Composable
-fun Level_06(
+fun LightTorch(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -78,9 +88,9 @@ fun Level_06(
     }
 
     val backgroundColor = if (isTorchOn) {
-        MaterialTheme.colorScheme.primary // Couleur personnalisée si la torche est allumée
+        MaterialTheme.colorScheme.primary // Personalized color if the torch is light
     } else {
-        MaterialTheme.colorScheme.background // Couleur par défaut
+        MaterialTheme.colorScheme.background // Default Color
     }
 
     Surface(
@@ -92,7 +102,7 @@ fun Level_06(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.level_06),
+                text = stringResource(id = R.string.level_light_torch),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -104,23 +114,23 @@ fun Level_06(
             if (isTorchOn) {
                 UnlockLevel(
                     labelResourceId = R.string.button,
-                    level = 6,
+                    level = idLevel,
                     modifier,
-                    levelName = Screens.Level_07.name,
+                    levelName = nextLevel,
                     navController
                 )
             }
 
             if (!hasFlashlight(context)) {
                 Text(
-                    text = stringResource(id = R.string.warning_level06),
+                    text = stringResource(id = R.string.warning_level_light_torch),
                     style = MaterialTheme.typography.bodyLarge
                 )
                 UnlockLevel(
                     labelResourceId = R.string.button,
-                    level = 6,
+                    level = idLevel,
                     modifier,
-                    levelName = Screens.Level_07.name,
+                    levelName = nextLevel,
                     navController
                 )
 
@@ -136,9 +146,11 @@ fun hasFlashlight(context: Context): Boolean {
 
 @Preview
 @Composable
-fun StartLevel06Preview() {
-    MaterialTheme {
-        Level_06(
+fun StartLightTorchPreview() {
+    ClickMeTheme {
+        LightTorch(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
