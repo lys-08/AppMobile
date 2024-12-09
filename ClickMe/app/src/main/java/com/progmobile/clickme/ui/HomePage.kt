@@ -13,7 +13,9 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -24,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.data.DataSource.LEVEL_NUMBERS
 import com.progmobile.clickme.data.DataSource.levels
 import com.progmobile.clickme.data.DataSource.levelsMap
@@ -50,6 +53,8 @@ fun HomePage(
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
+
+        DetectLanguageChange()
 
         // Levels button
         LazyVerticalGrid(
@@ -92,6 +97,16 @@ fun HomePage(
               }
         }
 
+    }
+}
+
+@Composable
+fun DetectLanguageChange() {
+    val configuration = LocalConfiguration.current
+    val currentLocale = configuration.locales[0].toString() // Obtenez la langue actuelle
+
+    LaunchedEffect(currentLocale) {
+        DataSource.updateLocale(currentLocale)
     }
 }
 
