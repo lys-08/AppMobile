@@ -79,8 +79,8 @@
     <string name="hint_light_sensor_2">Ve stínech se nejlépe schováme</string>
     <string name="hint_light_sensor_3">Vypnete prosím světla?</string> 
     <string name="hint_button_in_home_page_1">Rozhlédněte se po chvíli, možná to najdete.</string> <!-- TODO -->
-    <string name="hint_button_in_home_page_2">Look around for a little while, maybe you\'ll find it.</string><!-- TODO -->
-    <string name="hint_button_in_home_page_3">Look around for a little while, maybe you\'ll find it.</string>
+    <string name="hint_button_in_home_page_2">Pokud tu není, kde by to mohlo být?</string><!-- TODO -->
+    <string name="hint_button_in_home_page_3">Chcete se vrátit na domovskou stránku nebo ne?!</string>
      <string name="hint_shutdown_device_1">Pokuste se odříznout veškerý kontakt</string>
     <string name="hint_shutdown_device_2">Zkuste se rozpadnout, abyste viděli</string>
     <string name="hint_shutdown_device_3">Vypneš svůj zatracený telefon !</string>

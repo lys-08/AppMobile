@@ -95,8 +95,8 @@
     <string name="hint_light_sensor_2">It\'s in the shadows that we hide best</string>
     <string name="hint_light_sensor_3">Will you turn off the lights please ?</string>
     <string name="hint_button_in_home_page_1">Look around for a little while, maybe you\'ll find it.</string>
-    <string name="hint_button_in_home_page_2">Pokud tu není, kde by to mohlo být?</string><!-- TODO -->
-    <string name="hint_button_in_home_page_3">Chcete se vrátit na domovskou stránku nebo ne?!</string>
+    <string name="hint_button_in_home_page_2">If it\'s not here, where could it be ?</string><!-- TODO -->
+    <string name="hint_button_in_home_page_3">Are you going to go back to the homepage or not ?!</string>
     <string name="hint_shutdown_device_1">Try to cut all contact</string>
     <string name="hint_shutdown_device_2">Try passing out</string>
     <string name="hint_shutdown_device_3">Are you gonna turn off your phone !</string>
