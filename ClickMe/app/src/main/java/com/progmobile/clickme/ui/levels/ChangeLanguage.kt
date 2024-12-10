@@ -49,12 +49,9 @@ fun ChangeLanguage(
     var previousLocale by rememberSaveable { mutableStateOf(currentLocale) }
     var isLanguageChanged by remember { mutableStateOf(false) }
 
-    val dataSourceLocale by DataSource.currentLocale.collectAsState()
-
-    if (currentLocale != previousLocale || currentLocale != dataSourceLocale) {
+    if (currentLocale != previousLocale) {
         isLanguageChanged = true
         previousLocale = currentLocale
-        DetectLanguageChange()
     }
 
     Column(
@@ -82,16 +79,6 @@ fun ChangeLanguage(
                 navController = navController
             )
         }
-    }
-}
-
-@Composable
-fun DetectLanguageChange() {
-    val configuration = LocalConfiguration.current
-    val currentLocale = configuration.locales[0].toString() // Obtenez la langue actuelle
-
-    LaunchedEffect(currentLocale) {
-        DataSource.updateLocale(currentLocale)
     }
 }
 
