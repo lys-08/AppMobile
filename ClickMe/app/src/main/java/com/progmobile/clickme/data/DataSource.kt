@@ -26,6 +26,7 @@ import com.progmobile.clickme.ui.levels.MovingButton
 import com.progmobile.clickme.ui.levels.ChangeLanguage
 import com.progmobile.clickme.ui.levels.ButtonInHomepage
 import com.progmobile.clickme.ui.levels.ScrollToFindTheButton
+import com.progmobile.clickme.ui.levels.StepCountingLevel
 import com.progmobile.clickme.ui.theme.CustomTheme
 
 object DataSource {
@@ -86,7 +87,7 @@ object DataSource {
         Screens.DarkMode.name to { navController, modifier -> { DarkMode(13, Screens.MovingButton.name, navController, modifier) } },
         Screens.MovingButton.name to { navController, modifier -> { MovingButton(14, Screens.Screenshot.name, navController, modifier) } },
         Screens.Screenshot.name to { navController, modifier -> { Screenshot(15, Screens.StepCountingLevel.name, navController, modifier) } },
-        Screens.StepCountingLevel.name to { navController, modifier -> { Screenshot(16, Screens.LostButton.name, navController, modifier) } },
+        Screens.StepCountingLevel.name to { navController, modifier -> { StepCountingLevel(16, Screens.LostButton.name, navController, modifier) } },
         Screens.ButtonInHomepage.name to { navController, modifier -> { ButtonInHomepage(/* idLevel = 17*/ modifier) } },
         //Screens.Microphone.name to { navController, modifier -> { Microphone(18, Screens.Labyrinth.name, navController, modifier) } },
         Screens.Labyrinth.name to { navController, modifier -> { Labyrinth(18, Screens.LightSensor.name, navController, modifier) } },
