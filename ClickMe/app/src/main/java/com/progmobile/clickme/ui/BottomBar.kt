@@ -8,7 +8,9 @@ import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -215,33 +217,50 @@ fun ParameterDialog(
     Dialog(
         onDismissRequest = onDismissRequest
     ) {
-        if (isLandscape) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(spacing),
-                verticalAlignment = Alignment.CenterVertically)
-            {
-                IconList(
-                    isNotHomePage = isNotHomePage,
-                    onNavigateToHomePage = onNavigateToHomePage,
-                    iconSize = iconSize
-                )
-            }
-        } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(spacing)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent) // Ensure the outer area remains visually transparent
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) { onDismissRequest() } // Dismiss the dialog when clicking outside
+        ) {
+            // Center the dialog content
+            Box(
+                modifier = Modifier.align(Alignment.Center)
             ) {
-                IconList(
-                    isNotHomePage = isNotHomePage,
-                    onNavigateToHomePage = onNavigateToHomePage,
-                    iconSize = iconSize
-                )
+
+                if (isLandscape) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(spacing),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        IconList(
+                            isNotHomePage = isNotHomePage,
+                            onNavigateToHomePage = onNavigateToHomePage,
+                            iconSize = iconSize
+                        )
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(spacing)
+                    ) {
+                        IconList(
+                            isNotHomePage = isNotHomePage,
+                            onNavigateToHomePage = onNavigateToHomePage,
+                            iconSize = iconSize
+                        )
+                    }
+                }
             }
         }
     }
@@ -333,7 +352,6 @@ fun HintIconButton(
 
     // Maintain a state to control when the dialog should be shown
     var showDialog by remember { mutableStateOf(false) }
-
     if (MainActivity.instance?.isFirstLaunch == true) {
         showDialog = true
         MainActivity.instance?.switchFirstLaunch()
