@@ -73,12 +73,14 @@
     <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string> <!-- Créole haïtien -->
     <string name="hint_change_language_3">Egin klik nigan (ahal baduzu)</string> <!-- Basque -->
     <string name="hint_change_language_4">Klicken Sie auf mich (wenn Sie können)</string> <!-- Allemand -->
-    <string name="hint_change_language_5">Cliciwch fi (os gallwch chi)</string> <!-- Gallois -->
+    <string name="hint_change_language_5">Va changer la langue de ton appareil</string> <!-- Gallois -->
     <string name="hint_step_counting_1">Allez, ça te fera du bien</string> <!-- TODO -->
     <string name="hint_light_sensor_1">C\'est dans le noir que l\'on voit le mieux les étoiles</string>
     <string name="hint_light_sensor_2">C\'est dans le noir qu l\'on se cache me mieux</string>
     <string name="hint_light_sensor_3">Tu vas les éteindre ces lumières oui ?</string>
-    <string name="hint_button_in_home_page_1">TODO</string> <!-- TODO -->
+    <string name="hint_button_in_home_page_1">Regarde un peu autour,  peut-être que tu le trouveras.</string> <!-- TODO -->
+    <string name="hint_button_in_home_page_2">Si ce n\'est pas là, où peut-il bien être ?</string><!-- TODO -->
+    <string name="hint_button_in_home_page_3">Tu vas revenir à la page d\'accueil oui ou non ?!</string>
     <string name="hint_shutdown_device_1">Essaye de couper tout contact</string>
     <string name="hint_shutdown_device_2">Essaye de tomber dans les pommes pour voir</string>
     <string name="hint_shutdown_device_3">Tu vas finir par l\'éteindre ton fichu portable oui !</string>

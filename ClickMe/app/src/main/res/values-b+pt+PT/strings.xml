@@ -74,12 +74,14 @@
     <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string>
     <string name="hint_change_language_3">Egin klik nigan (ahal baduzu)</string>
     <string name="hint_change_language_4">Klicken Sie auf mich (wenn Sie können)</string>
-    <string name="hint_change_language_5">Cliciwch fi (os gallwch chi)</string>
+    <string name="hint_change_language_5">TODO</string>
     <string name="hint_step_counting_1">TODO</string> <!-- TODO -->
     <string name="hint_light_sensor_1">É no escuro que se vê melhor as estrelas</string>
     <string name="hint_light_sensor_2">É no escuro que me escondo melhor</string>
     <string name="hint_light_sensor_3">Vais apagar as luzes?</string>
     <string name="hint_button_in_home_page_1">TODO</string> <!-- TODO -->
+    <string name="hint_button_in_home_page_2">TODO</string><!-- TODO -->
+    <string name="hint_button_in_home_page_3">TODO</string>
     <string name="hint_shutdown_device_1">Tenta cortar o contacto</string>
     <string name="hint_shutdown_device_2">Tente cair em si para ver</string>
     <string name="hint_shutdown_device_3">Vais acabar por desligar o teu maldito telemóvel !</string>

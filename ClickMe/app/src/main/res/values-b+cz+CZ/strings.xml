@@ -73,12 +73,14 @@
     <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string>
     <string name="hint_change_language_3">Egin klik nigan (ahal baduzu)</string>
     <string name="hint_change_language_4">Klicken Sie auf mich (wenn Sie können)</string>
-    <string name="hint_change_language_5">Cliciwch fi (os gallwch chi)</string>
+    <string name="hint_change_language_5">Přejděte na Změna jazyka zařízení</string>
     <string name="hint_step_counting_1">Udělej to, je to dobré pro tebe</string> 
     <string name="hint_light_sensor_1">Ve tmě vidíme hvězdy nejlépe</string>
     <string name="hint_light_sensor_2">Ve stínech se nejlépe schováme</string>
     <string name="hint_light_sensor_3">Vypnete prosím světla?</string> 
-    <string name="hint_button_in_home_page_1">TODO</string> <!-- TODO -->
+    <string name="hint_button_in_home_page_1">Rozhlédněte se po chvíli, možná to najdete.</string> <!-- TODO -->
+    <string name="hint_button_in_home_page_2">Look around for a little while, maybe you\'ll find it.</string><!-- TODO -->
+    <string name="hint_button_in_home_page_3">Look around for a little while, maybe you\'ll find it.</string>
      <string name="hint_shutdown_device_1">Pokuste se odříznout veškerý kontakt</string>
     <string name="hint_shutdown_device_2">Zkuste se rozpadnout, abyste viděli</string>
     <string name="hint_shutdown_device_3">Vypneš svůj zatracený telefon !</string>

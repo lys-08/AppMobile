@@ -175,7 +175,10 @@ object DataSource {
             R.string.hint_airplane_mode_1,
             R.string.hint_airplane_mode_2
         ),
-        Screens.Labyrinth.name to listOf(R.string.hint_labyrinth_1),
+        Screens.Labyrinth.name to listOf(
+            R.string.hint_labyrinth_1,
+            R.string.hint_labyrinth_2,
+            R.string.hint_labyrinth_3),
         Screens.MovingButton.name to listOf(R.string.hint_moving_button_1),
         Screens.ChangeLanguage.name to listOf(
             R.string.hint_change_language_1,
@@ -193,7 +196,10 @@ object DataSource {
             R.string.hint_light_sensor_1,
             R.string.hint_light_sensor_2,
             R.string.hint_light_sensor_3),
-        Screens.ButtonInHomepage.name to listOf(R.string.hint_button_in_home_page_1),
+        Screens.ButtonInHomepage.name to listOf(
+            R.string.hint_button_in_home_page_1,
+            R.string.hint_button_in_home_page_2,
+            R.string.hint_button_in_home_page_3),
         Screens.ShutdownDevice.name to listOf(
             R.string.hint_shutdown_device_1,
             R.string.hint_shutdown_device_2,
