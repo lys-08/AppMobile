@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
@@ -343,8 +344,8 @@ fun HintIconButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val currentRoute = navController.currentDestination?.route
-    // Initialize a var to check if we are on the homepage
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
     val isHomePage = currentRoute == Screens.HomePage.name
 
     val configuration = LocalConfiguration.current
@@ -359,7 +360,7 @@ fun HintIconButton(
 
     // IconButton with onClick to show dialog
     IconButton(
-        imageResourceId = if(isHomePage) {R.drawable.info} else {R.drawable.interrogation},
+        imageResourceId = if(!isHomePage) {R.drawable.interrogation} else {R.drawable.info},
         onClick = {
             showDialog = true
         },

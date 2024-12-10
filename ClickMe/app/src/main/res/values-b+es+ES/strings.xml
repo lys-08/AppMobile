@@ -22,7 +22,7 @@
     <string name="level_labyrinth">Laberinto</string>
     <string name="level_moving_button">Hazlo caer</string>
     <string name="level_change_language">Klikněte na mě (pokud můžete)</string>
-    <string name="level_step_counting">TODO</string> <!-- TODO -->
+    <string name="level_step_counting">Pérdida de peso</string> <!-- TODO -->
     <string name="level_light_sensor">Oscura</string>
     <string name="level_button_in_home_page">Perdido</string> <!-- TODO -->
     <string name="level_shutdown_device">Blackout</string>
