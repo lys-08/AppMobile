@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +28,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
@@ -41,14 +44,17 @@ fun ChangeLanguage(
     modifier: Modifier = Modifier
 ) {
     val configuration = LocalConfiguration.current
-    val currentLocale = configuration.locales[0]// Get the language
+    val currentLocale = configuration.locales[0].toString()// Get the language
 
     var previousLocale by rememberSaveable { mutableStateOf(currentLocale) }
     var isLanguageChanged by remember { mutableStateOf(false) }
 
-    if (currentLocale != previousLocale) {
+    val dataSourceLocale by DataSource.currentLocale.collectAsState()
+
+    if (currentLocale != previousLocale || currentLocale != dataSourceLocale) {
         isLanguageChanged = true
         previousLocale = currentLocale
+        DetectLanguageChange()
     }
 
     Column(
@@ -76,6 +82,16 @@ fun ChangeLanguage(
                 navController = navController
             )
         }
+    }
+}
+
+@Composable
+fun DetectLanguageChange() {
+    val configuration = LocalConfiguration.current
+    val currentLocale = configuration.locales[0].toString() // Obtenez la langue actuelle
+
+    LaunchedEffect(currentLocale) {
+        DataSource.updateLocale(currentLocale)
     }
 }
 
