@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -135,8 +136,6 @@ fun Screenshot(
                 scaleX = -1f
             )
     )
-
-
 
     Column(
         modifier = modifier,
