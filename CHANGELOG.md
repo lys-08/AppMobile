@@ -40,4 +40,9 @@
 - Reformatting the repository to include a README and project license  
 - Implementing haptic feedback  
 - Fixing minor bugs related to hint colors and settings icon display.
-
+- Background music  
+- Audio feedback when pressing buttons, with distinct sounds for a regular press and for a press that successfully completes a level.  
+- Backend implementation for settings buttons, enabling return to the menu and toggling sound and music on/off.  
+- Writing hints for each level and storing them in an appropriate structure.  
+- Translating the entire UI into 5 languages: English, French, Spanish, Portuguese, and Czech.  
+- Storing all settings data (music, volume, completed levels) in a `PreferencesDataStore` for persistence.  
