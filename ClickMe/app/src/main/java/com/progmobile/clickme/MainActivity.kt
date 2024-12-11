@@ -10,6 +10,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,10 +19,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -30,11 +33,15 @@ import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
 import com.progmobile.clickme.data.DataSource.isAppInForeground
+import com.progmobile.clickme.ui.levels.ChangeLanguage
+import com.progmobile.clickme.ui.levels.isLanguageChanged
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.Locale
 
 // Datastore, declared out of the class to be able to use it in multiple functions
 private val Context.dataStore by preferencesDataStore("user_prefs")
@@ -63,7 +70,8 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
     @SuppressLint("InlinedApi")
     private var permissionsToCheck = arrayOf(
         Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.READ_EXTERNAL_STORAGE, // TODO : fix
+        //Manifest.permission.READ_EXTERNAL_STORAGE, // TODO : fix
+
         Manifest.permission.ACTIVITY_RECOGNITION,
         Manifest.permission.BODY_SENSORS)
 
@@ -167,6 +175,23 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
         currentLevelUnlocked = runBlocking { getCurrentLevelUnlocked() }
 
         isFirstLaunch = runBlocking { getFirstLaunch() }
+
+        // Get previous language
+        val previousLanguage = runBlocking { getPreviousLanguage() }
+
+        //Get current system's language
+        val currentLanguage = Locale.getDefault().language
+
+        if (previousLanguage != null && previousLanguage != currentLanguage) {
+            // Language has been modified
+            isLanguageChanged(true)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        //Set previous language to the current language when leaving the settings
+        runBlocking {setPreviousLanguage(Locale.getDefault().language)}
     }
 
     private suspend fun getFirstLaunch(): Boolean {
@@ -279,5 +304,22 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
                 preferences[levelKey] = currentLevelUnlocked
             }
         }
+    }
+
+    private suspend fun setPreviousLanguage(language: String)
+    {
+        val languageKey = stringPreferencesKey("LanguageKey")
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[languageKey] = language
+            }
+        }
+    }
+
+    private suspend fun getPreviousLanguage(): String? {
+        val previousLanguageKey = stringPreferencesKey("LanguageKey")
+        return dataStore.data.map { preferences ->
+            preferences[previousLanguageKey]
+        }.firstOrNull()
     }
 }

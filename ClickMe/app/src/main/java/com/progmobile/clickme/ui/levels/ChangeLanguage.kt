@@ -31,11 +31,14 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
+import org.intellij.lang.annotations.Language
 
 /**
  * Composable that displays the language level.
  * Change the device language (any language) to go to the next level.
  */
+var isLanguageChanged = false
+
 @Composable
 fun ChangeLanguage(
     idLevel: Int,
@@ -43,7 +46,7 @@ fun ChangeLanguage(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val configuration = LocalConfiguration.current
+    /*val configuration = LocalConfiguration.current
     val currentLocale = configuration.locales[0].toString()// Get the language
 
     var previousLocale by rememberSaveable { mutableStateOf(currentLocale) }
@@ -52,7 +55,7 @@ fun ChangeLanguage(
     if (currentLocale != previousLocale) {
         isLanguageChanged = true
         previousLocale = currentLocale
-    }
+    }*/
 
     Column(
         modifier = modifier,
@@ -80,6 +83,11 @@ fun ChangeLanguage(
             )
         }
     }
+}
+
+
+fun isLanguageChanged(changed: Boolean) {
+    isLanguageChanged = changed
 }
 
 @Preview
