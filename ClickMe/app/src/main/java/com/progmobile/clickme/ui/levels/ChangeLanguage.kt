@@ -35,7 +35,7 @@ import org.intellij.lang.annotations.Language
 
 /**
  * Composable that displays the language level.
- * Change the device language (any language) to go to the next level.
+ * Change the device language ( to any language) to go to the next level.
  */
 var isLanguageChanged = false
 
@@ -46,17 +46,6 @@ fun ChangeLanguage(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    /*val configuration = LocalConfiguration.current
-    val currentLocale = configuration.locales[0].toString()// Get the language
-
-    var previousLocale by rememberSaveable { mutableStateOf(currentLocale) }
-    var isLanguageChanged by remember { mutableStateOf(false) }
-
-    if (currentLocale != previousLocale) {
-        isLanguageChanged = true
-        previousLocale = currentLocale
-    }*/
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween,
@@ -85,7 +74,7 @@ fun ChangeLanguage(
     }
 }
 
-
+// Change isLanguageChanged value (called in MainActivity)
 fun isLanguageChanged(changed: Boolean) {
     isLanguageChanged = changed
 }
