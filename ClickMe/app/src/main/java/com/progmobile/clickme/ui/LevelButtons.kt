@@ -25,12 +25,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
@@ -65,6 +67,9 @@ fun LevelButton(
     val scope = rememberCoroutineScope()
     var isPressed by remember { mutableStateOf(false) }
     val hapticFeedback = LocalHapticFeedback.current
+
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
 
     Box(
         modifier = modifier
@@ -116,6 +121,7 @@ fun LevelButton(
     ) {
         Text(
             text = prefix + stringResource(labelResourceId),
+            fontSize = (screenWidth * 0.04).sp,
             color = Color.White,
             textAlign = TextAlign.Center,
             //style = MaterialTheme.typography.button // Adjust font style as needed
