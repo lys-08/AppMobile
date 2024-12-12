@@ -3,7 +3,6 @@ package com.progmobile.clickme.data
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
@@ -179,7 +178,10 @@ object DataSource {
             R.string.hint_labyrinth_1,
             R.string.hint_labyrinth_2,
             R.string.hint_labyrinth_3),
-        Screens.MovingButton.name to listOf(R.string.hint_moving_button_1),
+        Screens.MovingButton.name to listOf(
+            R.string.hint_moving_button_1,
+            R.string.hint_moving_button_2,
+            R.string.hint_moving_button_3),
         Screens.ChangeLanguage.name to listOf(
             R.string.hint_change_language_1,
             R.string.hint_change_language_2,
