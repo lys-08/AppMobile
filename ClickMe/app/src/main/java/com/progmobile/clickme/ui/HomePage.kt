@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -67,9 +69,9 @@ fun HomePage(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(),
-            contentPadding = PaddingValues(8.dp), // Ajoute un espace global autour de la grille
-            horizontalArrangement = Arrangement.spacedBy(8.dp), // Space between items
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            contentPadding = PaddingValues(50.dp), // Space outside the grid
+            horizontalArrangement = Arrangement.spacedBy(20.dp), // Space between items
+            verticalArrangement = Arrangement.spacedBy(10.dp)
           ) {
               val levelList = levelsMap.keys.toList();
 
@@ -80,6 +82,7 @@ fun HomePage(
                       onClick = { navController.navigate(levelList[i]) }, //levels[i].second
                       // Concatenate level number and the dash
                       prefix = "${i + 1}-",
+                      modifier = Modifier.height(80.dp).fillMaxHeight(1f)
                   )
               }
 
