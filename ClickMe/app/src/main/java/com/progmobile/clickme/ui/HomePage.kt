@@ -135,7 +135,10 @@ fun HomePage(
                 //Disable buttons from locked levels
                 items((MainActivity.instance?.currentLevelUnlocked!! + 1..<LEVEL_NUMBERS).toList()) { i ->
                     LevelButtonLocked(
-                        onClick = { navController.navigate(levelList[i]) }
+                        onClick = { navController.navigate(levelList[i]) },
+                        modifier = Modifier
+                            .height(80.dp)
+                            .fillMaxHeight(1f)
                     )
                 }
             }
