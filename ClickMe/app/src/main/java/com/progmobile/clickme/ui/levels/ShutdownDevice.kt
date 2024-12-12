@@ -29,6 +29,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
@@ -114,6 +115,14 @@ fun ShutdownDevice(
                 level = idLevel,
                 modifier = Modifier,
                 levelName = nextLevel,
+                onUnlock = {
+                    coroutineScope.launch {
+                        setDeviceShutdownState(false)
+                    }
+                    navController.navigate(nextLevel)
+                    if (MainActivity.instance?.currentLevelUnlocked!! < idLevel) {
+                        MainActivity.instance?.increaseLevel()
+                    }},
                 navController = navController
             )
         }
