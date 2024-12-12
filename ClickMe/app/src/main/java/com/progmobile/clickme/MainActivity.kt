@@ -69,9 +69,7 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
     // ========== PERMISSIONS ==========
     @SuppressLint("InlinedApi")
     private var permissionsToCheck = arrayOf(
-        Manifest.permission.RECORD_AUDIO,
-        //Manifest.permission.READ_EXTERNAL_STORAGE, // TODO : fix
-
+        Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.ACTIVITY_RECOGNITION,
         Manifest.permission.BODY_SENSORS)
 
