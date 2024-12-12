@@ -50,6 +50,7 @@ private val Context.dataStore by preferencesDataStore("user_prefs")
  * - Permissions
  * - Sound and music state
  * - Level unlocked state
+ * - Detection of language change
  */
 class MainActivity : ComponentActivity(), LifecycleObserver {
 
