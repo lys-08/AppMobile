@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.MainActivity
@@ -116,6 +117,7 @@ fun LevelButton(
         Text(
             text = prefix + stringResource(labelResourceId),
             color = Color.White,
+            textAlign = TextAlign.Center,
             //style = MaterialTheme.typography.button // Adjust font style as needed
         )
     }
