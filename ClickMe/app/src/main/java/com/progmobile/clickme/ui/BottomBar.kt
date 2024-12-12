@@ -362,7 +362,7 @@ fun HintIconButton(
     IconButton(
         imageResourceId = if(!isHomePage) {R.drawable.interrogation} else {R.drawable.info},
         onClick = {
-            showDialog = true
+            if (!showDialog) showDialog = true
         },
         contentDescription = "Hint",
         bottomButton = true,

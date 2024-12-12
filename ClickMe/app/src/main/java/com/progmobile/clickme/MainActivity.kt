@@ -117,7 +117,7 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
 
     var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
     var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
-    var isFirstLaunch by mutableStateOf(true)
+    var isFirstLaunch by mutableStateOf(false)
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
