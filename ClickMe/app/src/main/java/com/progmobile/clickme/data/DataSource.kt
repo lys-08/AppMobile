@@ -35,16 +35,6 @@ object DataSource {
     // State of the application
     var isAppInForeground = mutableStateOf(false)
 
-    // Manage the language of the application
-    private val _currentLocale = MutableStateFlow("")
-    val currentLocale: StateFlow<String> get() = _currentLocale
-
-    fun updateLocale(newLocale: String) {
-        if (_currentLocale.value != newLocale) {
-            _currentLocale.value = newLocale
-        }
-    }
-
     // Max number of levels to display
     const val LEVEL_NUMBERS = 21
     const val STARTING_LEVEL = 0
@@ -52,7 +42,6 @@ object DataSource {
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
     const val IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH = 0.2f
-    //const val IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH = 0.1f
 
     // Level-specific constants
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
