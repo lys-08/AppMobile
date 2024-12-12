@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -26,11 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.data.DataSource
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
+import kotlinx.coroutines.launch
 import org.intellij.lang.annotations.Language
 
 /**
@@ -61,6 +64,8 @@ fun ChangeLanguage(
             textAlign = TextAlign.Center
         )
 
+        val coroutineScope = rememberCoroutineScope()
+
         // Level button
         if (isLanguageChanged) {
             UnlockLevel(
@@ -68,7 +73,15 @@ fun ChangeLanguage(
                 level = idLevel,
                 modifier = Modifier.wrapContentSize(),
                 levelName = nextLevel,
-                navController = navController
+                navController = navController,
+                onUnlock = {
+                    coroutineScope.launch {
+                        isLanguageChanged(false)
+                    }
+                    navController.navigate(nextLevel)
+                    if (MainActivity.instance?.currentLevelUnlocked!! < idLevel) {
+                        MainActivity.instance?.increaseLevel()
+                    }},
             )
         }
     }
