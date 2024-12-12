@@ -211,6 +211,9 @@ object DataSource {
             R.string.hint_wait_20_seconds_1,
             R.string.hint_wait_20_seconds_2,
             R.string.hint_wait_20_seconds_3),
-        // TODO : add Scroll to find the button
+        Screens.ScrollToFindTheButton.name to listOf(
+            R.string.hint_scroll_to_find_the_button_1,
+            R.string.hint_scroll_to_find_the_button_2
+        )
     )
 }

@@ -89,8 +89,8 @@
     <string name="hint_wait_20_seconds_1">Eres muy impaciente!</string>
     <string name="hint_wait_20_seconds_2">Intenta la meditación</string>
     <string name="hint_wait_20_seconds_3">¿Vas a esperar o no ?</string>
-    <string name="hint_scroll_to_find_the_button_1">Never seen Alice in Wonderland ?</string>
-    <string name="hint_scroll_to_find_the_button_2">Go down the page !</string>
+    <string name="hint_scroll_to_find_the_button_1">Nunca he visto a Alicia en el país de las maravillas ?</string>
+    <string name="hint_scroll_to_find_the_button_2">Ir a la parte inferior de la página !</string>
 
     // Buttons
     <string name="button">Botón</string>
