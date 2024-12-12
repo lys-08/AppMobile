@@ -40,6 +40,7 @@ import com.progmobile.clickme.data.DataSource.LEVEL_PATIENCE_LONG_PRESS_DURATION
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.math.min
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -70,6 +71,7 @@ fun LevelButton(
 
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
+    val textFontSize = min(screenWidth * 0.04,20.0)
 
     Box(
         modifier = modifier
@@ -121,7 +123,7 @@ fun LevelButton(
     ) {
         Text(
             text = prefix + stringResource(labelResourceId),
-            fontSize = (screenWidth * 0.04).sp,
+            fontSize = textFontSize.sp,
             color = Color.White,
             textAlign = TextAlign.Center,
             //style = MaterialTheme.typography.button // Adjust font style as needed
