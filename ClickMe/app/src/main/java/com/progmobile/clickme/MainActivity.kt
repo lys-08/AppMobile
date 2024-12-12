@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
@@ -65,10 +66,18 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
 
     // ========== PERMISSIONS ==========
     @SuppressLint("InlinedApi")
-    private var permissionsToCheck = arrayOf(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.ACTIVITY_RECOGNITION,
-        Manifest.permission.BODY_SENSORS)
+    private val permissionsToCheck: Array<String> = if (Build.VERSION.SDK_INT < 29) {
+        arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACTIVITY_RECOGNITION,
+            Manifest.permission.BODY_SENSORS
+        )
+    } else {
+        arrayOf(
+            Manifest.permission.ACTIVITY_RECOGNITION,
+            Manifest.permission.BODY_SENSORS
+        )
+    }
 
     private fun checkPermissions() {
         val permissionsToRequest = permissionsToCheck.filter {
