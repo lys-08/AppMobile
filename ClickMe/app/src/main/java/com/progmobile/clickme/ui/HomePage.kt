@@ -66,7 +66,7 @@ fun HomePage(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(),
-            contentPadding = PaddingValues(50.dp), // Space outside the grid
+            contentPadding = PaddingValues(35.dp), // Space outside the grid
             horizontalArrangement = Arrangement.spacedBy(20.dp), // Space between items
             verticalArrangement = Arrangement.spacedBy(10.dp)
           ) {

@@ -5,7 +5,6 @@
     <!-- Sensor -->
     <uses-feature android:name="android.hardware.sensor.light" android:required="true" />
 
-
     <!-- Permissions -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
