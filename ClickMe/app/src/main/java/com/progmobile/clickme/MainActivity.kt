@@ -69,7 +69,6 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
     private val permissionsToCheck: Array<String> = if (Build.VERSION.SDK_INT < 29) {
         arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.ACTIVITY_RECOGNITION,
             Manifest.permission.BODY_SENSORS
         )
     } else {
