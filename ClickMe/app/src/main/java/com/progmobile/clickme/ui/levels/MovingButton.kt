@@ -54,7 +54,7 @@ import kotlin.random.Random
 
 const val SHAKE_DIST = 10
 const val SHAKE_TIME = 500
-const val SHAKE_COUNT_THRESHOLD = 10
+const val SHAKE_COUNT_THRESHOLD = 5
 const val SHAKE_TIME_FRAME = 5000L
 
 class ShakeDetector(
