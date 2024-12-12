@@ -35,16 +35,6 @@ object DataSource {
     // State of the application
     var isAppInForeground = mutableStateOf(false)
 
-    // Manage the language of the application
-    private val _currentLocale = MutableStateFlow("")
-    val currentLocale: StateFlow<String> get() = _currentLocale
-
-    fun updateLocale(newLocale: String) {
-        if (_currentLocale.value != newLocale) {
-            _currentLocale.value = newLocale
-        }
-    }
-
     // Max number of levels to display
     const val LEVEL_NUMBERS = 21
     const val STARTING_LEVEL = 20
@@ -52,7 +42,6 @@ object DataSource {
     const val SOUND_DEFAULT = true
     const val HINT_TEXT_SIZE = 20f
     const val IN_BOTTOM_BAR_BUTTONS_SIZE_RELATIVE_TO_SCREEN_WIDTH = 0.2f
-    //const val IN_PARAMETER_BUTTONS_SPACE_RELATIVE_TO_SCREEN_WIDTH = 0.1f
 
     // Level-specific constants
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
@@ -213,6 +202,9 @@ object DataSource {
             R.string.hint_wait_20_seconds_1,
             R.string.hint_wait_20_seconds_2,
             R.string.hint_wait_20_seconds_3),
-        // TODO : add Scroll to find the button
+        Screens.ScrollToFindTheButton.name to listOf(
+            R.string.hint_scroll_to_find_the_button_1,
+            R.string.hint_scroll_to_find_the_button_2
+        )
     )
 }
