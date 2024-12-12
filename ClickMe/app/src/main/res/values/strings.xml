@@ -56,7 +56,7 @@
     <string name="hint_orientation_1">Something doesn\'t seem right.</string>
     <string name="hint_orientation_2">Can you read the title ?</string>
     <string name="hint_orientation_3">Maybe if you turn your head it\'ll be easier</string>
-    <string name="hint_screenshot_1">Maybe you need to remember this level.</string> <!-- TODO -->
+    <string name="hint_screenshot_1">Maybe you need to remember this level.</string>
     <string name="hint_screenshot_2">How would you share it with you\'re friends ?</string>
     <string name="hint_screenshot_3">A picture equals a thousand words.</string>
     <string name="hint_light_torch_1">It\'s a little dark, isn\'t it ?</string>
@@ -95,7 +95,7 @@
     <string name="hint_light_sensor_2">It\'s in the shadows that we hide best</string>
     <string name="hint_light_sensor_3">Will you turn off the lights please ?</string>
     <string name="hint_button_in_home_page_1">Look around for a little while, maybe you\'ll find it.</string>
-    <string name="hint_button_in_home_page_2">If it\'s not here, where could it be ?</string><!-- TODO -->
+    <string name="hint_button_in_home_page_2">If it\'s not here, where could it be ?</string>
     <string name="hint_button_in_home_page_3">Are you going to go back to the homepage or not ?!</string>
     <string name="hint_shutdown_device_1">Try to cut all contact</string>
     <string name="hint_shutdown_device_2">Try passing out</string>
