@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.progmobile.clickme.R
-import com.progmobile.clickme.ui.isLastPage
+import com.progmobile.clickme.ui.IsLastPage
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
@@ -40,7 +40,7 @@ fun ButtonInHomepage(
             textAlign = TextAlign.Center
         )
         
-        isLastPage(isLastPage = true)
+        IsLastPage(isLastPage = true)
 
         //See HomePage.kt for more information
     }

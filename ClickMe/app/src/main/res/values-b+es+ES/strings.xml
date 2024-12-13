@@ -11,7 +11,7 @@
     <string name="level_long_press_button">Madre de todas las virtudes</string>
     <string name="level_double_buttons">Duplicación</string>
     <string name="level_orientation">Montaña rusa</string>
-    <string name="level_screenshot">Level 5</string> <!-- TODO -->
+    <string name="level_screenshot">Memoria</string>
     <string name="level_light_torch" tools:ignore="Typos">Lux Via</string>
     <string name="level_charging">Café</string>
     <string name="level_microphone">Ascensión</string>
@@ -28,7 +28,7 @@
     <string name="level_shutdown_device">Blackout</string>
     <string name="level_place_ten_fingers">Aprender a contar</string>
     <string name="level_wait_20_seconds">Paciencia</string>
-    <string name="level_scroll_to_find_button">TODO</string> <!-- TODO -->
+    <string name="level_scroll_to_find_button">Por la madriguera del conejo</string>
 
     // Hints
     <string name="no_hint_message">Lo sentimos, no hay ningún índice disponible</string>

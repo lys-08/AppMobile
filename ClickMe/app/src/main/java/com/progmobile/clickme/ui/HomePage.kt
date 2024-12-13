@@ -57,11 +57,10 @@ fun HomePage(
         val screenWidth = configuration.screenWidthDp
         var logoSize = 0.dp
 
-        if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            logoSize = (screenWidth / 3).dp
-        }
-        else {
-            logoSize = (screenWidth / 5).dp
+        logoSize = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            (screenWidth / 3).dp
+        } else {
+            (screenWidth / 5).dp
         }
 
         Column (
@@ -95,12 +94,12 @@ fun HomePage(
                 horizontalArrangement = Arrangement.spacedBy(20.dp), // Space between items
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                val levelList = levelsMap.keys.toList();
+                val levelList = levelsMap.keys.toList()
 
                 //Enable buttons from unlocked levels
                 items((0..MainActivity.instance?.currentLevelUnlocked!!).toList()) { i ->
                     LevelButton(
-                        labelResourceId = levels.get(levelList[i]) ?: R.string.error,//levels[i].first,
+                        labelResourceId = levels[levelList[i]] ?: R.string.error,//levels[i].first,
                         onClick = { navController.navigate(levelList[i]) }, //levels[i].second
                         // Concatenate level number and the dash
                         prefix = "${i + 1}-",
@@ -144,7 +143,7 @@ fun HomePage(
 }
 
 @Composable
-fun isLastPage(isLastPage: Boolean) {
+fun IsLastPage(isLastPage: Boolean) {
     isLastPage8 = isLastPage
 }
 

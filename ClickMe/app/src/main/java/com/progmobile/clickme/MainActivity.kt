@@ -309,7 +309,7 @@ class MainActivity : ComponentActivity(), LifecycleObserver {
         }
     }
 
-    private suspend fun setPreviousLanguage(language: String)
+    private fun setPreviousLanguage(language: String)
     {
         val languageKey = stringPreferencesKey("LanguageKey")
         lifecycleScope.launch {
