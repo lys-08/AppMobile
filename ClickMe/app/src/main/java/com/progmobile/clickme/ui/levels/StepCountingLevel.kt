@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -94,7 +96,7 @@ fun StepCountingLevel(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val stepCount = remember { mutableIntStateOf(0) }
+    val stepCount = remember{ mutableIntStateOf(0) }
     val context = LocalContext.current
     val stepCounter = remember { StepCounter(context) }
 
@@ -131,9 +133,16 @@ fun StepCountingLevel(
             textAlign = TextAlign.Center
         )
 
-        // Display the step count in the UI
-        Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-            if (stepCount.intValue <= LEVEL_STEP_COUNT_STEP_THRESHOLD) Text(text = "${stepCount.intValue}")
+        if (stepCount.intValue <= LEVEL_STEP_COUNT_STEP_THRESHOLD) {
+            Text(
+                text = "${stepCount.intValue}",
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.Center),
+                textAlign = TextAlign.Center,
+
+                )
         }
 
         if (!hasStepCounterSensor(context)) {

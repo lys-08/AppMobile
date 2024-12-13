@@ -28,8 +28,6 @@ import com.progmobile.clickme.ui.levels.ButtonInHomepage
 import com.progmobile.clickme.ui.levels.ScrollToFindTheButton
 import com.progmobile.clickme.ui.levels.StepCountingLevel
 import com.progmobile.clickme.ui.theme.CustomTheme
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 object DataSource {
     // State of the application
@@ -46,6 +44,11 @@ object DataSource {
     // Level-specific constants
     const val LEVEL_PATIENCE_LONG_PRESS_DURATION = 3000L
     const val LEVEL_STEP_COUNT_STEP_THRESHOLD = 40
+    const val LEVEL_MOVING_BUTTON_SHAKE_DIST = 10
+    const val LEVEL_MOVING_BUTTON_SHAKE_TIME = 500
+    const val LEVEL_MOVING_BUTTON_SHAKE_COUNT_THRESHOLD = 5
+    const val LEVEL_MOVING_BUTTON_SHAKE_TIME_FRAME = 5000L
+
 
     val levels = mapOf(
         Screens.SimpleButton.name to R.string.level_simple_button,

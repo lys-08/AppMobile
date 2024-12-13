@@ -45,6 +45,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
+import com.progmobile.clickme.data.DataSource.LEVEL_MOVING_BUTTON_SHAKE_COUNT_THRESHOLD
+import com.progmobile.clickme.data.DataSource.LEVEL_MOVING_BUTTON_SHAKE_DIST
+import com.progmobile.clickme.data.DataSource.LEVEL_MOVING_BUTTON_SHAKE_TIME
+import com.progmobile.clickme.data.DataSource.LEVEL_MOVING_BUTTON_SHAKE_TIME_FRAME
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.delay
@@ -52,10 +56,6 @@ import kotlinx.coroutines.launch
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-const val SHAKE_DIST = 10
-const val SHAKE_TIME = 500
-const val SHAKE_COUNT_THRESHOLD = 5
-const val SHAKE_TIME_FRAME = 5000L
 
 class ShakeDetector(
     context: Context,
@@ -87,7 +87,7 @@ class ShakeDetector(
                 val acceleration = sqrt(x * x + y * y + z * z)
                 val currentTime = System.currentTimeMillis()
 
-                if (acceleration > SHAKE_DIST && (currentTime - lastShakeTime > SHAKE_TIME)) {
+                if (acceleration > LEVEL_MOVING_BUTTON_SHAKE_DIST && (currentTime - lastShakeTime > LEVEL_MOVING_BUTTON_SHAKE_TIME)) {
                     // Get the first shake time
                     if (shakeCount == 0) {
                         firstShakeTime = currentTime
@@ -96,10 +96,10 @@ class ShakeDetector(
                     lastShakeTime = currentTime
 
                     // If current shake time is more than SHAKE_TIME_FRAME milliseconds after the first shake, reset the count
-                    if (currentTime - firstShakeTime <= SHAKE_TIME_FRAME) {
+                    if (currentTime - firstShakeTime <= LEVEL_MOVING_BUTTON_SHAKE_TIME_FRAME) {
                         shakeCount++
 
-                        if (shakeCount >= SHAKE_COUNT_THRESHOLD) {
+                        if (shakeCount >= LEVEL_MOVING_BUTTON_SHAKE_COUNT_THRESHOLD) {
                             onShake()
                             reset()
                         }
