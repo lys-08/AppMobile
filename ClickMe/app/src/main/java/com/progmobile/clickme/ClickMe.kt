@@ -43,7 +43,7 @@ enum class Screens(@StringRes val title: Int) {
     ChangeLanguage(title = R.string.level_change_language),
     StepCountingLevel(title = R.string.level_step_counting),
     ButtonInHomepage(title = R.string.level_button_in_home_page),
-    ScrollToFindTheButton(title = R.string.level_scroll_to_find_button) // TODO : change string
+    ScrollToFindTheButton(title = R.string.level_scroll_to_find_button)
 }
 
 /**
