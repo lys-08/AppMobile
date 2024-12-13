@@ -47,11 +47,9 @@ This project is under the MIT licence. You can find the full licence in the `LIC
 
 ## How to play ?
 
-// TODO
+You will be able to download it on the Android Playstore soon.
 
-You can download it on the Android Play store [here](https://play.google.com/store/apps/details?id=com.example.clickme).
-
-Or you can build it yourself by cloning this repository and opening it in Android Studio. To do the latter, in Android Studio, go to `File > Open` them select the `build.gradle.kts` to open, to ensure that Android Studio knows where to find the build rules.
+In the mean time, you can build it yourself by cloning this repository and opening it in Android Studio. To do the latter, in Android Studio, go to `File > Open` them select the `build.gradle.kts` to open, to ensure that Android Studio knows where to find the build rules.
 
 ## Project 
 
