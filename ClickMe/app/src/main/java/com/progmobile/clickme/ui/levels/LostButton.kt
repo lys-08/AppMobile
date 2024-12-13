@@ -14,20 +14,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
-import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
+
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level with an empty page,
+ * as the button composable for this level is in the Swipe composable of the bottom app bar
  */
 @Composable
-fun Level_01(
-    navController: NavHostController,
+fun LostButton(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -36,7 +32,7 @@ fun Level_01(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_01),
+            text = stringResource(id = R.string.level_lost_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -44,23 +40,15 @@ fun Level_01(
             textAlign = TextAlign.Center
         )
 
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 1,
-            modifier = Modifier,
-            levelName = Screens.Level_02.name,
-            navController = navController
-        )
+        /* Button is in bottom app bar :) */
     }
 }
 
 @Preview
 @Composable
-fun StartLevel01Preview() {
+fun StartLevel10Preview() {
     ClickMeTheme {
-        Level_01(
-            navController = rememberNavController(),
+        LostButton(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))

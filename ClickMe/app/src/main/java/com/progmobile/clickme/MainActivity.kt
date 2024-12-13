@@ -1,12 +1,17 @@
 package com.progmobile.clickme
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
-import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,37 +23,95 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.data.DataSource.MUSIC_DEFAULT
 import com.progmobile.clickme.data.DataSource.SOUND_DEFAULT
 import com.progmobile.clickme.data.DataSource.STARTING_LEVEL
+import com.progmobile.clickme.data.DataSource.isAppInForeground
+import com.progmobile.clickme.ui.levels.isLanguageChanged
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.Locale
 
+// Datastore, declared out of the class to be able to use it in multiple functions
 private val Context.dataStore by preferencesDataStore("user_prefs")
-private const val STARTING_LEVEL = 0
-private const val MUSIC_DEFAULT = true
-private const val SOUND_DEFAULT = true
 
+/**
+ * Main Activity of the application.
+ * Provides for :
+ * - Permissions
+ * - Sound and music state
+ * - Level unlocked state
+ * - Detection of language change
+ */
+class MainActivity : ComponentActivity(), LifecycleObserver {
 
-class MainActivity : ComponentActivity() {
+    // =========== LifeCycle ===========
+
+    init {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        isAppInForeground.value = hasFocus
+    }
 
     // ========== PERMISSIONS ==========
-    private var permissionsToCheck = arrayOf(
-        Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.CAMERA,
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        /* Manifest.permission.ACCESS_FINE_LOCATION */) // TODO : GPS permission
-    private val permissionsStatus = mutableStateOf(false) // state to check if a permission have been denied
+    @SuppressLint("InlinedApi")
+    private val permissionsToCheck: Array<String> = if (Build.VERSION.SDK_INT < 29) {
+        arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.BODY_SENSORS
+        )
+    } else {
+        arrayOf(
+            Manifest.permission.ACTIVITY_RECOGNITION,
+            Manifest.permission.BODY_SENSORS
+        )
+    }
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        val anyPermissionDenied = permissions.values.any { !it }
-        permissionsStatus.value = anyPermissionDenied
+    private fun checkPermissions() {
+        val permissionsToRequest = permissionsToCheck.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            requestMultiplePermissions.launch(permissionsToRequest.toTypedArray())
+        }
+    }
+
+    private val requestMultiplePermissions = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val deniedPermissions = permissions.filter { (_, isGranted) -> !isGranted }
+
+        if (deniedPermissions.isNotEmpty()) {
+            showPermissionDeniedDialog()
+        }
+    }
+
+    private fun showPermissionDeniedDialog() {8
+        AlertDialog.Builder(this)
+            .setTitle(R.string.permission_denied)
+            .setMessage(R.string.permission_denied_msg)
+            .setPositiveButton(R.string.settings) { _, _ ->
+                // Open parameters
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", packageName, null)
+                }
+                startActivity(intent)
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     // ========== LEVEL ==========
@@ -59,28 +122,15 @@ class MainActivity : ComponentActivity() {
         var instance: MainActivity? = null
     }
 
-    //var intent = Intent()
     private var mediaPlayer: MediaPlayer? = null
 
     var userMusicPreference by mutableStateOf(MUSIC_DEFAULT)
     var userSoundPreference by mutableStateOf(SOUND_DEFAULT)
+    var isFirstLaunch by mutableStateOf(false)
 
     // ========= MAIN ACTIVITY ==========
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        /*
-        val navController = rememberNavController()
-
-        // Override callback behaviour to always go back to HomePage
-        onBackPressedDispatcher.addCallback() {
-            // Handle the back button event
-            navController.navigate("home") {
-                popUpTo(0) // Clear the back stack
-            }
-
-        }
-        */
 
         instance = this // Set the instance to the current activity
         enableEdgeToEdge()
@@ -88,7 +138,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ClickMeTheme {
-                ClickMeApp(permissionsDenied = permissionsStatus, mainActivityInstance = this)
+                ClickMeApp(mainActivityInstance = this)
             }
 
         }
@@ -119,7 +169,7 @@ class MainActivity : ComponentActivity() {
         // Get music state in datastore : if true, user wants it on, then reactivate it.
         // If false, user wants it off, don't do anything as it has been paused at onPause or stopped at onDestroy
         userMusicPreference = runBlocking { getUserMusicPreference() }
-        if (userMusicPreference) switchMusicState(stopMusic = false)
+        if (userMusicPreference) runBlocking { switchMusicState(stopMusic = false) }
 
         // Get sound state, for the buttons to know if they should play sound when clicked
         userSoundPreference = runBlocking { getUserSoundPreference() }
@@ -127,6 +177,44 @@ class MainActivity : ComponentActivity() {
         // Get current level unlocked
         currentLevelUnlocked = runBlocking { getCurrentLevelUnlocked() }
 
+        isFirstLaunch = runBlocking { getFirstLaunch() }
+
+        // Get previous language
+        val previousLanguage = runBlocking { getPreviousLanguage() }
+
+        //Get current system's language
+        val currentLanguage = Locale.getDefault().language
+
+        if (previousLanguage != null && previousLanguage != currentLanguage) {
+            // Language has been modified
+            isLanguageChanged(true)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        //Set previous language to the current language when leaving the settings
+        runBlocking {setPreviousLanguage(Locale.getDefault().language)}
+    }
+
+    private suspend fun getFirstLaunch(): Boolean {
+        val firstLaunchKey = booleanPreferencesKey(R.string.first_launch_key.toString())
+        val dataStore = this.dataStore
+
+        // get boolean first launch state
+        val firstLaunch = dataStore.data.map { preferences ->
+            preferences[firstLaunchKey] ?: true
+        }.first()
+        return firstLaunch
+    }
+
+    fun switchFirstLaunch() {
+        val firstLaunchKey = booleanPreferencesKey(R.string.first_launch_key.toString())
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[firstLaunchKey] = false
+            }
+        }
     }
 
     private suspend fun getUserMusicPreference(): Boolean {
@@ -221,27 +309,20 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun checkPermissions() {
-        // Check current permissions
-        val permissionsNeeded = permissionsToCheck.filter { permission ->
-            ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED
+    private fun setPreviousLanguage(language: String)
+    {
+        val languageKey = stringPreferencesKey("LanguageKey")
+        lifecycleScope.launch {
+            dataStore.edit { preferences ->
+                preferences[languageKey] = language
+            }
         }
+    }
 
-        // Needed permissions
-        if (permissionsNeeded.isNotEmpty()) {
-            requestPermissionLauncher.launch(permissionsNeeded.toTypedArray())
-        } else {
-            permissionsStatus.value = false
-        }
-
-        // Check if at least one permission have been denied
-        val anyPermissionDeniedPreviously = permissionsToCheck.any { permission ->
-            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
-        }
-
-        // Update the status is a permission have been denied
-        if (anyPermissionDeniedPreviously) {
-            permissionsStatus.value = true
-        }
+    private suspend fun getPreviousLanguage(): String? {
+        val previousLanguageKey = stringPreferencesKey("LanguageKey")
+        return dataStore.data.map { preferences ->
+            preferences[previousLanguageKey]
+        }.firstOrNull()
     }
 }

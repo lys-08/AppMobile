@@ -14,20 +14,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
-import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.UnlockLevel
-
+import com.progmobile.clickme.ui.IsLastPage
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where the button is hidden in the Homepage.
+ * Go to home page to see the button (available one time).
  */
 @Composable
-fun Level_02(
-    navController: NavHostController,
+fun ButtonInHomepage(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -36,32 +32,25 @@ fun Level_02(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_02),
+            text = stringResource(id = R.string.level_button_in_home_page),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             textAlign = TextAlign.Center
         )
+        
+        IsLastPage(isLastPage = true)
 
-        // Level button
-        UnlockLevel(
-            labelResourceId = R.string.button,
-            level = 2,
-            modifier,
-            levelName = Screens.Level_03.name,
-            longClick = true,
-            navController = navController
-        )
+        //See HomePage.kt for more information
     }
 }
 
 @Preview
 @Composable
-fun StartLevel02Preview() {
-    MaterialTheme {
-        Level_02(
-            navController = rememberNavController(),
+fun StartButtonInHomepagePreview() {
+    ClickMeTheme {
+        ButtonInHomepage(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))

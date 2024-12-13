@@ -1,5 +1,7 @@
 package com.progmobile.clickme.ui.levels
 
+import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -17,24 +22,38 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
+import com.progmobile.clickme.Screens
+import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the device mode changed.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
+@SuppressLint("ServiceCast")
 @Composable
-fun Level_10(
+fun DarkMode(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val configuration = LocalConfiguration.current
+    val initialDarkMode = rememberSaveable {
+        configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+    }
+    val currentNightMode = remember (configuration) {
+        configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+    }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // Title
+        // Titre
         Text(
-            text = stringResource(id = R.string.level_10),
+            text = stringResource(id = R.string.level_dark_mode),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -42,15 +61,26 @@ fun Level_10(
             textAlign = TextAlign.Center
         )
 
-        /* Button is in bottom app bar :) */
+        // Level Button
+        if (currentNightMode != initialDarkMode) {
+            UnlockLevel(
+                labelResourceId = R.string.button,
+                level = idLevel,
+                modifier,
+                levelName = nextLevel,
+                navController
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-fun StartLevel10Preview() {
-    MaterialTheme {
-        Level_10(
+fun StartDarkModePreview() {
+    ClickMeTheme {
+        DarkMode(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

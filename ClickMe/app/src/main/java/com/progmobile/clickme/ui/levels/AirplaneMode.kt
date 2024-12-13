@@ -5,12 +5,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.BatteryManager
+import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,48 +30,54 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when the device is in airplane mode.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
-
 @SuppressLint("ServiceCast")
 @Composable
-fun Level_07(
+fun AirplaneMode(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isCharging = remember { mutableStateOf(false) }
+    val isInAirplaneMode = remember { mutableStateOf(false) }
 
     // Creation of a BroadcastReceiver to check the battery state
     val batteryReceiver = remember {
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val status = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
-                isCharging.value = status == BatteryManager.BATTERY_STATUS_CHARGING
+                val isAirplaneModeOn = Settings.Global.getInt(
+                    context?.contentResolver,
+                    Settings.Global.AIRPLANE_MODE_ON, 0
+                ) != 0
+
+                isInAirplaneMode.value = isAirplaneModeOn
             }
         }
     }
 
     // Register the BroadcastReceiver
     DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED) // Listen to the battery change state
+        val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED) // Listen to the battery change state
         context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
-
         onDispose {
             context.unregisterReceiver(batteryReceiver)
         } // Free the resources
     }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_07),
+            text = stringResource(id = R.string.level_airplane_mode),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -79,14 +86,14 @@ fun Level_07(
         )
 
         // Level button
-        if (isCharging.value)
+        if (isInAirplaneMode.value)
         {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 7,
-                modifier,
-                levelName = Screens.Level_08.name,
-                navController
+                level = idLevel,
+                modifier = Modifier.wrapContentSize(),
+                levelName = nextLevel,
+                navController = navController
             )
         }
     }
@@ -94,9 +101,11 @@ fun Level_07(
 
 @Preview
 @Composable
-fun StartLevel07Preview() {
-    MaterialTheme {
-        Level_07(
+fun StartAirplaneModePreview() {
+    ClickMeTheme {
+        AirplaneMode(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

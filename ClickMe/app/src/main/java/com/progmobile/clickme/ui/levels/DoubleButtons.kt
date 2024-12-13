@@ -28,16 +28,19 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level with two buttons screen.
+ * Uses two [UnlockLevel] buttons with a checkBothPressed() function to navigate to the next level if the buttons are both pressed at the same time.
  */
 @Composable
-fun Level_03(
+fun DoubleButtons(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -47,7 +50,7 @@ fun Level_03(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_03),
+            text = stringResource(id = R.string.level_double_buttons),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -60,7 +63,7 @@ fun Level_03(
         var box2Pressed by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
 
-        // Music stuff, overriden here to avoid playing it two times
+        // Music stuff, override here to avoid playing it two times
         val soundResourceId = R.raw.victory_sound
         val mediaPlayer = MediaPlayer.create(LocalContext.current, soundResourceId)
         val onBothClicked = {
@@ -73,8 +76,8 @@ fun Level_03(
             }
 
             // Navigate to level 4
-            navController.navigate(Screens.Level_04.name)
-            if (MainActivity.instance?.currentLevelUnlocked!! < 3) {
+            navController.navigate(nextLevel)
+            if (MainActivity.instance?.currentLevelUnlocked!! < 2) {
                 MainActivity.instance?.increaseLevel()
             }
         }
@@ -99,9 +102,9 @@ fun Level_03(
         Row {
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 3,
+                level = idLevel,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.Level_03.name,
+                levelName = nextLevel,
                 navController = navController,
                 onUnlock = {
                     box1Pressed = true
@@ -114,9 +117,9 @@ fun Level_03(
 
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 3,
+                level = idLevel,
                 modifier = Modifier.weight(1f),
-                levelName = Screens.Level_04.name,
+                levelName = nextLevel,
                 navController = navController,
                 onUnlock = {
                     box2Pressed = true
@@ -131,8 +134,10 @@ fun Level_03(
 @Preview
 @Composable
 fun StartLevel03Preview() {
-    MaterialTheme {
-        Level_03(
+    ClickMeTheme {
+        DoubleButtons(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

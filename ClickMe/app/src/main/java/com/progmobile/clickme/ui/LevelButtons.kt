@@ -23,17 +23,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
-import com.progmobile.clickme.data.DataSource.LEVEL_TWO_LONG_PRESS_DURATION
+import com.progmobile.clickme.data.DataSource.LEVEL_PATIENCE_LONG_PRESS_DURATION
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.math.min
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -46,11 +53,9 @@ fun LevelButton(
     longClick: Boolean = false,
     playMusic: Boolean = false,
     inLevelButton: Boolean = false,
+    prefix: String = "",
     modifier: Modifier = Modifier
 ) {
-    // Long click duration
-    val holdDuration = LEVEL_TWO_LONG_PRESS_DURATION
-
     // Sound section
     val context = LocalContext.current
 
@@ -62,6 +67,11 @@ fun LevelButton(
 
     val scope = rememberCoroutineScope()
     var isPressed by remember { mutableStateOf(false) }
+    val hapticFeedback = LocalHapticFeedback.current
+
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+    val textFontSize = min(screenWidth * 0.04,20.0)
 
     Box(
         modifier = modifier
@@ -73,19 +83,22 @@ fun LevelButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                         if (longClick) {
 
                             isPressed = true
                             // Start coroutine to wait for the hold duration
                             scope.launch {
-                                delay(holdDuration)
+                                delay(LEVEL_PATIENCE_LONG_PRESS_DURATION)
                                 if (isPressed) {
                                     onClick()
-                                    if (MainActivity.instance?.userSoundPreference == true && playMusic) {
-                                        val mediaPlayer =
-                                            MediaPlayer.create(context, soundResourceId)
-                                        mediaPlayer.setOnCompletionListener { it.release() }
-                                        mediaPlayer.start()
+                                    runBlocking {
+                                        if (MainActivity.instance?.userSoundPreference == true && playMusic) {
+                                            val mediaPlayer =
+                                                MediaPlayer.create(context, soundResourceId)
+                                            mediaPlayer.setOnCompletionListener { it.release() }
+                                            mediaPlayer.start()
+                                        }
                                     }
                                 }
                             }
@@ -94,11 +107,13 @@ fun LevelButton(
                             isPressed = false
                         } else {
                             onClick()
-                            if (MainActivity.instance?.userSoundPreference == true && playMusic) {
-                                val mediaPlayer =
-                                    MediaPlayer.create(context, soundResourceId)
-                                mediaPlayer.setOnCompletionListener { it.release() }
-                                mediaPlayer.start()
+                            runBlocking {
+                                if (MainActivity.instance?.userSoundPreference == true && playMusic) {
+                                    val mediaPlayer =
+                                        MediaPlayer.create(context, soundResourceId)
+                                    mediaPlayer.setOnCompletionListener { it.release() }
+                                    mediaPlayer.start()
+                                }
                             }
                         }
                     }
@@ -107,13 +122,18 @@ fun LevelButton(
         contentAlignment = Alignment.Center   // Center text in Box
     ) {
         Text(
-            text = stringResource(labelResourceId),
+            text = prefix + stringResource(labelResourceId),
+            fontSize = textFontSize.sp,
             color = Color.White,
+            textAlign = TextAlign.Center,
             //style = MaterialTheme.typography.button // Adjust font style as needed
         )
     }
 }
 
+/**
+ * Composable that displays a locked level button
+ */
 @Composable
 fun LevelButtonLocked(
     onClick: () -> Unit,

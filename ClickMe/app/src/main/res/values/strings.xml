@@ -4,84 +4,117 @@
     <string name="music_key" translatable="false">MusicKey</string>
     <string name="sound_key" translatable="false">SoundKey</string>
     <string name="level_key" translatable="false">LevelKey</string>
+    <string name="first_launch_key" translatable="false">FirstLaunchKey</string>
     <string name="reset_levels_title">Confirm Reset</string>
     <string name="reset_levels_message">Are you sure you want to reset all levels ?</string>
     <string name="reset_levels_positive_button">Yes</string>"
     <string name="reset_levels_negative_button">No</string>
 
+    <string name="error" translatable="false">Error</string>
+
+    // Permission
+    <string name="permission_denied">Permission denied</string>
+    <string name="permission_denied_msg">At least one permission have been denied.\nWARNING : you may not be able to complete some level, please accept all permissions.\n\nYou can accept the permission in the settings.</string>
+    <string name="settings">Settings</string>
+    <string name="cancel">Continue</string>
+
     // Levels title
-    <string name="level_01">Plain and simple</string>
-    <string name="level_02">Mother of all virtues</string>
-    <string name="level_03">Duplication</string>
-    <string name="level_04">Roller Coaster</string>
-    <string name="level_05">Clear Shot</string> <!-- Memories -->
-    <string name="level_06">Lux Via</string>
-    <string name="level_07">Coffee</string> <!-- Hidden connection, On the verge of death -->
-    <string name="level_08">The ascent</string>
-    <string name="level_09">Not what it seems</string>
-    <string name="level_10">Lost</string>
-    <string name="level_11">Out of your comfort zone</string> <!-- Ying Yang, Reverse -->
-    <string name="level_12">Aluminium hat</string> <!-- Beyond the Antennae, Crash -->
-    <string name="level_13">Labyrinth</string>
-    <string name="level_14">Knock it down</string>
-    <string name="level_15">Klikněte na mě (pokud můžete)</string>
-    <string name="level_16">TODO</string> <!-- TODO -->
-    <string name="level_17">TODO</string> <!-- TODO -->
-    <string name="level_18">TODO</string> <!-- TODO -->
-    <string name="level_19">TODO</string> <!-- TODO -->
-    <string name="level_20">TODO</string> <!-- TODO -->
+    <string name="level_simple_button">Plain and simple</string>
+    <string name="level_long_press_button">Mother of all virtues</string>
+    <string name="level_double_buttons">Duplication</string>
+    <string name="level_orientation">Roller Coaster</string>
+    <string name="level_screenshot">Clear Shot</string> <!-- Memories -->
+    <string name="level_light_torch">Lux Via</string>
+    <string name="level_charging">Coffee</string> <!-- Hidden connection, On the verge of death -->
+    <string name="level_microphone">The ascent</string>
+    <string name="level_drop_down_menu">Not what it seems</string>
+    <string name="level_lost_button">Lost (2)</string>
+    <string name="level_dark_mode">Out of your comfort zone</string> <!-- Ying Yang, Reverse -->
+    <string name="level_airplane_mode">Aluminium hat</string> <!-- Beyond the Antennae, Crash -->
+    <string name="level_labyrinth">Labyrinth</string>
+    <string name="level_moving_button">Knock it down</string>
+    <string name="level_change_language">Klikněte na mě (pokud můžete)</string>
+    <string name="level_step_counting">Weight loss</string>
+    <string name="level_light_sensor">Dark</string> <!-- Hidding, Veiled, Hidden -->
+    <string name="level_button_in_home_page">Lost</string>
+    <string name="level_shutdown_device">Blackout</string>
+    <string name="level_place_ten_fingers">Learn to count</string>
+    <string name="level_wait_20_seconds">Patience</string>
+    <string name="level_scroll_to_find_button">Down the rabbit hole</string>
 
     // Hints
-    <string name="hint_00">Sorry, no hint available</string> <!-- TODO -->
-    <string name="hint_01_1">Seriously ?</string>
-    <string name="hint_01_2">You\'ve got to be kidding me</string>
-    <string name="hint_01_3">Read. The. Title.</string>
-    <string name="hint_02_1">In a hurry aren\'t you ?</string>
-    <string name="hint_02_2">Arm yourself with patience</string>
-    <string name="hint_02_3">OK just press longer…</string>
-    <string name="hint_03_1">That. Is. Obvious.</string>
-    <string name="hint_03_2">That\'s even easier than the last level</string>
-    <string name="hint_03_3">You need two fingers</string>
-    <string name="hint_04_1">Something doesn\'t seem right</string>
-    <string name="hint_04_2">Can you read the title ?</string>
-    <string name="hint_04_3">Maybe if you turn your head it\'ll be easier</string>
-    <string name="hint_05_1">Maybe you need to remember this level.</string> <!-- TODO -->
-    <string name="hint_05_2">How would you share it with you\'re friends ?</string>
-    <string name="hint_05_3">A picture equals a thousand words.</string>
-    <string name="hint_06_1">It\'s a little dark, isn\'t it ?</string>
-    <string name="hint_06_2">A simple touch can light your way</string>
-    <string name="hint_06_3">You don\'t see anything : turn on the light !</string>
-    <string name="hint_07_1">I\'m kind of tired</string>
-    <string name="hint_07_2">I really lack energy</string>
-    <string name="hint_08_1">I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?</string>
-    <string name="hint_08_2">Give it everything you got</string>
-    <string name="hint_08_3">Just blow in the fucking mic for god\'s sake !</string>
-    <string name="hint_09_1">Maybe trying all options is not the greatest idea…</string>
-    <string name="hint_09_2">Try to expand your artistic knowledge</string>
-    <string name="hint_09_3">Never heard of surrealism ? What a shame</string>
-    <string name="hint_09_4">Really, no idea ? You need to step up your game. Fine, here\'s the last clue : René Magritte</string>
-    <string name="hint_10_1">Where can it be ?</string>
-    <string name="hint_10_2">Almost there</string>
-    <string name="hint_11_1">Seek the shadow to find the light, seek the light to find the shadow</string>
-    <string name="hint_11_2">Sometimes you have to dive into the depths to see the light</string>
-    <string name="hint_12_1">Head in the clouds</string>
-    <string name="hint_12_2">It\'s time to go on a vacation</string>
-    <string name="hint_13_1">x</string> <!-- TODO -->
-    <string name="hint_14_1">x</string> <!-- TODO -->
-    <string name="hint_15_1">Klikit warnon (ma c\'hellit)</string>
-    <string name="hint_15_2">Klike sou mwen (si ou kapab)</string>
-    <string name="hint_15_3">Egin klik nigan (ahal baduzu)</string>
-    <string name="hint_15_4">Klicken Sie auf mich (wenn Sie können)</string>
-    <string name="hint_15_5">Cliciwch fi (os gallwch chi)</string>
-    <string name="hint_16_1">TODO</string> <!-- TODO -->
-    <string name="hint_17_1">TODO</string> <!-- TODO -->
-    <string name="hint_18_1">TODO</string> <!-- TODO -->
-    <string name="hint_19_1">TODO</string> <!-- TODO -->
-    <string name="hint_20_1">TODO</string> <!-- TODO -->
+    <string name="no_hint_message">Sorry, no hint available</string>
+    <string name="hint_simple_button_1">Seriously ?</string>
+    <string name="hint_simple_button_2">You\'ve got to be kidding me.</string>
+    <string name="hint_simple_button_3">Read. The. Title.</string>
+    <string name="hint_long_press_button_1">In a hurry aren\'t you ?</string>
+    <string name="hint_long_press_button_2">Arm yourself with patience.</string>
+    <string name="hint_long_press_button_3">OK just press longer…</string>
+    <string name="hint_double_buttons_1">That. Is. Obvious.</string>
+    <string name="hint_double_buttons_2">That\'s even easier than the last level.</string>
+    <string name="hint_double_buttons_3">You need two fingers.</string>
+    <string name="hint_orientation_1">Something doesn\'t seem right.</string>
+    <string name="hint_orientation_2">Can you read the title ?</string>
+    <string name="hint_orientation_3">Maybe if you turn your head it\'ll be easier</string>
+    <string name="hint_screenshot_1">Maybe you need to remember this level.</string>
+    <string name="hint_screenshot_2">How would you share it with you\'re friends ?</string>
+    <string name="hint_screenshot_3">A picture equals a thousand words.</string>
+    <string name="hint_light_torch_1">It\'s a little dark, isn\'t it ?</string>
+    <string name="hint_light_torch_2">A simple touch can light your way</string>
+    <string name="hint_light_torch_3">You don\'t see anything : turn on the light !</string>
+    <string name="hint_charging_1">I\'m kind of tired</string>
+    <string name="hint_charging_2">I really lack energy</string>
+    <string name="hint_microphone_1">I whisper in the fields and howl in the storms. They follow me, but I have no path. Who am I?</string>
+    <string name="hint_microphone_2">Give it everything you got</string>
+    <string name="hint_microphone_3">Just blow in the fucking mic for god\'s sake !</string>
+    <string name="hint_drop_down_menu_1">Maybe trying all options is not the greatest idea…</string>
+    <string name="hint_drop_down_menu_2">Try to expand your artistic knowledge</string>
+    <string name="hint_drop_down_menu_3">Never heard of surrealism ? What a shame</string>
+    <string name="hint_drop_down_menu_4">Really, no idea ? You need to step up your game. Fine, here\'s the last clue : René Magritte</string>
+    <string name="hint_lost_button_1">Where can it be ?</string>
+    <string name="hint_lost_button_2">Almost there.</string>
+    <string name="hint_dark_mode_1">Seek the shadow to find the light, seek the light to find the shadow</string>
+    <string name="hint_dark_mode_2">Sometimes you have to dive into the depths to see the light</string>
+    <string name="hint_airplane_mode_1">Head in the clouds</string>
+    <string name="hint_airplane_mode_2">It\'s time to go on a vacation</string>
+    <string name="hint_labyrinth_1">It\'s a labyrinth… Just get out of there !</string>
+    <string name="hint_labyrinth_2">Imagine the point is a marble.</string>
+    <string name="hint_labyrinth_3">What happens to a marble when you tilt a labyrinth … ?</string>
+    <string name="hint_moving_button_1">It needs to be calmed down</string>
+    <string name="hint_moving_button_2">Act like a 30\'s dad</string>
+    <string name="hint_moving_button_3">A good knock out, that\'s what it needs</string>
+    <string name="hint_change_language_1">Klikit warnon (ma c\'hellit)</string>
+    <string name="hint_change_language_2">Klike sou mwen (si ou kapab)</string>
+    <string name="hint_change_language_3">Egin klik nigan (ahal baduzu)</string>
+    <string name="hint_change_language_4">Klicken Sie auf mich (wenn Sie können)</string>
+    <string name="hint_change_language_5">Go change the language of the device</string>
+    <string name="hint_step_counting_1">Do it, it\'s good for you</string>
+    <string name="hint_step_counting_2">And it\'s good for the planet !</string>
+    <string name="hint_step_counting_3">Just move your ass and get some exercise</string>
+    <string name="hint_light_sensor_1">It\'s in the dark that we see the stars best</string>
+    <string name="hint_light_sensor_2">It\'s in the shadows that we hide best</string>
+    <string name="hint_light_sensor_3">Will you turn off the lights please ?</string>
+    <string name="hint_button_in_home_page_1">Look around for a little while, maybe you\'ll find it.</string>
+    <string name="hint_button_in_home_page_2">If it\'s not here, where could it be ?</string>
+    <string name="hint_button_in_home_page_3">Are you going to go back to the homepage or not ?!</string>
+    <string name="hint_shutdown_device_1">Try to cut all contact</string>
+    <string name="hint_shutdown_device_2">Try passing out</string>
+    <string name="hint_shutdown_device_3">Are you gonna turn off your phone !</string>
+    <string name="hint_place_ten_fingers_1">Try counting to ten</string>
+    <string name="hint_place_ten_fingers_2">You\'re still a child</string>
+    <string name="hint_wait_20_seconds_1">You\'re a little impatient</string>
+    <string name="hint_wait_20_seconds_2">Try meditation</string>
+    <string name="hint_wait_20_seconds_3">Are you gonna wait or not ?</string>
+    <string name="hint_scroll_to_find_the_button_1">Never seen Alice in Wonderland ?</string>
+    <string name="hint_scroll_to_find_the_button_2">Go down the page !</string>
 
     // Buttons
     <string name="button">Button</string>
 
     //Warning Level 06
-    <string name="warning_level06">Your device doesn\'t the correct tool available. Here\'s a level for free :)</string>
+    <string name="warning_level_light_torch">Your device doesn\'t have the correct tool available. Here\'s a level for free :)</string>
+
+    // Home page indications
+    <string name="home_page_explication_1" translatable="false">Welcome to Click Me ! In each level you have to find a button, progressively more hidden, using every possible function of your device.</string>
+    <string name="home_page_explication_2" translatable="false">In every level, you will have access to a \"?\" like this one, containing hints, generally three, progressively more helpful.</string>
 </resources>

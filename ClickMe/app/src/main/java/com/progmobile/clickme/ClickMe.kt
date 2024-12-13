@@ -5,23 +5,13 @@ import androidx.activity.addCallback
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.data.DataSource.levelsMap
 import com.progmobile.clickme.ui.ClickMeBottomBar
@@ -32,71 +22,48 @@ import com.progmobile.clickme.ui.HomePage
  */
 enum class Screens(@StringRes val title: Int) {
     HomePage(title = R.string.app_name),
-    Level_01(title = R.string.level_01),
-    Level_02(title = R.string.level_02),
-    Level_03(title = R.string.level_03),
-    Level_04(title = R.string.level_04),
-    Level_05(title = R.string.level_05),
-    Level_06(title = R.string.level_06),
-    Level_07(title = R.string.level_07),
-    Level_08(title = R.string.level_08),
-    Level_09(title = R.string.level_09),
-    Level_10(title = R.string.level_10),
-    Level_11(title = R.string.level_11),
-    Level_12(title = R.string.level_12),
-    Level_13(title = R.string.level_13),
-    Level_14(title = R.string.level_14),
-    Level_15(title = R.string.level_15),
-    Level_16(title = R.string.level_16),
-    Level_17(title = R.string.level_17),
-    Level_18(title = R.string.level_18),
-    Level_19(title = R.string.level_19),
-    Level_20(title = R.string.level_20)
+    Charging(title = R.string.level_charging),
+    Microphone(title = R.string.level_microphone),
+    DarkMode(title = R.string.level_dark_mode),
+    AirplaneMode(title = R.string.level_airplane_mode),
+    LightSensor(title = R.string.level_light_sensor),
+    ShutdownDevice(title = R.string.level_shutdown_device),
+    Place10Finger(title = R.string.level_place_ten_fingers),
+    Wait20s(title = R.string.level_place_ten_fingers),
+    SimpleButton(title = R.string.level_simple_button),
+    LongPressButton(title = R.string.level_long_press_button),
+    DoubleButtons(title = R.string.level_double_buttons),
+    Orientation(title = R.string.level_orientation),
+    Screenshot(title = R.string.level_screenshot),
+    LightTorch(title = R.string.level_light_torch),
+    DropDownMenu(title = R.string.level_drop_down_menu),
+    LostButton(title = R.string.level_lost_button),
+    Labyrinth(title = R.string.level_labyrinth),
+    MovingButton(title = R.string.level_moving_button),
+    ChangeLanguage(title = R.string.level_change_language),
+    StepCountingLevel(title = R.string.level_step_counting),
+    ButtonInHomepage(title = R.string.level_button_in_home_page),
+    ScrollToFindTheButton(title = R.string.level_scroll_to_find_button)
 }
 
+/**
+ * Application composable, calls the Home Page, setups the Bottom Bar and the routes for the levels
+ * @param navController the navigation controller, could be passed from MainActivity but currently not used that way
+ * @param mainActivityInstance the instance of MainActivity, passed from MainActivity to override the back button behaviour, to always go back to HomePage
+ */
 @Composable
 fun ClickMeApp(
-    permissionsDenied : MutableState<Boolean>,
     navController: NavHostController = rememberNavController(),
     mainActivityInstance: MainActivity
 ) {
-    // ================= PERMISSION =================
-    /*var showDialog by remember { mutableStateOf(false) }
-
-    // An Alert message is print if at least one permission have been denied
-    // TODO : fix
-    LaunchedEffect(!permissionsDenied.value) {
-        if (!permissionsDenied.value) {
-            showDialog = true
-        }
-    }
-
-    if (showDialog) {
-        AlertDialog(
-            onDismissRequest = { showDialog = false },
-            title = { Text("Permission denied") },
-            text = { Text("Some permission have been denied. WARNING : you may nit complete some level, please accept the permission.") },
-            confirmButton = {
-                Button(onClick = { showDialog = false }) {
-                    Text("OK")
-                }
-            }
-        )
-    }*/
-    // =============== END PERMISSION ===============
-
     // Override callback behaviour to always go back to HomePage
-    mainActivityInstance.onBackPressedDispatcher.addCallback() {
+    mainActivityInstance.onBackPressedDispatcher.addCallback {
         // Handle the back button event
         navController.navigate(Screens.HomePage.name) {
             popUpTo(0) // Clear the back stack
         }
     }
 
-    val backStackEntry by navController.currentBackStackEntryAsState()
-    val currentScreen = Screens.valueOf(
-        backStackEntry?.destination?.route?: Screens.HomePage.name
-    )
     Scaffold(
         bottomBar = {
             ClickMeBottomBar(

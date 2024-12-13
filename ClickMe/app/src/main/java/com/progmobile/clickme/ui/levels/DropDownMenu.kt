@@ -30,14 +30,16 @@ import com.progmobile.clickme.MainActivity
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.LevelButton
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays a drop down menu where you have to make the sentence "This is not a button".
+ * Make the right sentence.
  */
 @Composable
-fun Level_09(
+fun DropDownMenu(
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -53,7 +55,7 @@ fun Level_09(
     ) {
         item {
             Text(
-                text = stringResource(id = R.string.level_09),
+                text = stringResource(id = R.string.level_drop_down_menu),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -250,7 +252,7 @@ fun Level_09(
                                         sentence += "button."
                                         expanded = false
                                         MainActivity.instance?.increaseLevel()
-                                        navController.navigate(Screens.Level_10.name)
+                                        navController.navigate(nextLevel)
                                     }
                                 )
                                 HorizontalDivider()
@@ -287,18 +289,14 @@ fun Level_09(
                 }
             }
         }
-
-        // Le menu ne se ferme pas après chaque choix
-//        item {
-//
-//        }
     }
 }
 @Preview
 @Composable
-fun StartLevel09Preview() {
-    MaterialTheme {
-        Level_09(
+fun StartDropDownMenuPreview() {
+    ClickMeTheme {
+        DropDownMenu(
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

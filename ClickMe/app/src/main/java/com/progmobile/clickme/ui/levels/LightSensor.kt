@@ -1,24 +1,21 @@
 package com.progmobile.clickme.ui.levels
 
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.provider.Settings
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -30,42 +27,48 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
-import com.progmobile.clickme.ui.LevelButton
-
+import com.progmobile.clickme.ui.UnlockLevel
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the next level button when light sensor of the device does not detect light.
+ * It uses a [UnlockLevel] composable to display the next level button.
  */
-@SuppressLint("ServiceCast")
 @Composable
-fun Level_12(
+fun LightSensor(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val isInAirplaneMode = remember { mutableStateOf(false) }
+    val lightLevel = remember { mutableStateOf<Float?>(null) }
 
-    // Creation of a BroadcastReceiver to check the battery state
-    val batteryReceiver = remember {
-        object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val isAirplaneModeOn = Settings.Global.getInt(
-                    context?.contentResolver,
-                    Settings.Global.AIRPLANE_MODE_ON, 0
-                ) != 0
+    DisposableEffect(Unit) {
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
 
-                isInAirplaneMode.value = isAirplaneModeOn
+        val lightSensorListener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                event?.let {
+                    lightLevel.value = it.values[0]
+                }
+            }
+
+            // Not necessary -> for the object
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
             }
         }
-    }
 
-    // Register the BroadcastReceiver
-    DisposableEffect(Unit) {
-        val filter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED) // Listen to the battery change state
-        context.registerReceiver(batteryReceiver, filter) // Save the BroadcastReceiver with the context
+        // Saving the listener
+        sensorManager.registerListener(
+            lightSensorListener,
+            lightSensor,
+            SensorManager.SENSOR_DELAY_UI
+        )
+
         onDispose {
-            context.unregisterReceiver(batteryReceiver)
+            sensorManager.unregisterListener(lightSensorListener)
         } // Free the resources
     }
 
@@ -75,7 +78,7 @@ fun Level_12(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_12),
+            text = stringResource(id = R.string.level_light_sensor),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -84,14 +87,13 @@ fun Level_12(
         )
 
         // Level button
-        if (isInAirplaneMode.value)
-        {
-            LevelButton(
+        if (lightLevel.value != null && lightLevel.value!! < 10) {
+            UnlockLevel(
                 labelResourceId = R.string.button,
-                onClick = { navController.navigate(Screens.HomePage.name) },
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(Alignment.Center)
+                level = idLevel,
+                modifier = Modifier,
+                levelName = nextLevel,
+                navController = navController
             )
         }
     }
@@ -99,9 +101,11 @@ fun Level_12(
 
 @Preview
 @Composable
-fun StartLevel12Preview() {
-    MaterialTheme {
-        Level_12(
+fun StartLightSensorPreview() {
+    ClickMeTheme {
+        LightSensor(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

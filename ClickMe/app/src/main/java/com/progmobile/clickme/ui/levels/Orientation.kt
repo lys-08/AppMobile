@@ -22,17 +22,20 @@ import androidx.navigation.compose.rememberNavController
 import com.progmobile.clickme.R
 import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.material3.Text
+import com.progmobile.clickme.ui.theme.ClickMeTheme
 
 
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level where you have to change the orientation's device from vertical to horizontal.
+ *
+ * Check the device's orientation then if the device is vertical, use [RotatedText] to show overflow title,
+ * else, if the device is horizontal, use [NormalText] to show normal title and [UnlockLevel] to show button to
+ * next level.
  */
 @Composable
-fun Level_04(
+fun Orientation(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -50,9 +53,9 @@ fun Level_04(
             NormalText(screenWidth)
             UnlockLevel(
                 labelResourceId = R.string.button,
-                level = 4,
+                level = idLevel,
                 modifier = Modifier,
-                levelName = Screens.Level_05.name,
+                levelName = nextLevel,
                 navController = navController
             )
         }
@@ -65,7 +68,7 @@ fun RotatedText(
 ) {
     val textSize = (screenWidth / 2).sp
     Text(
-        text = stringResource(id = R.string.level_04),
+        text = stringResource(id = R.string.level_orientation),
         style = MaterialTheme.typography.displayLarge,
         fontSize = textSize,
         modifier = Modifier,
@@ -78,7 +81,7 @@ fun NormalText(
 ) {
     val textSize = (screenWidth / 10).sp
     Text(
-        text = stringResource(id = R.string.level_04),
+        text = stringResource(id = R.string.level_orientation),
         style = MaterialTheme.typography.displayLarge,
         fontSize = textSize,
         modifier = Modifier
@@ -91,9 +94,11 @@ fun NormalText(
 
 @Preview
 @Composable
-fun StartLevel04Preview() {
-    MaterialTheme {
-        Level_04(
+fun StartOrientationPreview() {
+    ClickMeTheme {
+        Orientation(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()

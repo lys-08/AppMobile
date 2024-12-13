@@ -21,12 +21,15 @@ import com.progmobile.clickme.Screens
 import com.progmobile.clickme.ui.UnlockLevel
 import com.progmobile.clickme.ui.theme.ClickMeTheme
 
+
 /**
- * Composable that allows the user to select the desired action to do and triggers
- * the navigation to next screen
+ * Composable that displays the level with the long click button.
+ * It uses a [UnlockLevel] composable to display the level button, with a specific parameter to demand a long click.
  */
 @Composable
-fun Level_16(
+fun LongPressButton(
+    idLevel: Int,
+    nextLevel: String,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -36,7 +39,7 @@ fun Level_16(
     ) {
         // Title
         Text(
-            text = stringResource(id = R.string.level_16),
+            text = stringResource(id = R.string.level_long_press_button),
             style = MaterialTheme.typography.displayLarge,
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,9 +50,10 @@ fun Level_16(
         // Level button
         UnlockLevel(
             labelResourceId = R.string.button,
-            level = 16,
-            modifier = Modifier,
-            levelName = Screens.Level_17.name,
+            level = idLevel,
+            modifier,
+            levelName = nextLevel,
+            longClick = true,
             navController = navController
         )
     }
@@ -57,9 +61,11 @@ fun Level_16(
 
 @Preview
 @Composable
-fun StartLevel16Preview() {
+fun StartLevel02Preview() {
     ClickMeTheme {
-        Level_16(
+        LongPressButton(
+            idLevel = -1,
+            nextLevel = Screens.HomePage.name,
             navController = rememberNavController(),
             modifier = Modifier
                 .fillMaxSize()
