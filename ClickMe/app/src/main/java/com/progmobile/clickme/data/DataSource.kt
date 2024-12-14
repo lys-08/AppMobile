@@ -200,7 +200,8 @@ object DataSource {
             R.string.hint_shutdown_device_3),
         Screens.Place10Finger.name to listOf(
             R.string.hint_place_ten_fingers_1,
-            R.string.hint_place_ten_fingers_2),
+            R.string.hint_place_ten_fingers_2,
+            R.string.hint_place_ten_fingers_3),
         Screens.Wait20s.name to listOf(
             R.string.hint_wait_20_seconds_1,
             R.string.hint_wait_20_seconds_2,
