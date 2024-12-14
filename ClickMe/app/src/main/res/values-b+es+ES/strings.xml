@@ -105,4 +105,6 @@
     <string name="hint_moving_button_2">Actúa como un papá de los 30</string>
     <string name="hint_moving_button_3">¡Un buen torgnole es lo que necesita!</string>
     <string name="hint_place_ten_fingers_3">Un dedo tras otro, es obvio</string>
+    <string name="home_page_explication_1">¡Bienvenido a Click Me! En cada nivel tendrás que encontrar un botón, cada vez más escondido, utilizando todas las funciones posibles de tu dispositivo.</string>
+    <string name="home_page_explication_2">En cada nivel tendrás acceso a un \"?\" como éste, que contiene pistas, generalmente tres, progresivamente más útiles.</string>
 </resources>

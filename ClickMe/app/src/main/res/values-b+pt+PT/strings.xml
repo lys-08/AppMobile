@@ -105,4 +105,6 @@
     <string name="hint_moving_button_2">Agir como um pai de 30 anos</string>
     <string name="hint_moving_button_3">Um bom nocaute, é isso que ele precisa</string>
     <string name="hint_place_ten_fingers_3">Um dedo após o outro, isso é óbvio</string>
+    <string name="home_page_explication_1">Bem-vindo ao Click Me! Em cada nível deve encontrar um botão, cada vez mais escondido, utilizando todas as funções possíveis do seu dispositivo.</string>
+    <string name="home_page_explication_2">Em todos os níveis, terá acesso a um \"?\" como este, contendo dicas, geralmente três, progressivamente mais úteis.</string>
 </resources>
