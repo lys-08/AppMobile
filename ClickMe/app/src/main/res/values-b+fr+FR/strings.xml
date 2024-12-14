@@ -104,4 +104,6 @@
     <string name="hint_step_counting_3">Bouge tes fesses et fais un peu d\'exercice</string>
     <string name="hint_moving_button_2">Agis comme un père des années 30</string>
     <string name="hint_moving_button_3">Une bonne torgnole, c\'est ce qu\'il lui faut !</string>
+    <string name="home_page_explication_1">Bienvenue dans Click Me ! A chaque niveau, vous devez trouver un bouton, de plus en plus caché, en utilisant toutes les fonctions possibles de votre appareil.</string>
+    <string name="home_page_explication_2">À chaque niveau, vous aurez accès à un « ? » comme celui-ci, contenant des indices, généralement trois, de plus en plus utiles.</string>
 </resources>

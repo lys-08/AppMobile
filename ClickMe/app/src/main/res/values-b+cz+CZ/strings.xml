@@ -103,4 +103,6 @@
     <string name="hint_step_counting_3">Stačí jen pohnout zadkem a dostat nějaké cvičení</string>
     <string name="hint_moving_button_2">Chovejte se jako otec 30.</string>
     <string name="hint_moving_button_3">Dobrý knock out, to je to, co potřebuje</string>
+    <string name="home_page_explication_1">Vítejte v Click Me! V každé úrovni musíte najít tlačítko, postupně skrytější, využívající všechny možné funkce vašeho zařízení.</string>
+    <string name="home_page_explication_2">V každé úrovni budete mít přístup k \"?\" jako tento, obsahující rady, obecně tři, postupně užitečnější.</string>
 </resources>
