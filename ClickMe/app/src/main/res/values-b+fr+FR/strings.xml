@@ -84,7 +84,7 @@
     <string name="hint_shutdown_device_1">Essaye de couper tout contact</string>
     <string name="hint_shutdown_device_2">Essaye de tomber dans les pommes pour voir</string>
     <string name="hint_shutdown_device_3">Tu vas finir par l\'éteindre ton fichu portable oui !</string>
-    <string name="hint_place_ten_fingers_1">Essaye de compter jusqu\'à 10</string>
+    <string name="hint_place_ten_fingers_1">Essaye de compter jusqu\'à 5</string>
     <string name="hint_place_ten_fingers_2">Fait resortir l\'enfant en toi</string>
     <string name="hint_wait_20_seconds_1">Tu es vraiment impatient dit donc !</string>
     <string name="hint_wait_20_seconds_2">Essaye la meditation</string>

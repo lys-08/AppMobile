@@ -84,7 +84,7 @@
     <string name="hint_shutdown_device_1">Intenta cortar todo contacto</string>
     <string name="hint_shutdown_device_2">Intenta caerte al vacío para ver</string>
     <string name="hint_shutdown_device_3">Vas a terminar apagando tu maldito teléfono sí!</string>
-    <string name="hint_place_ten_fingers_1">Intenta contar hasta 10</string>
+    <string name="hint_place_ten_fingers_1">Intenta contar hasta 5</string>
     <string name="hint_place_ten_fingers_2">Saca al niño que hay en ti</string>
     <string name="hint_wait_20_seconds_1">Eres muy impaciente!</string>
     <string name="hint_wait_20_seconds_2">Intenta la meditación</string>

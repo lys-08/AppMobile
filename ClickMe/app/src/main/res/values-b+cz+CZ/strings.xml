@@ -84,7 +84,7 @@
      <string name="hint_shutdown_device_1">Pokuste se odříznout veškerý kontakt</string>
     <string name="hint_shutdown_device_2">Zkuste se rozpadnout, abyste viděli</string>
     <string name="hint_shutdown_device_3">Vypneš svůj zatracený telefon !</string>
-    <string name="hint_place_ten_fingers_1">Zkuste počítat do 10</string>
+    <string name="hint_place_ten_fingers_1">Zkuste počítat do 5</string>
     <string name="hint_place_ten_fingers_2">Vyvede dítě do vás</string>
     <string name="hint_wait_20_seconds_1">Jste opravdu netrpěliví, tak!</string>
     <string name="hint_wait_20_seconds_2">Zkuste meditaci</string>

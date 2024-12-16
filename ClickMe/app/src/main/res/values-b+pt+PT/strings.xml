@@ -84,7 +84,7 @@
     <string name="hint_shutdown_device_1">Tenta cortar o contacto</string>
     <string name="hint_shutdown_device_2">Tente cair em si para ver</string>
     <string name="hint_shutdown_device_3">Vais acabar por desligar o teu maldito telemóvel !</string>
-    <string name="hint_place_ten_fingers_1">Tente contar até dez</string>
+    <string name="hint_place_ten_fingers_1">Tente contar até cinco</string>
     <string name="hint_place_ten_fingers_2">Faz a criança em você</string>
     <string name="hint_wait_20_seconds_1">Estás impaciente</string>
     <string name="hint_wait_20_seconds_2">Try meditação</string>
